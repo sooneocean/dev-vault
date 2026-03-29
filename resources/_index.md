@@ -1,7 +1,7 @@
 ---
 title: resources index
 type: index
-updated: 2026-03-29
+updated: 2026-03-30
 ---
 
 # Resources
@@ -17,7 +17,8 @@ updated: 2026-03-29
 | [[harness-engineering-research]] | harness-engineering-research |
 | [[context-engineering-research]] | context-engineering-research |
 | [[prompt-engineering-research]] | prompt-engineering-research |
-| [[local-llm-deployment]] | RTX 4090 Laptop 16GB VRAM 上的本地模型部署決策和效能數據 |
+| [[local-llm-deployment]] | RTX 4090 Laptop 16GB VRAM 上的本地模型部署、MCP 整合、任務路由決策 |
+| [[local-llm-task-routing]] | RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API |
 | [[compound-engineering-plugin]] | compound-engineering-plugin |
 | [[開源專案品質標準]] | 開源專案上架前的品質檢查清單 — README、License、CI、Topics、文件 |
 | [[github-全部-repo-清單]] | sooneocean GitHub 帳號下所有 Repo 的完整盤點（35 個 Repo、22 個公開） |

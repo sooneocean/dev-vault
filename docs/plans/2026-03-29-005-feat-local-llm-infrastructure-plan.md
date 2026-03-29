@@ -216,7 +216,7 @@ graph TD
 
 ## Implementation Units
 
-- [ ] **Unit 1: Local Model 部署 + Benchmark + 路由規則**
+- [x] **Unit 1: Local Model 部署 + Benchmark + 路由規則**
 
 **Goal:** 在 RTX 4090 Laptop 上部署精選本地模型，執行效能基準測試作為 hard gate，建立任務路由決策矩陣
 
@@ -272,7 +272,7 @@ graph TD
 
 ---
 
-- [ ] **Unit 2: OllamaClaude MCP 任務委派整合**
+- [x] **Unit 2: OllamaClaude MCP 任務委派整合**
 
 **Goal:** 讓 Claude Code 能透過 MCP 將低價值任務委派給本地 Ollama 模型
 
