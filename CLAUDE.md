@@ -17,6 +17,10 @@ Owner: sooneocean. Public repo: `github.com/sooneocean/dev-vault`.
 
 Special files: `_index.md` (per-directory index), `_tags.md`, `_graph.md`.
 
+Additional directories (from plugins):
+- `docs/plans/` — Implementation plans (`/ce:plan`)
+- `docs/solutions/` — Solved problem learnings (`/ce:compound`)
+
 ## Agent Rules (Critical)
 
 1. **Use `obsidian-agent` CLI first** — it handles frontmatter, linking, and index updates automatically
@@ -55,6 +59,12 @@ obsidian-agent list --recent 7           # recent notes
 obsidian-agent review                    # weekly review
 obsidian-agent sync                      # rebuild indices
 obsidian-agent health                    # vault health check
+obsidian-agent stale                     # find stale notes
+obsidian-agent cluster                   # topic clustering
+obsidian-agent digest                    # daily digest
+obsidian-agent thread "topic"            # follow a topic thread
+obsidian-agent suggest                   # smart action suggestions
+obsidian-agent context "note"            # get note context
 ```
 
 ## Templates Available
