@@ -11,7 +11,7 @@ Usage: `[apply|status]`
 When invoked without arguments:
 
 1. **Read data sources:**
-   - Recent journal entries (`journal/*.md`) — focus on pain points, "哪裡卡住", "下次要試", repeated manual operations
+   - Recent journal entries (`journal/*.md`) — focus on `## Friction` section, pain points, "哪裡卡住", "下次要試", repeated manual operations
    - Current `~/.claude/settings.json` hooks configuration
    - Current project `CLAUDE.md` instructions
    - Current `.claude/commands/` slash commands
@@ -41,6 +41,8 @@ When invoked without arguments:
    - **high**: Modify `~/.claude/settings.json` or `~/.claude/CLAUDE.md` (affects all projects)
 
 If no improvements are found, report: "目前配置運作良好，沒有待處理的改善建議"
+
+6. **Combo: Offer immediate apply** — After presenting the summary, ask: "要立即套用嗎？" If user agrees, enter Apply Mode inline (skip re-reading proposals, go straight to selection and diff preview). This eliminates the need for a separate `/improve apply` invocation.
 
 ## Apply Mode (`apply`)
 
