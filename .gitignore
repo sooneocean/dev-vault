@@ -22,7 +22,13 @@ dist/
 build/
 
 # Claude Code projects (submodules, not vault content)
-projects/tools/
+projects/tools/*
+# Exception: research pipeline source code (not binary artifacts)
+!projects/tools/research-pipeline/
+projects/tools/research-pipeline/state/
+projects/tools/research-pipeline/lancedb/
+projects/tools/research-pipeline/lightrag/
+projects/tools/research-pipeline/__pycache__/
 
 # Editor
 .cursor/
