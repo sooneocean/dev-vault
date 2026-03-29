@@ -9,9 +9,13 @@ Steps:
 3. Run: `obsidian-agent note "<title>" resource` to create a vault resource note
 4. Run: `obsidian-agent patch "<title>" --heading "Summary" --replace "<Problem + Solution summary from the CE file>"`
 5. Update the note's frontmatter:
+   - `subtype`: `learning`
+   - `maturity`: `seed`
+   - `domain`: infer from CE `category` field — map to closest controlled vocabulary value (ai-engineering, dev-environment, open-source, knowledge-management, project-specific). Default to `project-specific` if unclear.
    - `tags`: `[compound-learning, <category>, <severity>]`
    - `source`: relative path to the original CE file (e.g., `docs/solutions/workflow-issues/my-fix.md`)
    - `related`: `["[[tech-research-squad]]"]` plus any related project if inferable from CE metadata
+   - `relation_map`: `"tech-research-squad:extends"` plus any additional typed relations
    - `summary`: one-line summary of the problem and solution
 6. Update bidirectional links: add `[[<new-note>]]` to `tech-research-squad.md`'s related field
 7. Run: `obsidian-agent sync` to rebuild indices

@@ -6,12 +6,15 @@ tags: [improvement]
 created: "{{DATE}}"
 updated: "{{DATE}}"
 status: proposed
+maturity: seed
+domain: ""
 risk_level: "{{RISK_LEVEL}}"
 target_layer: "{{TARGET_LAYER}}"
 target_file: "{{TARGET_FILE}}"
 friction_type: "{{FRICTION_TYPE}}"
 summary: "{{SUMMARY}}"
 related: []
+relation_map: ""
 ---
 
 # {{TITLE}}

@@ -12,9 +12,12 @@ Steps:
    - Copy the `Requirements Trace` (or list requirement IDs with brief descriptions)
    - Add implementation units as a checklist under a `## Progress` section
 5. Update the note's frontmatter:
+   - `maturity`: `seed`
+   - `domain`: infer from plan content — map to closest controlled vocabulary value (ai-engineering, dev-environment, open-source, knowledge-management, project-specific). Default to `project-specific` if unclear.
    - `tags`: `[plan, <type>]` (type is feat/fix/refactor from the plan)
    - `source`: relative path to the original plan file
    - `related`: start with `["[[tech-research-squad]]"]`
+   - `relation_map`: `"tech-research-squad:implements"` plus any additional typed relations
    - `summary`: one-line summary from the plan's Overview
    - `goal`: the plan's stated goal
 6. If the `origin` field exists (points to a brainstorm file):

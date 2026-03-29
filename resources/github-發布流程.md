@@ -1,10 +1,13 @@
 ---
 title: "GitHub 發布流程"
 type: resource
-tags: [github, release, workflow, ci-cd]
+tags: [github, ci-cd, workflow]
 created: "2026-03-28"
-updated: "2026-03-28"
+updated: "2026-03-30"
 status: active
+subtype: standard
+maturity: mature
+domain: open-source
 summary: "開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護"
 source: ""
 related: ["[[開源開發者身分]]", "[[開源專案品質標準]]", "[[dexg16-git-and-github]]", "[[github-全部-repo-清單]]"]

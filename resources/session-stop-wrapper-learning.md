@@ -1,13 +1,17 @@
 ---
 title: "Session-Stop Wrapper Learning"
 type: resource
-tags: [compound-learning, harness-automation, hooks, bash]
+tags: [hooks, harness-engineering]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-03-30"
 status: active
+subtype: learning
+maturity: mature
+domain: ai-engineering
 summary: "Wrapper script 繞過 CLI 限制，從 Stop hook stdin 擷取 last_assistant_message 寫入 journal"
 source: "docs/solutions/harness-automation/session-stop-wrapper-2026-03-29.md"
 related: ["[[tech-research-squad]]", "[[harness-engineering-research]]", "[[compound-engineering-plugin]]", "[[claude-code-configuration]]"]
+relation_map: "harness-engineering-research:implements"
 ---
 
 # Session-Stop Wrapper Learning

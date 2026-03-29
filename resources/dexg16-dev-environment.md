@@ -1,10 +1,13 @@
 ---
 title: "DEXG16 開發環境"
 type: resource
-tags: [dev-environment, toolchain, runtime]
+tags: [toolchain]
 created: "2026-03-28"
-updated: "2026-03-28"
+updated: "2026-03-30"
 status: active
+subtype: catalog
+maturity: mature
+domain: dev-environment
 summary: "DEXG16 開發工具鏈 — Node 24, Python 3.14, CUDA 12.6, Rust, Docker"
 source: ""
 related: ["[[claude-code-dev-tools]]", "[[dexg16-machine-specs]]", "[[dexg16-ai-stack]]", "[[dexg16-project-layout]]", "[[dexg16-ai-coding-tools]]", "[[dexg16-all-projects-catalog]]"]

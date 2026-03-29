@@ -1,10 +1,13 @@
 ---
 title: "DEXG16 硬體規格"
 type: resource
-tags: [hardware, workstation, asus]
+tags: [hardware, claude-code]
 created: "2026-03-28"
-updated: "2026-03-28"
+updated: "2026-03-30"
 status: active
+subtype: catalog
+maturity: mature
+domain: dev-environment
 summary: "ASUS ROG Zephyrus G16 — i9-185H, 32GB, RTX 4090 Laptop, 2TB NVMe"
 source: ""
 related: ["[[dexg16-dev-environment]]", "[[dexg16-ai-stack]]", "[[dexg16-project-layout]]", "[[dexg16-ai-coding-tools]]", "[[dexg16-all-projects-catalog]]"]
@@ -42,7 +45,7 @@ related: ["[[dexg16-dev-environment]]", "[[dexg16-ai-stack]]", "[[dexg16-project
 - **SSD：** Samsung NVMe MZVL22T0HDLB-00BT7（2TB）
 - **檔案系統：** NTFS，磁碟區名稱「OS」
 - **總容量：** 約 1.83 TB 可用
-- **剩餘空間：** 約 49 GB（⚠️ 空間偏低，建議清理）
+- **剩餘空間：** 約 491 GB（2026-03-29 更新；先前 49GB 為過時快照）
 
 ### 外觀與 BIOS
 - **機身：** 16 吋電競筆電

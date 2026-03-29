@@ -1,13 +1,17 @@
 ---
 title: "Harness Engineering 研究"
 type: resource
-tags: [research, harness-engineering, claude-code, plugins, hooks, mcp, agents]
+tags: [harness-engineering, claude-code, mcp, hooks, plugins]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-03-30"
 status: active
+subtype: research
+maturity: growing
+domain: ai-engineering
 summary: "Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構"
 source: ""
 related: ["[[tech-research-squad]]", "[[prompt-engineering-research]]", "[[context-engineering-research]]", "[[compound-engineering-research]]", "[[claude-code-configuration]]", "[[compound-engineering-plugin]]"]
+relation_map: "tech-research-squad:extends, compound-engineering-plugin:documents"
 ---
 
 # Harness Engineering 研究

@@ -1,10 +1,13 @@
 ---
 title: "DEXG16 全部專案清單"
 type: resource
-tags: [projects, catalog, inventory]
+tags: [inventory, workspace]
 created: "2026-03-28"
-updated: "2026-03-28"
+updated: "2026-03-30"
 status: active
+subtype: catalog
+maturity: growing
+domain: dev-environment
 summary: "DEX_data 與 Projects 目錄下所有專案的完整盤點"
 source: ""
 related: ["[[dexg16-project-layout]]", "[[dexg16-ai-coding-tools]]", "[[dexg16-ai-stack]]", "[[dexg16-dev-environment]]", "[[dexg16-machine-specs]]", "[[dexg16-git-and-github]]", "[[github-全部-repo-清單]]"]

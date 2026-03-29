@@ -1,13 +1,17 @@
 ---
 title: "Claude Code 設定"
 type: resource
-tags: [claude-code, config, plugins, hooks]
+tags: [claude-code, hooks, plugins]
 created: "2026-03-28"
-updated: "2026-03-28"
+updated: "2026-03-30"
 status: active
+subtype: config
+maturity: mature
+domain: ai-engineering
 summary: "Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置"
 source: ""
 related: ["[[claude-code-dev-tools]]", "[[claude-session-manager]]", "[[dexg16-ai-coding-tools]]", "[[csm-architecture]]", "[[dexg16-ai-stack]]", "[[dexg16-git-and-github]]"]
+relation_map: "compound-engineering-plugin:depends-on"
 ---
 
 # Claude Code 設定

@@ -117,6 +117,8 @@ updated: 2026-03-29
 | [[harness-engineering-research]] | [[compound-engineering-plugin]] | related |
 | [[improvement-2026-03-29-001]] | [[2026-03-29]] | related |
 | [[improvement-2026-03-29-002]] | [[2026-03-29]] | related |
+| [[local-llm-deployment]] | [[tech-research-squad]] | related |
+| [[local-llm-deployment]] | [[harness-engineering-research]] | related |
 | [[prompt-engineering-research]] | [[tech-research-squad]] | related |
 | [[prompt-engineering-research]] | [[context-engineering-research]] | related |
 | [[prompt-engineering-research]] | [[harness-engineering-research]] | related |

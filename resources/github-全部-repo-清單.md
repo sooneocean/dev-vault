@@ -1,10 +1,13 @@
 ---
 title: "GitHub 全部 Repo 清單"
 type: resource
-tags: [github, repos, inventory]
+tags: [github, inventory]
 created: "2026-03-28"
-updated: "2026-03-28"
+updated: "2026-03-30"
 status: active
+subtype: catalog
+maturity: growing
+domain: open-source
 summary: "sooneocean GitHub 帳號下所有 Repo 的完整盤點（35 個 Repo、22 個公開）"
 source: ""
 related: ["[[開源開發者身分]]", "[[dexg16-all-projects-catalog]]", "[[dexg16-git-and-github]]", "[[github-發布流程]]", "[[dexg16-project-layout]]"]

@@ -1,10 +1,13 @@
 ---
 title: "DEXG16 Git 與 GitHub 設定"
 type: resource
-tags: [git, github, identity]
+tags: [github]
 created: "2026-03-28"
-updated: "2026-03-28"
+updated: "2026-03-30"
 status: active
+subtype: catalog
+maturity: mature
+domain: dev-environment
 summary: "Git 設定、GitHub 帳號（sooneocean）、SSH 金鑰、delta 分頁器"
 source: ""
 related: ["[[dexg16-all-projects-catalog]]", "[[csm-feature-roadmap]]", "[[claude-code-configuration]]", "[[dexg16-ai-coding-tools]]", "[[dexg16-ai-stack]]", "[[開源開發者身分]]", "[[github-發布流程]]", "[[github-全部-repo-清單]]"]

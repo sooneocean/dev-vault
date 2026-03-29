@@ -16,6 +16,7 @@ updated: 2026-03-29
 | [[harness-engineering-research]] | harness-engineering-research |
 | [[context-engineering-research]] | context-engineering-research |
 | [[prompt-engineering-research]] | prompt-engineering-research |
+| [[local-llm-deployment]] | RTX 4090 Laptop 16GB VRAM 上的本地模型部署決策和效能數據 |
 | [[compound-engineering-plugin]] | compound-engineering-plugin |
 | [[開源專案品質標準]] | 開源專案上架前的品質檢查清單 — README、License、CI、Topics、文件 |
 | [[github-全部-repo-清單]] | sooneocean GitHub 帳號下所有 Repo 的完整盤點（35 個 Repo、22 個公開） |

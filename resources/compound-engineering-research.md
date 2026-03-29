@@ -1,13 +1,17 @@
 ---
 title: "Compound Engineering 研究"
 type: resource
-tags: [research, compound-engineering, workflow, knowledge-compounding]
+tags: [compound-engineering, workflow]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-03-30"
 status: active
+subtype: research
+maturity: growing
+domain: ai-engineering
 summary: "Compound Engineering — 讓每次工程工作累積為下次的加速器"
 source: "https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents"
 related: ["[[tech-research-squad]]", "[[prompt-engineering-research]]", "[[context-engineering-research]]", "[[harness-engineering-research]]", "[[compound-engineering-plugin]]"]
+relation_map: "tech-research-squad:extends, compound-engineering-plugin:documents"
 ---
 
 # Compound Engineering 研究

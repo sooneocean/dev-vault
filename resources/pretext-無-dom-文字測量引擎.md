@@ -1,10 +1,13 @@
 ---
 title: "Pretext — 無 DOM 文字測量引擎"
 type: resource
-tags: [javascript, typescript, text-layout, performance, browser]
+tags: [typescript, text-layout, performance]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-03-30"
 status: active
+subtype: reference
+maturity: seed
+domain: project-specific
 summary: "chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑"
 source: ""
 related: []

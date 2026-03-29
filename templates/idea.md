@@ -5,8 +5,11 @@ tags: []
 created: "{{DATE}}"
 updated: "{{DATE}}"
 status: draft
+maturity: seed
+domain: ""
 summary: ""
 related: []
+relation_map: ""
 ---
 
 # {{TITLE}}

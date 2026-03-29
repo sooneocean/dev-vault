@@ -1,13 +1,17 @@
 ---
 title: "Prompt Engineering 研究"
 type: resource
-tags: [research, prompt-engineering, llm, technique]
+tags: [prompt-engineering, llm]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-03-30"
 status: active
+subtype: research
+maturity: growing
+domain: ai-engineering
 summary: "Prompt Engineering 的技巧、模式、反模式與迭代心得"
 source: ""
 related: ["[[tech-research-squad]]", "[[context-engineering-research]]", "[[harness-engineering-research]]", "[[compound-engineering-research]]"]
+relation_map: "tech-research-squad:extends"
 ---
 
 # Prompt Engineering 研究

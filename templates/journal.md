@@ -5,6 +5,7 @@ tags: [daily]
 created: "{{DATE}}"
 updated: "{{DATE}}"
 status: active
+domain: ""
 summary: ""
 ---
 

@@ -1,13 +1,17 @@
 ---
 title: "Compound Engineering Plugin"
 type: resource
-tags: [claude-code, plugins, workflow, code-review, planning]
+tags: [claude-code, compound-engineering, plugins, workflow, planning]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-03-30"
 status: active
+subtype: reference
+maturity: growing
+domain: ai-engineering
 summary: "Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令"
 source: "https://github.com/EveryInc/compound-engineering-plugin"
 related: ["[[claude-code-configuration]]", "[[claude-code-dev-tools]]", "[[2026-03-29]]", "[[prompt-engineering-research]]", "[[context-engineering-research]]", "[[harness-engineering-research]]", "[[compound-engineering-research]]"]
+relation_map: "compound-engineering-research:documents, harness-engineering-research:extends"
 ---
 
 # Compound Engineering Plugin

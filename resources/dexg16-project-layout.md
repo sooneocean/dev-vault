@@ -1,10 +1,13 @@
 ---
 title: "DEXG16 專案目錄結構"
 type: resource
-tags: [directory-structure, workspace]
+tags: [workspace]
 created: "2026-03-28"
-updated: "2026-03-28"
+updated: "2026-03-30"
 status: active
+subtype: catalog
+maturity: mature
+domain: dev-environment
 summary: "工作目錄配置 — DEX_data 分區、Projects 資料夾、主要 Repo"
 source: ""
 related: ["[[dexg16-ai-stack]]", "[[dexg16-dev-environment]]", "[[dexg16-machine-specs]]", "[[dexg16-all-projects-catalog]]", "[[github-全部-repo-清單]]"]

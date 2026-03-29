@@ -1,10 +1,13 @@
 ---
 title: "DEXG16 AI 技術堆疊"
 type: resource
-tags: [ai, ml, cuda, llm]
+tags: [llm]
 created: "2026-03-28"
-updated: "2026-03-28"
+updated: "2026-03-30"
 status: active
+subtype: catalog
+maturity: mature
+domain: dev-environment
 summary: "AI/ML 工具鏈 — PyTorch 2.11+cu126, Transformers, Ollama, LM Studio, Claude, OpenAI"
 source: ""
 related: ["[[dexg16-dev-environment]]", "[[dexg16-machine-specs]]", "[[dexg16-project-layout]]", "[[dexg16-ai-coding-tools]]", "[[dexg16-all-projects-catalog]]", "[[claude-code-configuration]]", "[[dexg16-git-and-github]]"]
@@ -29,7 +32,7 @@ related: ["[[dexg16-dev-environment]]", "[[dexg16-machine-specs]]", "[[dexg16-pr
 ### 大型語言模型（LLM）執行環境
 | 工具 | 版本 | 用途 |
 |------|------|------|
-| Ollama | 0.17.0 | 本機 LLM 推論 |
+| Ollama | 0.18.3 | 本機 LLM 推論（2026-03-29 confirmed） |
 | LM Studio | 已安裝 | 本機模型的圖形介面 |
 | ChatWithRTX | 已安裝 | NVIDIA 本機 RAG 方案 |
 
