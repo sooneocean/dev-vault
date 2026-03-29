@@ -48,7 +48,7 @@ updated: 2026-03-29
 ### compound-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
-- [[compound-engineering-research]] — Compound Engineering — 讓每次工程工作累積為下次的加速器
+- [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
 
 ### context-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
@@ -71,7 +71,7 @@ updated: 2026-03-29
 
 ### hardware
 - [[dexg16-machine-specs]] — ASUS ROG Zephyrus G16 — i9-185H, 32GB, RTX 4090 Laptop, 2TB NVMe
-- [[local-llm-deployment]] — RTX 4090 Laptop 16GB VRAM 上的本地模型部署決策和效能數據
+- [[local-llm-deployment]] — RTX 4090 Laptop 16GB VRAM 上的本地模型部署、MCP 整合、任務路由決策
 
 ### harness-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
@@ -88,14 +88,22 @@ updated: 2026-03-29
 - [[dexg16-all-projects-catalog]] — DEX_data 與 Projects 目錄下所有專案的完整盤點
 - [[github-全部-repo-清單]] — sooneocean GitHub 帳號下所有 Repo 的完整盤點（35 個 Repo、22 個公開）
 
+### knowledge-loop
+- [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
+
+### learning-capture
+- [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
+
 ### llm
 - [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 - [[dexg16-ai-stack]] — AI/ML 工具鏈 — PyTorch 2.11+cu126, Transformers, Ollama, LM Studio, Claude, OpenAI
-- [[local-llm-deployment]] — RTX 4090 Laptop 16GB VRAM 上的本地模型部署決策和效能數據
+- [[local-llm-deployment]] — RTX 4090 Laptop 16GB VRAM 上的本地模型部署、MCP 整合、任務路由決策
+- [[local-llm-task-routing]] — RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 
 ### mcp
 - [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
+- [[local-llm-task-routing]] — RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API
 - [[research-mcp-model-context-protocol-2026-03-29]] — Tech research — 5 repos, 10 issues, 5 emerging
 
 ### obsidian-agent
@@ -103,6 +111,9 @@ updated: 2026-03-29
 - [[cluster-subtype-domain-dimensions]] — Enhance obsidian-agent cluster algorithm to use subtype and domain as clustering dimensions alongside tags and related links
 - [[relation-map-graph-consumer]] — Build MCP tool or slash command to consume relation_map data and render typed graph visualization
 - [[research-update-mode]] — Add --update flag to obsidian-agent research command to diff against previous research and surface changes
+
+### ollama
+- [[local-llm-task-routing]] — RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API
 
 ### open-source
 - [[開源開發者身分]] — sooneocean 開源開發者身分、發布策略、品牌定位
@@ -140,6 +151,9 @@ updated: 2026-03-29
 ### research-scan
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
 
+### task-routing
+- [[local-llm-task-routing]] — RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API
+
 ### text-layout
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
 - [[pretext-csm-tui-layout]] — Use pretext engine for CSM TUI text measurement and layout optimization
@@ -155,7 +169,7 @@ updated: 2026-03-29
 
 ### workflow
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
-- [[compound-engineering-research]] — Compound Engineering — 讓每次工程工作累積為下次的加速器
+- [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
 - [[github-發布流程]] — 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護
 
 ### workspace
@@ -167,14 +181,15 @@ updated: 2026-03-29
 | Tag | Count |
 |-----|-------|
 | claude-code | 15 |
+| llm | 5 |
 | github | 4 |
 | hooks | 4 |
-| llm | 4 |
 | obsidian-agent | 4 |
 | harness-engineering | 3 |
 | compound-engineering | 3 |
 | plugins | 3 |
 | workflow | 3 |
+| mcp | 3 |
 | open-source | 2 |
 | python | 2 |
 | planning | 2 |
@@ -184,11 +199,14 @@ updated: 2026-03-29
 | inventory | 2 |
 | workspace | 2 |
 | hardware | 2 |
-| mcp | 2 |
 | text-layout | 2 |
+| knowledge-loop | 1 |
+| learning-capture | 1 |
 | toolchain | 1 |
 | ci-cd | 1 |
 | agent-harness | 1 |
+| task-routing | 1 |
+| ollama | 1 |
 | typescript | 1 |
 | performance | 1 |
 | agent-workflow | 1 |

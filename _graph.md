@@ -134,6 +134,9 @@ updated: 2026-03-29
 | [[improvement-2026-03-30-003]] | [[improvement-2026-03-30-001]] | related |
 | [[local-llm-deployment]] | [[tech-research-squad]] | related |
 | [[local-llm-deployment]] | [[harness-engineering-research]] | related |
+| [[local-llm-deployment]] | [[local-llm-task-routing]] | related |
+| [[local-llm-task-routing]] | [[local-llm-deployment]] | related |
+| [[local-llm-task-routing]] | [[dexg16-ai-stack]] | related |
 | [[pretext-無-dom-文字測量引擎]] | [[pretext-csm-tui-layout]] | related |
 | [[prompt-engineering-research]] | [[tech-research-squad]] | related |
 | [[prompt-engineering-research]] | [[context-engineering-research]] | related |
