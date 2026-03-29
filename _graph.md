@@ -1,7 +1,7 @@
 ---
 title: Knowledge Graph
 type: index
-updated: 2026-03-28
+updated: 2026-03-29
 ---
 
 # Knowledge Graph
@@ -22,12 +22,31 @@ updated: 2026-03-28
 | [[csm-feature-roadmap]] | [[csm-architecture]] | related |
 | [[csm-feature-roadmap]] | [[csm-key-design-decisions]] | related |
 | [[csm-feature-roadmap]] | [[dexg16-git-and-github]] | related |
+| [[tech-research-squad]] | [[compound-engineering-plugin]] | related |
+| [[tech-research-squad]] | [[claude-code-configuration]] | related |
+| [[tech-research-squad]] | [[claude-code-dev-tools]] | related |
 | [[claude-code-configuration]] | [[claude-code-dev-tools]] | related |
 | [[claude-code-configuration]] | [[claude-session-manager]] | related |
 | [[claude-code-configuration]] | [[dexg16-ai-coding-tools]] | related |
 | [[claude-code-configuration]] | [[csm-architecture]] | related |
 | [[claude-code-configuration]] | [[dexg16-ai-stack]] | related |
 | [[claude-code-configuration]] | [[dexg16-git-and-github]] | related |
+| [[compound-engineering-plugin]] | [[claude-code-configuration]] | related |
+| [[compound-engineering-plugin]] | [[claude-code-dev-tools]] | related |
+| [[compound-engineering-plugin]] | [[2026-03-29]] | related |
+| [[compound-engineering-plugin]] | [[prompt-engineering-research]] | related |
+| [[compound-engineering-plugin]] | [[context-engineering-research]] | related |
+| [[compound-engineering-plugin]] | [[harness-engineering-research]] | related |
+| [[compound-engineering-plugin]] | [[compound-engineering-research]] | related |
+| [[compound-engineering-research]] | [[tech-research-squad]] | related |
+| [[compound-engineering-research]] | [[prompt-engineering-research]] | related |
+| [[compound-engineering-research]] | [[context-engineering-research]] | related |
+| [[compound-engineering-research]] | [[harness-engineering-research]] | related |
+| [[compound-engineering-research]] | [[compound-engineering-plugin]] | related |
+| [[context-engineering-research]] | [[tech-research-squad]] | related |
+| [[context-engineering-research]] | [[prompt-engineering-research]] | related |
+| [[context-engineering-research]] | [[harness-engineering-research]] | related |
+| [[context-engineering-research]] | [[compound-engineering-research]] | related |
 | [[csm-architecture]] | [[csm-key-design-decisions]] | related |
 | [[csm-architecture]] | [[csm-feature-roadmap]] | related |
 | [[csm-architecture]] | [[claude-code-configuration]] | related |
@@ -88,8 +107,22 @@ updated: 2026-03-28
 | [[github-發布流程]] | [[開源專案品質標準]] | related |
 | [[github-發布流程]] | [[dexg16-git-and-github]] | related |
 | [[github-發布流程]] | [[github-全部-repo-清單]] | related |
+| [[harness-engineering-research]] | [[tech-research-squad]] | related |
+| [[harness-engineering-research]] | [[prompt-engineering-research]] | related |
+| [[harness-engineering-research]] | [[context-engineering-research]] | related |
+| [[harness-engineering-research]] | [[compound-engineering-research]] | related |
+| [[harness-engineering-research]] | [[claude-code-configuration]] | related |
+| [[harness-engineering-research]] | [[compound-engineering-plugin]] | related |
+| [[improvement-2026-03-29-001]] | [[2026-03-29]] | related |
+| [[improvement-2026-03-29-002]] | [[2026-03-29]] | related |
+| [[prompt-engineering-research]] | [[tech-research-squad]] | related |
+| [[prompt-engineering-research]] | [[context-engineering-research]] | related |
+| [[prompt-engineering-research]] | [[harness-engineering-research]] | related |
+| [[prompt-engineering-research]] | [[compound-engineering-research]] | related |
 | [[開源專案品質標準]] | [[開源開發者身分]] | related |
 | [[開源專案品質標準]] | [[github-發布流程]] | related |
 | [[開源專案品質標準]] | [[github-全部-repo-清單]] | related |
 | [[2026-03-28]] | [[2026-03-27]] | nav-prev |
 | [[2026-03-28]] | [[2026-03-29]] | nav-next |
+| [[2026-03-29]] | [[2026-03-28]] | nav-prev |
+| [[2026-03-29]] | [[2026-03-30]] | nav-next |

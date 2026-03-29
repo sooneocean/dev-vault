@@ -1,13 +1,21 @@
 ---
 title: resources index
 type: index
-updated: 2026-03-28
+updated: 2026-03-29
 ---
 
 # Resources
 
 | File | Summary |
 |------|---------|
+| [[pretext-無-dom-文字測量引擎]] | chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑 |
+| [[research-chenglou-pretext-text-measurement-layout-2026-03-29]] | Research: chenglou pretext text measurement layout |
+| [[research-mcp-model-context-protocol-2026-03-29]] | Research: MCP model context protocol |
+| [[compound-engineering-research]] | compound-engineering-research |
+| [[harness-engineering-research]] | harness-engineering-research |
+| [[context-engineering-research]] | context-engineering-research |
+| [[prompt-engineering-research]] | prompt-engineering-research |
+| [[compound-engineering-plugin]] | compound-engineering-plugin |
 | [[開源專案品質標準]] | 開源專案上架前的品質檢查清單 — README、License、CI、Topics、文件 |
 | [[github-全部-repo-清單]] | sooneocean GitHub 帳號下所有 Repo 的完整盤點（35 個 Repo、22 個公開） |
 | [[github-發布流程]] | 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護 |
