@@ -38,6 +38,7 @@ Special files: `_index.md` (per-directory index), `_tags.md`, `_graph.md`.
 | `/search`  | Full-text search across vault        |
 | `/list`    | List notes with filters              |
 | `/review`  | Generate weekly review               |
+| `/improve` | Analyze usage & suggest config improvements |
 
 ## CLI Quick Reference
 
@@ -58,7 +59,7 @@ obsidian-agent health                    # vault health check
 
 ## Templates Available
 
-area, project, resource, idea, journal, weekly-review, monthly-review, note (generic)
+area, project, resource, idea, journal, weekly-review, monthly-review, note (generic), improvement
 
 ## Git
 
