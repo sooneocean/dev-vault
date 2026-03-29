@@ -6,9 +6,18 @@ updated: 2026-03-29
 
 # Tags Index
 
+### agent-framework
+- [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
+
+### agent-workflow
+- [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
+
 ### architecture
 - [[csm-architecture]] — Claude Session Manager 技術架構 — 程序模型、串流、持久化
 - [[csm-key-design-decisions]] — 架構決策紀錄：不用互動式子程序、短命程序、stream-json 解析
+
+### auto-generated
+- [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
 
 ### ci-cd
 - [[github-發布流程]] — 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護
@@ -25,6 +34,10 @@ updated: 2026-03-29
 - [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
 - [[improvement-2026-03-29-001]] — CLAUDE.md CLI Quick Reference 只列出原始命令，缺少 obsidian-agent v0.7.0 新增的 6 個命令
 - [[improvement-2026-03-29-002]] — docs/plans/ 和 docs/solutions/ 是 Compound Engineering 的標準輸出路徑，但 CLAUDE.md Directory Structure 未提及
+- [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
+
+### clustering
+- [[cluster-subtype-domain-dimensions]] — Enhance obsidian-agent cluster algorithm to use subtype and domain as clustering dimensions alongside tags and related links
 
 ### compound-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
@@ -35,11 +48,20 @@ updated: 2026-03-29
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
 - [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 
+### diff-tracking
+- [[research-update-mode]] — Add --update flag to obsidian-agent research command to diff against previous research and surface changes
+
+### frontmatter
+- [[cli-update-fields-flag]] — Add --fields flag to obsidian-agent updateNote() to INSERT new frontmatter keys, not just update existing ones
+
 ### github
 - [[開源開發者身分]] — sooneocean 開源開發者身分、發布策略、品牌定位
 - [[dexg16-git-and-github]] — Git 設定、GitHub 帳號（sooneocean）、SSH 金鑰、delta 分頁器
 - [[github-全部-repo-清單]] — sooneocean GitHub 帳號下所有 Repo 的完整盤點（35 個 Repo、22 個公開）
 - [[github-發布流程]] — 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護
+
+### graph-visualization
+- [[relation-map-graph-consumer]] — Build MCP tool or slash command to consume relation_map data and render typed graph visualization
 
 ### hardware
 - [[dexg16-machine-specs]] — ASUS ROG Zephyrus G16 — i9-185H, 32GB, RTX 4090 Laptop, 2TB NVMe
@@ -63,11 +85,17 @@ updated: 2026-03-29
 - [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 - [[dexg16-ai-stack]] — AI/ML 工具鏈 — PyTorch 2.11+cu126, Transformers, Ollama, LM Studio, Claude, OpenAI
 - [[local-llm-deployment]] — RTX 4090 Laptop 16GB VRAM 上的本地模型部署決策和效能數據
-- [[prompt-engineering-research]] — Prompt Engineering 的技巧、模式、反模式與迭代心得
+- [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 
 ### mcp
 - [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
 - [[research-mcp-model-context-protocol-2026-03-29]] — Tech research — 5 repos, 10 issues, 5 emerging
+
+### obsidian-agent
+- [[cli-update-fields-flag]] — Add --fields flag to obsidian-agent updateNote() to INSERT new frontmatter keys, not just update existing ones
+- [[cluster-subtype-domain-dimensions]] — Enhance obsidian-agent cluster algorithm to use subtype and domain as clustering dimensions alongside tags and related links
+- [[relation-map-graph-consumer]] — Build MCP tool or slash command to consume relation_map data and render typed graph visualization
+- [[research-update-mode]] — Add --update flag to obsidian-agent research command to diff against previous research and surface changes
 
 ### open-source
 - [[開源開發者身分]] — sooneocean 開源開發者身分、發布策略、品牌定位
@@ -85,19 +113,35 @@ updated: 2026-03-29
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
 - [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
 
+### pretext
+- [[pretext-csm-tui-layout]] — Use pretext engine for CSM TUI text measurement and layout optimization
+
 ### prompt-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
-- [[prompt-engineering-research]] — Prompt Engineering 的技巧、模式、反模式與迭代心得
+- [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 
 ### python
 - [[claude-session-manager]] — Python TUI 儀表板，從單一終端管理多個 Claude Code Session
 - [[csm-architecture]] — Claude Session Manager 技術架構 — 程序模型、串流、持久化
 
+### rag
+- [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
+
+### relation-map
+- [[relation-map-graph-consumer]] — Build MCP tool or slash command to consume relation_map data and render typed graph visualization
+
+### research-scan
+- [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
+
 ### text-layout
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
+- [[pretext-csm-tui-layout]] — Use pretext engine for CSM TUI text measurement and layout optimization
 
 ### toolchain
 - [[dexg16-dev-environment]] — DEXG16 開發工具鏈 — Node 24, Python 3.14, CUDA 12.6, Rust, Docker
+
+### tui
+- [[pretext-csm-tui-layout]] — Use pretext engine for CSM TUI text measurement and layout optimization
 
 ### typescript
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
@@ -115,9 +159,10 @@ updated: 2026-03-29
 
 | Tag | Count |
 |-----|-------|
-| claude-code | 11 |
+| claude-code | 12 |
 | github | 4 |
 | llm | 4 |
+| obsidian-agent | 4 |
 | harness-engineering | 3 |
 | compound-engineering | 3 |
 | hooks | 3 |
@@ -133,8 +178,20 @@ updated: 2026-03-29
 | workspace | 2 |
 | hardware | 2 |
 | mcp | 2 |
+| text-layout | 2 |
 | toolchain | 1 |
 | ci-cd | 1 |
 | typescript | 1 |
-| text-layout | 1 |
 | performance | 1 |
+| agent-workflow | 1 |
+| research-scan | 1 |
+| auto-generated | 1 |
+| agent-framework | 1 |
+| rag | 1 |
+| frontmatter | 1 |
+| clustering | 1 |
+| pretext | 1 |
+| tui | 1 |
+| relation-map | 1 |
+| graph-visualization | 1 |
+| diff-tracking | 1 |

@@ -8,6 +8,7 @@ updated: 2026-03-29
 
 | File | Summary |
 |------|---------|
+| [[agent-md-缺少新-schema-欄位說明]] | AGENT.md 缺少新 schema 欄位說明 |
 | [[session-stop-wrapper-learning]] | Session-Stop Wrapper Learning |
 | [[pretext-無-dom-文字測量引擎]] | chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑 |
 | [[research-chenglou-pretext-text-measurement-layout-2026-03-29]] | Research: chenglou pretext text measurement layout |
