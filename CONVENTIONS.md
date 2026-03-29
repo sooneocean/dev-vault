@@ -147,16 +147,48 @@ All templates are in `templates/` with `{{PLACEHOLDER}}` syntax. When creating n
 
 ## Using the CLI (recommended)
 
-Instead of manual file operations, agents can use the `obsidian-agent` CLI:
+Instead of manual file operations, agents can use the `obsidian-agent` CLI.
+The CLI handles frontmatter, linking, and index updates automatically.
 
 ```bash
+# Create & read
 obsidian-agent journal              # Create/open today's journal
 obsidian-agent note "Title" type    # Create a note (auto-links related notes)
 obsidian-agent capture "idea"       # Quick idea capture
-obsidian-agent search "keyword"     # Search notes
-obsidian-agent list [type]          # List notes
-obsidian-agent review               # Generate weekly review
-obsidian-agent sync                 # Rebuild indices
-```
+obsidian-agent read "note"          # Read a note's content
+obsidian-agent recent               # Recently updated notes (last 7 days)
 
-The CLI handles frontmatter, linking, and index updates automatically.
+# Search & discover
+obsidian-agent search "keyword"     # Full-text search
+obsidian-agent list [type]          # List notes with filters
+obsidian-agent backlinks "note"     # What links here?
+obsidian-agent orphans              # Find unlinked notes
+
+# Edit existing notes (prefer over direct file editing)
+obsidian-agent patch "note" --heading "Section" --append "content"
+obsidian-agent update "note" --status active --summary "Updated"
+obsidian-agent archive "old-note"   # Set status to archived
+obsidian-agent delete "old-note"    # Delete and clean up references
+
+# Tags
+obsidian-agent tag list             # List all tags with counts
+obsidian-agent tag rename "old" "new"
+
+# Reviews
+obsidian-agent review               # Weekly review
+obsidian-agent review monthly       # Monthly review
+
+# Discovery & analysis
+obsidian-agent stale                # Find stale notes + triage plan
+obsidian-agent cluster              # Topic clustering + missing links
+obsidian-agent digest --all         # Project status dashboard
+obsidian-agent thread "topic"       # Trace topic evolution over time
+obsidian-agent suggest              # Smart daily action suggestions
+obsidian-agent context "note"       # Full context around a note
+
+# Maintenance
+obsidian-agent sync                 # Rebuild tag & graph indices
+obsidian-agent health               # Vault health score
+obsidian-agent stats                # Vault statistics overview
+obsidian-agent graph                # Generate Mermaid knowledge graph
+```

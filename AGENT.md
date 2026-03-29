@@ -38,6 +38,14 @@ obsidian-agent tag rename "old" "new"
 obsidian-agent review                    # weekly
 obsidian-agent review monthly
 
+# Discovery & analysis
+obsidian-agent stale                     # find stale notes + triage plan
+obsidian-agent cluster                   # topic clustering + missing links
+obsidian-agent digest --all              # project status dashboard
+obsidian-agent thread "topic"            # trace topic evolution
+obsidian-agent suggest                   # smart daily action suggestions
+obsidian-agent context "note"            # full context around a note
+
 # Maintenance
 obsidian-agent sync                      # rebuild indices
 obsidian-agent health                    # vault health score
@@ -70,11 +78,12 @@ If you edit files directly instead of using the CLI:
 
 1. **Read `CONVENTIONS.md` first**
 2. **Include complete frontmatter** in new notes
-3. **Update `updated` field** when modifying
-4. **Update indices**: `_tags.md`, `_graph.md`, directory `_index.md`
-5. **Build bidirectional links** via the `related` field
-6. **File names**: lowercase with hyphens
-7. **Internal links**: `[[filename]]` (no `.md` extension)
+3. **New schema fields** (Plan 004): `subtype` (resource only — reference/research/catalog/config/learning/standard/improvement), `maturity` (seed/growing/mature), `domain` (controlled vocab — see CONVENTIONS.md), `relation_map` (typed relations, optional)
+4. **Update `updated` field** when modifying
+5. **Update indices**: `_tags.md`, `_graph.md`, directory `_index.md`
+6. **Build bidirectional links** via the `related` field
+7. **File names**: lowercase with hyphens
+8. **Internal links**: `[[filename]]` (no `.md` extension)
 
 ## Environment Variables
 

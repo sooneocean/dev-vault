@@ -34,6 +34,9 @@ updated: 2026-03-29
 - [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
 - [[improvement-2026-03-29-001]] — CLAUDE.md CLI Quick Reference 只列出原始命令，缺少 obsidian-agent v0.7.0 新增的 6 個命令
 - [[improvement-2026-03-29-002]] — docs/plans/ 和 docs/solutions/ 是 Compound Engineering 的標準輸出路徑，但 CLAUDE.md Directory Structure 未提及
+- [[improvement-2026-03-30-001]] — AGENT.md 的 Rules for Manual Edits 缺少 subtype/maturity/domain/relation_map 欄位說明，CLI 範例也只列基礎命令
+- [[improvement-2026-03-30-002]] — obsidian-agent journal 使用 UTC 時區，午夜後仍產出前一天的 journal，需設定 OA_TIMEZONE 或在 Stop hook 加 TZ
+- [[improvement-2026-03-30-003]] — CONVENTIONS.md 的 Using the CLI 段落只列 7 個基礎命令，缺少 patch/update/health/stale/suggest 等 v0.7.0 命令
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 
 ### clustering
@@ -75,6 +78,7 @@ updated: 2026-03-29
 ### hooks
 - [[claude-code-configuration]] — Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置
 - [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
+- [[improvement-2026-03-30-002]] — obsidian-agent journal 使用 UTC 時區，午夜後仍產出前一天的 journal，需設定 OA_TIMEZONE 或在 Stop hook 加 TZ
 - [[session-stop-wrapper-learning]] — Wrapper script 繞過 CLI 限制，從 Stop hook stdin 擷取 last_assistant_message 寫入 journal
 
 ### inventory
@@ -159,13 +163,13 @@ updated: 2026-03-29
 
 | Tag | Count |
 |-----|-------|
-| claude-code | 12 |
+| claude-code | 15 |
 | github | 4 |
+| hooks | 4 |
 | llm | 4 |
 | obsidian-agent | 4 |
 | harness-engineering | 3 |
 | compound-engineering | 3 |
-| hooks | 3 |
 | plugins | 3 |
 | workflow | 3 |
 | open-source | 2 |
