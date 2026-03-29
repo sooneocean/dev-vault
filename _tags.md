@@ -9,6 +9,9 @@ updated: 2026-03-29
 ### agent-framework
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
 
+### agent-harness
+- [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
+
 ### agent-workflow
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 
@@ -31,7 +34,7 @@ updated: 2026-03-29
 - [[csm-architecture]] — Claude Session Manager 技術架構 — 程序模型、串流、持久化
 - [[dexg16-ai-coding-tools]] — AI 輔助程式設計工具 — Claude Code, Cursor, Codex CLI, Gemini CLI, Cline
 - [[dexg16-machine-specs]] — ASUS ROG Zephyrus G16 — i9-185H, 32GB, RTX 4090 Laptop, 2TB NVMe
-- [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
+- [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
 - [[improvement-2026-03-29-001]] — CLAUDE.md CLI Quick Reference 只列出原始命令，缺少 obsidian-agent v0.7.0 新增的 6 個命令
 - [[improvement-2026-03-29-002]] — docs/plans/ 和 docs/solutions/ 是 Compound Engineering 的標準輸出路徑，但 CLAUDE.md Directory Structure 未提及
 - [[improvement-2026-03-30-001]] — AGENT.md 的 Rules for Manual Edits 缺少 subtype/maturity/domain/relation_map 欄位說明，CLI 範例也只列基礎命令
@@ -72,12 +75,12 @@ updated: 2026-03-29
 
 ### harness-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
-- [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
+- [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
 - [[session-stop-wrapper-learning]] — Wrapper script 繞過 CLI 限制，從 Stop hook stdin 擷取 last_assistant_message 寫入 journal
 
 ### hooks
 - [[claude-code-configuration]] — Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置
-- [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
+- [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
 - [[improvement-2026-03-30-002]] — obsidian-agent journal 使用 UTC 時區，午夜後仍產出前一天的 journal，需設定 OA_TIMEZONE 或在 Stop hook 加 TZ
 - [[session-stop-wrapper-learning]] — Wrapper script 繞過 CLI 限制，從 Stop hook stdin 擷取 last_assistant_message 寫入 journal
 
@@ -92,7 +95,7 @@ updated: 2026-03-29
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 
 ### mcp
-- [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
+- [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
 - [[research-mcp-model-context-protocol-2026-03-29]] — Tech research — 5 repos, 10 issues, 5 emerging
 
 ### obsidian-agent
@@ -115,7 +118,7 @@ updated: 2026-03-29
 ### plugins
 - [[claude-code-configuration]] — Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
-- [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
+- [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
 
 ### pretext
 - [[pretext-csm-tui-layout]] — Use pretext engine for CSM TUI text measurement and layout optimization
@@ -185,6 +188,7 @@ updated: 2026-03-29
 | text-layout | 2 |
 | toolchain | 1 |
 | ci-cd | 1 |
+| agent-harness | 1 |
 | typescript | 1 |
 | performance | 1 |
 | agent-workflow | 1 |
