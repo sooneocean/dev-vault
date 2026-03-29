@@ -24,6 +24,9 @@ updated: 2026-03-29
 ### asus
 - [[dexg16-machine-specs]] — ASUS ROG Zephyrus G16 — i9-185H, 32GB, RTX 4090 Laptop, 2TB NVMe
 
+### bash
+- [[session-stop-wrapper-learning]] — Wrapper script 繞過 CLI 限制，從 Stop hook stdin 擷取 last_assistant_message 寫入 journal
+
 ### browser
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
 
@@ -41,6 +44,7 @@ updated: 2026-03-29
 - [[claude-session-manager]] — Python TUI 儀表板，從單一終端管理多個 Claude Code Session
 - [[claude-code-configuration]] — Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
+- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 - [[dexg16-ai-coding-tools]] — AI 輔助程式設計工具 — Claude Code, Cursor, Codex CLI, Gemini CLI, Cline
 - [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
 
@@ -50,9 +54,15 @@ updated: 2026-03-29
 ### codex
 - [[dexg16-ai-coding-tools]] — AI 輔助程式設計工具 — Claude Code, Cursor, Codex CLI, Gemini CLI, Cline
 
+### compaction
+- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
+
 ### compound-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
 - [[compound-engineering-research]] — Compound Engineering — 讓每次工程工作累積為下次的加速器
+
+### compound-learning
+- [[session-stop-wrapper-learning]] — Wrapper script 繞過 CLI 限制，從 Stop hook stdin 擷取 last_assistant_message 寫入 journal
 
 ### config
 - [[claude-code-configuration]] — Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置
@@ -62,10 +72,10 @@ updated: 2026-03-29
 
 ### context-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
-- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略
+- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 
 ### context-window
-- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略
+- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 
 ### cuda
 - [[dexg16-ai-stack]] — AI/ML 工具鏈 — PyTorch 2.11+cu126, Transformers, Ollama, LM Studio, Claude, OpenAI
@@ -101,6 +111,9 @@ updated: 2026-03-29
 ### hardware
 - [[dexg16-machine-specs]] — ASUS ROG Zephyrus G16 — i9-185H, 32GB, RTX 4090 Laptop, 2TB NVMe
 
+### harness-automation
+- [[session-stop-wrapper-learning]] — Wrapper script 繞過 CLI 限制，從 Stop hook stdin 擷取 last_assistant_message 寫入 journal
+
 ### harness-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
 - [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
@@ -108,6 +121,7 @@ updated: 2026-03-29
 ### hooks
 - [[claude-code-configuration]] — Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置
 - [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
+- [[session-stop-wrapper-learning]] — Wrapper script 繞過 CLI 限制，從 Stop hook stdin 擷取 last_assistant_message 寫入 journal
 
 ### identity
 - [[開源開發者身分]] — sooneocean 開源開發者身分、發布策略、品牌定位
@@ -128,7 +142,7 @@ updated: 2026-03-29
 - [[compound-engineering-research]] — Compound Engineering — 讓每次工程工作累積為下次的加速器
 
 ### llm
-- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略
+- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 - [[dexg16-ai-stack]] — AI/ML 工具鏈 — PyTorch 2.11+cu126, Transformers, Ollama, LM Studio, Claude, OpenAI
 - [[prompt-engineering-research]] — Prompt Engineering 的技巧、模式、反模式與迭代心得
 
@@ -137,7 +151,7 @@ updated: 2026-03-29
 - [[research-mcp-model-context-protocol-2026-03-29]] — Tech research — 5 repos, 10 issues, 5 emerging
 
 ### memory
-- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略
+- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 
 ### ml
 - [[dexg16-ai-stack]] — AI/ML 工具鏈 — PyTorch 2.11+cu126, Transformers, Ollama, LM Studio, Claude, OpenAI
@@ -187,7 +201,7 @@ updated: 2026-03-29
 ### research
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
 - [[compound-engineering-research]] — Compound Engineering — 讓每次工程工作累積為下次的加速器
-- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略
+- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 - [[harness-engineering-research]] — Harness Engineering — 設計 agent 的工具鏈、hook、plugin、MCP 架構
 - [[prompt-engineering-research]] — Prompt Engineering 的技巧、模式、反模式與迭代心得
 - [[research-mcp-model-context-protocol-2026-03-29]] — Tech research — 5 repos, 10 issues, 5 emerging
@@ -197,6 +211,9 @@ updated: 2026-03-29
 
 ### runtime
 - [[dexg16-dev-environment]] — DEXG16 開發工具鏈 — Node 24, Python 3.14, CUDA 12.6, Rust, Docker
+
+### subagent
+- [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 
 ### technique
 - [[prompt-engineering-research]] — Prompt Engineering 的技巧、模式、反模式與迭代心得
@@ -231,10 +248,11 @@ updated: 2026-03-29
 
 | Tag | Count |
 |-----|-------|
-| claude-code | 6 |
+| claude-code | 7 |
 | research | 6 |
 | github | 4 |
 | plugins | 3 |
+| hooks | 3 |
 | workflow | 3 |
 | llm | 3 |
 | open-source | 2 |
@@ -245,7 +263,6 @@ updated: 2026-03-29
 | context-engineering | 2 |
 | harness-engineering | 2 |
 | compound-engineering | 2 |
-| hooks | 2 |
 | inventory | 2 |
 | mcp | 2 |
 | improvement | 2 |
@@ -259,6 +276,8 @@ updated: 2026-03-29
 | knowledge-compounding | 1 |
 | context-window | 1 |
 | memory | 1 |
+| compaction | 1 |
+| subagent | 1 |
 | architecture | 1 |
 | textual | 1 |
 | design-decisions | 1 |
@@ -292,5 +311,8 @@ updated: 2026-03-29
 | technique | 1 |
 | model | 1 |
 | context | 1 |
+| compound-learning | 1 |
+| harness-automation | 1 |
+| bash | 1 |
 | quality | 1 |
 | checklist | 1 |

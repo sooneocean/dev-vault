@@ -19,6 +19,7 @@ updated: 2026-03-29
 | [[claude-session-manager]] | [[claude-code-dev-tools]] | related |
 | [[claude-session-manager]] | [[dexg16-ai-coding-tools]] | related |
 | [[claude-session-manager]] | [[claude-code-configuration]] | related |
+| [[claude-session-manager]] | [[session-stop-wrapper-learning]] | related |
 | [[csm-feature-roadmap]] | [[csm-architecture]] | related |
 | [[csm-feature-roadmap]] | [[csm-key-design-decisions]] | related |
 | [[csm-feature-roadmap]] | [[dexg16-git-and-github]] | related |
@@ -50,6 +51,7 @@ updated: 2026-03-29
 | [[csm-architecture]] | [[csm-key-design-decisions]] | related |
 | [[csm-architecture]] | [[csm-feature-roadmap]] | related |
 | [[csm-architecture]] | [[claude-code-configuration]] | related |
+| [[csm-architecture]] | [[session-stop-wrapper-learning]] | related |
 | [[csm-key-design-decisions]] | [[csm-architecture]] | related |
 | [[csm-key-design-decisions]] | [[csm-feature-roadmap]] | related |
 | [[dexg16-ai-coding-tools]] | [[claude-code-dev-tools]] | related |
@@ -119,6 +121,10 @@ updated: 2026-03-29
 | [[prompt-engineering-research]] | [[context-engineering-research]] | related |
 | [[prompt-engineering-research]] | [[harness-engineering-research]] | related |
 | [[prompt-engineering-research]] | [[compound-engineering-research]] | related |
+| [[session-stop-wrapper-learning]] | [[tech-research-squad]] | related |
+| [[session-stop-wrapper-learning]] | [[harness-engineering-research]] | related |
+| [[session-stop-wrapper-learning]] | [[compound-engineering-plugin]] | related |
+| [[session-stop-wrapper-learning]] | [[claude-code-configuration]] | related |
 | [[開源專案品質標準]] | [[開源開發者身分]] | related |
 | [[開源專案品質標準]] | [[github-發布流程]] | related |
 | [[開源專案品質標準]] | [[github-全部-repo-清單]] | related |

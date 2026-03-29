@@ -8,6 +8,7 @@ updated: 2026-03-29
 
 | File | Summary |
 |------|---------|
+| [[session-stop-wrapper-learning]] | Session-Stop Wrapper Learning |
 | [[pretext-無-dom-文字測量引擎]] | chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑 |
 | [[research-chenglou-pretext-text-measurement-layout-2026-03-29]] | Research: chenglou pretext text measurement layout |
 | [[research-mcp-model-context-protocol-2026-03-29]] | Research: MCP model context protocol |
