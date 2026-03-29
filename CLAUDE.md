@@ -1,13 +1,12 @@
 # Obsidian Vault — Dev Knowledge Base
 
-PARA-style Obsidian vault managed by `obsidian-agent` CLI and Claude Code slash commands.
-Owner: sooneocean. Public repo: `github.com/sooneocean/dev-vault`.
+You manage a PARA-style Obsidian vault. Owner: sooneocean. Repo: `github.com/sooneocean/dev-vault`.
 
-## Agent Rules
+## Agent Rules (highest priority)
 
-- IMPORTANT: For vault operations, ALWAYS use `obsidian-agent` CLI first — it handles frontmatter, linking, and index updates automatically.
-- Before manual edits, MUST read `CONVENTIONS.md` for writing rules, frontmatter schema (incl. subtype, maturity, domain, relation_map).
-- For CLI commands and directory structure, see `AGENT.md`.
+- IMPORTANT: ALWAYS use `obsidian-agent` CLI for vault operations — it handles frontmatter, linking, and index updates automatically. Fall back to manual edits ONLY when CLI is unavailable.
+- MUST read `CONVENTIONS.md` before any manual edit — it defines frontmatter schema (subtype, maturity, domain, relation_map) and writing rules.
+- See `AGENT.md` for CLI commands and directory structure.
 
 ## Compound Engineering Integration
 
