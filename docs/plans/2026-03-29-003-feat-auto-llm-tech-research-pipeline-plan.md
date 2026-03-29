@@ -232,7 +232,7 @@ graph TD
 
 ### Phase 1 — MCP 基礎設施 + 掃描 + 基本報告（交付 MVP 價值）
 
-- [ ] **Unit 1: 研究 MCP Servers 安裝與配置**
+- [x] **Unit 1: 研究 MCP Servers 安裝與配置**
 
 **Goal:** 安裝 GitHub、arXiv、HuggingFace、Fetch 四個 MCP servers，在 Claude Code 中可用
 
@@ -269,7 +269,7 @@ graph TD
 
 ---
 
-- [ ] **Unit 2: Research Orchestrator Agent 定義**
+- [x] **Unit 2: Research Orchestrator Agent 定義**
 
 **Goal:** 建立管線的核心編排器——一個 Claude Agent SDK script 作為 parent agent，負責調度所有子任務
 
@@ -309,7 +309,7 @@ graph TD
 
 ---
 
-- [ ] **Unit 3: Source Scanner Subagents**
+- [x] **Unit 3: Source Scanner Subagents**
 
 **Goal:** 建立四個專業化的 source scanner subagent，各自負責一個資料來源
 
@@ -353,7 +353,7 @@ graph TD
 
 ---
 
-- [ ] **Unit 4: 基本 Vault Writer（MVP 報告生成）**
+- [x] **Unit 4: 基本 Vault Writer（MVP 報告生成）**
 
 **Goal:** 將掃描結果轉化為結構化的 Obsidian resource note，讓 Phase 1 MVP 可以端對端交付價值
 
@@ -393,7 +393,7 @@ graph TD
 
 ---
 
-- [ ] **Unit 5: LLM-as-Judge 評估引擎（含 Prompt Injection 防禦）**
+- [x] **Unit 5: LLM-as-Judge 評估引擎（含 Prompt Injection 防禦）**
 
 **Goal:** 對每個 ScanResult 自動執行 5 維結構化評估，產生可量化的採用建議
 
@@ -455,7 +455,7 @@ Input: ScanResult
 
 ---
 
-- [ ] **Unit 6: PoC Runner（Docker Sandbox — 安全加固）**
+- [x] **Unit 6: PoC Runner（Docker Sandbox — 安全加固）**
 
 **Goal:** 對 poc_candidate 工具在隔離的 Docker 環境中自動執行安裝和基本功能驗證
 
@@ -502,7 +502,7 @@ Input: ScanResult
 
 ---
 
-- [ ] **Unit 7: Vault Writer 擴充（評估 + PoC 報告生成）**
+- [x] **Unit 7: Vault Writer 擴充（評估 + PoC 報告生成）**
 
 **Goal:** 擴充 Unit 4 的基本 Writer，支援評估結果和 PoC 報告的結構化輸出
 

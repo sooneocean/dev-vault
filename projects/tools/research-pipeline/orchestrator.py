@@ -13,6 +13,7 @@ from claude_agent_sdk import AgentDefinition, ClaudeAgentOptions, query
 
 from config import (
     AGENT_MODELS,
+    DEDUP_EXPIRY,
     LOCK_STALE_HOURS,
     MAX_TURNS,
     MCP_SERVERS,
@@ -20,7 +21,24 @@ from config import (
     STATE_DIR,
     VAULT_ROOT,
 )
-from models import PipelineRunState, ScanResult, SeenUrl
+from evaluator import evaluate_scan_results, save_evaluation_results
+from models import EvaluationResult, PipelineRunState, PoCResult, ScanResult, SeenUrl, Verdict
+from poc_runner import run_poc, save_poc_results
+
+
+def _posix_path(p: Path) -> str:
+    """Convert a Windows Path to POSIX string for Claude Code subagents.
+
+    Claude Code CLI runs in a POSIX-like shell (Git Bash / MSYS2) where
+    ``C:\\foo`` becomes ``/c/foo``.  Subagents that receive file paths need
+    this form so their Write/Read tools resolve correctly.
+    """
+    s = p.as_posix()  # C:/DEX_data/...
+    # Convert drive letter: C:/foo -> /c/foo
+    if len(s) >= 2 and s[1] == ":":
+        s = "/" + s[0].lower() + s[2:]
+    return s
+
 
 # ---------------------------------------------------------------------------
 # Scanner subagent definitions
@@ -70,7 +88,7 @@ SCANNER_AGENTS: dict[str, AgentDefinition] = {
 }
 
 WRITER_AGENT = AgentDefinition(
-    description="Writes structured Obsidian research notes from scan results",
+    description="Writes structured Obsidian research notes from scan/evaluation results",
     prompt=(PIPELINE_ROOT / "prompts" / "writer.md").read_text(encoding="utf-8")
     if (PIPELINE_ROOT / "prompts" / "writer.md").exists()
     else "Write an Obsidian research note from the provided scan results. Use proper frontmatter.",
@@ -78,6 +96,9 @@ WRITER_AGENT = AgentDefinition(
     model=AGENT_MODELS["writer"],
     maxTurns=MAX_TURNS["writer"],
 )
+
+# Note: The evaluator agent is built dynamically via evaluator.build_evaluator_agent()
+# because it needs per-item rubric injection. PoC runner uses subprocess, not a subagent.
 
 # ---------------------------------------------------------------------------
 # State management
@@ -145,7 +166,14 @@ def save_run_state(state: PipelineRunState) -> None:
 
 
 async def run_pipeline(mode: str = "quick-scan", dry_run: bool = False) -> None:
-    """Main pipeline entry point."""
+    """Main pipeline entry point.
+
+    Pipeline flow:
+      1. Scan — dispatch source scanner subagents in parallel
+      2. Evaluate — LLM-as-Judge 5-dimension scoring per item
+      3. PoC — Docker sandbox verification for poc_candidates (deep-scan only)
+      4. Write — produce structured Obsidian vault notes with verdicts
+    """
     run_id = f"{date.today().isoformat()}-{uuid.uuid4().hex[:8]}"
     state = PipelineRunState(run_id=run_id, mode=mode)
 
@@ -160,6 +188,8 @@ async def run_pipeline(mode: str = "quick-scan", dry_run: bool = False) -> None:
             print(f"[DRY RUN] Scanners to dispatch:")
             for name, agent in SCANNER_AGENTS.items():
                 print(f"  - {name}: {agent.description}")
+            print(f"[DRY RUN] Evaluator: 5-dimension LLM-as-Judge (Relevance/Maturity/Integration Effort/Maintenance Risk/Unique Value)")
+            print(f"[DRY RUN] PoC Runner: Docker sandbox ({'enabled' if mode == 'deep-scan' else 'skipped in quick-scan'})")
             print(f"[DRY RUN] Writer: {WRITER_AGENT.description}")
             return
 
@@ -181,29 +211,76 @@ async def run_pipeline(mode: str = "quick-scan", dry_run: bool = False) -> None:
             print("No new discoveries. Writing empty scan note.")
             state.phase = "writing"
             save_run_state(state)
-            await run_writer(new_results, run_id)
+            await run_writer_with_evaluations([], [], run_id)
             state.phase = "complete"
             save_run_state(state)
             return
 
-        # Phase 2: Write results to vault (Phase 1 MVP — no evaluation)
+        # Phase 2: Evaluate — LLM-as-Judge 5-dimension scoring
+        state.phase = "evaluating"
+        save_run_state(state)
+        print(f"Evaluating {len(new_results)} new discoveries...")
+
+        eval_results = await evaluate_scan_results(new_results)
+        state.evaluation_results = eval_results
+        save_evaluation_results(eval_results)
+        save_run_state(state)
+
+        # Summarize evaluation verdicts
+        poc_candidates = [e for e in eval_results if e.verdict == Verdict.POC_CANDIDATE]
+        watching = [e for e in eval_results if e.verdict == Verdict.WATCHING]
+        not_applicable = [e for e in eval_results if e.verdict == Verdict.NOT_APPLICABLE]
+        print(
+            f"Evaluation complete: {len(poc_candidates)} poc_candidate, "
+            f"{len(watching)} watching, {len(not_applicable)} not_applicable"
+        )
+
+        # Phase 2b: PoC — Docker sandbox for poc_candidates (deep-scan only)
+        poc_results: list[PoCResult] = []
+        if mode == "deep-scan" and poc_candidates:
+            state.phase = "poc"
+            save_run_state(state)
+            print(f"Running PoC for {len(poc_candidates)} candidates...")
+
+            for eval_r in poc_candidates:
+                try:
+                    poc_result = run_poc(eval_r)
+                    poc_results.append(poc_result)
+                    status = "PASS" if poc_result.quickstart_success else "FAIL"
+                    print(f"  PoC {eval_r.scan_result.name}: {status}")
+                except Exception as e:
+                    print(f"  PoC {eval_r.scan_result.name}: ERROR — {e}")
+
+            state.poc_results = poc_results
+            save_poc_results(poc_results)
+            save_run_state(state)
+        elif poc_candidates:
+            print(f"Skipping PoC in {mode} mode. {len(poc_candidates)} candidates queued for deep-scan.")
+
+        # Phase 3: Write — structured vault notes with evaluation scores
         state.phase = "writing"
         save_run_state(state)
-        await run_writer(new_results, run_id)
+        await run_writer_with_evaluations(eval_results, poc_results, run_id)
 
-        # Update seen URLs
-        for r in new_results:
-            seen[r.url] = SeenUrl(
-                url=r.url,
-                verdict=None,  # No evaluation in Phase 1
+        # Update seen URLs with verdicts and appropriate expiry
+        for eval_r in eval_results:
+            verdict = eval_r.verdict
+            expiry_days = DEDUP_EXPIRY.get(verdict.value, 14)
+            seen[eval_r.scan_result.url] = SeenUrl(
+                url=eval_r.scan_result.url,
+                verdict=verdict,
                 first_seen=date.today(),
-                expires=date.today() + timedelta(days=14),
+                expires=date.today() + timedelta(days=expiry_days),
             )
         save_seen_urls(seen)
 
         state.phase = "complete"
         save_run_state(state)
-        print(f"Pipeline complete. {len(new_results)} new discoveries written to vault.")
+        print(
+            f"Pipeline complete. {len(eval_results)} evaluated, "
+            f"{len(poc_candidates)} poc_candidates, "
+            f"{len(poc_results)} PoCs run."
+        )
 
     except Exception as e:
         state.errors.append(str(e))
@@ -223,6 +300,9 @@ async def run_scanners(mode: str) -> list[ScanResult]:
         permission_mode="bypassPermissions",
     )
 
+    results_filename = f"scan-results-{date.today().isoformat()}.json"
+    results_posix = _posix_path(STATE_DIR / results_filename)
+
     scan_prompt = f"""You are the Research Pipeline Orchestrator running in {mode} mode.
 
 Dispatch ALL scanner subagents in parallel:
@@ -232,7 +312,9 @@ Dispatch ALL scanner subagents in parallel:
 - web_scanner: Search Product Hunt and Hacker News for new AI tools
 
 After all scanners complete, collect their results and save them to:
-{STATE_DIR / f'scan-results-{date.today().isoformat()}.json'}
+{results_posix}
+
+IMPORTANT: Use exactly that POSIX path (starting with /) for the Write tool.
 
 Each result must be a JSON object with these fields:
 - source: "github" | "arxiv" | "huggingface" | "web"
@@ -253,8 +335,8 @@ Save the JSON array to the state file, then report a summary."""
         if hasattr(message, "content"):
             print(f"[orchestrator] {str(message.content)[:200]}")
 
-    # Read results from state file
-    results_file = STATE_DIR / f"scan-results-{date.today().isoformat()}.json"
+    # Read results from state file — try both Windows and POSIX paths
+    results_file = STATE_DIR / results_filename
     if results_file.exists():
         try:
             raw = json.loads(results_file.read_text(encoding="utf-8"))
@@ -267,33 +349,122 @@ Save the JSON array to the state file, then report a summary."""
 
 
 async def run_writer(results: list[ScanResult], run_id: str) -> None:
-    """Dispatch the writer subagent to create vault notes."""
-    results_json = json.dumps(
-        [r.model_dump(mode="json") for r in results], indent=2, ensure_ascii=False
+    """Dispatch the writer subagent to create vault notes (scan-only, no evaluations)."""
+    await run_writer_with_evaluations(
+        [EvaluationResult(
+            scan_result=r,
+            scores=[],
+            total_score=0,
+            max_score=0,
+            percentage=0.0,
+            verdict=Verdict.WATCHING,
+            recommended_action="Pending evaluation",
+        ) for r in results],
+        [],
+        run_id,
     )
 
-    writer_prompt = f"""Write an Obsidian research scan note for today's discoveries.
 
-## Scan Results
-{results_json}
+async def run_writer_with_evaluations(
+    eval_results: list[EvaluationResult],
+    poc_results: list[PoCResult],
+    run_id: str,
+) -> None:
+    """Dispatch the writer subagent to create vault notes with evaluation data.
+
+    Generates a daily scan note containing:
+    - Evaluation scores and verdicts for each discovery
+    - PoC results for poc_candidates (if available)
+    - Verdict-based categorization (poc_candidate / watching / not_applicable)
+    """
+    today = date.today().isoformat()
+    note_path = _posix_path(VAULT_ROOT / "resources" / f"research-scan-{today}.md")
+
+    # Build a PoC lookup for quick access
+    poc_lookup: dict[str, PoCResult] = {}
+    for poc in poc_results:
+        poc_lookup[poc.evaluation_result.scan_result.url] = poc
+
+    # Prepare structured data for the writer
+    discoveries = []
+    for eval_r in eval_results:
+        sr = eval_r.scan_result
+        entry = {
+            "name": sr.name,
+            "url": sr.url,
+            "source": sr.source.value,
+            "description": sr.description,
+            "stars": sr.stars,
+            "tags": sr.tags,
+            "is_paper": sr.is_paper,
+            "verdict": eval_r.verdict.value,
+            "total_score": eval_r.total_score,
+            "max_score": eval_r.max_score,
+            "percentage": eval_r.percentage,
+            "scores": [
+                {"dimension": s.dimension, "score": s.score, "reasoning": s.reasoning}
+                for s in eval_r.scores
+            ],
+            "recommended_action": eval_r.recommended_action,
+        }
+        # Attach PoC result if available
+        if sr.url in poc_lookup:
+            poc = poc_lookup[sr.url]
+            entry["poc"] = {
+                "install_success": poc.install_success,
+                "quickstart_success": poc.quickstart_success,
+                "execution_time_seconds": poc.execution_time_seconds,
+                "notes": poc.notes,
+            }
+        discoveries.append(entry)
+
+    discoveries_json = json.dumps(discoveries, indent=2, ensure_ascii=False)
+
+    # Count verdicts for frontmatter summary
+    n_poc = sum(1 for e in eval_results if e.verdict == Verdict.POC_CANDIDATE)
+    n_watch = sum(1 for e in eval_results if e.verdict == Verdict.WATCHING)
+    n_skip = sum(1 for e in eval_results if e.verdict == Verdict.NOT_APPLICABLE)
+    n_total = len(eval_results)
+
+    writer_prompt = f"""Write an Obsidian research scan note for today's evaluated discoveries.
+
+## Evaluated Discoveries
+{discoveries_json}
 
 ## Output Requirements
-- File path: {VAULT_ROOT / "resources" / f"research-scan-{date.today().isoformat()}.md"}
+- File path: {note_path}
+
+IMPORTANT: Use exactly that POSIX path (starting with /) for the Write tool.
+
 - Use this frontmatter:
   ```yaml
   ---
-  title: "研究掃描 {date.today().isoformat()}"
+  title: "研究掃描 {today}"
   type: resource
   tags: [research-scan, auto-generated, agent-framework, rag]
-  created: "{date.today().isoformat()}"
-  updated: "{date.today().isoformat()}"
+  created: "{today}"
+  updated: "{today}"
   status: active
-  summary: "自動掃描發現 {len(results)} 個新工具/論文"
+  summary: "自動掃描評估 {n_total} 項：{n_poc} poc_candidate, {n_watch} watching, {n_skip} not_applicable"
   related: ["[[tech-research-squad]]"]
   ---
   ```
-- Format: Ecosystem Overview → Top Discoveries (table) → Emerging → Summary
-- Each discovery gets: name, URL, description, source, stars (if any), tags
+
+## Note Structure
+1. **Ecosystem Overview** — 1-2 paragraph summary of what was found today
+2. **PoC Candidates** (verdict = poc_candidate) — table with: Name, Score, Verdict, Source, Stars, Description
+   - For each, include a subsection with the 5-dimension score breakdown
+   - If PoC results exist, include install/quickstart status
+3. **Watching** (verdict = watching) — table with same columns
+4. **Not Applicable** (verdict = not_applicable) — brief list with one-line reasoning
+5. **Score Distribution** — summary statistics (avg score, score range, verdict counts)
+6. **Recommended Actions** — aggregated next steps from all poc_candidates
+
+## Formatting Rules
+- Internal links use `[[filename]]` format without .md extension
+- Each discovery's score shows: total/max (percentage%)
+- Dimension scores formatted as: Relevance: 7 | Maturity: 5 | Integration: 6 | Risk: 4 | Value: 8
+- PoC results show: Install: PASS/FAIL | Quickstart: PASS/FAIL | Time: Xs
 - If results are empty, write "No new discoveries today."
 - After writing, run: obsidian-agent sync (to update indices)"""
 
