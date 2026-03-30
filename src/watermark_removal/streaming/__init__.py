@@ -1,6 +1,5 @@
-"""Real-time streaming service for watermark removal."""
+"""Streaming server and session management for watermark removal."""
 
-from .session_manager import StreamingSession
-from .queue_processor import BackgroundTaskRunner
+from .server import create_app
 
-__all__ = ["StreamingSession", "BackgroundTaskRunner"]
+__all__ = ["create_app"]

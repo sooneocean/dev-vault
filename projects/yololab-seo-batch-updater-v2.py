@@ -90,15 +90,16 @@ class SEOGenerator:
         user = os.environ.get("WP_USER")
         passwd = os.environ.get("WP_PASS")
 
-        data = urllib.parse.urlencode({
-            "meta[jetpack_seo_html_title]": seo_title,
-            "meta[advanced_seo_description]": seo_desc
+        # Use JSON payload instead of form-urlencoded for better WordPress.com API support
+        payload = json.dumps({
+            "title": seo_title,
+            "excerpt": seo_desc
         }).encode('utf-8')
 
         for attempt in range(RETRY_LIMIT):
             try:
-                req = urllib.request.Request(url, data=data, method='POST')
-                req.add_header('Content-Type', 'application/x-www-form-urlencoded')
+                req = urllib.request.Request(url, data=payload, method='POST')
+                req.add_header('Content-Type', 'application/json')
                 if user and passwd:
                     import base64
                     creds = base64.b64encode(f"{user}:{passwd}".encode()).decode()
@@ -109,7 +110,11 @@ class SEOGenerator:
                         return True
             except urllib.error.HTTPError as e:
                 if e.code == 403:
-                    self.error_log.append(f"Post {post_id}: Permission denied")
+                    self.error_log.append(f"Post {post_id}: Permission denied (403)")
+                    self.failed_count += 1
+                    return False
+                elif e.code == 400:
+                    self.error_log.append(f"Post {post_id}: Bad request (400) - {e.reason}")
                     self.failed_count += 1
                     return False
             except Exception as e:

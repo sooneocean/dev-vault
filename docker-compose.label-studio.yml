@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # PostgreSQL backend for Label Studio
+  label_studio_db:
+    image: postgres:15-alpine
+    container_name: label_studio_postgres
+    environment:
+      POSTGRES_DB: label_studio
+      POSTGRES_USER: label_studio
+      POSTGRES_PASSWORD: label_studio_password
+    volumes:
+      - label_studio_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U label_studio"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - label_studio_network
+
+  # Label Studio service
+  label_studio:
+    image: heartexlabs/label-studio:latest
+    container_name: label_studio
+    environment:
+      DJANGO_DB: postgresql
+      POSTGRES_NAME: label_studio
+      POSTGRES_USER: label_studio
+      POSTGRES_PASSWORD: label_studio_password
+      POSTGRES_HOST: label_studio_db
+      POSTGRES_PORT: 5432
+      LABEL_STUDIO_KEY: label_studio_key_${RANDOM}
+    ports:
+      - "8080:8080"
+    volumes:
+      - label_studio_data:/label-studio/data
+      - label_studio_logs:/label-studio/logs
+    depends_on:
+      label_studio_db:
+        condition: service_healthy
+    networks:
+      - label_studio_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/version"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  label_studio_db_data:
+    driver: local
+  label_studio_data:
+    driver: local
+  label_studio_logs:
+    driver: local
+
+networks:
+  label_studio_network:
+    driver: bridge

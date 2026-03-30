@@ -1,16 +1,12 @@
 """Tests for FastAPI streaming service (Unit 23)."""
 
 import asyncio
-import base64
 import json
 import logging
 from pathlib import Path
-from typing import Optional
 
-import cv2
 import numpy as np
 import pytest
-from fastapi.testclient import TestClient
 
 from src.watermark_removal.streaming.server import create_app
 from src.watermark_removal.streaming.queue_processor import BackgroundTaskRunner
