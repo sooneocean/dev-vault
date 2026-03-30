@@ -16,6 +16,7 @@ from ..inpaint.inpaint_executor import InpaintExecutor
 from ..postprocessing.stitch_handler import StitchHandler
 from ..postprocessing.video_encoder import VideoEncoder
 from ..temporal.temporal_smoother import TemporalSmoother
+from ..persistence.crop_serializer import CropRegionSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -143,6 +144,8 @@ class Pipeline:
     async def _preprocess_crops(self, frames: List[Path]) -> Dict[int, Path]:
         """Preprocess each frame: load mask, crop, store metadata.
 
+        Attempts to resume from checkpoint if available, skipping preprocessing.
+
         Args:
             frames: List of frame file paths.
 
@@ -154,6 +157,24 @@ class Pipeline:
         """
         self.crops_dir = Path(self.config.output_dir) / "crops"
         self.crops_dir.mkdir(parents=True, exist_ok=True)
+
+        # Attempt to load checkpoint (Phase 2 feature: resumption)
+        checkpoint_crops = CropRegionSerializer.load_checkpoint(self.config.output_dir)
+        if checkpoint_crops is not None:
+            logger.info(f"Resuming from checkpoint: {len(checkpoint_crops)} crops loaded")
+            self.crop_regions = checkpoint_crops
+            # Return pre-computed crop paths (crops already in crops_dir from prior run)
+            crops = {}
+            for frame_idx in checkpoint_crops.keys():
+                crop_path = self.crops_dir / f"crop_{frame_idx:06d}.png"
+                if crop_path.exists():
+                    crops[frame_idx] = crop_path
+            if len(crops) == len(checkpoint_crops):
+                logger.info(f"Using {len(crops)} pre-computed crops from checkpoint")
+                return crops
+            else:
+                logger.warning("Checkpoint crops don't match filesystem, reprocessing")
+                self.crop_regions.clear()
 
         mask_loader = MaskLoader()
         crop_handler = CropHandler()
@@ -204,6 +225,17 @@ class Pipeline:
                     raise
 
         logger.info(f"Preprocessed {len(crops)} frames")
+
+        # Save checkpoint for potential resumption (Phase 2 feature)
+        if self.crop_regions:
+            try:
+                CropRegionSerializer.save_checkpoint(
+                    self.crop_regions,
+                    self.config.output_dir,
+                )
+            except Exception as e:
+                logger.warning(f"Failed to save checkpoint: {e}")
+
         return crops
 
     def _region_from_mask(self, mask) -> CropRegion:
