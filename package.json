@@ -1,0 +1,26 @@
+{
+  "name": "dev-vault",
+  "version": "1.0.0",
+  "description": "Claude Code DevVault - PARA-style knowledge management and automation",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:proposal": "jest .claude/lib/proposal-engine.test.js",
+    "test:proposal-integration": "jest .claude/lib/proposal-engine.integration.test.js --forceExit"
+  },
+  "keywords": [
+    "obsidian",
+    "vault",
+    "knowledge-management",
+    "automation"
+  ],
+  "author": "sooneocean",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.24.0"
+  }
+}

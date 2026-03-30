@@ -1,0 +1,30 @@
+{
+  "github": {
+    "tokenEnvVar": "GITHUB_TOKEN",
+    "tokenDescription": "GitHub Personal Access Token or GitHub Actions token",
+    "requiredScopes": [
+      "repo",
+      "read:org"
+    ],
+    "setupInstructions": {
+      "local": "Create a fine-grained PAT at https://github.com/settings/tokens?type=beta with 'repo', 'read:org' scopes",
+      "github_actions": "Token is automatically provided via github.token or secrets.GITHUB_TOKEN in Actions",
+      "export": "export GITHUB_TOKEN=ghp_xxxxx (replace with your token)"
+    }
+  },
+  "iteration": {
+    "libPath": ".claude/lib",
+    "modulePath": ".claude/lib/github-api.js",
+    "testPath": ".claude/lib/github-api.test.js",
+    "commandPath": ".claude/commands/iterate.md"
+  },
+  "api": {
+    "rateLimit": {
+      "primaryRetries": 3,
+      "secondaryRetries": 0,
+      "throttleEnabled": true
+    },
+    "timeout": 30000,
+    "userAgent": "claude-code-iteration-tool/1.0"
+  }
+}

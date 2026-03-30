@@ -1,0 +1,32 @@
+{
+  "name": "claude-code-iteration",
+  "version": "1.0.0",
+  "description": "Product iteration automation tools for Claude Code",
+  "type": "commonjs",
+  "main": "lib/github-api.js",
+  "scripts": {
+    "test": "node lib/github-api.test.js",
+    "test:github-api": "node lib/github-api.test.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^20.0.0",
+    "@octokit/plugin-throttling": "^9.0.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "github",
+    "api",
+    "iteration",
+    "automation",
+    "release",
+    "changelog"
+  ],
+  "author": "sooneocean",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

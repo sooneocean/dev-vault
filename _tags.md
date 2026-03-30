@@ -160,6 +160,9 @@ updated: 2026-03-30
 ### pretext
 - [[pretext-csm-tui-layout]] — Use pretext engine for CSM TUI text measurement and layout optimization
 
+### product-iteration
+- [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
+
 ### prompt-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
@@ -192,6 +195,9 @@ updated: 2026-03-30
 
 ### typescript
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
+
+### version-tracking
+- [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
 
 ### weekly-review
 - [[2026-W14-review]] — Vault 從零到 Grade A 99% 的三日旅程 — 48 notes, 7 plans, 12-agent parallel sessions, 知識複利迴路首次閉合
@@ -231,6 +237,8 @@ updated: 2026-03-30
 | workspace | 2 |
 | hardware | 2 |
 | text-layout | 2 |
+| version-tracking | 1 |
+| product-iteration | 1 |
 | claude-code-hooks | 1 |
 | local-llm | 1 |
 | claude-agent-sdk | 1 |

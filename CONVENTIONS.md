@@ -106,6 +106,35 @@ friction_type: missing-hook | instruction-gap | command-gap
 
 File naming: `improvement-YYYY-MM-DD-NNN.md` (e.g., `improvement-2026-03-29-001.md`)
 
+### `subtype: iteration-log` — Additional Fields
+
+**Role:** Record a single iteration cycle for product development — proposals generated, features selected, and release completed.
+
+**When to use:** After running `/iterate propose`, `/iterate confirm`, and `/iterate release` commands to document the full iteration workflow.
+
+**Additional frontmatter fields:**
+
+```yaml
+subtype: iteration-log
+version: string                 # Version released in this iteration (e.g., "1.2.3")
+iteration_date: YYYY-MM-DD      # Date iteration was initiated
+proposals_count: integer        # Number of proposals generated
+selected_count: integer         # Number of features selected
+github_release_url: string      # URL to GitHub release (set after release)
+github_release_date: YYYY-MM-DD # Date of GitHub release (set after release)
+```
+
+**Sections:**
+
+- **Proposals Generated** — Table of proposals with title, problem statement, effort estimate (S/M/L), value estimate (L/M/H), rank, and status
+- **Features Selected** — Table of selected features with GitHub issue links and status
+- **Release Record** — GitHub release link, generated changelog, version jump details
+- **Iteration Notes** — Key dates: iteration started, selection finalized, release date
+
+**File naming:** `YYYY-MM-DD-vX.Y.Z-iteration.md` (e.g., `2026-03-30-v1.2.3-iteration.md`)
+
+**Use case:** Developers can browse iteration history, link to past proposals, understand what was shipped in which version, and track feature evolution.
+
 ## File Naming
 
 - Lowercase with hyphens: `my-note-title.md`
