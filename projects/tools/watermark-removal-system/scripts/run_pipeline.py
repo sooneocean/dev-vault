@@ -140,6 +140,18 @@ Examples:
     )
 
     parser.add_argument(
+        "--use-adaptive-temporal-smoothing",
+        action="store_true",
+        help="Enable adaptive temporal smoothing with motion detection (Phase 2)",
+    )
+
+    parser.add_argument(
+        "--adaptive-motion-threshold",
+        type=float,
+        help="Motion threshold for adaptive temporal smoothing (0.0-1.0, Phase 2)",
+    )
+
+    parser.add_argument(
         "--use-poisson-blending",
         action="store_true",
         help="Enable Poisson blending for seamless edge integration (Phase 2)",
@@ -248,6 +260,10 @@ def load_config(args) -> ProcessConfig:
     # Phase 2 overrides
     if hasattr(args, 'temporal_smooth_alpha') and args.temporal_smooth_alpha is not None:
         config.temporal_smooth_alpha = args.temporal_smooth_alpha
+    if hasattr(args, 'use_adaptive_temporal_smoothing') and args.use_adaptive_temporal_smoothing:
+        config.use_adaptive_temporal_smoothing = True
+    if hasattr(args, 'adaptive_motion_threshold') and args.adaptive_motion_threshold is not None:
+        config.adaptive_motion_threshold = args.adaptive_motion_threshold
     if hasattr(args, 'use_poisson_blending') and args.use_poisson_blending:
         config.use_poisson_blending = True
     if hasattr(args, 'poisson_max_iterations') and args.poisson_max_iterations is not None:

@@ -113,6 +113,8 @@ class TestCLIParsing:
             "--video", "input.mp4",
             "--mask", "mask.png",
             "--temporal-smooth-alpha", "0.3",
+            "--use-adaptive-temporal-smoothing",
+            "--adaptive-motion-threshold", "0.05",
             "--use-poisson-blending",
             "--poisson-max-iterations", "50",
             "--use-watermark-tracker",
@@ -122,6 +124,8 @@ class TestCLIParsing:
         with patch.object(sys, "argv", ["run_pipeline.py"] + test_args):
             args = parse_arguments()
             assert args.temporal_smooth_alpha == 0.3
+            assert args.use_adaptive_temporal_smoothing is True
+            assert args.adaptive_motion_threshold == 0.05
             assert args.use_poisson_blending is True
             assert args.poisson_max_iterations == 50
             assert args.use_watermark_tracker is True
@@ -282,6 +286,8 @@ class TestConfigLoading:
                 comfyui_port = None
                 keep_intermediate = False
                 temporal_smooth_alpha = 0.3
+                use_adaptive_temporal_smoothing = True
+                adaptive_motion_threshold = 0.05
                 use_poisson_blending = True
                 poisson_max_iterations = 50
                 use_watermark_tracker = True
@@ -291,6 +297,8 @@ class TestConfigLoading:
 
             config = load_config(Args())
             assert config.temporal_smooth_alpha == 0.3
+            assert config.use_adaptive_temporal_smoothing is True
+            assert config.adaptive_motion_threshold == 0.05
             assert config.use_poisson_blending is True
             assert config.poisson_max_iterations == 50
             assert config.use_watermark_tracker is True

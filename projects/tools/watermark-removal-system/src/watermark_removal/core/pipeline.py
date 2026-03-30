@@ -62,10 +62,12 @@ class Pipeline:
         from ..preprocessing.frame_extractor import FrameExtractor
         from ..preprocessing.mask_loader import MaskLoader
         from ..preprocessing.crop_handler import CropHandler
+        from ..preprocessing.watermark_tracker import BboxTracker
         from ..inpaint.inpaint_executor import InpaintExecutor
         from ..postprocessing.stitch_handler import StitchHandler
         from ..postprocessing.video_encoder import VideoEncoder
         from ..postprocessing.temporal_smoother import TemporalSmoother
+        from ..postprocessing.adaptive_temporal_smoother import AdaptiveTemporalSmoother
         from ..postprocessing.poisson_blender import PoissonBlender
         from ..utils.image_io import read_image, write_image
         from .checkpoint import CheckpointManager
@@ -132,6 +134,23 @@ class Pipeline:
             is_image_mask = isinstance(mask_data, np.ndarray)
             bbox_dict = mask_data if not is_image_mask else None
 
+            # Phase 2: Initialize WatermarkTracker if enabled
+            tracker = None
+            if self.config.use_watermark_tracker and not is_image_mask and bbox_dict:
+                logger.info("Initializing WatermarkTracker for dynamic watermark tracking")
+                tracker = BboxTracker(
+                    motion_smoothing_factor=self.config.tracker_smoothing_factor,
+                )
+
+                # Register detections from bbox_dict
+                for frame_id, bbox in bbox_dict.items():
+                    # bbox is (x, y, w, h), confidence defaults to 1.0
+                    tracker.add_detection(frame_id, bbox, confidence=0.95)
+
+                logger.info(
+                    f"Tracker initialized with {len(tracker.detections)} keyframe detections"
+                )
+
             inpaint_crops = []  # List of (frame_id, crop_path) tuples
 
             for frame in frames:
@@ -157,7 +176,14 @@ class Pipeline:
                         continue
                 else:
                     # Bbox sequence: get bbox for this frame
-                    if frame.frame_id in bbox_dict:
+                    if tracker is not None:
+                        # Use tracker interpolation for dynamic bboxes
+                        bbox = tracker.interpolate(frame.frame_id)
+                        if bbox is None:
+                            logger.debug(f"No bbox from tracker for frame {frame.frame_id}")
+                            continue
+                    elif frame.frame_id in bbox_dict:
+                        # Fallback to direct bbox lookup
                         bbox = bbox_dict[frame.frame_id]
                     else:
                         logger.debug(f"No bbox for frame {frame.frame_id}")
@@ -325,35 +351,63 @@ class Pipeline:
             logger.info(f"Stitched {len(stitched_frames)} frames")
 
             # Phase 5.5: Temporal smoothing (Phase 2 optional)
-            if self.config.temporal_smooth_alpha > 0.0:
+            if self.config.temporal_smooth_alpha > 0.0 or self.config.use_adaptive_temporal_smoothing:
                 logger.info("=" * 60)
                 logger.info("Phase 5.5: Temporal Smoothing")
                 logger.info("=" * 60)
 
-                temporal_smoother = TemporalSmoother(alpha=self.config.temporal_smooth_alpha)
+                if self.config.use_adaptive_temporal_smoothing:
+                    # Use adaptive temporal smoother
+                    logger.info("Using adaptive temporal smoothing with motion detection")
+                    adaptive_smoother = AdaptiveTemporalSmoother(
+                        base_alpha=self.config.temporal_smooth_alpha or 0.3,
+                        motion_threshold=self.config.adaptive_motion_threshold,
+                    )
 
-                # Load stitched frames in order and apply temporal smoothing
-                frame_ids_sorted = sorted(stitched_frames.keys())
-                smoothed_frames = {}
-                previous_frame = None
+                    # Load stitched frames in order and apply adaptive temporal smoothing
+                    frame_ids_sorted = sorted(stitched_frames.keys())
+                    frame_list = [stitched_frames[fid] for fid in frame_ids_sorted]
 
-                for frame_id in frame_ids_sorted:
-                    try:
-                        current_frame = stitched_frames[frame_id]
-                        smoothed = temporal_smoother.smooth_frame(current_frame, previous_frame)
-                        smoothed_frames[frame_id] = smoothed
-                        previous_frame = smoothed
+                    smoothed_list, motions = adaptive_smoother.smooth_sequence(frame_list)
 
-                        # Save smoothed frame, overwriting stitched frame
+                    smoothed_frames = {
+                        frame_ids_sorted[i]: smoothed_list[i]
+                        for i in range(len(frame_ids_sorted))
+                    }
+
+                    # Save smoothed frames
+                    for frame_id, smoothed in smoothed_frames.items():
                         smoothed_path = stitched_dir / f"frame_{frame_id:06d}.png"
                         write_image(str(smoothed_path), smoothed)
 
-                    except Exception as e:
-                        logger.error(f"Error smoothing frame {frame_id}: {e}")
-                        smoothed_frames[frame_id] = stitched_frames[frame_id]
-                        previous_frame = stitched_frames[frame_id]
+                    logger.info(f"Adaptive temporal smoothing complete with motion-aware blending")
+                else:
+                    # Use standard temporal smoother
+                    temporal_smoother = TemporalSmoother(alpha=self.config.temporal_smooth_alpha)
 
-                logger.info(f"Temporal smoothing complete: {len(smoothed_frames)} frames smoothed")
+                    # Load stitched frames in order and apply temporal smoothing
+                    frame_ids_sorted = sorted(stitched_frames.keys())
+                    smoothed_frames = {}
+                    previous_frame = None
+
+                    for frame_id in frame_ids_sorted:
+                        try:
+                            current_frame = stitched_frames[frame_id]
+                            smoothed = temporal_smoother.smooth_frame(current_frame, previous_frame)
+                            smoothed_frames[frame_id] = smoothed
+                            previous_frame = smoothed
+
+                            # Save smoothed frame, overwriting stitched frame
+                            smoothed_path = stitched_dir / f"frame_{frame_id:06d}.png"
+                            write_image(str(smoothed_path), smoothed)
+
+                        except Exception as e:
+                            logger.error(f"Error smoothing frame {frame_id}: {e}")
+                            smoothed_frames[frame_id] = stitched_frames[frame_id]
+                            previous_frame = stitched_frames[frame_id]
+
+                    logger.info(f"Temporal smoothing complete: {len(smoothed_frames)} frames smoothed")
+
                 stitched_frames = smoothed_frames
 
             # Phase 6: Video encoding

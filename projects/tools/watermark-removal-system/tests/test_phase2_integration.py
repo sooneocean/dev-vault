@@ -12,6 +12,7 @@ from pathlib import Path
 from src.watermark_removal.core.pipeline import Pipeline
 from src.watermark_removal.core.types import ProcessConfig, CropRegion
 from src.watermark_removal.postprocessing.temporal_smoother import TemporalSmoother
+from src.watermark_removal.postprocessing.adaptive_temporal_smoother import AdaptiveTemporalSmoother
 from src.watermark_removal.postprocessing.poisson_blender import PoissonBlender
 from src.watermark_removal.preprocessing.watermark_tracker import BboxTracker
 from src.watermark_removal.core.checkpoint import CheckpointManager
@@ -27,6 +28,85 @@ class TestTemporalSmoothing:
 
         smoother_custom = TemporalSmoother(alpha=0.5)
         assert smoother_custom.alpha == 0.5
+
+    def test_adaptive_temporal_smoother_init(self):
+        """Initialize adaptive temporal smoother."""
+        smoother = AdaptiveTemporalSmoother()
+        assert smoother.base_alpha == 0.3
+        assert smoother.motion_threshold == 0.05
+        assert smoother.min_alpha == 0.0
+        assert smoother.max_alpha == 0.8
+
+    def test_adaptive_smoother_motion_estimation(self):
+        """Estimate motion between two frames."""
+        smoother = AdaptiveTemporalSmoother()
+
+        # Static frames: no motion
+        frame1 = np.ones((100, 100, 3), dtype=np.uint8) * 128
+        frame2 = np.ones((100, 100, 3), dtype=np.uint8) * 128
+
+        motion = smoother.estimate_motion(frame1, frame2)
+        assert motion == pytest.approx(0.0, abs=0.01)
+
+        # High-motion frames
+        frame1 = np.zeros((100, 100, 3), dtype=np.uint8)
+        frame2 = np.ones((100, 100, 3), dtype=np.uint8) * 255
+
+        motion = smoother.estimate_motion(frame1, frame2)
+        assert motion > 0.9  # Should be very high
+
+    def test_adaptive_smoother_alpha_adaptation(self):
+        """Adapt alpha based on motion magnitude."""
+        smoother = AdaptiveTemporalSmoother(
+            base_alpha=0.3,
+            motion_threshold=0.05,
+            min_alpha=0.1,
+            max_alpha=0.5,
+        )
+
+        # Low motion: should increase alpha
+        alpha_low = smoother.adapt_alpha(motion=0.0)
+        assert alpha_low > smoother.base_alpha
+
+        # High motion: should decrease alpha
+        alpha_high = smoother.adapt_alpha(motion=1.0)
+        assert alpha_high < smoother.base_alpha
+
+        # At threshold: should be base_alpha
+        alpha_threshold = smoother.adapt_alpha(motion=0.05)
+        assert alpha_threshold == pytest.approx(smoother.base_alpha, abs=0.01)
+
+    def test_adaptive_smoother_smooth_frame(self):
+        """Smooth frame with adaptive alpha."""
+        smoother = AdaptiveTemporalSmoother()
+
+        current = np.ones((50, 50, 3), dtype=np.uint8) * 100
+        previous = np.ones((50, 50, 3), dtype=np.uint8) * 200
+
+        # Provide motion estimate
+        result = smoother.smooth_frame(current, previous, motion=0.0)
+
+        # Should be closer to current than static temporal smoother
+        assert result.dtype == np.uint8
+        assert result.shape == (50, 50, 3)
+
+    def test_adaptive_smoother_smooth_sequence(self):
+        """Smooth frame sequence with adaptive alpha."""
+        smoother = AdaptiveTemporalSmoother()
+
+        frames = [
+            np.ones((50, 50, 3), dtype=np.uint8) * i * 50
+            for i in range(5)
+        ]
+
+        smoothed, motions = smoother.smooth_sequence(frames)
+
+        assert len(smoothed) == 5
+        assert len(motions) == 5
+        # First motion should be 0.0
+        assert motions[0] == 0.0
+        # Other motions should be estimated
+        assert all(0.0 <= m <= 1.0 for m in motions[1:])
 
     def test_temporal_smoother_invalid_alpha(self):
         """Temporal smoother rejects invalid alpha values."""
@@ -164,6 +244,59 @@ class TestBboxTracking:
         tracker = BboxTracker()
         result = tracker.interpolate(5)
         assert result is None
+
+    def test_smooth_trajectory_complete(self):
+        """Generate smooth trajectory for full frame range."""
+        tracker = BboxTracker(motion_smoothing_factor=0.3)
+
+        # Add sparse detections (frames 0, 10, 20)
+        tracker.add_detection(0, (10, 10, 100, 100))
+        tracker.add_detection(10, (50, 50, 100, 100))
+        tracker.add_detection(20, (90, 90, 100, 100))
+
+        # Generate trajectory for all frames
+        frame_ids = list(range(21))
+        trajectory = tracker.smooth_trajectory(frame_ids)
+
+        assert len(trajectory.frame_ids) == 21
+        assert len(trajectory.bboxes) == 21
+        # First bbox should be exact (detected)
+        assert trajectory.bboxes[0] == (10, 10, 100, 100)
+        # Middle bbox should be interpolated
+        assert trajectory.bboxes[5] != trajectory.bboxes[0]
+        assert trajectory.bboxes[5] != trajectory.bboxes[10]
+
+    def test_get_motion_vector(self):
+        """Estimate motion vector between frames."""
+        tracker = BboxTracker()
+
+        tracker.add_detection(0, (10, 10, 100, 100))
+        tracker.add_detection(5, (20, 20, 100, 100))
+
+        motion = tracker.get_motion_vector(0, 5)
+
+        assert motion is not None
+        dx, dy = motion
+        # Center should move from (60, 60) to (70, 70)
+        assert dx > 0
+        assert dy > 0
+
+    def test_trajectory_confidence(self):
+        """Estimate trajectory confidence based on detections."""
+        tracker = BboxTracker()
+
+        # No detections
+        assert tracker.get_trajectory_confidence() == 0.0
+
+        # Single detection
+        tracker.add_detection(0, (10, 10, 100, 100), confidence=0.9)
+        conf = tracker.get_trajectory_confidence()
+        assert 0.4 < conf < 0.6  # Single detection confidence
+
+        # Multiple detections
+        tracker.add_detection(5, (20, 20, 100, 100), confidence=0.95)
+        conf = tracker.get_trajectory_confidence()
+        assert conf == pytest.approx((0.9 + 0.95) / 2, abs=0.01)  # Average confidence
 
 
 class TestCheckpointing:
@@ -357,6 +490,35 @@ class TestPhase2PipelineIntegration:
         assert pipeline.config.use_poisson_blending is True
         assert pipeline.config.use_watermark_tracker is True
         assert pipeline.config.use_checkpoints is True
+
+    def test_pipeline_with_adaptive_temporal_smoothing(self):
+        """Pipeline supports adaptive temporal smoothing."""
+        config = ProcessConfig(
+            video_path="input.mp4",
+            mask_path="mask.png",
+            use_adaptive_temporal_smoothing=True,
+            adaptive_motion_threshold=0.05,
+        )
+        pipeline = Pipeline(config)
+
+        assert pipeline.config.use_adaptive_temporal_smoothing is True
+        assert pipeline.config.adaptive_motion_threshold == 0.05
+
+    def test_pipeline_with_watermark_tracker_and_adaptive_smoothing(self):
+        """Pipeline can combine watermark tracking with adaptive temporal smoothing."""
+        config = ProcessConfig(
+            video_path="input.mp4",
+            mask_path="mask.json",
+            use_watermark_tracker=True,
+            use_adaptive_temporal_smoothing=True,
+            tracker_smoothing_factor=0.3,
+            adaptive_motion_threshold=0.05,
+        )
+        pipeline = Pipeline(config)
+
+        assert pipeline.config.use_watermark_tracker is True
+        assert pipeline.config.use_adaptive_temporal_smoothing is True
+        assert pipeline.config.tracker_smoothing_factor == 0.3
 
 
 if __name__ == "__main__":
