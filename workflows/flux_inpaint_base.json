@@ -1,0 +1,70 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "flux-dev.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "crop_image.png"
+    }
+  },
+  "3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "inpaint_mask.png"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "remove watermark, clean background",
+      "clip": ["1", 0]
+    }
+  },
+  "5": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "watermark, logo, text, artifacts",
+      "clip": ["1", 0]
+    }
+  },
+  "6": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": ["2", 0],
+      "vae": ["1", 2]
+    }
+  },
+  "7": {
+    "class_type": "FluxInpaint",
+    "inputs": {
+      "latent": ["6", 0],
+      "mask": ["3", 0],
+      "conditioning": ["4", 0],
+      "negative_conditioning": ["5", 0],
+      "model": ["1", 0],
+      "steps": 20,
+      "cfg": 7.5,
+      "sampler": "euler",
+      "scheduler": "simple",
+      "seed": 42
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "latent": ["7", 0],
+      "vae": ["1", 2]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "inpainted",
+      "images": ["8", 0]
+    }
+  }
+}
