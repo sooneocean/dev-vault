@@ -1,7 +1,7 @@
 ---
 title: "feat: Product Iteration Automation Workflow"
 type: feat
-status: active
+status: completed
 date: 2026-03-30
 origin: docs/brainstorms/2026-03-30-product-iteration-automation-requirements.md
 ---
