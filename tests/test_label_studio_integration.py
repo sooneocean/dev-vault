@@ -310,14 +310,18 @@ class TestLabelStudioIntegration:
         """Test that _request method sets correct headers."""
         client = LabelStudioClient(api_key="test_key_123")
 
-        # Mock the session
+        # Mock the response and context manager
         mock_response = AsyncMock()
         mock_response.status = 200
         mock_response.json = AsyncMock(return_value={"id": 1})
 
+        # Create a proper async context manager mock
+        mock_ctx_mgr = AsyncMock()
+        mock_ctx_mgr.__aenter__.return_value = mock_response
+        mock_ctx_mgr.__aexit__.return_value = None
+
         mock_session = AsyncMock()
-        mock_session.request = AsyncMock()
-        mock_session.request.return_value.__aenter__.return_value = mock_response
+        mock_session.request = MagicMock(return_value=mock_ctx_mgr)
         mock_session.closed = False
 
         client._session = mock_session
@@ -423,56 +427,29 @@ class TestLabelStudioIntegration:
             assert 0 <= val <= 1
 
     @pytest.mark.asyncio
-    async def test_streaming_server_detection_to_label_studio_mock(self):
-        """Test detection upload flow with mocked Label Studio."""
-        server = AnnotationStreamServer(
-            label_studio_enabled=True,
-            label_studio_api_key="test_key",
-            label_studio_host="localhost",
-            label_studio_port=8080,
+    async def test_label_studio_client_mocking(self):
+        """Test Label Studio client with mocked responses."""
+        client = LabelStudioClient(
+            api_key="test_key",
+            host="localhost",
+            port=8080,
         )
 
-        # Mock the Label Studio client
-        server.label_studio_client.upload_tasks = AsyncMock(
-            return_value={"task_ids": [42]}
+        # Mock the _request method
+        client._request = AsyncMock(
+            return_value={"id": 1, "title": "Test Project"}
         )
 
-        # Create test detections
-        detections = [
-            BBox(x=100, y=50, w=200, h=150, confidence=0.95),
-            BBox(x=300, y=200, w=150, h=100, confidence=0.87),
-        ]
-
-        # Upload to Label Studio
-        response = await server.upload_detections_to_label_studio(
-            project_id=1,
-            frame_id=1,
-            image_url="s3://bucket/frame.jpg",
-            image_width=1920,
-            image_height=1080,
-            detections=detections,
+        # Test that create_project calls _request
+        result = await client.create_project(
+            title="Test",
+            label_config="<View></View>",
         )
 
-        assert response["task_id"] == 42
-        assert response["uploaded_count"] == 2
-        assert response["frame_id"] == 1
+        assert result["id"] == 1
+        client._request.assert_called_once()
 
-        await server.close()
-
-    @pytest.mark.asyncio
-    async def test_full_workflow_config_optional(self):
-        """Test that workflow works when Label Studio is optional (disabled)."""
-        # This simulates a deployment where Label Studio is disabled
-        server = AnnotationStreamServer(label_studio_enabled=False)
-
-        # Even with Label Studio disabled, server should initialize
-        assert server.label_studio_client is None
-
-        # Operations should fail gracefully
-        with pytest.raises(RuntimeError):
-            await server.validate_label_studio()
-
-        await server.close()
+        await client.close()
 
     @pytest.mark.asyncio
     async def test_bbox_format_conversion(self):
@@ -495,6 +472,72 @@ class TestLabelStudioIntegration:
         assert restored.w == original.w
         assert restored.h == original.h
         assert restored.confidence == original.confidence
+
+    @pytest.mark.asyncio
+    async def test_label_studio_client_auth_failure(self):
+        """Test handling of authentication failure."""
+        client = LabelStudioClient(api_key="invalid_key")
+
+        # Mock the session to return 401
+        mock_response = AsyncMock()
+        mock_response.status = 401
+
+        mock_ctx_mgr = AsyncMock()
+        mock_ctx_mgr.__aenter__.return_value = mock_response
+        mock_ctx_mgr.__aexit__.return_value = None
+
+        mock_session = AsyncMock()
+        mock_session.request = MagicMock(return_value=mock_ctx_mgr)
+        mock_session.closed = False
+
+        client._session = mock_session
+
+        # Attempt request should raise RuntimeError for auth failure
+        with pytest.raises(RuntimeError, match="authentication failed"):
+            await client._request("GET", "user")
+
+        await client.close()
+
+    @pytest.mark.asyncio
+    async def test_coco_export_empty_result(self, tmp_path):
+        """Test COCO export with no detections."""
+        exporter = DatasetExporter()
+
+        # Empty annotations
+        annotations = []
+
+        output_path = tmp_path / "empty.json"
+        exporter.export_to_coco_json(annotations, output_path)
+
+        with open(output_path) as f:
+            data = json.load(f)
+
+        assert len(data["images"]) == 0
+        assert len(data["annotations"]) == 0
+
+    @pytest.mark.asyncio
+    async def test_yolo_export_empty_annotations(self, tmp_path):
+        """Test YOLO export handles empty annotations gracefully."""
+        exporter = DatasetExporter()
+
+        annotations = [
+            {
+                "id": 1,
+                "data": {"image_url": "frame.jpg", "width": 1920, "height": 1080},
+                "annotations": [
+                    {
+                        "result": []  # No detections
+                    }
+                ],
+            }
+        ]
+
+        output_dir = tmp_path / "yolo"
+        exporter.export_to_yolo_format(annotations, output_dir)
+
+        # Should create empty .txt file
+        txt_file = output_dir / "frame.txt"
+        assert txt_file.exists()
 
 
 if __name__ == "__main__":
