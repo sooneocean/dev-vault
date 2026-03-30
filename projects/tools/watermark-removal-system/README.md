@@ -90,8 +90,6 @@ python scripts/run_pipeline.py \
 
 ## Configuration
 
-See `config/base.yaml` for all available parameters:
-
 ### Phase 1 Parameters
 - **inpaint**: Model, prompt, steps, guidance scale, sampler, scheduler
 - **preprocessing**: Context padding, target inpaint size
@@ -103,6 +101,23 @@ See `config/base.yaml` for all available parameters:
 - **poisson_blending**: `use_poisson_blending`, `poisson_max_iterations`, `poisson_tolerance`
 - **watermark_tracking**: `use_watermark_tracker`, `yolo_model_path`, `yolo_confidence_threshold`
 - **checkpointing**: `use_checkpoints`, `resume_from_checkpoint`, `checkpoint_dir`
+
+**Complete configuration reference:** See `docs/phase2_configuration_guide.md`
+
+## Phase 2 Documentation
+
+Phase 2 features significantly improve watermark removal quality for dynamic and complex scenarios:
+
+| Document | Purpose |
+|----------|---------|
+| [Phase 2 Configuration Guide](docs/phase2_configuration_guide.md) | Comprehensive parameter reference with ranges, defaults, and effects |
+| [Phase 2 YOLO Setup Guide](docs/phase2_yolo_setup.md) | Installation, model selection, troubleshooting for watermark tracking |
+| [Phase 2 Tuning Scenarios](docs/phase2_tuning_scenarios.md) | Real-world configurations: static watermarks, moving watermarks, complex backgrounds |
+| [Phase 2 Performance Guide](docs/phase2_performance_guide.md) | Benchmarking results, optimization strategies, hardware recommendations |
+
+**Quick examples:**
+- See `config/base.yaml` for all parameters
+- See `examples/phase2_advanced_watermark.yaml` for annotated example config
 
 ## Requirements
 
