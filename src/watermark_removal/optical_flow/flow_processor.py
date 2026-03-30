@@ -55,10 +55,16 @@ class OpticalFlowProcessor:
 
             # Load pretrained RAFT model
             # Use progress=False to avoid threading issues on Windows
-            self.model = torchvision.models.optical_flow.raft_large(
-                pretrained=True,
-                progress=False,
-            )
+            try:
+                self.model = torchvision.models.optical_flow.raft_large(
+                    pretrained=True,
+                    progress=False,
+                )
+            except (OSError, RuntimeError) as e:
+                # Fallback: try loading without pretrained weights (in case download fails)
+                logger.warning(f"Failed to load pretrained RAFT, trying without pretrained weights: {e}")
+                self.model = torchvision.models.optical_flow.raft_large(pretrained=False)
+
             self.model = self.model.to(self.device)
             self.model.eval()
             self._model_loaded = True
@@ -176,8 +182,9 @@ class OpticalFlowProcessor:
             )
 
         try:
-            # Load model if not already loaded (synchronous to avoid threading issues)
-            self._lazy_load_model()
+            # Load model in main thread BEFORE async operations to avoid Windows CUDA initialization issues
+            if not self._model_loaded:
+                self._lazy_load_model()
 
             # Resize to target resolution
             frame1_resized, original_size = await asyncio.to_thread(

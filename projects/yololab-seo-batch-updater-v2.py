@@ -9,6 +9,7 @@ import urllib.parse
 import json
 import time
 import sys
+import os
 from typing import Dict, Tuple
 from datetime import datetime
 
@@ -39,10 +40,17 @@ class SEOGenerator:
         })
 
         full_url = f"{url}?{params}"
+        user = os.environ.get("WP_USER")
+        passwd = os.environ.get("WP_PASS")
 
         for attempt in range(RETRY_LIMIT):
             try:
-                with urllib.request.urlopen(full_url, timeout=15) as response:
+                req = urllib.request.Request(full_url)
+                if user and passwd:
+                    import base64
+                    creds = base64.b64encode(f"{user}:{passwd}".encode()).decode()
+                    req.add_header('Authorization', f'Basic {creds}')
+                with urllib.request.urlopen(req, timeout=15) as response:
                     data = json.loads(response.read().decode('utf-8'))
                     return data.get("posts", [])
             except Exception as e:
@@ -79,6 +87,8 @@ class SEOGenerator:
     def update_post_seo(self, post_id: int, seo_title: str, seo_desc: str) -> bool:
         """更新单篇文章 SEO 元数据"""
         url = f"{API_ENDPOINT}/posts/{post_id}"
+        user = os.environ.get("WP_USER")
+        passwd = os.environ.get("WP_PASS")
 
         data = urllib.parse.urlencode({
             "meta[jetpack_seo_html_title]": seo_title,
@@ -89,6 +99,10 @@ class SEOGenerator:
             try:
                 req = urllib.request.Request(url, data=data, method='POST')
                 req.add_header('Content-Type', 'application/x-www-form-urlencoded')
+                if user and passwd:
+                    import base64
+                    creds = base64.b64encode(f"{user}:{passwd}".encode()).decode()
+                    req.add_header('Authorization', f'Basic {creds}')
                 with urllib.request.urlopen(req, timeout=10) as response:
                     if response.status in [200, 201]:
                         self.updated_count += 1

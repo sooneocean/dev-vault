@@ -113,7 +113,32 @@ Phase 2 features significantly improve watermark removal quality for dynamic and
 | [Phase 2 Configuration Guide](docs/phase2_configuration_guide.md) | Comprehensive parameter reference with ranges, defaults, and effects |
 | [Phase 2 YOLO Setup Guide](docs/phase2_yolo_setup.md) | Installation, model selection, troubleshooting for watermark tracking |
 | [Phase 2 Tuning Scenarios](docs/phase2_tuning_scenarios.md) | Real-world configurations: static watermarks, moving watermarks, complex backgrounds |
-| [Phase 2 Performance Guide](docs/phase2_performance_guide.md) | Benchmarking results, optimization strategies, hardware recommendations |
+| [**Phase 2 Performance Results**](docs/PHASE2_PERFORMANCE_RESULTS.md) | **✅ Final benchmarks** — measured overhead, tuning recommendations |
+| [Phase 2 Performance Guide](docs/phase2_performance_guide.md) | Detailed performance analysis, optimization strategies |
+
+### Phase 2 Performance Summary (Measured 2026-03-31)
+
+**Key Finding:** Phase 2 is **batch-optimized**, not real-time. Recommended configuration:
+
+```yaml
+# Enable fast Phase 2 features (recommended for most users)
+temporal_smooth_alpha: 0.3
+use_adaptive_temporal_smoothing: true
+use_poisson_blending: false  # ← Disable (too slow)
+blend_feather_width: 32      # ← Use feathering instead
+
+# Expected performance @ 1920x1080
+# Time: ~195 ms/frame = ~12 min per hour of video ✅
+# Quality: Flicker-free smooth edges ✅
+```
+
+| Feature | Overhead | Recommendation |
+|---------|----------|-----------------|
+| Temporal Smoothing (α=0.3) | +194 ms/frame @ 1080p | **Enable always** |
+| Adaptive Temporal | +49 ms/frame @ 1080p | **Preferred option** |
+| Poisson Blending (100 iter) | +50 sec/crop @ 1080p | Batch only (disable) |
+
+See [PHASE2_PERFORMANCE_RESULTS.md](docs/PHASE2_PERFORMANCE_RESULTS.md) for complete benchmarks.
 
 **Quick examples:**
 - See `config/base.yaml` for all parameters
