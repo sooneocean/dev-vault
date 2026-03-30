@@ -193,6 +193,9 @@ updated: 2026-03-30
 ### typescript
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
 
+### weekly-review
+- [[2026-W14-review]] — 2026 Week 14 Review
+
 ### workflow
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
 - [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
@@ -245,6 +248,7 @@ updated: 2026-03-30
 | auto-generated | 1 |
 | agent-framework | 1 |
 | rag | 1 |
+| weekly-review | 1 |
 | frontmatter | 1 |
 | clustering | 1 |
 | pretext | 1 |
