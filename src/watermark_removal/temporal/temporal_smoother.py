@@ -113,11 +113,14 @@ class TemporalSmoother:
         inverse_mask = 255 - binary_mask
         distance = cv2.distanceTransform(inverse_mask, cv2.DIST_L2, cv2.DIST_MASK_PRECISE)
 
-        # Normalize to [0, 1], with 0 outside feather and 1 deep inside
+        # Normalize distance to feather width [0, 1]
+        # 0 at boundaries, 1+ deep inside region
         feather_mask = np.clip(distance / feather_width, 0, 1)
 
-        # Invert: outer boundary = 1 (blend), inner = 0 (don't blend)
-        # This creates gradient blending at edges
+        # Ensure region interior stays 1.0 (max blend strength at center)
+        feather_mask = np.maximum(feather_mask, binary_mask.astype(np.float32) / 255.0)
+
+        # Use distance-based mask as blend strength
         blend_strength = feather_mask.astype(np.float32)
 
         # Apply gradient blending

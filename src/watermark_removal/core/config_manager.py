@@ -86,6 +86,8 @@ class ConfigManager:
             skip_errors_in_postprocessing=raw_config.get(
                 "skip_errors_in_postprocessing", False
             ),
+            temporal_smooth_enabled=raw_config.get("temporal_smooth_enabled", True),
+            temporal_smooth_alpha=raw_config.get("temporal_smooth_alpha", 0.3),
         )
 
         logger.info(

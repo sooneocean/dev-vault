@@ -180,6 +180,12 @@ class ProcessConfig:
     skip_errors_in_postprocessing: bool = False
     """Skip frames that fail postprocessing instead of stopping."""
 
+    temporal_smooth_enabled: bool = True
+    """Enable temporal smoothing to reduce inter-frame flicker."""
+
+    temporal_smooth_alpha: float = 0.3
+    """Alpha blending factor for temporal smoothing (0.0-1.0)."""
+
     crop_region: "CropRegion | None" = None
     """Override crop region (if None, derived from mask)."""
 
@@ -208,3 +214,5 @@ class ProcessConfig:
             raise ValueError("timeout must be > 0")
         if not (0 <= self.output_crf <= 51):
             raise ValueError("output_crf must be 0-51")
+        if not (0.0 <= self.temporal_smooth_alpha <= 1.0):
+            raise ValueError("temporal_smooth_alpha must be 0.0-1.0")
