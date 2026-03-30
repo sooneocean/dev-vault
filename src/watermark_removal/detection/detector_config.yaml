@@ -1,0 +1,18 @@
+# Watermark detection configuration
+
+# YOLOv5 model selection
+model_name: "yolov5s"  # Options: yolov5s, yolov5m, yolov5l
+confidence_threshold: 0.5  # Detection confidence threshold (0.0-1.0)
+nms_threshold: 0.45  # Non-maximum suppression threshold (0.0-1.0)
+
+# Detection filtering
+min_detection_area: 100  # Minimum bbox area in pixels (filter noise)
+max_detections_per_frame: 5  # Limit number of detections per frame
+
+# Performance tuning
+inference_size: 640  # Input size for YOLOv5 (640 is default)
+batch_size: 1  # Frames per batch (1 for streaming, >1 for offline)
+
+# Fallback behavior
+fallback_to_manual: true  # Fall back to manual JSON mask if detection fails
+use_largest_bbox: false  # If multiple detections, use largest or keep all

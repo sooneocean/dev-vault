@@ -1,5 +1,17 @@
+# Core dependencies
 pyyaml>=6.0
 aiohttp>=3.8.0
 pytest>=7.0
 pytest-asyncio>=0.21.0
 numpy>=1.24.0
+
+# Phase 2: Watermark removal (inpainting)
+opencv-python>=4.8.0
+pillow>=10.0.0
+
+# Phase 3: Optical flow + ensemble detection (PyTorch required)
+torch>=2.0.0,<3.0.0
+torchvision>=0.15.0
+# CUDA (optional, install cuda version if GPU available)
+# For CUDA 11.8: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+# For CUDA 12.1: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121

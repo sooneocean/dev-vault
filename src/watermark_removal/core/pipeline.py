@@ -15,6 +15,8 @@ from ..inpaint.workflow_builder import WorkflowBuilder
 from ..inpaint.inpaint_executor import InpaintExecutor
 from ..postprocessing.stitch_handler import StitchHandler
 from ..postprocessing.video_encoder import VideoEncoder
+from ..temporal.temporal_smoother import TemporalSmoother
+from ..persistence.crop_serializer import CropRegionSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -72,13 +74,17 @@ class Pipeline:
             inpaint_duration = time.time() - inpaint_start
             logger.info(f"Inpainting complete in {inpaint_duration:.2f}s")
 
-            # Phase 5: Postprocessing (stitch)
-            logger.info("Phase 5: Stitching frames")
+            # Phase 5: Temporal smoothing (optional Phase 2 feature)
+            logger.info("Phase 5: Applying temporal smoothing")
+            inpainted = await self._apply_temporal_smoothing(inpainted)
+
+            # Phase 6: Postprocessing (stitch)
+            logger.info("Phase 6: Stitching frames")
             stitched = await self._stitch_frames(frames, inpainted)
             logger.info(f"Stitched {len(stitched)} frames")
 
-            # Phase 6: Encoding
-            logger.info("Phase 6: Encoding to MP4")
+            # Phase 7: Encoding
+            logger.info("Phase 7: Encoding to MP4")
             encode_start = time.time()
             output_path = await self._encode_video(stitched)
             encode_duration = time.time() - encode_start
@@ -138,6 +144,8 @@ class Pipeline:
     async def _preprocess_crops(self, frames: List[Path]) -> Dict[int, Path]:
         """Preprocess each frame: load mask, crop, store metadata.
 
+        Attempts to resume from checkpoint if available, skipping preprocessing.
+
         Args:
             frames: List of frame file paths.
 
@@ -149,6 +157,24 @@ class Pipeline:
         """
         self.crops_dir = Path(self.config.output_dir) / "crops"
         self.crops_dir.mkdir(parents=True, exist_ok=True)
+
+        # Attempt to load checkpoint (Phase 2 feature: resumption)
+        checkpoint_crops = CropRegionSerializer.load_checkpoint(self.config.output_dir)
+        if checkpoint_crops is not None:
+            logger.info(f"Resuming from checkpoint: {len(checkpoint_crops)} crops loaded")
+            self.crop_regions = checkpoint_crops
+            # Return pre-computed crop paths (crops already in crops_dir from prior run)
+            crops = {}
+            for frame_idx in checkpoint_crops.keys():
+                crop_path = self.crops_dir / f"crop_{frame_idx:06d}.png"
+                if crop_path.exists():
+                    crops[frame_idx] = crop_path
+            if len(crops) == len(checkpoint_crops):
+                logger.info(f"Using {len(crops)} pre-computed crops from checkpoint")
+                return crops
+            else:
+                logger.warning("Checkpoint crops don't match filesystem, reprocessing")
+                self.crop_regions.clear()
 
         mask_loader = MaskLoader()
         crop_handler = CropHandler()
@@ -199,6 +225,17 @@ class Pipeline:
                     raise
 
         logger.info(f"Preprocessed {len(crops)} frames")
+
+        # Save checkpoint for potential resumption (Phase 2 feature)
+        if self.crop_regions:
+            try:
+                CropRegionSerializer.save_checkpoint(
+                    self.crop_regions,
+                    self.config.output_dir,
+                )
+            except Exception as e:
+                logger.warning(f"Failed to save checkpoint: {e}")
+
         return crops
 
     def _region_from_mask(self, mask) -> CropRegion:
@@ -320,6 +357,64 @@ class Pipeline:
 
         logger.info(f"Inpainted {len(inpainted)} crops")
         return inpainted
+
+    async def _apply_temporal_smoothing(
+        self,
+        inpainted: Dict[int, Path],
+    ) -> Dict[int, Path]:
+        """Apply temporal smoothing to reduce inter-frame flicker.
+
+        Args:
+            inpainted: Dictionary mapping frame index to inpainted crop path.
+
+        Returns:
+            Dictionary mapping frame index to temporally-smoothed crop path.
+        """
+        import cv2
+
+        if not self.config.temporal_smooth_enabled:
+            logger.info("Temporal smoothing disabled, skipping phase")
+            return inpainted
+
+        smoother = TemporalSmoother(alpha=self.config.temporal_smooth_alpha)
+
+        smoothed_dir = Path(self.config.output_dir) / "smoothed"
+        smoothed_dir.mkdir(parents=True, exist_ok=True)
+
+        smoothed = {}
+        previous_frame = None
+
+        for frame_idx in sorted(inpainted.keys()):
+            try:
+                # Read inpainted crop
+                inpainted_crop = cv2.imread(str(inpainted[frame_idx]))
+
+                if inpainted_crop is None:
+                    raise FileNotFoundError(f"Failed to read inpainted crop for frame {frame_idx}")
+
+                # Apply temporal smoothing
+                blended_crop = smoother.blend_frame(inpainted_crop, previous_frame)
+
+                # Save smoothed crop
+                smoothed_path = smoothed_dir / f"smoothed_{frame_idx:06d}.png"
+                cv2.imwrite(str(smoothed_path), blended_crop)
+
+                smoothed[frame_idx] = smoothed_path
+                previous_frame = blended_crop
+
+                if (frame_idx + 1) % 10 == 0:
+                    logger.debug(f"Smoothed {frame_idx + 1}/{len(inpainted)} frames")
+
+            except Exception as e:
+                if self.config.skip_errors_in_postprocessing:
+                    logger.warning(f"Skipping temporal smooth for frame {frame_idx}: {e}")
+                    # Use original inpainted crop if smoothing fails
+                    smoothed[frame_idx] = inpainted[frame_idx]
+                else:
+                    raise
+
+        logger.info(f"Temporal smoothing complete: {len(smoothed)} frames")
+        return smoothed
 
     async def _stitch_frames(
         self,
