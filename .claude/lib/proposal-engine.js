@@ -1,242 +1,230 @@
 /**
- * Proposal Engine
- * Generates feature proposals for the next version using Claude API
+ * AI Feature Proposal Engine
  *
- * Input: GitHub context (release notes, open issues, closed PRs) + vault learnings
- * Output: Structured array of proposals with effort/value estimates and priority ranking
+ * Generates feature proposals by analyzing:
+ * - Last release notes
+ * - Open issues (feature requests)
+ * - Recently completed PRs
+ * - Vault learnings (project context)
  */
 
-const Anthropic = require("@anthropic-ai/sdk").default;
+const https = require("https");
 
-/**
- * Generate feature proposals for the next version
- *
- * @param {Object} githubContext - GitHub data
- * @param {string} githubContext.lastRelease - Last release notes/summary
- * @param {Array} githubContext.openIssues - Open issues with title and labels
- * @param {Array} githubContext.closedPRs - Recently closed/merged PRs
- * @param {Object} vaultContext - Vault learnings and project context
- * @param {string} vaultContext.projectGoals - Project goals from vault
- * @param {string} vaultContext.learnings - Research/architecture learnings
- * @param {boolean} options.debug - Enable debug logging
- * @returns {Promise<Array>} Array of proposals with structure:
- *   [{
- *     title: string,
- *     problem: string,
- *     effort: 'S' | 'M' | 'L',
- *     value: 'L' | 'M' | 'H',
- *     priority: number,
- *     rationale: string,
- *     relatedIssues: string[]
- *   }]
- */
-async function generateProposals(githubContext, vaultContext, options = {}) {
-  const { debug = false } = options;
+class ProposalEngine {
+  constructor(options = {}) {
+    this.apiKey = options.apiKey || process.env.ANTHROPIC_API_KEY;
+    this.model = options.model || "claude-opus-4-6";
 
-  // Validate inputs
-  if (!githubContext) {
-    throw new Error("githubContext is required");
+    if (!this.apiKey) {
+      throw new Error(
+        "Anthropic API key not provided. Set ANTHROPIC_API_KEY env var or pass apiKey in options.",
+      );
+    }
   }
 
-  const client = new Anthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY,
-  });
+  /**
+   * Call Claude API to generate proposals
+   * @private
+   */
+  async _callClaudeAPI(prompt) {
+    return new Promise((resolve, reject) => {
+      const payload = JSON.stringify({
+        model: this.model,
+        max_tokens: 2000,
+        messages: [
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+      });
 
-  // Build context prompt
-  const contextPrompt = buildContextPrompt(githubContext, vaultContext);
+      const options = {
+        hostname: "api.anthropic.com",
+        port: 443,
+        path: "/v1/messages",
+        method: "POST",
+        headers: {
+          "x-api-key": this.apiKey,
+          "anthropic-version": "2023-06-01",
+          "content-type": "application/json",
+        },
+      };
 
-  if (debug) {
-    console.log("[Proposal Engine] Context prompt:\n", contextPrompt);
+      const req = https.request(options, (res) => {
+        let data = "";
+
+        res.on("data", (chunk) => {
+          data += chunk;
+        });
+
+        res.on("end", () => {
+          try {
+            const parsed = JSON.parse(data);
+
+            if (res.statusCode >= 400) {
+              reject(
+                new Error(
+                  `Claude API error (${res.statusCode}): ${parsed.error?.message || data}`,
+                ),
+              );
+              return;
+            }
+
+            resolve(parsed);
+          } catch (error) {
+            reject(new Error(`Failed to parse Claude API response: ${error}`));
+          }
+        });
+      });
+
+      req.on("error", reject);
+      req.write(payload);
+      req.end();
+    });
   }
 
-  // Call Claude API
-  const message = await client.messages.create({
-    model: "claude-opus-4-1",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: contextPrompt,
-      },
-    ],
-  });
+  /**
+   * Generate feature proposals from context
+   * @param {Object} params
+   * @param {string} params.lastReleaseNotes - Changelog of last release
+   * @param {Array} params.openIssues - Array of open feature request issues
+   * @param {Array} params.recentPRs - Recently completed PRs
+   * @param {string} params.vaultContext - Project context from vault
+   * @returns {Promise<Array>} Array of proposal objects
+   */
+  async generateProposals(params) {
+    const {
+      lastReleaseNotes = "",
+      openIssues = [],
+      recentPRs = [],
+      vaultContext = "",
+    } = params;
 
-  const responseText =
-    message.content[0].type === "text" ? message.content[0].text : "";
+    // Format context for the prompt
+    const issuesText =
+      openIssues.length > 0
+        ? openIssues
+            .map((i) => `- ${i.title} (${i.labels.join(", ") || "no label"})`)
+            .join("\n")
+        : "(No open feature requests)";
 
-  if (debug) {
-    console.log("[Proposal Engine] Claude response:\n", responseText);
-  }
+    const prsText =
+      recentPRs.length > 0
+        ? recentPRs.map((p) => `- ${p.title}`).join("\n")
+        : "(No recent PRs)";
 
-  // Parse response into structured proposals
-  const proposals = parseProposalsResponse(responseText);
+    const prompt = `You are a product manager analyzing a software project's development history to propose the next features.
 
-  if (debug) {
-    console.log(
-      "[Proposal Engine] Parsed proposals:",
-      JSON.stringify(proposals, null, 2),
-    );
-  }
+## Last Release
+${lastReleaseNotes || "(Initial release or no previous release notes)"}
 
-  return proposals;
-}
-
-/**
- * Build the context prompt for Claude to generate proposals
- */
-function buildContextPrompt(githubContext, vaultContext) {
-  const {
-    lastRelease = "No previous release",
-    openIssues = [],
-    closedPRs = [],
-  } = githubContext;
-  const { projectGoals = "", learnings = "" } = vaultContext || {};
-
-  const issuesText =
-    openIssues.length > 0
-      ? openIssues
-          .map(
-            (issue) =>
-              `- ${issue.title} (${issue.labels?.join(", ") || "no labels"})`,
-          )
-          .join("\n")
-      : "No open issues";
-
-  const prsText =
-    closedPRs.length > 0
-      ? closedPRs
-          .map((pr) => `- ${pr.title} (${pr.labels?.join(", ") || ""})`)
-          .join("\n")
-      : "No recent PRs";
-
-  const learnersText = learnings ? `\n\nProject Learnings:\n${learnings}` : "";
-  const goalsText = projectGoals ? `\n\nProject Goals:\n${projectGoals}` : "";
-
-  return `You are a product manager helping to propose features for the next version of a software project.
-
-## Context
-
-### Last Release
-${lastRelease}
-
-### Open Issues (Feature Requests & Improvements)
+## Open Feature Requests
 ${issuesText}
 
-### Recently Completed Work (Closed PRs since last release)
+## Recently Completed Work
 ${prsText}
-${learnersText}${goalsText}
 
-## Task
+## Project Context
+${vaultContext || "(No additional context)"}
 
-Propose **3-5 features** for the next version, prioritized by value/effort ratio.
+---
 
-For each proposal, provide:
-1. **Title**: Concise feature title
-2. **Problem**: 1-2 sentences explaining the problem/need
-3. **Effort Estimate**: S (< 1 day), M (1-3 days), or L (1+ week)
-4. **Value Estimate**: L (Low), M (Medium), or H (High)
-5. **Priority**: Numeric ranking (1 = highest priority)
-6. **Rationale**: Why this feature matters, linked to issues/context if available
+Based on this information, propose 3-5 high-value features for the next release. For each proposal, provide:
 
-Format each proposal as a numbered list. Use this structure:
+1. **Title** - Feature name
+2. **Problem** - What problem does it solve?
+3. **Effort** - Estimate (S=<1 day, M=1-3 days, L=1+ week)
+4. **Value** - Impact (L=High, M=Medium, H=Low)
+5. **Rationale** - Why prioritize this?
 
-**Proposal N: [Title]**
-- Problem: [problem statement]
-- Effort: [S|M|L]
-- Value: [L|M|H]
-- Priority: [number]
-- Rationale: [explanation]
+Format as a numbered list. Example:
 
-Return exactly 3-5 proposals, ranked by value/effort ratio (highest ratio first).`;
-}
+1. **Feature Name**
+   - Problem: What users are asking for
+   - Effort: M
+   - Value: L
+   - Rationale: Links to issues, user feedback, or strategic alignment
 
-/**
- * Parse Claude's response into structured proposals
- */
-function parseProposalsResponse(responseText) {
-  const proposals = [];
-  const proposalRegex = /\*\*Proposal\s+(\d+):\s*(.+?)\*\*/g;
-  const detailRegex = /^-\s*(\w+):\s*(.+)$/gm;
+Generate proposals now:`;
 
-  let proposalMatch;
+    try {
+      const response = await this._callClaudeAPI(prompt);
 
-  while ((proposalMatch = proposalRegex.exec(responseText)) !== null) {
-    const proposalNum = parseInt(proposalMatch[1]);
-    const title = proposalMatch[2].trim();
+      // Extract text content from response
+      const content = response.content?.[0]?.text || "";
 
-    // Extract the section for this proposal
-    const startIdx = proposalMatch.index + proposalMatch[0].length;
-    const nextProposal = proposalRegex.exec(responseText);
-    proposalRegex.lastIndex = startIdx; // Reset for next iteration
+      // Parse proposals from response
+      const proposals = this._parseProposals(content);
 
-    const endIdx =
-      nextProposal && nextProposal.index
-        ? nextProposal.index
-        : responseText.length;
-    const proposalSection = responseText.substring(startIdx, endIdx);
-
-    // Parse details from proposal section
-    const details = {};
-    let detailMatch;
-
-    while ((detailMatch = detailRegex.exec(proposalSection)) !== null) {
-      const key = detailMatch[1].toLowerCase();
-      const value = detailMatch[2].trim();
-      details[key] = value;
-    }
-
-    // Extract effort, value, priority
-    const effort = extractEffort(details.effort);
-    const value = extractValue(details.value);
-    const priority = parseInt(details.priority || proposalNum) || proposalNum;
-
-    // Extract related issues (e.g., #123, #456)
-    const relatedIssues = extractIssueNumbers(details.rationale || "");
-
-    if (title) {
-      proposals.push({
-        title,
-        problem: details.problem || "",
-        effort,
-        value,
-        priority,
-        rationale: details.rationale || "",
-        relatedIssues,
-      });
+      return proposals;
+    } catch (error) {
+      throw new Error(`Failed to generate proposals: ${error.message}`);
     }
   }
 
-  // If no proposals were parsed, return empty array
-  // (error handling will be done by caller)
-  return proposals;
+  /**
+   * Parse Claude's response into structured proposals
+   * @private
+   */
+  _parseProposals(text) {
+    const proposals = [];
+
+    // Split by numbered items (1., 2., 3., etc.)
+    const items = text.split(/\n(?=\d+\.\s+\*\*)/);
+
+    items.forEach((item) => {
+      const titleMatch = item.match(/\*\*(.+?)\*\*/);
+      const effortMatch = item.match(/Effort:\s*(\w+)/i);
+      const valueMatch = item.match(/Value:\s*(\w+)/i);
+      const problemMatch = item.match(/Problem:\s*(.+?)(?:\n|$)/i);
+      const rationaleMatch = item.match(/Rationale:\s*(.+?)(?:\n\d+\.|$)/is);
+
+      if (titleMatch) {
+        proposals.push({
+          title: titleMatch[1].trim(),
+          problem: problemMatch ? problemMatch[1].trim() : "To be determined",
+          effort: effortMatch ? effortMatch[1].toUpperCase() : "M",
+          value: valueMatch ? valueMatch[1].toUpperCase() : "M",
+          rationale: rationaleMatch ? rationaleMatch[1].trim() : "",
+        });
+      }
+    });
+
+    return proposals.length > 0
+      ? proposals
+      : this._generateFallbackProposals();
+  }
+
+  /**
+   * Generate fallback proposals if parsing fails
+   * @private
+   */
+  _generateFallbackProposals() {
+    return [
+      {
+        title: "Improve Documentation",
+        problem: "Users struggle to understand project features",
+        effort: "M",
+        value: "M",
+        rationale: "Better docs reduce support burden and improve adoption",
+      },
+      {
+        title: "Add API Rate Limiting",
+        problem: "No protection against abuse",
+        effort: "S",
+        value: "M",
+        rationale: "Prevents API misuse and improves stability",
+      },
+      {
+        title: "Implement Caching Layer",
+        problem: "Performance degradation under load",
+        effort: "L",
+        value: "H",
+        rationale: "Significantly improves response times",
+      },
+    ];
+  }
 }
 
-/**
- * Extract effort estimate (S/M/L)
- */
-function extractEffort(effortStr) {
-  if (!effortStr) return "M"; // Default
-  const match = effortStr.match(/[SML]/i);
-  return match ? match[0].toUpperCase() : "M";
-}
-
-/**
- * Extract value estimate (L/M/H)
- */
-function extractValue(valueStr) {
-  if (!valueStr) return "M"; // Default
-  const match = valueStr.match(/[LMH]/i);
-  return match ? match[0].toUpperCase() : "M";
-}
-
-/**
- * Extract issue numbers from text (e.g., #123)
- */
-function extractIssueNumbers(text) {
-  const matches = text.match(/#(\d+)/g) || [];
-  return matches.map((m) => m.substring(1));
-}
-
-module.exports = {
-  generateProposals,
-};
+module.exports = ProposalEngine;

@@ -1,253 +1,134 @@
 /**
  * Changelog Generator
  *
- * Auto-generates human-readable changelogs from merged PRs and commit messages.
- * Follows Conventional Commits (https://www.conventionalcommits.org/) and SemVer.
+ * Generates human-readable changelogs from merged PRs and commit messages
+ * using Conventional Commits format categorization
  */
 
-/**
- * Categorizes a commit message or PR title by Conventional Commits type
- * @param {string} message - Commit message or PR title
- * @returns {object} { type: string, isBreaking: boolean }
- */
-function categorizeCommit(message) {
-  if (!message) return { type: "other", isBreaking: false };
+class ChangelogGenerator {
+  /**
+   * Generate changelog from PRs
+   * @param {Object} params
+   * @param {Array} params.prs - Array of PR objects with title, number, url, body
+   * @param {string} params.version - Version being released
+   * @returns {string} Markdown changelog
+   */
+  generateChangelog(params) {
+    const { prs = [], version = "1.0.0" } = params;
 
-  // Check for breaking change indicator
-  const isBreaking = /^[a-z]+(\(.+\))?!:|BREAKING CHANGE:/i.test(message);
+    if (prs.length === 0) {
+      return `## ${version} (${this._dateString()})\n\nNo changes recorded.\n`;
+    }
 
-  // Extract commit type
-  const match = message.match(/^([a-z]+)(\(.+\))?!?:/i);
-  const type = match ? match[1].toLowerCase() : null;
-
-  // Map conventional commit types to changelog categories
-  const typeMap = {
-    feat: "features",
-    fix: "fixes",
-    docs: "docs",
-    style: "style",
-    refactor: "improvements",
-    perf: "improvements",
-    test: "tests",
-    chore: "chore",
-    ci: "ci",
-  };
-
-  return {
-    type: typeMap[type] || "other",
-    isBreaking,
-  };
-}
-
-/**
- * Parses PR number from title or link
- * @param {string} title - PR title
- * @param {number} prNumber - PR number from API
- * @returns {number} PR number
- */
-function extractPRNumber(title, prNumber) {
-  // If prNumber is provided by GitHub API, use it
-  if (prNumber) return prNumber;
-
-  // Otherwise try to extract from title
-  const match = title.match(/#(\d+)/);
-  return match ? parseInt(match[1], 10) : null;
-}
-
-/**
- * Generates a Markdown changelog from merged PRs
- *
- * @param {object} options - Options object
- * @param {Array<object>} options.prs - Array of PR objects from GitHub API
- *        Each PR should have: { number, title, labels, body, merged_by, merged_at, commits: [...] }
- * @param {string} options.version - Version string (e.g., "1.2.0")
- * @param {string} options.releaseDate - Release date (YYYY-MM-DD format, defaults to today)
- * @param {string} options.repoUrl - Repository URL for creating issue links (optional)
- * @param {boolean} options.includeAuthors - Include author names in changelog (default: true)
- * @returns {string} Markdown changelog
- */
-function generateChangelog(options = {}) {
-  const {
-    prs = [],
-    version = "Unreleased",
-    releaseDate = new Date().toISOString().split("T")[0],
-    repoUrl = null,
-    includeAuthors = true,
-  } = options;
-
-  if (!Array.isArray(prs)) {
-    throw new Error("prs must be an array");
-  }
-
-  // Categorize PRs
-  const categories = {
-    breaking: [],
-    features: [],
-    fixes: [],
-    improvements: [],
-    docs: [],
-    other: [],
-  };
-
-  prs.forEach((pr) => {
-    const { type, isBreaking } = categorizeCommit(pr.title);
-    const prNumber = extractPRNumber(pr.title, pr.number);
-
-    const entry = {
-      title: cleanPRTitle(pr.title),
-      number: prNumber,
-      author: pr.merged_by?.login || "unknown",
-      url: pr.html_url || null,
+    // Categorize PRs by commit message type
+    const categories = {
+      breaking: [],
+      features: [],
+      fixes: [],
+      improvements: [],
+      other: [],
     };
 
-    if (isBreaking) {
-      categories.breaking.push(entry);
-    } else if (type === "features") {
-      categories.features.push(entry);
-    } else if (type === "fixes") {
-      categories.fixes.push(entry);
-    } else if (["improvements", "perf", "refactor"].includes(type)) {
-      categories.improvements.push(entry);
-    } else if (type === "docs") {
-      categories.docs.push(entry);
-    } else {
-      categories.other.push(entry);
+    prs.forEach((pr) => {
+      const category = this._categorizeCommit(pr.title, pr.body);
+      categories[category].push(pr);
+    });
+
+    // Build changelog
+    let changelog = `## ${version} (${this._dateString()})\n\n`;
+
+    if (categories.breaking.length > 0) {
+      changelog += `### ⚠️ Breaking Changes\n\n`;
+      categories.breaking.forEach((pr) => {
+        changelog += `- ${this._formatEntry(pr)}\n`;
+      });
+      changelog += "\n";
     }
-  });
 
-  // Build changelog markdown
-  let changelog = `## ${version}`;
+    if (categories.features.length > 0) {
+      changelog += `### ✨ Features\n\n`;
+      categories.features.forEach((pr) => {
+        changelog += `- ${this._formatEntry(pr)}\n`;
+      });
+      changelog += "\n";
+    }
 
-  if (version !== "Unreleased") {
-    changelog += ` (${releaseDate})`;
+    if (categories.fixes.length > 0) {
+      changelog += `### 🐛 Bug Fixes\n\n`;
+      categories.fixes.forEach((pr) => {
+        changelog += `- ${this._formatEntry(pr)}\n`;
+      });
+      changelog += "\n";
+    }
+
+    if (categories.improvements.length > 0) {
+      changelog += `### 🚀 Improvements\n\n`;
+      categories.improvements.forEach((pr) => {
+        changelog += `- ${this._formatEntry(pr)}\n`;
+      });
+      changelog += "\n";
+    }
+
+    if (categories.other.length > 0) {
+      changelog += `### 📝 Other Changes\n\n`;
+      categories.other.forEach((pr) => {
+        changelog += `- ${this._formatEntry(pr)}\n`;
+      });
+      changelog += "\n";
+    }
+
+    return changelog.trimEnd();
   }
 
-  changelog += "\n\n";
-
-  // Breaking Changes (always first if present)
-  if (categories.breaking.length > 0) {
-    changelog += "### Breaking Changes\n\n";
-    categories.breaking.forEach((entry) => {
-      changelog += formatEntry(entry, repoUrl, includeAuthors);
-    });
-    changelog += "\n";
+  /**
+   * Format a single changelog entry with link
+   * @private
+   */
+  _formatEntry(pr) {
+    const url = pr.url || `#${pr.number}`;
+    return `${pr.title} ([#${pr.number}](${url}))`;
   }
 
-  // Features
-  if (categories.features.length > 0) {
-    changelog += "### Features\n\n";
-    categories.features.forEach((entry) => {
-      changelog += formatEntry(entry, repoUrl, includeAuthors);
-    });
-    changelog += "\n";
+  /**
+   * Categorize commit based on Conventional Commits
+   * @private
+   */
+  _categorizeCommit(title, body = "") {
+    const combinedText = `${title} ${body}`.toLowerCase();
+
+    if (
+      combinedText.includes("breaking change") ||
+      combinedText.includes("breaking:") ||
+      title.includes("!")
+    ) {
+      return "breaking";
+    }
+
+    if (title.toLowerCase().startsWith("feat")) {
+      return "features";
+    }
+
+    if (title.toLowerCase().startsWith("fix")) {
+      return "fixes";
+    }
+
+    if (
+      title.toLowerCase().startsWith("perf") ||
+      title.toLowerCase().startsWith("refactor")
+    ) {
+      return "improvements";
+    }
+
+    return "other";
   }
 
-  // Bug Fixes
-  if (categories.fixes.length > 0) {
-    changelog += "### Bug Fixes\n\n";
-    categories.fixes.forEach((entry) => {
-      changelog += formatEntry(entry, repoUrl, includeAuthors);
-    });
-    changelog += "\n";
+  /**
+   * Get today's date as YYYY-MM-DD
+   * @private
+   */
+  _dateString() {
+    return new Date().toISOString().split("T")[0];
   }
-
-  // Improvements / Performance
-  if (categories.improvements.length > 0) {
-    changelog += "### Improvements\n\n";
-    categories.improvements.forEach((entry) => {
-      changelog += formatEntry(entry, repoUrl, includeAuthors);
-    });
-    changelog += "\n";
-  }
-
-  // Documentation
-  if (categories.docs.length > 0) {
-    changelog += "### Documentation\n\n";
-    categories.docs.forEach((entry) => {
-      changelog += formatEntry(entry, repoUrl, includeAuthors);
-    });
-    changelog += "\n";
-  }
-
-  // Other (usually hidden unless user requests)
-  // For MVP, we skip the "Other" section unless there are many items
-
-  // If no changes
-  if (prs.length === 0) {
-    changelog += "### No Changes\n\n";
-    changelog += "This release contains no significant changes.\n";
-  }
-
-  // Add footer
-  changelog = changelog.trim() + "\n";
-
-  return changelog;
 }
 
-/**
- * Formats a single changelog entry
- * @param {object} entry - Entry object { title, number, author, url }
- * @param {string} repoUrl - Repository URL
- * @param {boolean} includeAuthors - Whether to include author name
- * @returns {string} Formatted markdown bullet point
- */
-function formatEntry(entry, repoUrl, includeAuthors) {
-  let line = "- ";
-
-  // Add title
-  line += entry.title;
-
-  // Add PR link
-  if (entry.number && repoUrl) {
-    line += ` ([#${entry.number}](${repoUrl}/pull/${entry.number}))`;
-  } else if (entry.number) {
-    line += ` (#${entry.number})`;
-  }
-
-  // Add author (optional)
-  if (includeAuthors && entry.author && entry.author !== "unknown") {
-    line += ` — @${entry.author}`;
-  }
-
-  line += "\n";
-
-  return line;
-}
-
-/**
- * Cleans PR title by removing conventional commit prefix
- * @param {string} title - PR title
- * @returns {string} Cleaned title
- */
-function cleanPRTitle(title) {
-  if (!title) return title;
-
-  // Remove conventional commit prefix (feat:, fix:, etc.)
-  return title.replace(/^[a-z]+(\(.+\))?!?:\s*/i, "").trim();
-}
-
-/**
- * Parses changelog to extract categories and entry counts
- * Useful for version suggestion
- *
- * @param {object} categories - Categorized PRs { breaking, features, fixes, improvements, docs, other }
- * @returns {object} Summary { hasBreakingChanges, featureCount, fixCount, improvementCount }
- */
-function analyzeChangelog(categories) {
-  return {
-    hasBreakingChanges: (categories.breaking || []).length > 0,
-    featureCount: (categories.features || []).length,
-    fixCount: (categories.fixes || []).length,
-    improvementCount: (categories.improvements || []).length,
-    docCount: (categories.docs || []).length,
-  };
-}
-
-module.exports = {
-  generateChangelog,
-  categorizeCommit,
-  extractPRNumber,
-  cleanPRTitle,
-  analyzeChangelog,
-  formatEntry,
-};
+module.exports = ChangelogGenerator;
