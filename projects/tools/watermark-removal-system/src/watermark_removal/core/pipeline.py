@@ -38,13 +38,16 @@ class Pipeline:
         Run complete watermark removal pipeline.
 
         Phases:
-        1. Extract frames from video
-        2. For each frame: load mask, crop, save crop metadata, store CropRegion
-        3. Pre-flight ComfyUI checks
-        4. Submit all crops to inpaint executor (async batch)
-        5. For each inpainted crop: stitch, blend, save stitched frame
-        6. Encode stitched frames to MP4
-        7. Log summary and return results
+        1. [Phase 2] Checkpoint resumption if available
+        2. Extract frames from video
+        3. For each frame: load mask, crop, save crop metadata, store CropRegion
+        4. Pre-flight ComfyUI checks
+        5. Submit all crops to inpaint executor (async batch)
+        6. For each inpainted crop: stitch, blend, save stitched frame
+        7. [Phase 2] Temporal smoothing if enabled
+        8. Encode stitched frames to MP4
+        9. [Phase 2] Save checkpoint on completion
+        10. Log summary and return results
 
         Returns:
             Summary dict with results and timing:
@@ -62,13 +65,32 @@ class Pipeline:
         from ..inpaint.inpaint_executor import InpaintExecutor
         from ..postprocessing.stitch_handler import StitchHandler
         from ..postprocessing.video_encoder import VideoEncoder
+        from ..postprocessing.temporal_smoother import TemporalSmoother
+        from ..postprocessing.poisson_blender import PoissonBlender
         from ..utils.image_io import read_image, write_image
+        from .checkpoint import CheckpointManager
 
         self.start_time = datetime.now()
         logger.info("Starting watermark removal pipeline")
         logger.info(f"Video: {self.config.video_path}")
         logger.info(f"Mask: {self.config.mask_path}")
         logger.info(f"Output: {self.config.output_dir}")
+
+        # Phase 2: Checkpoint resumption
+        checkpoint_manager = None
+        if self.config.use_checkpoints:
+            checkpoint_manager = CheckpointManager(self.config.checkpoint_dir)
+            video_name = self.config.video_path.stem
+
+            if self.config.resume_from_checkpoint:
+                loaded_crops, processing_state = checkpoint_manager.load_crop_regions(video_name)
+                if loaded_crops:
+                    logger.info(f"Resuming from checkpoint: {len(loaded_crops)} crops already processed")
+                    self.crop_regions = loaded_crops
+                    # In Phase 2+, we'd resume from the inpaint phase
+                    # For now, we log and continue normally
+                else:
+                    logger.info("No checkpoint found, starting fresh")
 
         try:
             # Ensure output directory exists
@@ -238,6 +260,15 @@ class Pipeline:
                 blend_feather_width=self.config.blend_feather_width,
             )
 
+            # Initialize Poisson blender if enabled
+            poisson_blender = None
+            if self.config.use_poisson_blending:
+                logger.info("Poisson blending enabled for seamless edge integration")
+                poisson_blender = PoissonBlender(
+                    max_iterations=self.config.poisson_max_iterations,
+                    tolerance=self.config.poisson_tolerance,
+                )
+
             # Stitch inpainted crops back to original frames (can parallelize with asyncio.gather())
             stitched_frames = {}
             for i, (frame, (frame_id, _)) in enumerate(zip(frames, inpaint_crops)):
@@ -261,6 +292,23 @@ class Pipeline:
                 # Stitch back to original frame
                 try:
                     stitched = stitch_handler.stitch_back(frame.image, inpainted, crop_region)
+
+                    # Apply Poisson blending if enabled (replaces feather blending for better quality)
+                    if poisson_blender is not None:
+                        # Create binary mask for inpainted region
+                        mask = np.zeros((inpainted.shape[0], inpainted.shape[1]), dtype=np.uint8)
+                        # Mark inpainted region as 255 (source), rest as 0 (target)
+                        x, y, w, h = crop_region.context_bbox
+                        mask[y:y+h, x:x+w] = 255
+
+                        # Apply Poisson blending
+                        stitched = poisson_blender.blend(
+                            stitched,  # target
+                            inpainted,  # source (already padded to frame size by stitch_back)
+                            mask,
+                            blend_width=self.config.blend_feather_width,
+                        )
+
                     stitched_frames[frame_id] = stitched
 
                     # Save stitched frame
@@ -275,6 +323,38 @@ class Pipeline:
                     continue
 
             logger.info(f"Stitched {len(stitched_frames)} frames")
+
+            # Phase 5.5: Temporal smoothing (Phase 2 optional)
+            if self.config.temporal_smooth_alpha > 0.0:
+                logger.info("=" * 60)
+                logger.info("Phase 5.5: Temporal Smoothing")
+                logger.info("=" * 60)
+
+                temporal_smoother = TemporalSmoother(alpha=self.config.temporal_smooth_alpha)
+
+                # Load stitched frames in order and apply temporal smoothing
+                frame_ids_sorted = sorted(stitched_frames.keys())
+                smoothed_frames = {}
+                previous_frame = None
+
+                for frame_id in frame_ids_sorted:
+                    try:
+                        current_frame = stitched_frames[frame_id]
+                        smoothed = temporal_smoother.smooth_frame(current_frame, previous_frame)
+                        smoothed_frames[frame_id] = smoothed
+                        previous_frame = smoothed
+
+                        # Save smoothed frame, overwriting stitched frame
+                        smoothed_path = stitched_dir / f"frame_{frame_id:06d}.png"
+                        write_image(str(smoothed_path), smoothed)
+
+                    except Exception as e:
+                        logger.error(f"Error smoothing frame {frame_id}: {e}")
+                        smoothed_frames[frame_id] = stitched_frames[frame_id]
+                        previous_frame = stitched_frames[frame_id]
+
+                logger.info(f"Temporal smoothing complete: {len(smoothed_frames)} frames smoothed")
+                stitched_frames = smoothed_frames
 
             # Phase 6: Video encoding
             logger.info("=" * 60)
@@ -296,7 +376,25 @@ class Pipeline:
 
             logger.info(f"Video encoding complete: {output_video}")
 
-            # Phase 7: Cleanup and summary
+            # Phase 7: Checkpoint saving (Phase 2)
+            if checkpoint_manager is not None:
+                try:
+                    video_name = self.config.video_path.stem
+                    processing_state = {
+                        "frames_processed": len(frames),
+                        "crops_created": len(self.crop_regions),
+                        "inpaint_duration_sec": sum(self.inpaint_times),
+                        "status": "completed",
+                    }
+                    checkpoint_manager.save_crop_regions(
+                        video_name,
+                        self.crop_regions,
+                        processing_state,
+                    )
+                except Exception as e:
+                    logger.warning(f"Failed to save checkpoint: {e}")
+
+            # Phase 8: Cleanup and summary
             logger.info("=" * 60)
             logger.info("Pipeline Complete")
             logger.info("=" * 60)

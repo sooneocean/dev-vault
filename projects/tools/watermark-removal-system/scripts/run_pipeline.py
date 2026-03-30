@@ -132,6 +132,49 @@ Examples:
         help="Enable verbose logging (DEBUG level)",
     )
 
+    # Phase 2 arguments
+    parser.add_argument(
+        "--temporal-smooth-alpha",
+        type=float,
+        help="Temporal smoothing factor for flicker reduction (0.0-1.0, Phase 2)",
+    )
+
+    parser.add_argument(
+        "--use-poisson-blending",
+        action="store_true",
+        help="Enable Poisson blending for seamless edge integration (Phase 2)",
+    )
+
+    parser.add_argument(
+        "--poisson-max-iterations",
+        type=int,
+        help="Maximum iterations for Poisson solver (Phase 2)",
+    )
+
+    parser.add_argument(
+        "--use-watermark-tracker",
+        action="store_true",
+        help="Enable YOLO-based watermark tracking (Phase 2)",
+    )
+
+    parser.add_argument(
+        "--yolo-model-path",
+        type=Path,
+        help="Path to YOLO model weights (Phase 2)",
+    )
+
+    parser.add_argument(
+        "--use-checkpoints",
+        action="store_true",
+        help="Enable pipeline checkpointing for resumption (Phase 2)",
+    )
+
+    parser.add_argument(
+        "--resume-from-checkpoint",
+        action="store_true",
+        help="Resume from last checkpoint if available (Phase 2)",
+    )
+
     return parser.parse_args()
 
 
@@ -201,6 +244,22 @@ def load_config(args) -> ProcessConfig:
         config.comfyui_port = args.comfyui_port
     if args.keep_intermediate:
         config.keep_intermediate = True
+
+    # Phase 2 overrides
+    if hasattr(args, 'temporal_smooth_alpha') and args.temporal_smooth_alpha is not None:
+        config.temporal_smooth_alpha = args.temporal_smooth_alpha
+    if hasattr(args, 'use_poisson_blending') and args.use_poisson_blending:
+        config.use_poisson_blending = True
+    if hasattr(args, 'poisson_max_iterations') and args.poisson_max_iterations is not None:
+        config.poisson_max_iterations = args.poisson_max_iterations
+    if hasattr(args, 'use_watermark_tracker') and args.use_watermark_tracker:
+        config.use_watermark_tracker = True
+    if hasattr(args, 'yolo_model_path') and args.yolo_model_path:
+        config.yolo_model_path = args.yolo_model_path
+    if hasattr(args, 'use_checkpoints') and args.use_checkpoints:
+        config.use_checkpoints = True
+    if hasattr(args, 'resume_from_checkpoint') and args.resume_from_checkpoint:
+        config.resume_from_checkpoint = True
 
     # Validate required files
     if not config.video_path.exists():

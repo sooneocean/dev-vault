@@ -107,6 +107,27 @@ class TestCLIParsing:
                 assert args.keep_intermediate is False
                 assert args.verbose is False
 
+    def test_parse_with_phase2_parameters(self):
+        """Parse arguments with Phase 2 parameters."""
+        test_args = [
+            "--video", "input.mp4",
+            "--mask", "mask.png",
+            "--temporal-smooth-alpha", "0.3",
+            "--use-poisson-blending",
+            "--poisson-max-iterations", "50",
+            "--use-watermark-tracker",
+            "--use-checkpoints",
+            "--resume-from-checkpoint",
+        ]
+        with patch.object(sys, "argv", ["run_pipeline.py"] + test_args):
+            args = parse_arguments()
+            assert args.temporal_smooth_alpha == 0.3
+            assert args.use_poisson_blending is True
+            assert args.poisson_max_iterations == 50
+            assert args.use_watermark_tracker is True
+            assert args.use_checkpoints is True
+            assert args.resume_from_checkpoint is True
+
 
 class TestConfigLoading:
     """Test configuration loading from files and arguments."""
@@ -237,6 +258,44 @@ class TestConfigLoading:
             assert config.comfyui_host == "192.168.1.100"
             assert config.comfyui_port == 9000
             assert config.keep_intermediate is True
+
+    def test_load_with_phase2_overrides(self):
+        """Load config and override with Phase 2 parameters."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmpdir = Path(tmpdir)
+            video_path = tmpdir / "input.mp4"
+            mask_path = tmpdir / "mask.png"
+            video_path.write_text("test")
+            mask_path.write_text("test")
+
+            class Args:
+                config = None
+                video = video_path
+                mask = mask_path
+                output = tmpdir / "output"
+                context_padding = None
+                target_inpaint_size = None
+                blend_feather_width = None
+                batch_size = None
+                inpaint_timeout = None
+                comfyui_host = None
+                comfyui_port = None
+                keep_intermediate = False
+                temporal_smooth_alpha = 0.3
+                use_poisson_blending = True
+                poisson_max_iterations = 50
+                use_watermark_tracker = True
+                yolo_model_path = None
+                use_checkpoints = True
+                resume_from_checkpoint = True
+
+            config = load_config(Args())
+            assert config.temporal_smooth_alpha == 0.3
+            assert config.use_poisson_blending is True
+            assert config.poisson_max_iterations == 50
+            assert config.use_watermark_tracker is True
+            assert config.use_checkpoints is True
+            assert config.resume_from_checkpoint is True
 
 
 if __name__ == "__main__":
