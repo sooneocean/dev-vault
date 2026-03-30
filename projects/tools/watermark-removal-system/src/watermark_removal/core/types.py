@@ -156,10 +156,15 @@ class ProcessConfig:
     poisson_max_iterations: int = 100
     poisson_tolerance: float = 0.01
 
+    # Phase 2 Preprocessing - YOLO Automatic Detection
+    use_yolo_detection: bool = False
+    yolo_model_size: str = "small"  # nano, small, medium, large
+    yolo_confidence_threshold: float = 0.5
+    yolo_nms_threshold: float = 0.45
+
     # Phase 2 Preprocessing - Watermark Tracking
     use_watermark_tracker: bool = False
     yolo_model_path: Optional[str | Path] = None
-    yolo_confidence_threshold: float = 0.5
     tracker_sparse_interval: int = 1
     tracker_smoothing_factor: float = 0.3
 

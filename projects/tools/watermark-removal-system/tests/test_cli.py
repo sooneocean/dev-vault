@@ -112,6 +112,9 @@ class TestCLIParsing:
         test_args = [
             "--video", "input.mp4",
             "--mask", "mask.png",
+            "--use-yolo-detection",
+            "--yolo-model-size", "small",
+            "--yolo-confidence-threshold", "0.5",
             "--temporal-smooth-alpha", "0.3",
             "--use-adaptive-temporal-smoothing",
             "--adaptive-motion-threshold", "0.05",
@@ -123,6 +126,9 @@ class TestCLIParsing:
         ]
         with patch.object(sys, "argv", ["run_pipeline.py"] + test_args):
             args = parse_arguments()
+            assert args.use_yolo_detection is True
+            assert args.yolo_model_size == "small"
+            assert args.yolo_confidence_threshold == 0.5
             assert args.temporal_smooth_alpha == 0.3
             assert args.use_adaptive_temporal_smoothing is True
             assert args.adaptive_motion_threshold == 0.05
@@ -285,6 +291,9 @@ class TestConfigLoading:
                 comfyui_host = None
                 comfyui_port = None
                 keep_intermediate = False
+                use_yolo_detection = True
+                yolo_model_size = "small"
+                yolo_confidence_threshold = 0.5
                 temporal_smooth_alpha = 0.3
                 use_adaptive_temporal_smoothing = True
                 adaptive_motion_threshold = 0.05
@@ -296,6 +305,9 @@ class TestConfigLoading:
                 resume_from_checkpoint = True
 
             config = load_config(Args())
+            assert config.use_yolo_detection is True
+            assert config.yolo_model_size == "small"
+            assert config.yolo_confidence_threshold == 0.5
             assert config.temporal_smooth_alpha == 0.3
             assert config.use_adaptive_temporal_smoothing is True
             assert config.adaptive_motion_threshold == 0.05

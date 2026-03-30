@@ -164,15 +164,34 @@ Examples:
     )
 
     parser.add_argument(
+        "--use-yolo-detection",
+        action="store_true",
+        help="Enable automatic YOLO watermark detection (Phase 2)",
+    )
+
+    parser.add_argument(
+        "--yolo-model-size",
+        type=str,
+        choices=["nano", "small", "medium", "large"],
+        help="YOLO model size for detection (Phase 2)",
+    )
+
+    parser.add_argument(
+        "--yolo-confidence-threshold",
+        type=float,
+        help="Confidence threshold for YOLO detections (Phase 2)",
+    )
+
+    parser.add_argument(
         "--use-watermark-tracker",
         action="store_true",
-        help="Enable YOLO-based watermark tracking (Phase 2)",
+        help="Enable watermark tracking with bbox interpolation (Phase 2)",
     )
 
     parser.add_argument(
         "--yolo-model-path",
         type=Path,
-        help="Path to YOLO model weights (Phase 2)",
+        help="Path to custom YOLO model weights (Phase 2)",
     )
 
     parser.add_argument(
@@ -257,21 +276,35 @@ def load_config(args) -> ProcessConfig:
     if args.keep_intermediate:
         config.keep_intermediate = True
 
-    # Phase 2 overrides
+    # Phase 2 overrides - YOLO Detection
+    if hasattr(args, 'use_yolo_detection') and args.use_yolo_detection:
+        config.use_yolo_detection = True
+    if hasattr(args, 'yolo_model_size') and args.yolo_model_size:
+        config.yolo_model_size = args.yolo_model_size
+    if hasattr(args, 'yolo_confidence_threshold') and args.yolo_confidence_threshold is not None:
+        config.yolo_confidence_threshold = args.yolo_confidence_threshold
+
+    # Phase 2 overrides - Temporal Smoothing
     if hasattr(args, 'temporal_smooth_alpha') and args.temporal_smooth_alpha is not None:
         config.temporal_smooth_alpha = args.temporal_smooth_alpha
     if hasattr(args, 'use_adaptive_temporal_smoothing') and args.use_adaptive_temporal_smoothing:
         config.use_adaptive_temporal_smoothing = True
     if hasattr(args, 'adaptive_motion_threshold') and args.adaptive_motion_threshold is not None:
         config.adaptive_motion_threshold = args.adaptive_motion_threshold
+
+    # Phase 2 overrides - Poisson Blending
     if hasattr(args, 'use_poisson_blending') and args.use_poisson_blending:
         config.use_poisson_blending = True
     if hasattr(args, 'poisson_max_iterations') and args.poisson_max_iterations is not None:
         config.poisson_max_iterations = args.poisson_max_iterations
+
+    # Phase 2 overrides - Watermark Tracking
     if hasattr(args, 'use_watermark_tracker') and args.use_watermark_tracker:
         config.use_watermark_tracker = True
     if hasattr(args, 'yolo_model_path') and args.yolo_model_path:
         config.yolo_model_path = args.yolo_model_path
+
+    # Phase 2 overrides - Checkpointing
     if hasattr(args, 'use_checkpoints') and args.use_checkpoints:
         config.use_checkpoints = True
     if hasattr(args, 'resume_from_checkpoint') and args.resume_from_checkpoint:

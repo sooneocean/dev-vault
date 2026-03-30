@@ -63,6 +63,7 @@ class Pipeline:
         from ..preprocessing.mask_loader import MaskLoader
         from ..preprocessing.crop_handler import CropHandler
         from ..preprocessing.watermark_tracker import BboxTracker
+        from ..preprocessing.yolo_detector import YOLODetector
         from ..inpaint.inpaint_executor import InpaintExecutor
         from ..postprocessing.stitch_handler import StitchHandler
         from ..postprocessing.video_encoder import VideoEncoder
@@ -125,14 +126,56 @@ class Pipeline:
             )
             mask_loader = MaskLoader()
 
-            # Load mask file (auto-detect type)
-            mask_data = mask_loader.load_mask(self.config.mask_path)
-            if mask_data is None:
-                raise RuntimeError(f"Failed to load mask: {self.config.mask_path}")
+            # Phase 2: YOLO Automatic Detection (if enabled)
+            if self.config.use_yolo_detection:
+                logger.info("=" * 60)
+                logger.info("Phase 2a: YOLO Automatic Watermark Detection")
+                logger.info("=" * 60)
+                try:
+                    yolo_detector = YOLODetector(
+                        model_size=self.config.yolo_model_size,
+                        confidence_threshold=self.config.yolo_confidence_threshold,
+                        nms_threshold=self.config.yolo_nms_threshold,
+                    )
 
-            # Determine mask type (image vs bbox sequence)
-            is_image_mask = isinstance(mask_data, np.ndarray)
-            bbox_dict = mask_data if not is_image_mask else None
+                    # Run YOLO detection on all frames (batch inference)
+                    logger.info(f"Running YOLO detection (model: {self.config.yolo_model_size}) on {len(frames)} frames")
+                    all_bboxes = yolo_detector.detect_batch([f.image for f in frames])
+
+                    # Build bbox_dict from detections
+                    bbox_dict = {}
+                    for frame_id, bboxes in enumerate(all_bboxes):
+                        if bboxes:
+                            # For now, use the first (highest confidence) bbox per frame
+                            # Multi-watermark support will handle multiple bboxes in Phase 2 Unit 2
+                            bbox_dict[frame_id] = bboxes[0]
+                            logger.debug(f"Frame {frame_id}: detected {len(bboxes)} watermark(s), using primary bbox")
+
+                    logger.info(f"YOLO detection complete: {len(bbox_dict)} frames with detections")
+                    mask_data = bbox_dict
+                    is_image_mask = False
+
+                    # Cleanup YOLO resources
+                    yolo_detector.cleanup()
+
+                except Exception as e:
+                    logger.error(f"YOLO detection failed: {e}")
+                    logger.warning("Falling back to manual mask input")
+                    # Load mask file as fallback
+                    mask_data = mask_loader.load_mask(self.config.mask_path)
+                    if mask_data is None:
+                        raise RuntimeError(f"Failed to load mask: {self.config.mask_path}")
+                    is_image_mask = isinstance(mask_data, np.ndarray)
+                    bbox_dict = mask_data if not is_image_mask else None
+            else:
+                # Load mask file (auto-detect type)
+                mask_data = mask_loader.load_mask(self.config.mask_path)
+                if mask_data is None:
+                    raise RuntimeError(f"Failed to load mask: {self.config.mask_path}")
+
+                # Determine mask type (image vs bbox sequence)
+                is_image_mask = isinstance(mask_data, np.ndarray)
+                bbox_dict = mask_data if not is_image_mask else None
 
             # Phase 2: Initialize WatermarkTracker if enabled
             tracker = None
