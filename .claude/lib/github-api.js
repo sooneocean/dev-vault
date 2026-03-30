@@ -1,398 +1,243 @@
 /**
- * GitHub API Integration Layer
- * Wrapper around Octokit.js with higher-level functions for:
- * - Reading issues, PRs, commits
- * - Creating releases and tags
- * - Managing GitHub workflow
+ * GitHub API Wrapper
  *
- * Requires: GITHUB_TOKEN environment variable (PAT or Actions token)
- * Dependencies: @octokit/rest, @octokit/plugin-throttling
+ * Provides higher-level functions for GitHub operations:
+ * - Getting last release and commit history
+ * - Creating releases and tags
+ * - Managing issues and milestones
+ * - Reading repository metadata
  */
 
-const { Octokit } = require("@octokit/rest");
-const { throttling } = require("@octokit/plugin-throttling");
+const https = require("https");
 
-// Apply throttling plugin for rate limit handling
-const OctokitWithThrottling = Octokit.plugin(throttling);
+class GitHubAPI {
+  constructor(options = {}) {
+    this.token = options.token || process.env.GITHUB_TOKEN;
+    this.owner = options.owner;
+    this.repo = options.repo;
+    this.baseUrl = "api.github.com";
 
-/**
- * Initialize GitHub API client with rate limiting and retry logic
- * @returns {Octokit} Configured Octokit instance
- * @throws {Error} If GITHUB_TOKEN is missing
- */
-function initializeClient() {
-  const token = process.env.GITHUB_TOKEN;
-
-  if (!token) {
-    throw new Error(
-      "GitHub token not found. Please set GITHUB_TOKEN environment variable.\n" +
-        "For local development: create a fine-grained PAT at https://github.com/settings/tokens?type=beta\n" +
-        "For GitHub Actions: token is automatically set by the runner",
-    );
+    if (!this.token) {
+      throw new Error(
+        "GitHub token not provided. Set GITHUB_TOKEN env var or pass token in options.",
+      );
+    }
   }
 
-  const octokit = new OctokitWithThrottling({
-    auth: token,
-    throttle: {
-      onRateLimit: (retryAfter, options, octokit, retryCount) => {
-        console.warn(
-          `[GitHub API] Rate limited. Retrying after ${retryAfter} seconds...`,
-        );
-        if (retryCount < 3) {
-          // Retry up to 3 times on primary rate limit
-          return true;
-        }
-        return false;
-      },
-      onAbuseLimit: (retryAfter, options, octokit) => {
-        // Does not retry on abuse limit (secondary rate limit)
-        console.error(
-          `[GitHub API] Abuse limit reached. Please try again after ${retryAfter} seconds`,
-        );
-        return false;
-      },
-    },
-  });
+  /**
+   * Make authenticated HTTP request to GitHub API
+   * @private
+   */
+  async _request(method, path, body = null) {
+    return new Promise((resolve, reject) => {
+      const options = {
+        hostname: this.baseUrl,
+        port: 443,
+        path,
+        method,
+        headers: {
+          Authorization: `token ${this.token}`,
+          "Content-Type": "application/json",
+          "User-Agent": "GitHub-Iteration-Tool",
+          Accept: "application/vnd.github.v3+json",
+        },
+      };
 
-  return octokit;
-}
+      const req = https.request(options, (res) => {
+        let data = "";
 
-/**
- * Get the most recent release of a repository
- * @param {string} owner - Repository owner
- * @param {string} repo - Repository name
- * @returns {Object|null} Release object with tag, date, body; null if no release exists
- * @throws {Error} If API call fails
- */
-async function getLastRelease(owner, repo) {
-  try {
-    const octokit = initializeClient();
-    const response = await octokit.repos.getLatestRelease({
-      owner,
-      repo,
+        res.on("data", (chunk) => {
+          data += chunk;
+        });
+
+        res.on("end", () => {
+          try {
+            const parsed = data ? JSON.parse(data) : null;
+
+            // Handle rate limit and common errors
+            if (res.statusCode === 429) {
+              const retryAfter = res.headers["retry-after"] || 60;
+              reject(
+                new Error(
+                  `Rate limited by GitHub. Retry after ${retryAfter}s`,
+                ),
+              );
+              return;
+            }
+
+            if (res.statusCode >= 400) {
+              const message = parsed?.message || data || res.statusMessage;
+              reject(
+                new Error(
+                  `GitHub API error (${res.statusCode}): ${message}`,
+                ),
+              );
+              return;
+            }
+
+            resolve(parsed);
+          } catch (error) {
+            reject(new Error(`Failed to parse GitHub API response: ${error}`));
+          }
+        });
+      });
+
+      req.on("error", reject);
+
+      if (body) {
+        req.write(JSON.stringify(body));
+      }
+
+      req.end();
+    });
+  }
+
+  /**
+   * Get last release for the repository
+   * @returns {Promise<{tag: string, date: string, body: string}>}
+   */
+  async getLastRelease() {
+    try {
+      const release = await this._request(
+        "GET",
+        `/repos/${this.owner}/${this.repo}/releases/latest`,
+      );
+
+      if (!release || !release.tag_name) {
+        return null;
+      }
+
+      return {
+        tag: release.tag_name,
+        date: release.published_at
+          ? release.published_at.split("T")[0]
+          : new Date().toISOString().split("T")[0],
+        body: release.body || "",
+        url: release.html_url,
+      };
+    } catch (error) {
+      // "latest" endpoint returns 404 if no releases exist
+      if (error.message.includes("404")) {
+        return null;
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * Get closed PRs since a given date or tag
+   * @param {string} sinceDate - ISO date string (YYYY-MM-DD) or git tag
+   * @returns {Promise<Array>} List of PR objects with title, number, author, merged_at
+   */
+  async getClosedPRsSince(sinceDate) {
+    const query = `repo:${this.owner}/${this.repo} is:pr is:merged merged:>${sinceDate}`;
+    const response = await this._request(
+      "GET",
+      `/search/issues?q=${encodeURIComponent(query)}&sort=merged&order=desc&per_page=100`,
+    );
+
+    const prs = response.items || [];
+    return prs.map((pr) => ({
+      number: pr.number,
+      title: pr.title,
+      author: pr.user?.login,
+      mergedAt: pr.closed_at,
+      url: pr.html_url,
+      body: pr.body || "",
+    }));
+  }
+
+  /**
+   * Create a GitHub release
+   * @param {Object} params
+   * @param {string} params.tagName - Git tag name (e.g., 'v1.2.3')
+   * @param {string} params.name - Release name
+   * @param {string} params.body - Release notes (changelog)
+   * @returns {Promise<{url: string, id: number}>}
+   */
+  async createRelease(params) {
+    const { tagName, name, body, draft = false, prerelease = false } = params;
+
+    const response = await this._request("POST", `/repos/${this.owner}/${this.repo}/releases`, {
+      tag_name: tagName,
+      name: name || tagName,
+      body: body || "",
+      draft,
+      prerelease,
     });
 
     return {
-      tag: response.data.tag_name,
-      name: response.data.name,
-      date: response.data.published_at,
-      body: response.data.body,
-      url: response.data.html_url,
-      id: response.data.id,
+      url: response.html_url,
+      id: response.id,
     };
-  } catch (error) {
-    // No release exists yet (404)
-    if (error.status === 404) {
-      return null;
-    }
-    throw new Error(
-      `Failed to fetch latest release from ${owner}/${repo}: ${error.message}`,
-    );
   }
-}
 
-/**
- * Get closed (merged) PRs since a given date
- * @param {string} owner - Repository owner
- * @param {string} repo - Repository name
- * @param {Date|string} sinceDate - Only include PRs merged after this date (ISO 8601 or Date object)
- * @returns {Array} Array of PR objects with number, title, author, merged_at
- * @throws {Error} If API call fails
- */
-async function getClosedPRsSince(owner, repo, sinceDate) {
-  try {
-    const octokit = initializeClient();
-    const sinceISO =
-      sinceDate instanceof Date ? sinceDate.toISOString() : sinceDate;
+  /**
+   * Create a GitHub issue
+   * @param {Object} params
+   * @param {string} params.title - Issue title
+   * @param {string} params.body - Issue description
+   * @param {Array} params.labels - Label names
+   * @param {string} params.milestone - Milestone title
+   * @returns {Promise<{number: number, url: string}>}
+   */
+  async createIssue(params) {
+    const { title, body, labels = [], milestone } = params;
 
-    const response = await octokit.paginate(
-      "GET /repos/{owner}/{repo}/pulls",
-      {
-        owner,
-        repo,
-        state: "closed",
-        sort: "updated",
-        direction: "desc",
-        per_page: 100,
-      },
-      (response) => {
-        // Filter to only merged PRs since date
-        return response.data
-          .filter(
-            (pr) => pr.merged_at && new Date(pr.merged_at) > new Date(sinceISO),
-          )
-          .map((pr) => ({
-            number: pr.number,
-            title: pr.title,
-            author: pr.user.login,
-            merged_at: pr.merged_at,
-            url: pr.html_url,
-            labels: pr.labels.map((l) => l.name),
-            body: pr.body,
-          }));
-      },
-    );
+    const payload = {
+      title,
+      body: body || "",
+      labels: labels || [],
+    };
 
-    // Flatten paginated results
-    return response.flat();
-  } catch (error) {
-    throw new Error(
-      `Failed to fetch closed PRs from ${owner}/${repo}: ${error.message}`,
-    );
-  }
-}
+    if (milestone) {
+      // Resolve milestone name to number if needed
+      const milestones = await this._request(
+        "GET",
+        `/repos/${this.owner}/${this.repo}/milestones?state=open&per_page=100`,
+      );
 
-/**
- * Get open issues with a specific label
- * @param {string} owner - Repository owner
- * @param {string} repo - Repository name
- * @param {string} label - Issue label to filter by
- * @returns {Array} Array of issue objects with number, title, body, labels
- * @throws {Error} If API call fails
- */
-async function getOpenIssuesByLabel(owner, repo, label) {
-  try {
-    const octokit = initializeClient();
-    const response = await octokit.paginate(
-      "GET /repos/{owner}/{repo}/issues",
-      {
-        owner,
-        repo,
-        state: "open",
-        labels: label,
-        sort: "updated",
-        direction: "desc",
-        per_page: 100,
-      },
-      (response) => {
-        return response.data.map((issue) => ({
-          number: issue.number,
-          title: issue.title,
-          body: issue.body,
-          labels: issue.labels.map((l) => l.name),
-          url: issue.html_url,
-          created_at: issue.created_at,
-          updated_at: issue.updated_at,
-        }));
-      },
-    );
+      const foundMilestone = milestones?.find(
+        (m) => m.title === milestone || m.number.toString() === milestone,
+      );
 
-    return response.flat();
-  } catch (error) {
-    throw new Error(
-      `Failed to fetch issues with label '${label}' from ${owner}/${repo}: ${error.message}`,
-    );
-  }
-}
-
-/**
- * Create a new release and tag
- * @param {string} owner - Repository owner
- * @param {string} repo - Repository name
- * @param {string} tagName - Semantic version tag (e.g., "v1.2.0")
- * @param {string} changelog - Release notes (Markdown)
- * @param {string} versionName - Human-readable version name (e.g., "Version 1.2.0")
- * @returns {Object} Release object with tag, url, id
- * @throws {Error} If API call fails
- */
-async function createRelease(owner, repo, tagName, changelog, versionName) {
-  try {
-    const octokit = initializeClient();
-
-    // First, check if tag already exists
-    let tagExists = false;
-    try {
-      await octokit.git.getRef({
-        owner,
-        repo,
-        ref: `tags/${tagName}`,
-      });
-      tagExists = true;
-    } catch (e) {
-      // Tag doesn't exist yet, which is expected
-      if (e.status !== 404) {
-        throw e;
+      if (foundMilestone) {
+        payload.milestone = foundMilestone.number;
       }
     }
 
-    // Create the release (this will create the tag if it doesn't exist)
-    const response = await octokit.repos.createRelease({
-      owner,
-      repo,
-      tag_name: tagName,
-      name: versionName,
-      body: changelog,
-      draft: false,
-      prerelease: false,
-    });
+    const response = await this._request(
+      "POST",
+      `/repos/${this.owner}/${this.repo}/issues`,
+      payload,
+    );
 
     return {
-      tag: response.data.tag_name,
-      name: response.data.name,
-      url: response.data.html_url,
-      id: response.data.id,
-      published_at: response.data.published_at,
+      number: response.number,
+      url: response.html_url,
+      id: response.id,
     };
-  } catch (error) {
-    throw new Error(
-      `Failed to create release ${tagName} on ${owner}/${repo}: ${error.message}`,
-    );
   }
-}
 
-/**
- * Create a new GitHub issue
- * @param {string} owner - Repository owner
- * @param {string} repo - Repository name
- * @param {string} title - Issue title
- * @param {string} body - Issue description (Markdown)
- * @param {Array<string>} labels - Issue labels
- * @param {number} milestone - Milestone ID (optional)
- * @returns {Object} Issue object with number, url, id
- * @throws {Error} If API call fails
- */
-async function createIssue(
-  owner,
-  repo,
-  title,
-  body,
-  labels = [],
-  milestone = null,
-) {
-  try {
-    const octokit = initializeClient();
-    const payload = {
-      owner,
-      repo,
-      title,
-      body,
-      labels,
-    };
-
-    if (milestone !== null) {
-      payload.milestone = milestone;
-    }
-
-    const response = await octokit.issues.create(payload);
+  /**
+   * Get repository metadata
+   * @returns {Promise<Object>}
+   */
+  async getRepositoryInfo() {
+    const response = await this._request(
+      "GET",
+      `/repos/${this.owner}/${this.repo}`,
+    );
 
     return {
-      number: response.data.number,
-      title: response.data.title,
-      url: response.data.html_url,
-      id: response.data.id,
-      created_at: response.data.created_at,
+      name: response.name,
+      fullName: response.full_name,
+      description: response.description,
+      url: response.html_url,
+      language: response.language,
+      defaultBranch: response.default_branch,
     };
-  } catch (error) {
-    throw new Error(
-      `Failed to create issue on ${owner}/${repo}: ${error.message}`,
-    );
   }
 }
 
-/**
- * Get release readiness status for a milestone
- * Checks if all PRs in a milestone are merged
- * @param {string} owner - Repository owner
- * @param {string} repo - Repository name
- * @param {number} milestone - Milestone number
- * @returns {Object} Readiness status with merged_count, open_count, total_count, ready (boolean)
- * @throws {Error} If API call fails
- */
-async function getReleaseReadiness(owner, repo, milestone) {
-  try {
-    const octokit = initializeClient();
-
-    // Get all PRs in the milestone
-    const response = await octokit.paginate(
-      "GET /repos/{owner}/{repo}/pulls",
-      {
-        owner,
-        repo,
-        milestone,
-        state: "all",
-        per_page: 100,
-      },
-      (response) => {
-        return response.data.map((pr) => ({
-          number: pr.number,
-          title: pr.title,
-          state: pr.state, // 'open' or 'closed'
-          merged: pr.merged,
-          merged_at: pr.merged_at,
-          url: pr.html_url,
-        }));
-      },
-    );
-
-    const allPRs = response.flat();
-    const merged = allPRs.filter((pr) => pr.merged).length;
-    const open = allPRs.filter((pr) => pr.state === "open").length;
-    const total = allPRs.length;
-
-    return {
-      milestone,
-      merged_count: merged,
-      open_count: open,
-      total_count: total,
-      ready: open === 0 && total > 0,
-      prs: allPRs,
-    };
-  } catch (error) {
-    throw new Error(
-      `Failed to get release readiness for milestone ${milestone} on ${owner}/${repo}: ${error.message}`,
-    );
-  }
-}
-
-/**
- * Get a list of milestones for a repository
- * @param {string} owner - Repository owner
- * @param {string} repo - Repository name
- * @param {string} state - Milestone state ('open', 'closed', or 'all')
- * @returns {Array} Array of milestone objects with number, title, description
- * @throws {Error} If API call fails
- */
-async function getMilestones(owner, repo, state = "open") {
-  try {
-    const octokit = initializeClient();
-    const response = await octokit.paginate(
-      "GET /repos/{owner}/{repo}/milestones",
-      {
-        owner,
-        repo,
-        state,
-        sort: "due_date",
-        direction: "asc",
-        per_page: 100,
-      },
-      (response) => {
-        return response.data.map((m) => ({
-          number: m.number,
-          title: m.title,
-          description: m.description,
-          due_on: m.due_on,
-          open_issues: m.open_issues,
-          closed_issues: m.closed_issues,
-          url: m.html_url,
-        }));
-      },
-    );
-
-    return response.flat();
-  } catch (error) {
-    throw new Error(
-      `Failed to fetch milestones from ${owner}/${repo}: ${error.message}`,
-    );
-  }
-}
-
-module.exports = {
-  initializeClient,
-  getLastRelease,
-  getClosedPRsSince,
-  getOpenIssuesByLabel,
-  createRelease,
-  createIssue,
-  getReleaseReadiness,
-  getMilestones,
-};
+module.exports = GitHubAPI;

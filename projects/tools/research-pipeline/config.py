@@ -19,6 +19,14 @@ SCAN_TOPICS = {
         "MCP server",
         "tool use LLM",
     ],
+    "agentic-harness": [
+        "agentic harness",
+        "context prompt",
+        "prompt engineering agent",
+        "agent context window",
+        "system prompt management",
+        "prompt optimization",
+    ],
     "rag-knowledge": [
         "RAG",
         "retrieval augmented generation",
@@ -29,9 +37,9 @@ SCAN_TOPICS = {
 }
 
 GITHUB_SEARCH_FILTERS = {
-    "min_stars": 100,
+    "min_stars": 50,
     "language": "python",
-    "created_after_days": 90,  # repos created in last N days
+    "created_after_days": 30,  # repos created in last N days
 }
 
 ARXIV_CATEGORIES = ["cs.AI", "cs.CL", "cs.IR"]
