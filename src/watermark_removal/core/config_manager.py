@@ -74,8 +74,18 @@ class ConfigManager:
             timeout=raw_config.get("timeout", 300.0),
             output_codec=raw_config.get("output_codec", "h264"),
             output_crf=raw_config.get("output_crf", 23),
+            output_fps=raw_config.get("output_fps", 30.0),
             keep_intermediate=raw_config.get("keep_intermediate", False),
             verbose=raw_config.get("verbose", True),
+            comfyui_host=raw_config.get("comfyui_host", "127.0.0.1"),
+            comfyui_port=raw_config.get("comfyui_port", 8188),
+            blend_feather_width=raw_config.get("blend_feather_width", 32),
+            skip_errors_in_preprocessing=raw_config.get(
+                "skip_errors_in_preprocessing", False
+            ),
+            skip_errors_in_postprocessing=raw_config.get(
+                "skip_errors_in_postprocessing", False
+            ),
         )
 
         logger.info(
