@@ -58,9 +58,7 @@ class GitHubAPI {
             if (res.statusCode === 429) {
               const retryAfter = res.headers["retry-after"] || 60;
               reject(
-                new Error(
-                  `Rate limited by GitHub. Retry after ${retryAfter}s`,
-                ),
+                new Error(`Rate limited by GitHub. Retry after ${retryAfter}s`),
               );
               return;
             }
@@ -68,9 +66,7 @@ class GitHubAPI {
             if (res.statusCode >= 400) {
               const message = parsed?.message || data || res.statusMessage;
               reject(
-                new Error(
-                  `GitHub API error (${res.statusCode}): ${message}`,
-                ),
+                new Error(`GitHub API error (${res.statusCode}): ${message}`),
               );
               return;
             }
@@ -158,13 +154,17 @@ class GitHubAPI {
   async createRelease(params) {
     const { tagName, name, body, draft = false, prerelease = false } = params;
 
-    const response = await this._request("POST", `/repos/${this.owner}/${this.repo}/releases`, {
-      tag_name: tagName,
-      name: name || tagName,
-      body: body || "",
-      draft,
-      prerelease,
-    });
+    const response = await this._request(
+      "POST",
+      `/repos/${this.owner}/${this.repo}/releases`,
+      {
+        tag_name: tagName,
+        name: name || tagName,
+        body: body || "",
+        draft,
+        prerelease,
+      },
+    );
 
     return {
       url: response.html_url,
@@ -216,6 +216,66 @@ class GitHubAPI {
       number: response.number,
       url: response.html_url,
       id: response.id,
+    };
+  }
+
+  /**
+   * Get open issues by label
+   * @param {string} label - Label name to filter by
+   * @param {number} limit - Maximum issues to return
+   * @returns {Promise<Array>} List of issue objects
+   */
+  async getOpenIssuesByLabel(label, limit = 50) {
+    const query = `repo:${this.owner}/${this.repo} is:issue is:open label:${encodeURIComponent(label)}`;
+    const response = await this._request(
+      "GET",
+      `/search/issues?q=${encodeURIComponent(query)}&sort=updated&order=desc&per_page=${limit}`,
+    );
+
+    return (response.items || []).map((issue) => ({
+      number: issue.number,
+      title: issue.title,
+      body: issue.body || "",
+      labels: issue.labels || [],
+      url: issue.html_url,
+    }));
+  }
+
+  /**
+   * Get milestone by name
+   * @param {string} title - Milestone title
+   * @returns {Promise<Object|null>} Milestone object or null if not found
+   */
+  async getMilestoneByName(title) {
+    const response = await this._request(
+      "GET",
+      `/repos/${this.owner}/${this.repo}/milestones?state=open&per_page=100`,
+    );
+
+    const milestones = response || [];
+    return milestones.find((m) => m.title === title) || null;
+  }
+
+  /**
+   * Create a milestone
+   * @param {string} title - Milestone title
+   * @param {string} description - Milestone description
+   * @returns {Promise<Object>} Created milestone object
+   */
+  async createMilestone(title, description = "") {
+    const response = await this._request(
+      "POST",
+      `/repos/${this.owner}/${this.repo}/milestones`,
+      {
+        title,
+        description,
+      },
+    );
+
+    return {
+      number: response.number,
+      title: response.title,
+      url: response.html_url,
     };
   }
 

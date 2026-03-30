@@ -200,7 +200,7 @@ async function handlePropose(env, args) {
   console.log("⏳ Fetching GitHub context...");
   const lastRelease = await github.getLastRelease();
   const lastReleaseDate = lastRelease
-    ? new Date(lastRelease.published_at).toISOString().split("T")[0]
+    ? lastRelease.date
     : projectData.lastReleaseDate;
 
   const openIssues = await github.getOpenIssuesByLabel("feature-request", 50);
@@ -217,7 +217,7 @@ async function handlePropose(env, args) {
   console.log("🤖 Calling Claude API to generate proposals...");
   const githubContext = {
     lastRelease: lastRelease
-      ? `${lastRelease.tag_name} released ${lastRelease.published_at}\n\n${lastRelease.body || "No release notes"}`
+      ? `${lastRelease.tag} released ${lastRelease.date}\n\n${lastRelease.body || "No release notes"}`
       : "No previous release",
     openIssues: openIssues.map((issue) => ({
       title: issue.title,
@@ -389,13 +389,13 @@ async function handleConfirm(env, args) {
   // Create issues
   const createdIssues = [];
   for (const proposal of selectedProposals) {
-    const issue = await github.createIssue(
-      proposal.title,
-      `**Problem:** ${proposal.problem}\n\n**Effort:** ${proposal.effort}\n**Value:** ${proposal.value}\n\n**Rationale:** ${proposal.rationale}`,
-      ["feature"],
-      milestone.number,
-    );
-    createdIssues.push(issue);
+    const issue = await github.createIssue({
+      title: proposal.title,
+      body: `**Problem:** ${proposal.problem}\n\n**Effort:** ${proposal.effort}\n**Value:** ${proposal.value}\n\n**Rationale:** ${proposal.rationale}`,
+      labels: ["feature"],
+      milestone: milestone.number,
+    });
+    createdIssues.push({ ...issue, title: proposal.title });
     console.log(`✓ Issue #${issue.number}: ${proposal.title}`);
   }
 
@@ -415,7 +415,7 @@ async function handleConfirm(env, args) {
 
 Confirmed by developer on ${new Date().toISOString().split("T")[0]}:
 
-${createdIssues.map((issue) => `- [#${issue.number}](${issue.html_url}): ${issue.title}`).join("\n")}
+${createdIssues.map((issue) => `- [#${issue.number}](${issue.url}): ${issue.title}`).join("\n")}
 `;
 
     if (content.includes("## Features Selected")) {
@@ -512,13 +512,13 @@ async function handleRelease(env, args) {
   console.log(`📦 Creating GitHub release v${releaseVersion}...\n`);
   const releaseBody = `${changelog}\n\n---\n\n*Released on ${new Date().toISOString().split("T")[0]}*`;
 
-  const release = await github.createRelease(
-    `v${releaseVersion}`,
-    releaseBody,
-    `Release v${releaseVersion}`,
-  );
+  const release = await github.createRelease({
+    tagName: `v${releaseVersion}`,
+    name: `Release v${releaseVersion}`,
+    body: releaseBody,
+  });
 
-  console.log(`✅ Release created: ${release.html_url}`);
+  console.log(`✅ Release created: ${release.url}`);
 
   // 5. Update vault
   console.log("📚 Updating vault...");
@@ -526,7 +526,7 @@ async function handleRelease(env, args) {
   vault.updateProjectNote({
     version: releaseVersion,
     releaseDate: releaseDate,
-    releaseUrl: release.html_url,
+    releaseUrl: release.url,
     features: mergedPRs.slice(0, 5).map((p) => p.title),
   });
 
@@ -546,7 +546,7 @@ async function handleRelease(env, args) {
 
 **Version:** ${releaseVersion}
 **Released:** ${new Date().toISOString().split("T")[0]}
-**GitHub:** [${release.html_url}](${release.html_url})
+**GitHub:** [${release.url}](${release.url})
 
 ### Changelog
 
@@ -564,7 +564,7 @@ ${changelog}
 
   console.log(`✅ Vault updated with new version: ${releaseVersion}`);
   console.log(`\n🎉 Release complete!\n`);
-  console.log(`📖 Release URL: ${release.html_url}`);
+  console.log(`📖 Release URL: ${release.url}`);
   console.log(`📝 Iteration notes: iterations/${iterationFile}\n`);
 }
 

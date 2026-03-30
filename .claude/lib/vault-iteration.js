@@ -283,7 +283,7 @@ ${selectedTable}`,
       `- Released: ${releaseDate}`,
     );
 
-    fs.writeFileSync(iterationNotePath, "utf-8");
+    fs.writeFileSync(iterationNotePath, content, "utf-8");
   }
 }
 

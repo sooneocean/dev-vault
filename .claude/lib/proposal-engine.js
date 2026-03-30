@@ -50,16 +50,31 @@ async function generateProposals(githubContext, vaultContext, options = {}) {
   }
 
   // Call Claude API
-  const message = await client.messages.create({
-    model: "claude-opus-4-1",
-    max_tokens: 2048,
-    messages: [
-      {
-        role: "user",
-        content: contextPrompt,
-      },
-    ],
-  });
+  let message;
+  try {
+    message = await client.messages.create({
+      model: "claude-opus-4-1",
+      max_tokens: 2048,
+      messages: [
+        {
+          role: "user",
+          content: contextPrompt,
+        },
+      ],
+    });
+  } catch (error) {
+    throw new Error(
+      `Failed to call Claude API for proposal generation: ${error.message}`,
+    );
+  }
+
+  if (
+    !message ||
+    !Array.isArray(message.content) ||
+    message.content.length === 0
+  ) {
+    throw new Error("Claude API returned empty or invalid response");
+  }
 
   const responseText =
     message.content[0].type === "text" ? message.content[0].text : "";
