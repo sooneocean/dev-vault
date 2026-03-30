@@ -8,6 +8,11 @@ updated: 2026-03-30
 
 | File | Summary |
 |------|---------|
+| [[claude-agent-sdk-api]] | Claude Agent SDK API |
+| [[toolchain-reference]] | Toolchain Reference |
+| [[benchmark-first-rule]] | Benchmark First Rule |
+| [[context-engineering-hygiene]] | Context Engineering Hygiene |
+| [[architecture-lessons]] | Architecture Lessons |
 | [[agent-md-缺少新-schema-欄位說明]] | AGENT.md 缺少新 schema 欄位說明 |
 | [[session-stop-wrapper-learning]] | Session-Stop Wrapper Learning |
 | [[pretext-無-dom-文字測量引擎]] | chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑 |

@@ -3,14 +3,14 @@ title: "CSM 功能路線圖"
 type: project
 tags: [planning]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-03-29"
 status: active
 maturity: growing
 domain: project-specific
 summary: "CSM 的版本演進與未來功能規劃"
 goal: ""
 deadline: ""
-related: ["[[csm-architecture]]", "[[csm-key-design-decisions]]", "[[dexg16-git-and-github]]"]
+related: ["[[csm-architecture]]", "[[csm-key-design-decisions]]", "[[dexg16-git-and-github]]", "[[pretext-csm-tui-layout]]"]
 relation_map: "claude-session-manager:documents"
 ---
 

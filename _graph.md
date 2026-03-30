@@ -1,7 +1,7 @@
 ---
 title: Knowledge Graph
 type: index
-updated: 2026-03-29
+updated: 2026-03-30
 ---
 
 # Knowledge Graph
@@ -25,10 +25,33 @@ updated: 2026-03-29
 | [[csm-feature-roadmap]] | [[csm-key-design-decisions]] | related |
 | [[csm-feature-roadmap]] | [[dexg16-git-and-github]] | related |
 | [[csm-feature-roadmap]] | [[pretext-csm-tui-layout]] | related |
+| [[dev-vault-status]] | [[compound-engineering-research]] | related |
+| [[dev-vault-status]] | [[2026-03-30]] | related |
+| [[dev-vault-status]] | [[architecture-lessons]] | related |
+| [[dev-vault-status]] | [[context-engineering-hygiene]] | related |
+| [[dev-vault-status]] | [[benchmark-first-rule]] | related |
+| [[dev-vault-status]] | [[toolchain-reference]] | related |
+| [[dev-vault-status]] | [[claude-agent-sdk-api]] | related |
 | [[tech-research-squad]] | [[compound-engineering-plugin]] | related |
 | [[tech-research-squad]] | [[claude-code-configuration]] | related |
 | [[tech-research-squad]] | [[claude-code-dev-tools]] | related |
 | [[tech-research-squad]] | [[research-update-mode]] | related |
+| [[tech-research-squad]] | [[context-engineering-hygiene]] | related |
+| [[architecture-lessons]] | [[dev-vault-status]] | related |
+| [[architecture-lessons]] | [[context-engineering-hygiene]] | related |
+| [[architecture-lessons]] | [[benchmark-first-rule]] | related |
+| [[architecture-lessons]] | [[toolchain-reference]] | related |
+| [[architecture-lessons]] | [[claude-agent-sdk-api]] | related |
+| [[benchmark-first-rule]] | [[dev-vault-status]] | related |
+| [[benchmark-first-rule]] | [[architecture-lessons]] | related |
+| [[benchmark-first-rule]] | [[context-engineering-hygiene]] | related |
+| [[benchmark-first-rule]] | [[toolchain-reference]] | related |
+| [[benchmark-first-rule]] | [[claude-agent-sdk-api]] | related |
+| [[claude-agent-sdk-api]] | [[dev-vault-status]] | related |
+| [[claude-agent-sdk-api]] | [[architecture-lessons]] | related |
+| [[claude-agent-sdk-api]] | [[benchmark-first-rule]] | related |
+| [[claude-agent-sdk-api]] | [[context-engineering-hygiene]] | related |
+| [[claude-agent-sdk-api]] | [[toolchain-reference]] | related |
 | [[claude-code-configuration]] | [[claude-code-dev-tools]] | related |
 | [[claude-code-configuration]] | [[claude-session-manager]] | related |
 | [[claude-code-configuration]] | [[dexg16-ai-coding-tools]] | related |
@@ -42,15 +65,26 @@ updated: 2026-03-29
 | [[compound-engineering-plugin]] | [[context-engineering-research]] | related |
 | [[compound-engineering-plugin]] | [[harness-engineering-research]] | related |
 | [[compound-engineering-plugin]] | [[compound-engineering-research]] | related |
+| [[compound-engineering-plugin]] | [[context-engineering-hygiene]] | related |
 | [[compound-engineering-research]] | [[tech-research-squad]] | related |
 | [[compound-engineering-research]] | [[prompt-engineering-research]] | related |
 | [[compound-engineering-research]] | [[context-engineering-research]] | related |
 | [[compound-engineering-research]] | [[harness-engineering-research]] | related |
 | [[compound-engineering-research]] | [[compound-engineering-plugin]] | related |
+| [[compound-engineering-research]] | [[dev-vault-status]] | related |
+| [[context-engineering-hygiene]] | [[dev-vault-status]] | related |
+| [[context-engineering-hygiene]] | [[architecture-lessons]] | related |
+| [[context-engineering-hygiene]] | [[tech-research-squad]] | related |
+| [[context-engineering-hygiene]] | [[context-engineering-research]] | related |
+| [[context-engineering-hygiene]] | [[compound-engineering-plugin]] | related |
+| [[context-engineering-hygiene]] | [[benchmark-first-rule]] | related |
+| [[context-engineering-hygiene]] | [[toolchain-reference]] | related |
+| [[context-engineering-hygiene]] | [[claude-agent-sdk-api]] | related |
 | [[context-engineering-research]] | [[tech-research-squad]] | related |
 | [[context-engineering-research]] | [[prompt-engineering-research]] | related |
 | [[context-engineering-research]] | [[harness-engineering-research]] | related |
 | [[context-engineering-research]] | [[compound-engineering-research]] | related |
+| [[context-engineering-research]] | [[context-engineering-hygiene]] | related |
 | [[csm-architecture]] | [[csm-key-design-decisions]] | related |
 | [[csm-architecture]] | [[csm-feature-roadmap]] | related |
 | [[csm-architecture]] | [[claude-code-configuration]] | related |
@@ -123,6 +157,7 @@ updated: 2026-03-29
 | [[harness-engineering-research]] | [[compound-engineering-plugin]] | related |
 | [[improvement-2026-03-29-001]] | [[2026-03-29]] | related |
 | [[improvement-2026-03-29-001]] | [[cli-update-fields-flag]] | related |
+| [[improvement-2026-03-29-001]] | [[toolchain-reference]] | related |
 | [[improvement-2026-03-29-002]] | [[2026-03-29]] | related |
 | [[improvement-2026-03-30-001]] | [[2026-03-30]] | related |
 | [[improvement-2026-03-30-001]] | [[improvement-2026-03-29-001]] | related |
@@ -149,6 +184,12 @@ updated: 2026-03-29
 | [[session-stop-wrapper-learning]] | [[compound-engineering-plugin]] | related |
 | [[session-stop-wrapper-learning]] | [[claude-code-configuration]] | related |
 | [[session-stop-wrapper-learning]] | [[cli-update-fields-flag]] | related |
+| [[toolchain-reference]] | [[dev-vault-status]] | related |
+| [[toolchain-reference]] | [[architecture-lessons]] | related |
+| [[toolchain-reference]] | [[benchmark-first-rule]] | related |
+| [[toolchain-reference]] | [[context-engineering-hygiene]] | related |
+| [[toolchain-reference]] | [[improvement-2026-03-29-001]] | related |
+| [[toolchain-reference]] | [[claude-agent-sdk-api]] | related |
 | [[開源專案品質標準]] | [[開源開發者身分]] | related |
 | [[開源專案品質標準]] | [[github-發布流程]] | related |
 | [[開源專案品質標準]] | [[github-全部-repo-清單]] | related |

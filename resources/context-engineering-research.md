@@ -11,7 +11,7 @@ maturity: mature
 domain: ai-engineering
 summary: "Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。"
 source: "https://code.claude.com/docs/en/best-practices, https://code.claude.com/docs/en/memory"
-related: ["[[tech-research-squad]]", "[[prompt-engineering-research]]", "[[harness-engineering-research]]", "[[compound-engineering-research]]"]
+related: ["[[tech-research-squad]]", "[[prompt-engineering-research]]", "[[harness-engineering-research]]", "[[compound-engineering-research]]", "[[context-engineering-hygiene]]"]
 relation_map: "tech-research-squad:extends, harness-engineering-research:extends"
 ---
 

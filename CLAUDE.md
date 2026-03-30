@@ -14,6 +14,22 @@ You manage a PARA-style Obsidian vault. Owner: sooneocean. Repo: `github.com/soo
 - `docs/solutions/` — Solved problem learnings (`/ce:compound`)
 - `docs/brainstorms/` — Requirements documents (`/ce:brainstorm`)
 
+## Behavioral Rules
+
+### Architecture Constraints
+- Stop hooks run AFTER Claude exits — Claude is NOT available. Any logic needing reasoning must run in an active session (slash command or user trigger).
+- `~/.claude/` is NOT a git repo. Rollback strategy: project-level = git, global-level = `.bak` files.
+- `.claude/commands/*.md` are prompt templates injected into active sessions, not executable scripts.
+
+### Operational Rules
+- 12 plugins consume ~10-15K tokens in tool definitions at session start. Be context-aware.
+- Local LLM deployment: ALWAYS benchmark (pull + test) before writing plans. Model card estimates are unreliable (often 5-10x off for VRAM/speed).
+
+### Knowledge Routing (Obsidian-first)
+- Durable knowledge (learnings, research, decisions, references) → Obsidian vault via `obsidian-agent` CLI. Do NOT create auto-memory content files for durable knowledge.
+- Session-to-session context → keep MEMORY.md as lean pointers (under 10 entries, each under 150 chars).
+- session-wrap: when wrapping, prefer updating existing vault notes over creating new auto-memory files.
+
 ## Git
 
 - Line endings: `.gitattributes` set to `* text=auto`

@@ -88,3 +88,25 @@ class SeenUrl(BaseModel):
     verdict: Verdict | None = None
     first_seen: date
     expires: date
+
+
+class RiskLevel(str, Enum):
+    LOW = "low"       # MCP server additions — auto-apply eligible
+    MEDIUM = "medium"  # Tool replacements/upgrades — human review
+    HIGH = "high"      # Workflow changes — always manual
+
+
+class IntegrationProposal(BaseModel):
+    """A concrete integration suggestion for a poc_candidate tool."""
+
+    tool_name: str
+    tool_url: str
+    risk_level: RiskLevel
+    category: str  # "mcp_server_add" | "tool_replace" | "workflow_change"
+    title: str  # e.g., "Add paper-search-mcp to settings.json"
+    description: str  # What and why
+    config_diff: str = ""  # Schema-validated diff (for auto-apply candidates)
+    target_file: str = ""  # File to modify (settings.json, CLAUDE.md, etc.)
+    existing_tool: str = ""  # Tool being replaced (if applicable)
+    status: str = "pending"  # pending | applied | rejected
+    created_at: datetime = Field(default_factory=datetime.now)

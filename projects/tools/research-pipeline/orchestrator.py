@@ -22,6 +22,7 @@ from config import (
     VAULT_ROOT,
 )
 from evaluator import evaluate_scan_results, save_evaluation_results
+from integrator import assess_candidates
 from models import EvaluationResult, PipelineRunState, PoCResult, ScanResult, SeenUrl, Verdict
 from poc_runner import run_poc, save_poc_results
 
@@ -261,6 +262,19 @@ async def run_pipeline(mode: str = "quick-scan", dry_run: bool = False) -> None:
         state.phase = "writing"
         save_run_state(state)
         await run_writer_with_evaluations(eval_results, poc_results, run_id)
+
+        # Phase 3b: Integrate — assess poc_candidates for toolchain integration
+        if poc_candidates:
+            state.phase = "integrating"
+            save_run_state(state)
+            print(f"Assessing {len(poc_candidates)} candidates for integration...")
+            proposals = await assess_candidates(eval_results, poc_results)
+            if proposals:
+                print(f"Generated {len(proposals)} integration proposals:")
+                for p in proposals:
+                    print(f"  [{p.risk_level.value.upper()}] {p.title}")
+            else:
+                print("No integration proposals generated.")
 
         # Update seen URLs with verdicts and appropriate expiry
         for eval_r in eval_results:

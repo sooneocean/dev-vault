@@ -3,14 +3,14 @@ title: "DEXG16 AI 程式設計工具"
 type: resource
 tags: [claude-code]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-03-29"
 status: active
 subtype: catalog
 maturity: mature
 domain: ai-engineering
 summary: "AI 輔助程式設計工具 — Claude Code, Cursor, Codex CLI, Gemini CLI, Cline"
 source: ""
-related: ["[[claude-code-dev-tools]]", "[[claude-session-manager]]", "[[dexg16-ai-stack]]", "[[dexg16-dev-environment]]", "[[dexg16-machine-specs]]", "[[dexg16-all-projects-catalog]]", "[[claude-code-configuration]]", "[[dexg16-git-and-github]]"]
+related: ["[[claude-code-dev-tools]]", "[[claude-session-manager]]", "[[dexg16-ai-stack]]", "[[dexg16-dev-environment]]", "[[dexg16-machine-specs]]", "[[dexg16-all-projects-catalog]]", "[[claude-code-configuration]]", "[[dexg16-git-and-github]]", "[[cli-update-fields-flag]]"]
 ---
 
 # DEXG16 AI 程式設計工具

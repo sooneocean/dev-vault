@@ -3,14 +3,14 @@ title: "CSM 關鍵設計決策"
 type: resource
 tags: [architecture]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-03-29"
 status: active
 subtype: reference
 maturity: mature
 domain: project-specific
 summary: "架構決策紀錄：不用互動式子程序、短命程序、stream-json 解析"
 source: ""
-related: ["[[csm-architecture]]", "[[csm-feature-roadmap]]"]
+related: ["[[csm-architecture]]", "[[csm-feature-roadmap]]", "[[pretext-csm-tui-layout]]"]
 relation_map: "claude-session-manager:documents, csm-architecture:extends"
 ---
 

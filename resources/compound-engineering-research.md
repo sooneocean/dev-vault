@@ -10,7 +10,7 @@ maturity: growing
 domain: ai-engineering
 summary: "Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。"
 source: "https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents, https://every.to/guides/compound-engineering, https://lethain.com/everyinc-compound-engineering/"
-related: ["[[tech-research-squad]]", "[[prompt-engineering-research]]", "[[context-engineering-research]]", "[[harness-engineering-research]]", "[[compound-engineering-plugin]]"]
+related: ["[[tech-research-squad]]", "[[prompt-engineering-research]]", "[[context-engineering-research]]", "[[harness-engineering-research]]", "[[compound-engineering-plugin]]", "[[dev-vault-status]]"]
 relation_map: "tech-research-squad:extends, compound-engineering-plugin:documents, context-engineering-research:extends, harness-engineering-research:extends"
 ---
 

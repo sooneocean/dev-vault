@@ -1,7 +1,7 @@
 ---
 title: Tags Index
 type: index
-updated: 2026-03-29
+updated: 2026-03-30
 ---
 
 # Tags Index
@@ -21,6 +21,9 @@ updated: 2026-03-29
 
 ### auto-generated
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
+
+### auto-memory-migration
+- [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
 
 ### ci-cd
 - [[github-發布流程]] — 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護
@@ -91,6 +94,9 @@ updated: 2026-03-29
 ### knowledge-loop
 - [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
 
+### knowledge-management
+- [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
+
 ### learning-capture
 - [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
 
@@ -151,6 +157,15 @@ updated: 2026-03-29
 ### research-scan
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
 
+### subtype:learning
+- [[architecture-lessons]] — Critical lessons about Stop hooks, global config safety, and slash command nature
+- [[benchmark-first-rule]] — Always benchmark before planning — local LLM estimates were 5-10x off from reality
+- [[context-engineering-hygiene]] — Actionable context hygiene rules — when to compact, when to use subagents, plugin overhead awareness
+
+### subtype:reference
+- [[claude-agent-sdk-api]] — Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility
+- [[toolchain-reference]] — External repos, tools, plugins and config paths used in this project
+
 ### task-routing
 - [[local-llm-task-routing]] — RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API
 
@@ -187,6 +202,7 @@ updated: 2026-03-29
 | obsidian-agent | 4 |
 | harness-engineering | 3 |
 | compound-engineering | 3 |
+| subtype:learning | 3 |
 | plugins | 3 |
 | workflow | 3 |
 | mcp | 3 |
@@ -195,11 +211,14 @@ updated: 2026-03-29
 | planning | 2 |
 | prompt-engineering | 2 |
 | context-engineering | 2 |
+| subtype:reference | 2 |
 | architecture | 2 |
 | inventory | 2 |
 | workspace | 2 |
 | hardware | 2 |
 | text-layout | 2 |
+| knowledge-management | 1 |
+| auto-memory-migration | 1 |
 | knowledge-loop | 1 |
 | learning-capture | 1 |
 | toolchain | 1 |

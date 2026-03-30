@@ -64,6 +64,7 @@ AGENT_MODELS = {
     "scanner": "haiku",   # fast + cheap for scanning
     "evaluator": "sonnet", # balanced for evaluation
     "writer": "sonnet",    # balanced for writing
+    "integrator": "sonnet",  # needs reasoning for risk assessment
     "orchestrator": "sonnet",
 }
 
@@ -72,4 +73,12 @@ MAX_TURNS = {
     "scanner": 10,
     "evaluator": 15,
     "writer": 10,
+    "integrator": 15,
 }
+
+# Integration proposal settings
+PROPOSALS_DIR = STATE_DIR / "proposals"
+SETTINGS_JSON_PATHS = [
+    Path.home() / ".claude" / "settings.json",  # global
+    VAULT_ROOT / ".claude" / "settings.json",    # project (if exists)
+]

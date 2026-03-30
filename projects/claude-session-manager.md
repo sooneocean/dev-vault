@@ -3,14 +3,14 @@ title: "Claude Session Manager"
 type: project
 tags: [claude-code, python]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-03-29"
 status: active
 maturity: growing
 domain: project-specific
 summary: "Python TUI 儀表板，從單一終端管理多個 Claude Code Session"
 goal: ""
 deadline: ""
-related: ["[[claude-code-dev-tools]]", "[[dexg16-ai-coding-tools]]", "[[claude-code-configuration]]", "[[session-stop-wrapper-learning]]"]
+related: ["[[claude-code-dev-tools]]", "[[dexg16-ai-coding-tools]]", "[[claude-code-configuration]]", "[[session-stop-wrapper-learning]]", "[[pretext-csm-tui-layout]]"]
 relation_map: "csm-architecture:documents, csm-feature-roadmap:documents"
 ---
 

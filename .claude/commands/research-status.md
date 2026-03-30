@@ -28,6 +28,24 @@ else
 fi
 
 echo ""
+echo "=== Integration Proposals ==="
+if [ -d state/proposals ]; then
+  python -c "
+import json, glob
+pending = applied = rejected = 0
+for f in glob.glob('state/proposals/pending-*.json'):
+    for p in json.load(open(f)):
+        s = p.get('status', 'pending')
+        if s == 'pending': pending += 1
+        elif s == 'applied': applied += 1
+        elif s == 'rejected': rejected += 1
+print(f'Pending: {pending}  Applied: {applied}  Rejected: {rejected}')
+" 2>/dev/null
+else
+  echo "No proposals yet"
+fi
+
+echo ""
 echo "=== Research Notes ==="
 ls -la "C:\DEX_data\Claude Code DEV\resources\research-scan-"*.md 2>/dev/null | tail -5 || echo "No research notes yet"
 ```

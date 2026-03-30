@@ -3,14 +3,14 @@ title: "CSM 架構"
 type: resource
 tags: [architecture, python, claude-code]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-03-29"
 status: active
 subtype: reference
 maturity: growing
 domain: project-specific
 summary: "Claude Session Manager 技術架構 — 程序模型、串流、持久化"
 source: ""
-related: ["[[csm-key-design-decisions]]", "[[csm-feature-roadmap]]", "[[claude-code-configuration]]", "[[session-stop-wrapper-learning]]"]
+related: ["[[csm-key-design-decisions]]", "[[csm-feature-roadmap]]", "[[claude-code-configuration]]", "[[session-stop-wrapper-learning]]", "[[pretext-csm-tui-layout]]"]
 relation_map: "claude-session-manager:documents, csm-key-design-decisions:extends"
 ---
 

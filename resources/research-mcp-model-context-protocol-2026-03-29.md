@@ -3,13 +3,13 @@ title: "Research: MCP model context protocol"
 type: resource
 tags: [mcp]
 created: "2026-03-29"
-updated: "2026-03-30"
+updated: "2026-03-29"
 status: active
 subtype: research
 maturity: seed
 domain: ai-engineering
 summary: "Tech research — 5 repos, 10 issues, 5 emerging"
-related: []
+related: ["[[research-update-mode]]"]
 relation_map: "harness-engineering-research:extends"
 ---
 
