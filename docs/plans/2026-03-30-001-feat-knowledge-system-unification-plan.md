@@ -1,7 +1,7 @@
 ---
 title: "feat: Unify knowledge systems — Obsidian as canonical store"
 type: feat
-status: active
+status: completed
 date: 2026-03-30
 origin: docs/brainstorms/2026-03-30-knowledge-unification-requirements.md
 ---
@@ -109,7 +109,7 @@ graph TD
 
 ## Implementation Units
 
-- [ ] **Unit 1: Backup auto-memory files**
+- [x] **Unit 1: Backup auto-memory files**
 
 **Goal:** Create safety net before any migration changes.
 
@@ -141,7 +141,7 @@ graph TD
 
 ---
 
-- [ ] **Unit 2: Promote behavioral rules to project CLAUDE.md**
+- [x] **Unit 2: Promote behavioral rules to project CLAUDE.md**
 
 **Goal:** Ensure critical behavioral guardrails are auto-loaded from turn 1, independent of auto-memory files.
 
@@ -180,7 +180,7 @@ graph TD
 
 ---
 
-- [ ] **Unit 3: Migrate durable knowledge to Obsidian vault**
+- [x] **Unit 3: Migrate durable knowledge to Obsidian vault**
 
 **Goal:** Create Obsidian notes for all auto-memory content that qualifies as durable knowledge.
 
@@ -228,7 +228,7 @@ graph TD
 
 ---
 
-- [ ] **Unit 4: Redesign MEMORY.md as pointer-only index**
+- [x] **Unit 4: Redesign MEMORY.md as pointer-only index**
 
 **Goal:** Replace MEMORY.md with a lean pointer index referencing Obsidian notes and CLAUDE.md.
 

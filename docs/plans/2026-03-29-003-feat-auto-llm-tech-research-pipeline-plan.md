@@ -1,7 +1,7 @@
 ---
 title: "feat: LLM 技術自動調研管線 — 全自動迭代閉環"
 type: feat
-status: active
+status: completed
 date: 2026-03-29
 deepened: 2026-03-29
 related: docs/plans/2026-03-29-005-feat-local-llm-infrastructure-plan.md
@@ -592,7 +592,7 @@ Input: ScanResult
 
 ---
 
-- [ ] **Unit 9: 整合評估器 + 配置建議產生器 + `/research apply`**
+- [x] **Unit 9: 整合評估器 + 配置建議產生器 + `/research apply`**
 
 **Goal:** 評估高分工具如何整合進現有 Claude Code 工具鏈，產生具體的配置改善建議，提供人工審核和套用入口
 
@@ -637,7 +637,7 @@ Input: ScanResult
 
 ---
 
-- [ ] **Unit 10: 排程 + 自動觸發**
+- [x] **Unit 10: 排程 + 自動觸發**
 
 **Goal:** 設定 daily quick-scan 和 weekly deep-scan 的自動排程
 
@@ -678,7 +678,7 @@ Input: ScanResult
 
 ---
 
-- [ ] **Unit 11: 自我改進迴圈（經驗記錄 + Prompt 最佳化）**
+- [x] **Unit 11: 自我改進迴圈（經驗記錄 + Prompt 最佳化）**
 
 **Goal:** 管線從每次運行中學習，持續提升掃描精準度和評估品質
 

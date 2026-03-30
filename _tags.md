@@ -24,9 +24,17 @@ updated: 2026-03-30
 
 ### auto-memory-migration
 - [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
+- [[architecture-lessons]] — Critical lessons about Stop hooks, global config safety, and slash command nature
+- [[benchmark-first-rule]] — Always benchmark before planning — local LLM estimates were 5-10x off from reality
+- [[claude-agent-sdk-api]] — Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility
+- [[context-engineering-hygiene]] — Actionable context hygiene rules — when to compact, when to use subagents, plugin overhead awareness
+- [[toolchain-reference]] — External repos, tools, plugins and config paths used in this project
 
 ### ci-cd
 - [[github-發布流程]] — 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護
+
+### claude-agent-sdk
+- [[claude-agent-sdk-api]] — Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility
 
 ### claude-code
 - [[claude-code-dev-tools]] — 圍繞 Claude Code 生態系打造的開發工具集合
@@ -45,6 +53,9 @@ updated: 2026-03-30
 - [[improvement-2026-03-30-003]] — CONVENTIONS.md 的 Using the CLI 段落只列 7 個基礎命令，缺少 patch/update/health/stale/suggest 等 v0.7.0 命令
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 
+### claude-code-hooks
+- [[architecture-lessons]] — Critical lessons about Stop hooks, global config safety, and slash command nature
+
 ### clustering
 - [[cluster-subtype-domain-dimensions]] — Enhance obsidian-agent cluster algorithm to use subtype and domain as clustering dimensions alongside tags and related links
 
@@ -55,6 +66,7 @@ updated: 2026-03-30
 
 ### context-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
+- [[context-engineering-hygiene]] — Actionable context hygiene rules — when to compact, when to use subagents, plugin overhead awareness
 - [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 
 ### diff-tracking
@@ -96,6 +108,11 @@ updated: 2026-03-30
 
 ### knowledge-management
 - [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
+- [[architecture-lessons]] — Critical lessons about Stop hooks, global config safety, and slash command nature
+- [[benchmark-first-rule]] — Always benchmark before planning — local LLM estimates were 5-10x off from reality
+- [[claude-agent-sdk-api]] — Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility
+- [[context-engineering-hygiene]] — Actionable context hygiene rules — when to compact, when to use subagents, plugin overhead awareness
+- [[toolchain-reference]] — External repos, tools, plugins and config paths used in this project
 
 ### learning-capture
 - [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
@@ -106,6 +123,9 @@ updated: 2026-03-30
 - [[local-llm-deployment]] — RTX 4090 Laptop 16GB VRAM 上的本地模型部署、MCP 整合、任務路由決策
 - [[local-llm-task-routing]] — RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
+
+### local-llm
+- [[benchmark-first-rule]] — Always benchmark before planning — local LLM estimates were 5-10x off from reality
 
 ### mcp
 - [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
@@ -157,15 +177,6 @@ updated: 2026-03-30
 ### research-scan
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
 
-### subtype:learning
-- [[architecture-lessons]] — Critical lessons about Stop hooks, global config safety, and slash command nature
-- [[benchmark-first-rule]] — Always benchmark before planning — local LLM estimates were 5-10x off from reality
-- [[context-engineering-hygiene]] — Actionable context hygiene rules — when to compact, when to use subagents, plugin overhead awareness
-
-### subtype:reference
-- [[claude-agent-sdk-api]] — Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility
-- [[toolchain-reference]] — External repos, tools, plugins and config paths used in this project
-
 ### task-routing
 - [[local-llm-task-routing]] — RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API
 
@@ -196,13 +207,15 @@ updated: 2026-03-30
 | Tag | Count |
 |-----|-------|
 | claude-code | 15 |
+| knowledge-management | 6 |
+| auto-memory-migration | 6 |
 | llm | 5 |
 | github | 4 |
 | hooks | 4 |
 | obsidian-agent | 4 |
+| context-engineering | 3 |
 | harness-engineering | 3 |
 | compound-engineering | 3 |
-| subtype:learning | 3 |
 | plugins | 3 |
 | workflow | 3 |
 | mcp | 3 |
@@ -210,15 +223,14 @@ updated: 2026-03-30
 | python | 2 |
 | planning | 2 |
 | prompt-engineering | 2 |
-| context-engineering | 2 |
-| subtype:reference | 2 |
 | architecture | 2 |
 | inventory | 2 |
 | workspace | 2 |
 | hardware | 2 |
 | text-layout | 2 |
-| knowledge-management | 1 |
-| auto-memory-migration | 1 |
+| claude-code-hooks | 1 |
+| local-llm | 1 |
+| claude-agent-sdk | 1 |
 | knowledge-loop | 1 |
 | learning-capture | 1 |
 | toolchain | 1 |
