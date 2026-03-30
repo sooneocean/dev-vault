@@ -3,6 +3,5 @@
   "tests/test_frame_extractor.py::TestFrameExtractorInterface::test_init_validates_video_exists": true,
   "tests/test_frame_extractor.py::TestFrameExtractorInterface::test_extract_all_method_exists": true,
   "tests/test_frame_extractor.py::TestFrameExtractorInterface::test_extract_range_method_exists": true,
-  "tests/test_frame_extractor.py::TestFrameExtractorInterface::test_extract_generator_method_exists": true,
-  "tests/test_poisson_blender.py::TestPoissonBlender::test_blend_full_mask": true
+  "tests/test_frame_extractor.py::TestFrameExtractorInterface::test_extract_generator_method_exists": true
 }
