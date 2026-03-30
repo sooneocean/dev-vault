@@ -1,0 +1,40 @@
+{
+  "repository": {
+    "owner": "sooneocean",
+    "name": "dev-vault",
+    "url": "https://github.com/sooneocean/dev-vault"
+  },
+  "lastRelease": {
+    "tag": "v1.0.0",
+    "name": "v1.0.0",
+    "url": "https://github.com/sooneocean/dev-vault/releases/tag/v1.0.0",
+    "createdAt": "2026-03-15T10:00:00Z",
+    "body": "## v1.0.0 (2026-03-15)\n\n### Features\n- Initial vault setup with PARA structure\n- Obsidian integration\n- Agent workflow support\n\n### Bug Fixes\n- Fixed sync issues\n"
+  },
+  "closedPRsSinceLastRelease": [
+    {
+      "number": 101,
+      "title": "feat: AI-powered search",
+      "mergedAt": "2026-03-25T11:20:00Z",
+      "author": "github-user",
+      "url": "https://github.com/sooneocean/dev-vault/pull/101",
+      "labels": ["feature"]
+    },
+    {
+      "number": 102,
+      "title": "feat: Automated backup system",
+      "mergedAt": "2026-03-26T14:50:00Z",
+      "author": "github-user",
+      "url": "https://github.com/sooneocean/dev-vault/pull/102",
+      "labels": ["feature"]
+    },
+    {
+      "number": 103,
+      "title": "fix: Resolve sync race condition",
+      "mergedAt": "2026-03-27T09:30:00Z",
+      "author": "github-user",
+      "url": "https://github.com/sooneocean/dev-vault/pull/103",
+      "labels": ["bugfix"]
+    }
+  ]
+}

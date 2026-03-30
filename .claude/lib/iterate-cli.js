@@ -21,9 +21,13 @@ const { execSync } = require("child_process");
 // Import supporting modules
 const GitHubAPI = require("./github-api");
 const { generateProposals } = require("./proposal-engine");
-const { generateChangelog } = require("./changelog-generator");
-const { suggestVersion } = require("./version-suggester");
+const ChangelogGenerator = require("./changelog-generator");
+const VersionSuggester = require("./version-suggester");
 const VaultIterationSystem = require("./vault-iteration");
+
+// Instantiate classes
+const changelogGen = new ChangelogGenerator();
+const versionSuggester = new VersionSuggester();
 
 /**
  * Main CLI entry point
@@ -479,17 +483,21 @@ async function handleRelease(env, args) {
   console.log(
     `📝 Generating changelog from ${mergedPRs.length} merged PRs...\n`,
   );
-  const changelog = await generateChangelog(owner, repo, lastTag, "HEAD", {
+  const changelog = changelogGen.generateChangelog({
     prs: mergedPRs,
+    version: projectData.version,
   });
 
   // 3. Suggest version
-  const suggestedVersion = suggestVersion(projectData.version, changelog);
-  console.log(`💡 Suggested version: ${suggestedVersion.version}`);
+  const suggestedVersion = versionSuggester.suggestVersion(
+    projectData.version,
+    changelog,
+  );
+  console.log(`💡 Suggested version: ${suggestedVersion.suggested}`);
   console.log(`   Reason: ${suggestedVersion.reason}\n`);
 
   // Get version from args or use suggested
-  let releaseVersion = suggestedVersion.version;
+  let releaseVersion = suggestedVersion.suggested;
   const versionArg = args.find((a) => a.startsWith("--version="));
   if (versionArg) {
     releaseVersion = versionArg.split("=")[1];
@@ -519,7 +527,7 @@ async function handleRelease(env, args) {
     version: releaseVersion,
     releaseDate: releaseDate,
     releaseUrl: release.html_url,
-    features: selectedProposals ? selectedProposals.map((p) => p.title) : [],
+    features: mergedPRs.slice(0, 5).map((p) => p.title),
   });
 
   // Append to iteration history

@@ -212,3 +212,15 @@ Fallback proposals are auto-generated if Claude API fails. Check:
 - [ ] Multi-repo support
 - [ ] Integration with project milestones
 - [ ] AI polish for changelog
+
+## CLI Entry Point
+
+The `/iterate` command is powered by `.claude/lib/iterate-cli.js`:
+
+```bash
+node .claude/lib/iterate-cli.js propose                  # Generate proposals
+node .claude/lib/iterate-cli.js confirm --selections="1,2"  # Select and create issues
+node .claude/lib/iterate-cli.js release --version="1.2.0"   # Release and changelog
+```
+
+$ARGUMENTS
