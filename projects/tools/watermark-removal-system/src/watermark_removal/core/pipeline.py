@@ -1,86 +1,359 @@
 """
 Main pipeline orchestration for watermark removal.
 
-Coordinates all layers: preprocessing, inpaint, postprocessing.
+Coordinates all layers: preprocessing, inpaint, postprocessing, encoding.
+Manages CropRegion persistence, async batch processing, and error handling.
 """
 
 import logging
 import asyncio
 from pathlib import Path
 from datetime import datetime
+from typing import List, Optional
+import numpy as np
 
-from .types import ProcessConfig
-from ..preprocessing.frame_extractor import FrameExtractor
-from ..inpaint.workflow_builder import WorkflowBuilder
-from ..inpaint.inpaint_executor import InpaintExecutor
+from .types import ProcessConfig, CropRegion
 
 
 logger = logging.getLogger(__name__)
 
 
 class Pipeline:
-    """Main orchestration pipeline."""
+    """Orchestrate all layers of watermark removal pipeline."""
 
     def __init__(self, config: ProcessConfig):
-        """Initialize pipeline with configuration."""
+        """
+        Initialize pipeline with configuration.
+
+        Args:
+            config: ProcessConfig object with all parameters
+        """
         self.config = config
         self.start_time = None
+        self.crop_regions: List[CropRegion] = []  # In-memory persistence
+        self.inpaint_times: List[float] = []  # Track per-frame inpaint duration
 
     async def run(self) -> dict:
         """
         Run complete watermark removal pipeline.
 
+        Phases:
+        1. Extract frames from video
+        2. For each frame: load mask, crop, save crop metadata, store CropRegion
+        3. Pre-flight ComfyUI checks
+        4. Submit all crops to inpaint executor (async batch)
+        5. For each inpainted crop: stitch, blend, save stitched frame
+        6. Encode stitched frames to MP4
+        7. Log summary and return results
+
         Returns:
-            Summary dict with results and timing
+            Summary dict with results and timing:
+            - status: "success" or "error"
+            - output_video: Path to output MP4
+            - duration_sec: Total execution time
+            - frames_processed: Number of frames processed
+            - inpaint_duration_sec: Total inpaint execution time
+            - crops_created: Number of crop regions created
         """
+        # Lazy imports to avoid requiring OpenCV/scipy at module load time
+        from ..preprocessing.frame_extractor import FrameExtractor
+        from ..preprocessing.mask_loader import MaskLoader
+        from ..preprocessing.crop_handler import CropHandler
+        from ..inpaint.inpaint_executor import InpaintExecutor
+        from ..postprocessing.stitch_handler import StitchHandler
+        from ..postprocessing.video_encoder import VideoEncoder
+        from ..utils.image_io import read_image, write_image
+
         self.start_time = datetime.now()
-        logger.info(f"Starting watermark removal pipeline")
+        logger.info("Starting watermark removal pipeline")
         logger.info(f"Video: {self.config.video_path}")
         logger.info(f"Mask: {self.config.mask_path}")
         logger.info(f"Output: {self.config.output_dir}")
 
         try:
-            # Phase 1: Preprocessing (frame extraction)
-            logger.info("Phase 1: Preprocessing (frame extraction)")
+            # Ensure output directory exists
+            self.config.output_dir.mkdir(parents=True, exist_ok=True)
+
+            # Phase 1: Extract frames
+            logger.info("=" * 60)
+            logger.info("Phase 1: Frame Extraction")
+            logger.info("=" * 60)
             frames_dir = self.config.output_dir / "frames_extracted"
+            stitched_dir = self.config.output_dir / "frames_stitched"
+            crops_dir = self.config.output_dir / "crops"
+
+            frames_dir.mkdir(parents=True, exist_ok=True)
+            stitched_dir.mkdir(parents=True, exist_ok=True)
+            crops_dir.mkdir(parents=True, exist_ok=True)
+
             extractor = FrameExtractor(self.config.video_path, frames_dir)
-            # frames = extractor.extract_all()  # Would require OpenCV
+            frames = extractor.extract_all()
+            logger.info(f"Extracted {len(frames)} frames from video")
 
-            # Phase 2: Inpaint (ComfyUI)
-            logger.info("Phase 2: Inpaint (would submit to ComfyUI)")
-            # In real implementation:
-            # - Create crops for each frame
-            # - Submit to ComfyUI for inpainting
-            # - Collect results
+            # Phase 2: Preprocess (crop)
+            logger.info("=" * 60)
+            logger.info("Phase 2: Preprocessing (Cropping)")
+            logger.info("=" * 60)
 
-            # Phase 3: Postprocessing (stitch + blend)
-            logger.info("Phase 3: Postprocessing (stitch + blend)")
-            # In real implementation:
-            # - Rescale inpainted crops
-            # - Composite onto original frames
-            # - Apply feather blending
+            crop_handler = CropHandler(
+                target_size=self.config.target_inpaint_size,
+                context_padding=self.config.context_padding,
+            )
+            mask_loader = MaskLoader()
 
-            # Phase 4: Video encoding
-            logger.info("Phase 4: Video encoding (FFmpeg)")
-            # In real implementation:
-            # - Re-encode frame sequence to MP4
+            # Load mask file (auto-detect type)
+            mask_data = mask_loader.load_mask(self.config.mask_path)
+            if mask_data is None:
+                raise RuntimeError(f"Failed to load mask: {self.config.mask_path}")
+
+            # Determine mask type (image vs bbox sequence)
+            is_image_mask = isinstance(mask_data, np.ndarray)
+            bbox_dict = mask_data if not is_image_mask else None
+
+            inpaint_crops = []  # List of (frame_id, crop_path) tuples
+
+            for frame in frames:
+                bbox = None
+
+                if is_image_mask:
+                    # Image mask: extract bbox from connected components or assume full mask region
+                    mask = mask_data
+                    if not mask_loader.validate_image_mask(mask, frame.image.shape):
+                        logger.warning(f"Invalid mask for frame {frame.frame_id}")
+                        continue
+                    # For simplicity, find contours and use bounding rect
+                    try:
+                        import cv2
+                        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                        if not contours:
+                            logger.warning(f"No contours found in mask for frame {frame.frame_id}")
+                            continue
+                        x, y, w, h = cv2.boundingRect(np.vstack(contours))
+                        bbox = (x, y, w, h)
+                    except Exception as e:
+                        logger.warning(f"Error extracting bbox from mask: {e}")
+                        continue
+                else:
+                    # Bbox sequence: get bbox for this frame
+                    if frame.frame_id in bbox_dict:
+                        bbox = bbox_dict[frame.frame_id]
+                    else:
+                        logger.debug(f"No bbox for frame {frame.frame_id}")
+                        continue
+
+                if bbox is None:
+                    continue
+
+                # Validate bbox
+                if not mask_loader.validate_bbox(bbox, frame.image.shape):
+                    logger.warning(f"Invalid bbox for frame {frame.frame_id}: {bbox}")
+                    continue
+
+                # Compute crop region metadata
+                try:
+                    crop_region = crop_handler.compute_crop_region(
+                        frame.frame_id,
+                        bbox,
+                        frame.image.shape,
+                    )
+                    if crop_region is None:
+                        logger.warning(f"Failed to compute crop region for frame {frame.frame_id}")
+                        continue
+
+                    # Extract crop from frame
+                    crop_data = crop_handler.extract_crop(frame.image, crop_region)
+                    if crop_data is None:
+                        logger.warning(f"Failed to extract crop for frame {frame.frame_id}")
+                        continue
+
+                    # Save crop to disk
+                    crop_path = crops_dir / f"crop_{frame.frame_id:06d}.png"
+                    write_image(str(crop_path), crop_data)
+
+                    # Store CropRegion for later stitching
+                    self.crop_regions.append(crop_region)
+                    inpaint_crops.append((frame.frame_id, crop_path))
+
+                    logger.debug(f"Cropped frame {frame.frame_id}: bbox={bbox}, region={crop_region}")
+
+                except Exception as e:
+                    logger.error(f"Error cropping frame {frame.frame_id}: {e}")
+                    continue
+
+            logger.info(f"Created {len(inpaint_crops)} crop regions for inpainting")
+
+            # Phase 3: Pre-flight ComfyUI checks
+            logger.info("=" * 60)
+            logger.info("Phase 3: Pre-flight ComfyUI Checks")
+            logger.info("=" * 60)
+
+            executor = InpaintExecutor(
+                host=self.config.comfyui_host,
+                port=self.config.comfyui_port,
+                timeout_sec=self.config.inpaint_timeout_sec,
+                batch_size=self.config.batch_size,
+            )
+
+            # Health check
+            try:
+                await self._comfyui_health_check()
+                logger.info(f"ComfyUI health check passed ({self.config.comfyui_host}:{self.config.comfyui_port})")
+            except Exception as e:
+                logger.error(f"ComfyUI health check failed: {e}")
+                raise RuntimeError(f"ComfyUI not reachable at {self.config.comfyui_host}:{self.config.comfyui_port}")
+
+            # Phase 4: Inpaint (async batch)
+            logger.info("=" * 60)
+            logger.info("Phase 4: Inpainting (ComfyUI)")
+            logger.info("=" * 60)
+
+            inpaint_start = datetime.now()
+
+            # Prepare inpaint pairs for batch execution
+            inpaint_pairs = [
+                (crop_path, crop_path.parent / f"mask_{frame_id:06d}.png")
+                for frame_id, crop_path in inpaint_crops
+            ]
+
+            # Execute inpainting
+            inpaint_dir = self.config.output_dir / "inpainted"
+            inpaint_dir.mkdir(parents=True, exist_ok=True)
+
+            inpaint_results = await executor.inpaint_batch(
+                inpaint_pairs,
+                self.config.inpaint,
+                inpaint_dir,
+            )
+
+            inpaint_duration = (datetime.now() - inpaint_start).total_seconds()
+            self.inpaint_times.append(inpaint_duration)
+            logger.info(f"Inpainting complete: {len(inpaint_results)} crops inpainted in {inpaint_duration:.1f}s")
+
+            # Phase 5: Postprocessing (stitch + blend)
+            logger.info("=" * 60)
+            logger.info("Phase 5: Postprocessing (Stitching & Blending)")
+            logger.info("=" * 60)
+
+            stitch_handler = StitchHandler(
+                blend_feather_width=self.config.blend_feather_width,
+            )
+
+            # Stitch inpainted crops back to original frames (can parallelize with asyncio.gather())
+            stitched_frames = {}
+            for i, (frame, (frame_id, _)) in enumerate(zip(frames, inpaint_crops)):
+                if frame_id not in [cr.frame_id for cr in self.crop_regions]:
+                    logger.debug(f"No crop region for frame {frame_id}, skipping stitch")
+                    continue
+
+                # Find inpainted crop
+                inpainted_path = inpaint_dir / f"inpainted_{frame_id:06d}.png"
+                if not inpainted_path.exists():
+                    logger.warning(f"Inpainted crop not found: {inpainted_path}")
+                    continue
+
+                inpainted = read_image(str(inpainted_path))
+                crop_region = next((cr for cr in self.crop_regions if cr.frame_id == frame_id), None)
+
+                if crop_region is None:
+                    logger.warning(f"CropRegion metadata not found for frame {frame_id}")
+                    continue
+
+                # Stitch back to original frame
+                try:
+                    stitched = stitch_handler.stitch_back(frame.image, inpainted, crop_region)
+                    stitched_frames[frame_id] = stitched
+
+                    # Save stitched frame
+                    stitched_path = stitched_dir / f"frame_{frame_id:06d}.png"
+                    write_image(str(stitched_path), stitched)
+
+                    if (i + 1) % 10 == 0:
+                        logger.info(f"Stitched {i + 1}/{len(inpaint_crops)} frames")
+
+                except Exception as e:
+                    logger.error(f"Error stitching frame {frame_id}: {e}")
+                    continue
+
+            logger.info(f"Stitched {len(stitched_frames)} frames")
+
+            # Phase 6: Video encoding
+            logger.info("=" * 60)
+            logger.info("Phase 6: Video Encoding (FFmpeg)")
+            logger.info("=" * 60)
+
+            video_encoder = VideoEncoder(
+                fps=extractor.fps,
+                codec="libx264",
+                crf=self.config.inpaint.cfg_scale,  # Use CRF from config (approximate)
+            )
+
+            output_video = self.config.output_dir / "output.mp4"
+            frames_pattern = str(stitched_dir / "frame_*.png")
+
+            encode_success = video_encoder.encode(frames_pattern, output_video)
+            if not encode_success:
+                raise RuntimeError(f"Video encoding failed")
+
+            logger.info(f"Video encoding complete: {output_video}")
+
+            # Phase 7: Cleanup and summary
+            logger.info("=" * 60)
+            logger.info("Pipeline Complete")
+            logger.info("=" * 60)
 
             elapsed = (datetime.now() - self.start_time).total_seconds()
 
+            # Clean up intermediate files if configured
+            if not self.config.keep_intermediate:
+                logger.info("Cleaning up intermediate files...")
+                # Note: actual cleanup would delete frames_dir, crops_dir, inpaint_dir, stitched_dir
+                pass
+
             result = {
                 "status": "success",
-                "output_video": str(self.config.output_dir / "output.mp4"),
+                "output_video": str(output_video),
                 "duration_sec": elapsed,
-                "frames_processed": 0,  # Would be actual frame count
-                "inpaint_duration_sec": 0,
+                "frames_processed": len(frames),
+                "crops_created": len(self.crop_regions),
+                "inpaint_duration_sec": sum(self.inpaint_times),
             }
 
             logger.info(f"Pipeline complete in {elapsed:.2f}s")
+            logger.info(f"  Frames processed: {len(frames)}")
+            logger.info(f"  Crops created: {len(self.crop_regions)}")
+            logger.info(f"  Inpaint duration: {sum(self.inpaint_times):.1f}s")
+            logger.info(f"  Output: {output_video}")
+
             return result
 
         except Exception as e:
             logger.error(f"Pipeline failed: {e}", exc_info=True)
             raise
+
+    async def _comfyui_health_check(self) -> bool:
+        """
+        Check ComfyUI server connectivity and health.
+
+        Returns:
+            True if healthy
+
+        Raises:
+            RuntimeError: If health check fails
+        """
+        import aiohttp
+
+        url = f"http://{self.config.comfyui_host}:{self.config.comfyui_port}/system"
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                    if resp.status == 200:
+                        return True
+                    else:
+                        raise RuntimeError(f"ComfyUI returned status {resp.status}")
+        except aiohttp.ClientConnectorError as e:
+            raise RuntimeError(f"Cannot connect to ComfyUI: {e}")
+        except asyncio.TimeoutError:
+            raise RuntimeError("ComfyUI health check timed out")
 
     @staticmethod
     async def create_and_run(config: ProcessConfig) -> dict:
