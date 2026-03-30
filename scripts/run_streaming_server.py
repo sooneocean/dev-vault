@@ -1,125 +1,131 @@
-#!/usr/bin/env python
-"""
-CLI entry point for streaming watermark removal server.
+#!/usr/bin/env python3
+"""CLI entry point for streaming watermark removal server.
 
 Usage:
-    python scripts/run_streaming_server.py --port 8000 --host 0.0.0.0 --log-level info
+    python scripts/run_streaming_server.py --config config.yaml --port 8000
+
+Uses uvloop for event loop optimization on supported platforms.
 """
 
-import argparse
+import asyncio
 import logging
 import sys
 from pathlib import Path
 
+import click
+import uvicorn
 
-def setup_logging(log_level: str):
-    """Configure logging for the application."""
-    numeric_level = getattr(logging, log_level.upper(), logging.INFO)
+# Try to import uvloop for event loop optimization
+try:
+    import uvloop
+    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+    HAS_UVLOOP = True
+except ImportError:
+    HAS_UVLOOP = False
+
+from src.watermark_removal.streaming.server import create_app
+
+logger = logging.getLogger(__name__)
+
+
+@click.command()
+@click.option(
+    "--port",
+    type=int,
+    default=8000,
+    help="Server port (default 8000).",
+)
+@click.option(
+    "--host",
+    type=str,
+    default="127.0.0.1",
+    help="Server host (default 127.0.0.1).",
+)
+@click.option(
+    "--queue-size",
+    type=int,
+    default=100,
+    help="Maximum queue size for frames (default 100).",
+)
+@click.option(
+    "--result-ttl",
+    type=int,
+    default=300,
+    help="Result cache TTL in seconds (default 300).",
+)
+@click.option(
+    "--workers",
+    type=int,
+    default=1,
+    help="Number of uvicorn workers (default 1).",
+)
+@click.option(
+    "--reload",
+    is_flag=True,
+    default=False,
+    help="Enable auto-reload on code changes (dev mode).",
+)
+@click.option(
+    "--verbose",
+    is_flag=True,
+    default=False,
+    help="Enable verbose logging.",
+)
+def main(
+    port: int,
+    host: str,
+    queue_size: int,
+    result_ttl: int,
+    workers: int,
+    reload: bool,
+    verbose: bool,
+) -> None:
+    """Run FastAPI streaming server for watermark removal.
+
+    This server accepts frames via HTTP POST and processes them asynchronously.
+    Results are cached and can be polled via GET requests.
+
+    Example:
+        python scripts/run_streaming_server.py --port 8000
+    """
+    # Setup logging
+    log_level = logging.DEBUG if verbose else logging.INFO
     logging.basicConfig(
-        level=numeric_level,
+        level=log_level,
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
 
+    logger.info("Streaming server starting...")
+    if HAS_UVLOOP:
+        logger.info("Using uvloop for event loop optimization")
+    else:
+        logger.warning("uvloop not available, using standard asyncio")
 
-def main():
-    """Main entry point for streaming server."""
-    parser = argparse.ArgumentParser(
-        description="Start the watermark removal streaming API server",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  # Start server on default port 8000
-  python scripts/run_streaming_server.py
-
-  # Start server on custom port with debug logging
-  python scripts/run_streaming_server.py --port 8080 --log-level debug
-
-  # Start server on specific host and port
-  python scripts/run_streaming_server.py --host 127.0.0.1 --port 9000
-        """,
-    )
-
-    parser.add_argument(
-        "--port",
-        type=int,
-        default=8000,
-        help="Port to listen on (default: 8000)",
-    )
-
-    parser.add_argument(
-        "--host",
-        type=str,
-        default="0.0.0.0",
-        help="Host to bind to (default: 0.0.0.0)",
-    )
-
-    parser.add_argument(
-        "--log-level",
-        type=str,
-        choices=["debug", "info", "warning", "error"],
-        default="info",
-        help="Logging level (default: info)",
-    )
-
-    parser.add_argument(
-        "--workers",
-        type=int,
-        default=1,
-        help="Number of worker processes (default: 1, use 1 for async-native server)",
-    )
-
-    parser.add_argument(
-        "--use-uvloop",
-        action="store_true",
-        help="Use uvloop for async I/O acceleration (requires uvloop package)",
-    )
-
-    args = parser.parse_args()
-
-    # Setup logging
-    setup_logging(args.log_level)
-    logger = logging.getLogger(__name__)
-
-    logger.info("Watermark Removal Streaming API — Starting")
-    logger.info(f"Configuration: host={args.host}, port={args.port}, workers={args.workers}")
-
-    # Try to use uvloop for better async performance
-    if args.use_uvloop:
-        try:
-            import uvloop
-
-            asyncio_policy = uvloop.EventLoopPolicy()
-            import asyncio
-
-            asyncio.set_event_loop_policy(asyncio_policy)
-            logger.info("Using uvloop for async event loop")
-        except ImportError:
-            logger.warning("uvloop not available, falling back to standard asyncio")
-
-    # Import and run FastAPI app
     try:
-        from watermark_removal.streaming.server import app
-
-        import uvicorn
-
-        logger.info(f"Starting server on {args.host}:{args.port}")
-
-        uvicorn.run(
-            app,
-            host=args.host,
-            port=args.port,
-            workers=args.workers,
-            log_level=args.log_level,
-            access_log=args.log_level == "debug",  # Disable access logs unless debugging
+        # Create FastAPI app
+        app, session_manager, background_runner = create_app(
+            process_func=None,  # Use default identity function
+            queue_size=queue_size,
+            result_ttl_sec=result_ttl,
         )
 
-    except ImportError as e:
-        logger.error(f"Failed to import watermark_removal.streaming.server: {e}")
-        logger.error("Ensure watermark-removal-system package is installed or in PYTHONPATH")
-        sys.exit(1)
+        logger.info(
+            f"Starting server on {host}:{port} "
+            f"(queue_size={queue_size}, result_ttl={result_ttl}s, workers={workers})"
+        )
+
+        # Run server
+        uvicorn.run(
+            app,
+            host=host,
+            port=port,
+            workers=workers,
+            reload=reload,
+            log_level="debug" if verbose else "info",
+        )
 
     except Exception as e:
-        logger.error(f"Failed to start server: {e}", exc_info=True)
+        logger.error(f"Fatal error: {e}", exc_info=True)
         sys.exit(1)
 
 

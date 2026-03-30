@@ -107,6 +107,8 @@ class ConfigManager:
             ensemble_iou_threshold=raw_config.get("ensemble_iou_threshold", 0.3),
             ensemble_nms_threshold=raw_config.get("ensemble_nms_threshold", 0.45),
             ensemble_model_accuracies=raw_config.get("ensemble_model_accuracies", {"yolov5s": 0.85, "yolov5m": 0.90, "yolov5l": 0.92}),
+            streaming_queue_size=raw_config.get("streaming_queue_size", 100),
+            streaming_result_ttl_sec=raw_config.get("streaming_result_ttl_sec", 300),
         )
 
         logger.info(

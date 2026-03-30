@@ -272,6 +272,12 @@ class ProcessConfig:
     )
     """Baseline accuracy baseline for each model (used for confidence weighting)."""
 
+    streaming_queue_size: int = 100
+    """Maximum size of frame processing queue (frames dropped if exceeded)."""
+
+    streaming_result_ttl_sec: int = 300
+    """Time-to-live for cached streaming results in seconds (default 5 min)."""
+
     def __post_init__(self):
         """Validate configuration."""
         if not self.video_path:
@@ -330,3 +336,9 @@ class ProcessConfig:
                 raise ValueError("ensemble_nms_threshold must be 0.0-1.0")
             if not self.ensemble_model_accuracies:
                 raise ValueError("ensemble_model_accuracies must not be empty")
+
+        # Phase 3 streaming parameter validation
+        if self.streaming_queue_size < 1:
+            raise ValueError("streaming_queue_size must be >= 1")
+        if self.streaming_result_ttl_sec < 1:
+            raise ValueError("streaming_result_ttl_sec must be >= 1")
