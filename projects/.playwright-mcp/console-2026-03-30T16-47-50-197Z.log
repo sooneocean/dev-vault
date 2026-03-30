@@ -1,0 +1,33 @@
+[    6168ms] ReferenceError: jQuery is not defined
+    at https://yololab.net/_jb_static/??f221521362:2:1
+[    6485ms] TypeError: Cannot read properties of undefined (reading 'hooks')
+    at https://yololab.net/wp-includes/js/dist/i18n.min.js?ver=c26c3dc7bed366793375:2:4981
+    at https://yololab.net/wp-includes/js/dist/i18n.min.js?ver=c26c3dc7bed366793375:2:5277
+[    6499ms] ReferenceError: wp is not defined
+    at wp-i18n-js-after:2:1
+[    6502ms] ReferenceError: wp is not defined
+    at password-strength-meter-js-translations:5:2
+    at password-strength-meter-js-translations:6:4
+[    6505ms] ReferenceError: jQuery is not defined
+    at https://yololab.net/wp-admin/js/password-strength-meter.min.js?ver=6.9.4:2:1081
+[    6513ms] ReferenceError: jQuery is not defined
+    at https://yololab.net/_jb_static/??ffa9fa8fa4:2:1389
+[    6520ms] TypeError: Cannot read properties of undefined (reading 'setLocaleData')
+    at wp-a11y-js-translations:5:10
+    at wp-a11y-js-translations:6:4
+[    6524ms] TypeError: o(...) is not a function
+    at https://yololab.net/wp-includes/js/dist/a11y.min.js?ver=cb460b4676c94bd228ed:2:2136
+    at https://yololab.net/wp-includes/js/dist/a11y.min.js?ver=cb460b4676c94bd228ed:2:2174
+[    6533ms] TypeError: Cannot read properties of undefined (reading 'setLocaleData')
+    at user-profile-js-translations:5:10
+    at user-profile-js-translations:6:4
+[    6538ms] ReferenceError: jQuery is not defined
+    at https://yololab.net/wp-admin/js/user-profile.min.js?ver=6.9.4:2:7955
+[    6192ms] [ERROR] Not signed in with the identity provider. @ https://yololab.net/wp-login.php?redirect_to=https%3A%2F%2Fyololab.net%2Fwp-admin%2F&reauth=1:191
+[    8815ms] [ERROR] [GSI_LOGGER]: FedCM get() rejects with AbortError: signal is aborted without reason @ https://accounts.google.com/gsi/client:81
+[   35935ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://wordpress.com/wp-login.php?action=two-step-authentication-endpoint:0
+[   41485ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://wordpress.com/wp-login.php?action=two-step-authentication-endpoint:0
+[   47106ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://wordpress.com/wp-login.php?action=two-step-authentication-endpoint:0
+[   52713ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://wordpress.com/wp-login.php?action=two-step-authentication-endpoint:0
+[   58315ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://wordpress.com/wp-login.php?action=two-step-authentication-endpoint:0
+[   64000ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://wordpress.com/wp-login.php?action=two-step-authentication-endpoint:0

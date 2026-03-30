@@ -8,5 +8,10 @@
   "tests/test_inpaint_executor.py::TestInpaintExecutor::test_inpaint_single_timeout": true,
   "tests/test_inpaint_executor.py::TestInpaintExecutor::test_inpaint_single_connection_error": true,
   "tests/test_inpaint_executor.py::TestInpaintExecutor::test_inpaint_batch_mixed_results": true,
-  "tests/test_inpaint_executor.py::TestInpaintExecutorIntegration::test_executor_workflow_with_mock_client": true
+  "tests/test_inpaint_executor.py::TestInpaintExecutorIntegration::test_executor_workflow_with_mock_client": true,
+  "tests/test_stitch_handler.py::TestStitchHandler::test_rescale_to_original_upscale": true,
+  "tests/test_stitch_handler.py::TestStitchHandler::test_rescale_to_original_downscale": true,
+  "tests/test_stitch_handler.py::TestStitchHandler::test_create_feather_mask_gradient": true,
+  "tests/test_stitch_handler.py::TestStitchHandlerIntegration::test_full_stitch_workflow": true,
+  "tests/test_stitch_handler.py::TestStitchHandlerIntegration::test_stitch_with_different_feather_widths": true
 }
