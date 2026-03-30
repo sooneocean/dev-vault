@@ -1,0 +1,23 @@
+# Phase 1 Static Watermark Example
+# Use this for simple JPEG mask applied to all frames
+
+video_path: "samples/video.mp4"
+mask_path: "samples/static_logo_mask.png"
+output_dir: "output/phase1_static"
+
+inpaint:
+  model_name: "flux-dev.safetensors"
+  prompt: "remove watermark logo, clean background"
+  negative_prompt: "watermark, logo, text, artifacts"
+  steps: 20
+  cfg_scale: 7.5
+  seed: 42
+
+context_padding: 50
+target_inpaint_size: 1024
+batch_size: 4
+timeout: 300.0
+output_codec: "h264"
+output_crf: 23
+keep_intermediate: false
+verbose: true

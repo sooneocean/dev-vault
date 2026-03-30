@@ -1,0 +1,31 @@
+# Watermark Removal Pipeline - Base Configuration
+# Copy this file and customize for your project
+
+# Input/Output paths
+video_path: "input/video.mp4"           # Path to input video (absolute or relative)
+mask_path: "input/mask.png"             # Path to mask: JPEG for static, JSON for dynamic bbox
+output_dir: "output"                    # Directory for frames, crops, and final MP4
+
+# Inpainting configuration
+inpaint:
+  model_name: "flux-dev.safetensors"   # Flux model checkpoint (default recommended)
+  prompt: "remove watermark, clean background"  # Positive prompt
+  negative_prompt: "watermark, text, artifacts, blurry"  # Negative prompt
+  steps: 20                             # Diffusion steps (20-50 recommended)
+  cfg_scale: 7.5                        # Classifier-free guidance strength
+  seed: 42                              # Random seed for reproducibility
+  sampler: "euler"                      # Diffusion sampler
+
+# Pipeline parameters
+context_padding: 50                     # Extra pixels around watermark bbox
+target_inpaint_size: 1024               # Inpaint resolution (1024x1024)
+batch_size: 4                           # Concurrent crops to inpaint
+timeout: 300.0                          # Inpaint execution timeout (seconds)
+
+# Output encoding
+output_codec: "h264"                    # Video codec (h264, vp9, etc)
+output_crf: 23                          # Quality (0=best, 51=worst)
+
+# Debug options
+keep_intermediate: false                # Keep temporary frames/crops after encoding
+verbose: true                           # Verbose logging
