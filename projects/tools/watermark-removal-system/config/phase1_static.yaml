@@ -1,0 +1,17 @@
+# Phase 1: Static watermark removal (JPEG mask)
+# Example configuration for a static watermark using a JPEG mask image
+
+video_path: ./examples/sample_video.mp4
+mask_path: ./examples/sample_mask.png
+output_dir: ./output/phase1_static
+
+inpaint:
+  model_name: flux-dev
+  prompt: "remove watermark seamlessly, fill with background"
+  negative_prompt: "watermark, text, logo"
+  steps: 20
+  cfg_scale: 7.5
+
+context_padding: 64
+target_inpaint_size: 1024
+blend_feather_width: 32

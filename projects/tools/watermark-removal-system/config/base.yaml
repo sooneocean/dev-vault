@@ -1,0 +1,33 @@
+# Base configuration for watermark removal pipeline
+# Copy this file and customize for your project
+
+# Input/Output
+video_path: ./input/video.mp4
+mask_path: ./input/watermark_mask.png
+output_dir: ./output
+
+# Inpaint model parameters
+inpaint:
+  model_name: flux-dev
+  prompt: "remove watermark seamlessly"
+  negative_prompt: "watermark, text, logo, artifact"
+  steps: 20
+  cfg_scale: 7.5
+  sampler: dpmpp_2m
+  scheduler: karras
+  seed: -1
+
+# Preprocessing
+context_padding: 64
+target_inpaint_size: 1024
+
+# Postprocessing
+blend_feather_width: 32
+temporal_smooth_alpha: 0.0
+
+# Execution
+batch_size: 4
+inpaint_timeout_sec: 300.0
+comfyui_host: "127.0.0.1"
+comfyui_port: 8188
+keep_intermediate: false
