@@ -156,11 +156,32 @@ class ProcessConfig:
     output_crf: int = 23
     """Video quality: lower = better (0-51, H.264 convention)."""
 
+    output_fps: float = 30.0
+    """Output video frames per second."""
+
     keep_intermediate: bool = False
     """Keep temporary frame/crop files after encoding."""
 
     verbose: bool = True
     """Enable verbose logging."""
+
+    comfyui_host: str = "127.0.0.1"
+    """ComfyUI server hostname."""
+
+    comfyui_port: int = 8188
+    """ComfyUI server port."""
+
+    blend_feather_width: int = 32
+    """Feather blend width in pixels at stitch boundaries."""
+
+    skip_errors_in_preprocessing: bool = False
+    """Skip frames that fail preprocessing instead of stopping."""
+
+    skip_errors_in_postprocessing: bool = False
+    """Skip frames that fail postprocessing instead of stopping."""
+
+    crop_region: "CropRegion | None" = None
+    """Override crop region (if None, derived from mask)."""
 
     def __post_init__(self):
         """Validate configuration."""
