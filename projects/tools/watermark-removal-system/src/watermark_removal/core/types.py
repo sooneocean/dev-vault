@@ -61,17 +61,22 @@ class CropRegion:
     Tracks the original bbox, context padding, and scaling applied during crop,
     so the inpainted crop can be rescaled and composited back exactly.
 
+    For multi-watermark support, watermark_id distinguishes between multiple
+    watermarks in the same frame.
+
     Attributes:
         frame_id: Which frame this crop came from
         original_bbox: (x, y, w, h) of watermark in original frame
         context_bbox: (x, y, w, h) of crop region including context padding in original frame
         scale_factor: Scaling applied during resize (context_size → 1024x1024)
+        watermark_id: ID to distinguish multiple watermarks in same frame (0-indexed, Phase 2)
         pad_left, pad_top, pad_right, pad_bottom: Zero-padding applied during resize
     """
     frame_id: int
     original_bbox: tuple[int, int, int, int]  # (x, y, w, h)
     context_bbox: tuple[int, int, int, int]   # (x, y, w, h)
     scale_factor: float
+    watermark_id: int = 0  # Phase 2: distinguishes multiple watermarks per frame
     pad_left: int = 0
     pad_top: int = 0
     pad_right: int = 0
@@ -161,6 +166,10 @@ class ProcessConfig:
     yolo_model_size: str = "small"  # nano, small, medium, large
     yolo_confidence_threshold: float = 0.5
     yolo_nms_threshold: float = 0.45
+
+    # Phase 2 Preprocessing - Multi-Watermark Support
+    max_watermarks_per_frame: int = 1  # Max watermarks to process per frame
+    watermark_merge_threshold: float = 0.3  # IoU threshold for merging overlapping watermarks
 
     # Phase 2 Preprocessing - Watermark Tracking
     use_watermark_tracker: bool = False

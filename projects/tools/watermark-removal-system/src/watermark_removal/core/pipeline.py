@@ -194,10 +194,10 @@ class Pipeline:
                     f"Tracker initialized with {len(tracker.detections)} keyframe detections"
                 )
 
-            inpaint_crops = []  # List of (frame_id, crop_path) tuples
+            inpaint_crops = []  # List of (frame_id, crop_path, watermark_id) tuples
 
             for frame in frames:
-                bbox = None
+                bboxes_for_frame = []  # List of bboxes for this frame
 
                 if is_image_mask:
                     # Image mask: extract bbox from connected components or assume full mask region
@@ -213,63 +213,74 @@ class Pipeline:
                             logger.warning(f"No contours found in mask for frame {frame.frame_id}")
                             continue
                         x, y, w, h = cv2.boundingRect(np.vstack(contours))
-                        bbox = (x, y, w, h)
+                        bboxes_for_frame = [(x, y, w, h)]  # Single bbox from image mask
                     except Exception as e:
                         logger.warning(f"Error extracting bbox from mask: {e}")
                         continue
                 else:
-                    # Bbox sequence: get bbox for this frame
+                    # Bbox sequence: get bboxes for this frame (multi-watermark support)
                     if tracker is not None:
                         # Use tracker interpolation for dynamic bboxes
                         bbox = tracker.interpolate(frame.frame_id)
-                        if bbox is None:
-                            logger.debug(f"No bbox from tracker for frame {frame.frame_id}")
-                            continue
+                        if bbox is not None:
+                            bboxes_for_frame = [bbox]
                     elif frame.frame_id in bbox_dict:
-                        # Fallback to direct bbox lookup
-                        bbox = bbox_dict[frame.frame_id]
-                    else:
+                        # Get bboxes from dict
+                        bbox_entry = bbox_dict[frame.frame_id]
+                        # Handle both single bbox and list of bboxes
+                        if isinstance(bbox_entry, (list, tuple)) and isinstance(bbox_entry[0], (list, tuple)):
+                            bboxes_for_frame = bbox_entry  # List of bboxes
+                        elif isinstance(bbox_entry, (list, tuple)):
+                            bboxes_for_frame = [bbox_entry]  # Single bbox
+
+                    if not bboxes_for_frame:
                         logger.debug(f"No bbox for frame {frame.frame_id}")
                         continue
 
-                if bbox is None:
-                    continue
+                # Limit number of watermarks per frame for computational efficiency
+                max_watermarks = self.config.max_watermarks_per_frame
+                if len(bboxes_for_frame) > max_watermarks:
+                    logger.info(f"Frame {frame.frame_id}: limiting to {max_watermarks} of {len(bboxes_for_frame)} watermarks")
+                    bboxes_for_frame = bboxes_for_frame[:max_watermarks]
 
-                # Validate bbox
-                if not mask_loader.validate_bbox(bbox, frame.image.shape):
-                    logger.warning(f"Invalid bbox for frame {frame.frame_id}: {bbox}")
-                    continue
-
-                # Compute crop region metadata
-                try:
-                    crop_region = crop_handler.compute_crop_region(
-                        frame.frame_id,
-                        bbox,
-                        frame.image.shape,
-                    )
-                    if crop_region is None:
-                        logger.warning(f"Failed to compute crop region for frame {frame.frame_id}")
+                # Process each watermark in frame (multi-watermark)
+                for watermark_id, bbox in enumerate(bboxes_for_frame):
+                    # Validate bbox
+                    if not mask_loader.validate_bbox(bbox, frame.image.shape):
+                        logger.warning(f"Invalid bbox for frame {frame.frame_id}, watermark {watermark_id}: {bbox}")
                         continue
 
-                    # Extract crop from frame
-                    crop_data = crop_handler.extract_crop(frame.image, crop_region)
-                    if crop_data is None:
-                        logger.warning(f"Failed to extract crop for frame {frame.frame_id}")
+                    # Compute crop region metadata with watermark_id
+                    try:
+                        crop_region = crop_handler.compute_crop_region(
+                            frame.frame_id,
+                            bbox,
+                            frame.image.shape,
+                            watermark_id=watermark_id,
+                        )
+                        if crop_region is None:
+                            logger.warning(f"Failed to compute crop region for frame {frame.frame_id}, watermark {watermark_id}")
+                            continue
+
+                        # Extract crop from frame
+                        crop_data = crop_handler.extract_crop(frame.image, crop_region)
+                        if crop_data is None:
+                            logger.warning(f"Failed to extract crop for frame {frame.frame_id}, watermark {watermark_id}")
+                            continue
+
+                        # Save crop to disk with watermark_id in filename
+                        crop_path = crops_dir / f"crop_{frame.frame_id:06d}_w{watermark_id}.png"
+                        write_image(str(crop_path), crop_data)
+
+                        # Store CropRegion for later stitching
+                        self.crop_regions.append(crop_region)
+                        inpaint_crops.append((frame.frame_id, crop_path, watermark_id))
+
+                        logger.debug(f"Cropped frame {frame.frame_id}, watermark {watermark_id}: bbox={bbox}, region={crop_region}")
+
+                    except Exception as e:
+                        logger.error(f"Error cropping frame {frame.frame_id}, watermark {watermark_id}: {e}")
                         continue
-
-                    # Save crop to disk
-                    crop_path = crops_dir / f"crop_{frame.frame_id:06d}.png"
-                    write_image(str(crop_path), crop_data)
-
-                    # Store CropRegion for later stitching
-                    self.crop_regions.append(crop_region)
-                    inpaint_crops.append((frame.frame_id, crop_path))
-
-                    logger.debug(f"Cropped frame {frame.frame_id}: bbox={bbox}, region={crop_region}")
-
-                except Exception as e:
-                    logger.error(f"Error cropping frame {frame.frame_id}: {e}")
-                    continue
 
             logger.info(f"Created {len(inpaint_crops)} crop regions for inpainting")
 
@@ -302,8 +313,8 @@ class Pipeline:
 
             # Prepare inpaint pairs for batch execution
             inpaint_pairs = [
-                (crop_path, crop_path.parent / f"mask_{frame_id:06d}.png")
-                for frame_id, crop_path in inpaint_crops
+                (crop_path, crop_path.parent / f"mask_{frame_id:06d}_w{watermark_id}.png")
+                for frame_id, crop_path, watermark_id in inpaint_crops
             ]
 
             # Execute inpainting

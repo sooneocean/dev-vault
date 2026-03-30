@@ -183,6 +183,18 @@ Examples:
     )
 
     parser.add_argument(
+        "--max-watermarks-per-frame",
+        type=int,
+        help="Maximum watermarks to process per frame (Phase 2)",
+    )
+
+    parser.add_argument(
+        "--watermark-merge-threshold",
+        type=float,
+        help="IoU threshold for merging overlapping watermarks (Phase 2)",
+    )
+
+    parser.add_argument(
         "--use-watermark-tracker",
         action="store_true",
         help="Enable watermark tracking with bbox interpolation (Phase 2)",
@@ -283,6 +295,12 @@ def load_config(args) -> ProcessConfig:
         config.yolo_model_size = args.yolo_model_size
     if hasattr(args, 'yolo_confidence_threshold') and args.yolo_confidence_threshold is not None:
         config.yolo_confidence_threshold = args.yolo_confidence_threshold
+
+    # Phase 2 overrides - Multi-Watermark Support
+    if hasattr(args, 'max_watermarks_per_frame') and args.max_watermarks_per_frame is not None:
+        config.max_watermarks_per_frame = args.max_watermarks_per_frame
+    if hasattr(args, 'watermark_merge_threshold') and args.watermark_merge_threshold is not None:
+        config.watermark_merge_threshold = args.watermark_merge_threshold
 
     # Phase 2 overrides - Temporal Smoothing
     if hasattr(args, 'temporal_smooth_alpha') and args.temporal_smooth_alpha is not None:

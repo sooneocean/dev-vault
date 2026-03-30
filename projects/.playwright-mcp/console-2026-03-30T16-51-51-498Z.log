@@ -1,0 +1,75 @@
+[    4777ms] ReferenceError: jQuery is not defined
+    at https://yololab.net/_jb_static/??b4d61310ec:1:133
+    at https://yololab.net/_jb_static/??b4d61310ec:1:141
+[    4778ms] TypeError: Cannot read properties of undefined (reading 'defaultHooks')
+    at https://yololab.net/wp-includes/js/dist/i18n.min.js?ver=c26c3dc7bed366793375:2:5007
+    at https://yololab.net/wp-includes/js/dist/i18n.min.js?ver=c26c3dc7bed366793375:2:5277
+[    4779ms] TypeError: Cannot read properties of undefined (reading 'setLocaleData')
+    at wp-i18n-js-after:2:9
+[    4784ms] TypeError: Cannot read properties of undefined (reading 'setLocaleData')
+    at jetpack-instant-search-js-translations:5:10
+    at jetpack-instant-search-js-translations:6:4
+[    4854ms] Octal escape sequences are not allowed in template strings.
+[    5910ms] [WARNING] [GSI_LOGGER]: google.accounts.id.initialize() is called multiple times. This could cause unexpected behavior and only the last initialized instance will be used. @ https://accounts.google.com/gsi/client:80
+[    6749ms] ReferenceError: jQuery is not defined
+    at https://yololab.net/_jb_static/??b4d61310ec:1:133
+    at https://yololab.net/_jb_static/??b4d61310ec:1:141
+[    6750ms] TypeError: Cannot read properties of undefined (reading 'defaultHooks')
+    at https://yololab.net/wp-includes/js/dist/i18n.min.js?ver=c26c3dc7bed366793375:2:5007
+    at https://yololab.net/wp-includes/js/dist/i18n.min.js?ver=c26c3dc7bed366793375:2:5277
+[    6751ms] TypeError: Cannot read properties of undefined (reading 'setLocaleData')
+    at wp-i18n-js-after:2:9
+[    6756ms] TypeError: Cannot read properties of undefined (reading 'setLocaleData')
+    at jetpack-instant-search-js-translations:5:10
+    at jetpack-instant-search-js-translations:6:4
+[    6778ms] Octal escape sequences are not allowed in template strings.
+[    8494ms] Failed to resolve module specifier "@wordpress/interactivity". Relative references must start with either "/", "./", or "../".
+[    8507ms] TypeError: Cannot read properties of undefined (reading '__')
+    at 7479 (https://yololab.net/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-search/build/instant-search/jp-search.js?minify=false&ver=904682e550fefbe1827b:1:241)
+    at n (https://yololab.net/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-search/build/instant-search/jp-search.js?minify=false&ver=904682e550fefbe1827b:1:2305)
+    at https://yololab.net/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-search/build/instant-search/jp-search.js?minify=false&ver=904682e550fefbe1827b:1:5407
+    at https://yololab.net/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-search/build/instant-search/jp-search.js?minify=false&ver=904682e550fefbe1827b:1:5626
+    at https://yololab.net/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-search/build/instant-search/jp-search.js?minify=false&ver=904682e550fefbe1827b:1:5630
+[    8592ms] Failed to resolve module specifier "@wordpress/interactivity". Relative references must start with either "/", "./", or "../".
+[    8606ms] TypeError: Cannot read properties of undefined (reading '__')
+    at 7479 (https://yololab.net/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-search/build/instant-search/jp-search.js?minify=false&ver=904682e550fefbe1827b:1:241)
+    at n (https://yololab.net/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-search/build/instant-search/jp-search.js?minify=false&ver=904682e550fefbe1827b:1:2305)
+    at https://yololab.net/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-search/build/instant-search/jp-search.js?minify=false&ver=904682e550fefbe1827b:1:5407
+    at https://yololab.net/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-search/build/instant-search/jp-search.js?minify=false&ver=904682e550fefbe1827b:1:5626
+    at https://yololab.net/wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-search/build/instant-search/jp-search.js?minify=false&ver=904682e550fefbe1827b:1:5630
+[    8803ms] Uncaught (in promise) No config could be discovered in the page
+    at zi (https://news.google.com/swg/js/v1/swg.js:0:231909)
+[    8807ms] Uncaught (in promise) No config could be discovered in the page
+    at setupButtons (https://news.google.com/swg/js/v1/swg-basic.js:0:259995)
+[    8808ms] Uncaught (in promise) No config could be discovered in the page
+    at setupInlineCta (https://news.google.com/swg/js/v1/swg-basic.js:0:260055)
+[    8808ms] Uncaught (in promise) No config could be discovered in the page
+    at setupAndShowAutoPrompt (https://news.google.com/swg/js/v1/swg-basic.js:0:259810)
+[    8808ms] Uncaught (in promise) No config could be discovered in the page
+    at setOnLoginRequest (https://news.google.com/swg/js/v1/swg-basic.js:0:259732)
+[    8808ms] Uncaught (in promise) No config could be discovered in the page
+    at processEntitlements (https://news.google.com/swg/js/v1/swg-basic.js:0:260125)
+[    8809ms] Uncaught (in promise) No config could be discovered in the page
+    at setupAndShowAutoPrompt (https://news.google.com/swg/js/v1/swg-basic.js:0:259810)
+[    8809ms] Uncaught (in promise) No config could be discovered in the page
+    at setOnLoginRequest (https://news.google.com/swg/js/v1/swg-basic.js:0:259732)
+[    8809ms] Uncaught (in promise) No config could be discovered in the page
+    at processEntitlements (https://news.google.com/swg/js/v1/swg-basic.js:0:260125)
+[   10976ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://widgets.wp.com/notifications/languages/zh-v1.1.json:0
+[   11250ms] [WARNING] Failed to execute 'postMessage' on 'DOMWindow': The target origin provided ('https://wordpress.com') does not match the recipient window's origin ('https://yololab.net'). @ https://s0.wp.com/wp-content/mu-plugins/notes/admin-bar-v2.js?ver=15.7-a.5-202614-lite:0
+[   12133ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://widgets.wp.com/notifications/languages/zh-v1.1.json:0
+[   12199ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-7948109972684826&output=html&adk=1812271804&adf=3025194257&lmt=1774889523&plat=1%3A16777216%2C2%3A16777216%2C3%3A16%2C4%3A16%2C9%3A32776%2C16%3A8388608%2C17%3A32%2C24%3A32%2C25%3A32%2C30%3A1081344%2C32%3A32%2C41%3A32%2C42%3A32%2C43%3A32&format=0x0&url=https%3A%2F%2Fyololab.net%2F&pra=5&aiof=9&asro=0&aiapmd=0.1423&aiapmid=1&aiactd=0&aicctd=0&ailctd=0&aimartd=4&aieuf=1&aicrs=1&uach=WyJXaW5kb3dzIiwiMTkuMC4wIiwieDg2IiwiIiwiMTQ2LjAuNzY4MC4xNjUiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxNDYuMC43NjgwLjE2NSJdLFsiTm90LUEuQnJhbmQiLCIyNC4wLjAuMCJdLFsiR29vZ2xlIENocm9tZSIsIjE0Ni4wLjc2ODAuMTY1Il1dLDBd&abgtt=6&dt=1774889523077&bpp=37&bdt=8394&idt=436&shv=r20260326&mjsv=m202603230101&ptt=9&saldr=aa&abxe=1&cookie_enabled=1&eoidce=1&nras=1&correlator=1146610507732&frm=20&pv=2&u_tz=480&u_his=7&u_h=940&u_w=1670&u_ah=898&u_aw=1670&u_cd=32&u_sd=0.92&dmc=8&adx=-12245933&ady=-12245933&biw=1375&bih=1014&scr_x=0&scr_y=4741&eid=31097488%2C95386651%2C95386338%2C95386955%2C95379824&oid=2&pvsid=5033541624731915&tmod=1819084130&uas=0&nvt=1&fsapi=1&fc=1920&brdim=0%2C0%2C0%2C0%2C1670%2C0%2C1670%2C898%2C1393%2C1014&vis=1&rsz=%7C%7Cs%7C&abl=NS&fu=32768&bc=31&bz=1.2&pgls=CAEQBBoHMS4xNzUuMA..&ifi=1&uci=a!1&fsb=1&dtd=524:0
+[   12199ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-7948109972684826&output=html&adk=1812271804&adf=3025194257&lmt=1774889523&plat=1%3A16777216%2C2%3A16777216%2C3%3A16%2C4%3A16%2C9%3A32776%2C16%3A8388608%2C17%3A32%2C24%3A32%2C25%3A32%2C30%3A1081344%2C32%3A32%2C41%3A32%2C42%3A32%2C43%3A32&format=0x0&url=https%3A%2F%2Fyololab.net%2F&pra=5&aiof=9&asro=0&aiapmd=0.1423&aiapmid=1&aiactd=0&aicctd=0&ailctd=0&aimartd=4&aieuf=1&aicrs=1&uach=WyJXaW5kb3dzIiwiMTkuMC4wIiwieDg2IiwiIiwiMTQ2LjAuNzY4MC4xNjUiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxNDYuMC43NjgwLjE2NSJdLFsiTm90LUEuQnJhbmQiLCIyNC4wLjAuMCJdLFsiR29vZ2xlIENocm9tZSIsIjE0Ni4wLjc2ODAuMTY1Il1dLDBd&abgtt=6&dt=1774889523077&bpp=37&bdt=8394&idt=436&shv=r20260326&mjsv=m202603230101&ptt=9&saldr=aa&abxe=1&cookie_enabled=1&eoidce=1&nras=1&correlator=1146610507732&frm=20&pv=2&u_tz=480&u_his=7&u_h=940&u_w=1670&u_ah=898&u_aw=1670&u_cd=32&u_sd=0.92&dmc=8&adx=-12245933&ady=-12245933&biw=1375&bih=1014&scr_x=0&scr_y=4741&eid=31097488%2C95386651%2C95386338%2C95386955%2C95379824&oid=2&pvsid=5033541624731915&tmod=1819084130&uas=0&nvt=1&fsapi=1&fc=1920&brdim=0%2C0%2C0%2C0%2C1670%2C0%2C1670%2C898%2C1393%2C1014&vis=1&rsz=%7C%7Cs%7C&abl=NS&fu=32768&bc=31&bz=1.2&pgls=CAEQBBoHMS4xNzUuMA..&ifi=1&uci=a!1&fsb=1&dtd=524:0
+[   12252ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-7948109972684826&output=html&h=90&slotname=7415555587&adk=2112372482&adf=4211153753&pi=t.ma~as.7415555587&w=728&lmt=1774889523&format=728x90&url=https%3A%2F%2Fyololab.net%2F&host=ca-host-pub-5038568878849053&h_ch=3624119425&aiof=9&asro=0&aiapmd=0.1423&aiapmid=1&aiactd=0&aicctd=0&ailctd=0&aimartd=4&aieuf=1&aicrs=1&uach=WyJXaW5kb3dzIiwiMTkuMC4wIiwieDg2IiwiIiwiMTQ2LjAuNzY4MC4xNjUiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxNDYuMC43NjgwLjE2NSJdLFsiTm90LUEuQnJhbmQiLCIyNC4wLjAuMCJdLFsiR29vZ2xlIENocm9tZSIsIjE0Ni4wLjc2ODAuMTY1Il1dLDBd&abgtt=6&dt=1774889523139&bpp=14&bdt=8457&idt=519&shv=r20260326&mjsv=m202603230101&ptt=9&saldr=aa&abxe=1&cookie_enabled=1&eoidce=1&prev_fmts=0x0&nras=1&correlator=1146610507732&frm=20&pv=1&u_tz=480&u_his=7&u_h=940&u_w=1670&u_ah=898&u_aw=1670&u_cd=32&u_sd=0.92&dmc=8&adx=324&ady=5655&biw=1375&bih=1014&scr_x=0&scr_y=4741&eid=31097488%2C95386651%2C95386338%2C95386955%2C95379824&oid=2&pvsid=5033541624731915&tmod=1819084130&uas=0&nvt=1&fc=1920&brdim=0%2C0%2C0%2C0%2C1670%2C0%2C1670%2C898%2C1393%2C1014&vis=1&rsz=%7CM%7Cfoe%7C&abl=NF&pfx=0&fu=0&bc=31&bz=1.2&pgls=CAEQBBoHMS4xNzUuMA..&ifi=2&uci=a!2&fsb=1&dtd=556:0
+[   19697ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://cs.admanmedia.com/e03deca3316b700a1ce99c41e324fd03.gif?puid=ID5-2-e1e0a81b-7270-4644-ab6a-473f172f61d7&redir=https%3A%2F%2Fsync.inmobi.com%2Fsetuid%3FbidderID%3D149%26dspUserId%3D%5BUID%5D&gdpr=0&gdpr_consent=:0
+[   21400ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://csync.loopme.me/?pubid=9724&gdpr=0&gdpr_consent=&redirect=https%3A%2F%2Fsync.inmobi.com%2Fsetuid%3FbidderID%3D109%26dspUserId%3D%7Bviewer_token%7D:0
+[   19697ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://cs.admanmedia.com/e03deca3316b700a1ce99c41e324fd03.gif?puid=ID5-2-e1e0a81b-7270-4644-ab6a-473f172f61d7&redir=https%3A%2F%2Fsync.inmobi.com%2Fsetuid%3FbidderID%3D149%26dspUserId%3D%5BUID%5D&gdpr=0&gdpr_consent=:0
+[   21400ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://csync.loopme.me/?pubid=9724&gdpr=0&gdpr_consent=&redirect=https%3A%2F%2Fsync.inmobi.com%2Fsetuid%3FbidderID%3D109%26dspUserId%3D%7Bviewer_token%7D:0
+[   19697ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://cs.admanmedia.com/e03deca3316b700a1ce99c41e324fd03.gif?puid=ID5-2-e1e0a81b-7270-4644-ab6a-473f172f61d7&redir=https%3A%2F%2Fsync.inmobi.com%2Fsetuid%3FbidderID%3D149%26dspUserId%3D%5BUID%5D&gdpr=0&gdpr_consent=:0
+[   21400ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://csync.loopme.me/?pubid=9724&gdpr=0&gdpr_consent=&redirect=https%3A%2F%2Fsync.inmobi.com%2Fsetuid%3FbidderID%3D109%26dspUserId%3D%7Bviewer_token%7D:0
+[   66376ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://yololab.net/wp-json/wp/v2/plugins:0
+[   67180ms] [ERROR] ❌ 執行失敗: Cookie 檢查失敗 @ :160
+[   12199ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-7948109972684826&output=html&adk=1812271804&adf=3025194257&lmt=1774889523&plat=1%3A16777216%2C2%3A16777216%2C3%3A16%2C4%3A16%2C9%3A32776%2C16%3A8388608%2C17%3A32%2C24%3A32%2C25%3A32%2C30%3A1081344%2C32%3A32%2C41%3A32%2C42%3A32%2C43%3A32&format=0x0&url=https%3A%2F%2Fyololab.net%2F&pra=5&aiof=9&asro=0&aiapmd=0.1423&aiapmid=1&aiactd=0&aicctd=0&ailctd=0&aimartd=4&aieuf=1&aicrs=1&uach=WyJXaW5kb3dzIiwiMTkuMC4wIiwieDg2IiwiIiwiMTQ2LjAuNzY4MC4xNjUiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxNDYuMC43NjgwLjE2NSJdLFsiTm90LUEuQnJhbmQiLCIyNC4wLjAuMCJdLFsiR29vZ2xlIENocm9tZSIsIjE0Ni4wLjc2ODAuMTY1Il1dLDBd&abgtt=6&dt=1774889523077&bpp=37&bdt=8394&idt=436&shv=r20260326&mjsv=m202603230101&ptt=9&saldr=aa&abxe=1&cookie_enabled=1&eoidce=1&nras=1&correlator=1146610507732&frm=20&pv=2&u_tz=480&u_his=7&u_h=940&u_w=1670&u_ah=898&u_aw=1670&u_cd=32&u_sd=0.92&dmc=8&adx=-12245933&ady=-12245933&biw=1375&bih=1014&scr_x=0&scr_y=4741&eid=31097488%2C95386651%2C95386338%2C95386955%2C95379824&oid=2&pvsid=5033541624731915&tmod=1819084130&uas=0&nvt=1&fsapi=1&fc=1920&brdim=0%2C0%2C0%2C0%2C1670%2C0%2C1670%2C898%2C1393%2C1014&vis=1&rsz=%7C%7Cs%7C&abl=NS&fu=32768&bc=31&bz=1.2&pgls=CAEQBBoHMS4xNzUuMA..&ifi=1&uci=a!1&fsb=1&dtd=524:0
+[   12252ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-7948109972684826&output=html&h=90&slotname=7415555587&adk=2112372482&adf=4211153753&pi=t.ma~as.7415555587&w=728&lmt=1774889523&format=728x90&url=https%3A%2F%2Fyololab.net%2F&host=ca-host-pub-5038568878849053&h_ch=3624119425&aiof=9&asro=0&aiapmd=0.1423&aiapmid=1&aiactd=0&aicctd=0&ailctd=0&aimartd=4&aieuf=1&aicrs=1&uach=WyJXaW5kb3dzIiwiMTkuMC4wIiwieDg2IiwiIiwiMTQ2LjAuNzY4MC4xNjUiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxNDYuMC43NjgwLjE2NSJdLFsiTm90LUEuQnJhbmQiLCIyNC4wLjAuMCJdLFsiR29vZ2xlIENocm9tZSIsIjE0Ni4wLjc2ODAuMTY1Il1dLDBd&abgtt=6&dt=1774889523139&bpp=14&bdt=8457&idt=519&shv=r20260326&mjsv=m202603230101&ptt=9&saldr=aa&abxe=1&cookie_enabled=1&eoidce=1&prev_fmts=0x0&nras=1&correlator=1146610507732&frm=20&pv=1&u_tz=480&u_his=7&u_h=940&u_w=1670&u_ah=898&u_aw=1670&u_cd=32&u_sd=0.92&dmc=8&adx=324&ady=5655&biw=1375&bih=1014&scr_x=0&scr_y=4741&eid=31097488%2C95386651%2C95386338%2C95386955%2C95379824&oid=2&pvsid=5033541624731915&tmod=1819084130&uas=0&nvt=1&fc=1920&brdim=0%2C0%2C0%2C0%2C1670%2C0%2C1670%2C898%2C1393%2C1014&vis=1&rsz=%7CM%7Cfoe%7C&abl=NF&pfx=0&fu=0&bc=31&bz=1.2&pgls=CAEQBBoHMS4xNzUuMA..&ifi=2&uci=a!2&fsb=1&dtd=556:0
+[   19697ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://cs.admanmedia.com/e03deca3316b700a1ce99c41e324fd03.gif?puid=ID5-2-e1e0a81b-7270-4644-ab6a-473f172f61d7&redir=https%3A%2F%2Fsync.inmobi.com%2Fsetuid%3FbidderID%3D149%26dspUserId%3D%5BUID%5D&gdpr=0&gdpr_consent=:0
+[   21400ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_CLOSED @ https://csync.loopme.me/?pubid=9724&gdpr=0&gdpr_consent=&redirect=https%3A%2F%2Fsync.inmobi.com%2Fsetuid%3FbidderID%3D109%26dspUserId%3D%7Bviewer_token%7D:0

@@ -8,5 +8,16 @@
   "tests/test_inpaint_executor.py::TestInpaintExecutor::test_inpaint_single_timeout": true,
   "tests/test_inpaint_executor.py::TestInpaintExecutor::test_inpaint_single_connection_error": true,
   "tests/test_inpaint_executor.py::TestInpaintExecutor::test_inpaint_batch_mixed_results": true,
-  "tests/test_inpaint_executor.py::TestInpaintExecutorIntegration::test_executor_workflow_with_mock_client": true
+  "tests/test_inpaint_executor.py::TestInpaintExecutorIntegration::test_executor_workflow_with_mock_client": true,
+  "tests/test_pipeline_integration.py::TestPipelineRun::test_comfyui_health_check_success": true,
+  "tests/test_pipeline_integration.py::TestPipelineRun::test_comfyui_health_check_failure": true,
+  "tests/test_pipeline_integration.py::TestPipelineRun::test_run_with_mocked_components": true,
+  "tests/test_pipeline_integration.py::TestPipelineIntegration::test_create_and_run_static_method": true,
+  "tests/test_yolo_detector.py::TestYOLODetectorInference::test_detect_single_frame_one_watermark": true,
+  "tests/test_yolo_detector.py::TestYOLODetectorInference::test_detect_multiple_watermarks": true,
+  "tests/test_yolo_detector.py::TestYOLODetectorInference::test_detect_model_load_failure": true,
+  "tests/test_yolo_detector.py::TestYOLODetectorBatch::test_detect_batch_empty_list": true,
+  "tests/test_yolo_detector.py::TestYOLODetectorWithConfidence::test_detect_with_confidence_single": true,
+  "tests/test_yolo_detector.py::TestYOLODetectorWithConfidence::test_detect_with_confidence_sorted": true,
+  "tests/test_phase2_tracking_integration.py::TestYOLOModelAvailability::test_yolo_tracker_wrapper_invalid_confidence_threshold": true
 }
