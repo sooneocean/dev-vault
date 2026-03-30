@@ -194,7 +194,7 @@ updated: 2026-03-30
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
 
 ### weekly-review
-- [[2026-W14-review]] — 2026 Week 14 Review
+- [[2026-W14-review]] — Vault 從零到 Grade A 99% 的三日旅程 — 48 notes, 7 plans, 12-agent parallel sessions, 知識複利迴路首次閉合
 
 ### workflow
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令

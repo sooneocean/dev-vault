@@ -5,93 +5,172 @@ tags: [weekly-review]
 created: "2026-03-30"
 updated: "2026-03-30"
 status: active
-summary: "2026 Week 14 Review"
+maturity: mature
+domain: knowledge-management
+summary: "Vault 從零到 Grade A 99% 的三日旅程 — 48 notes, 7 plans, 12-agent parallel sessions, 知識複利迴路首次閉合"
+related:
+  - "[[dev-vault-status]]"
+  - "[[tech-research-squad]]"
+  - "[[claude-session-manager]]"
+  - "[[claude-code-dev-tools]]"
 ---
 
 # Weekly Review 2026-W14
 
-> 2026-03-30 ~ 2026-04-05
+> 2026-03-28 (Sat) ~ 2026-03-30 (Mon) — Vault 創建後首週（3 日）
+
+## Highlights
+
+This vault went from empty directory to **Grade A 99% health | 48 notes | 299 links | 0 orphans** in just three days. The compound engineering knowledge loop achieved first closure, and a 12-agent parallel session pattern emerged as a highly effective deep-work mode.
+
+---
 
 ## Completed
 
-- CONVENTIONS.md 新增 subtype（7 種）、maturity、domain、relation_map、tag 命名規範
-- 7 個 templates 更新（使用預設值避免 CLI placeholder 殘留問題）
-- Tag 整合：68 → 23 tags，singleton 從 72% 降到 22%
-- 31 篇筆記全部遷移到新 schema（直接 file editing，因 CLI updateNote 無法 INSERT 新 key）
-- 源碼驗證：`"[[note]]:extends"` 格式破壞 CLI parser（vault.mjs:69），改用獨立 `relation_map` 欄位
-- Document review（4 agents: coherence + feasibility + scope-guardian + adversarial）修正 6 項 auto-fix
-- 5 維 LLM-as-Judge 評估框架 + Docker PoC 驗證 + Writer 升級
-- 39 tests all pass
-- OllamaClaude MCP: 11 → 15 tools（+classify/summarize/translate/route_info）
-- 5 維度任務路由決策矩陣（品質/隱私/延遲/批量/複雜度）
-- E2E 測試通過
-- Auto-compact regression bug 修復（234/234 tests pass）
-- MCP project-switcher spec（S0-S3）正式 committed
-- 評估報告：建議順序 fix bug → MCP Phase 1 → API server
-- 5 個 idea notes 入庫（cli-update-fields-flag、cluster-subtype-domain、relation-map-consumer 等）
-- /improve 偵測 3 proposals，套用 2 個（AGENT.md + CONVENTIONS.md CLI 參考）
-- CLAUDE.md 應用 prompt research：身份聲明 + 優先級信號 + CLI-first 強化
-- [08:45:57] Plan 005 agent 也產出了大量額外成果（integrator、schedule、新 research notes）。全部 committed 和 pushed。  ---  ## Session 最終報告  **Vault 健康：Grade A 99% | 48 notes | 299 links | 0 orphans**  ### 本 session 產出（12 parallel subagents）  | 類別 | 成
-- [08:49:26] Phase 4 (Units 9-11) 閉環完成。總結一下交付成果：  ---  ## Phase 4 完成清單  ### Unit 9: 整合評估器 + `/research apply` - **`integrator.py`** — 整合評估 subagent，接收 poc_candidates 交叉比對現有 MCP servers (settings.json)，產生三層風險分類建è­
-- [08:50:49] ---  ## 完成摘要  知識系統統一遷移完成。核心變更：  1. **Project CLAUDE.md** — 新增 `## Behavioral Rules` 段落（架構約束 + 操作規則 + 知識路由規則） 2. **Obsidian vault** — 6 個新 notes 承接 auto-memory 的持久知識 3. **MEMORY.md** — 從
+### Day 1 — 2026-03-28 (Sat): Vault Bootstrap
 
-## Issues
+- Built Obsidian vault from scratch using obsidian-agent CLI with PARA structure
+- Fixed 2 Windows compatibility bugs in obsidian-agent (path separator in `vault.write`, CRLF in `vault.read`)
+- Created 5 core linked notes: CSM project overview, architecture, design decisions, roadmap, area
+- Added 5 machine-specific notes: hardware specs, dev environment, AI stack, AI coding tools, project layout
+- Added 3 more notes: all projects catalog (20 projects inventoried), Claude Code configuration (11 plugins, 2 hooks), Git/GitHub identity
+- Added 4 open-source developer notes: identity, publishing workflow, GitHub repo list, quality standards
+- Initialized vault as Git repo, pushed to github.com/sooneocean/dev-vault (public)
+- GitHub account inventory: 35 repos (22 public), primary languages TypeScript/Python
 
-- None
+### Day 2 — 2026-03-29 (Sun): Compound Engineering + Knowledge Loop Closure
+
+- Set up Telegram bot @maindexlong_bot with pairing and allowlist
+- Installed Compound Engineering Plugin (Every Inc) — agents expanded from 5 to 52, gained `/ce:ideate`, `/ce:brainstorm`, `/ce:plan`, `/ce:work`, `/ce:review`, `/ce:compound` workflows, plus context7 MCP server
+- Upgraded obsidian-agent v0.6.1 to v0.7.0 — PR #1 submitted to redredchen01/obsidian-agent
+  - +6 commands (stale, cluster, digest, thread, suggest, context)
+  - Full cross-platform support, backlinks bug fix, tests 100 to 147, MCP tools 19 to 25
+- **Plan 001** (completed): `/improve` slash command — workflow self-iteration mechanism
+- **Plan 002** (completed): session-stop wrapper script + sync hook + `/bridge-compound` + `/bridge-plan` slash commands — knowledge loop closure
+- First complete knowledge cycle: `/ce:compound` -> `/bridge-compound` -> vault resource note
+- `/improve` first cycle: 2 proposed, 2 applied (CLAUDE.md v0.7.0 CLI reference + docs/ directory)
+- Added combo flow and journal Friction section for faster iteration
+- Researched chenglou/pretext (no-DOM text measurement engine), full tech note in vault
+- Plans 003 (auto LLM tech research pipeline, 11 units/4 phases) and 005 (local LLM infrastructure, 3 units/3 phases) created and split from original combined plan
+
+### Day 3 — 2026-03-30 (Mon): Schema Upgrade + Deep Research + Multi-Plan Execution
+
+- **Plan 004** (completed): Vault knowledge framework structural upgrade
+  - CONVENTIONS.md: added subtype (7 kinds), maturity, domain, relation_map, tag naming rules
+  - 7 templates updated with defaults (avoiding CLI placeholder residue)
+  - Tag consolidation: 68 to 23 tags, singletons from 72% down to 22%
+  - 31 notes migrated to new schema (direct file editing due to CLI updateNote limitation)
+  - Source code verification: `"[[note]]:extends"` format breaks CLI parser (vault.mjs:69), adopted separate `relation_map` field
+  - Document review (4 agents: coherence + feasibility + scope-guardian + adversarial), 6 auto-fixes
+- **Four-discipline deep research** (12-agent parallel session):
+  - Prompt Engineering: 51 to 584 lines — Claude 4.x literal execution; CLAUDE.md optimization +5-11%; well-prompted Sonnet > poorly-prompted Opus
+  - Context Engineering: 370 lines — already mature, no changes needed
+  - Harness Engineering: 136 to 813 lines — 22 hook events, 14 plugin context overhead analysis, 19 anti-patterns
+  - Compound Engineering: 65 to 689 lines — six-stage knowledge loop, 7 plans quality evolution data, measurement framework
+- **Plan 003 Phase 2** (completed, 7/11 units): 5-dimension LLM-as-Judge evaluation framework + Docker PoC verification + Writer upgrade, 39 tests all pass
+- **Plan 005 Phase 2** (completed, 2/3 units): OllamaClaude MCP 11 to 15 tools (+classify/summarize/translate/route_info), 5-dimension task routing decision matrix, E2E tests pass
+- **Plan 006** (completed): Knowledge system unification — Obsidian as canonical store, auto-memory migrated to pointer-only, claude-mem as read complement
+- **CSM project**: auto-compact regression bug fixed (234/234 tests pass), MCP project-switcher spec (S0-S3) committed, evaluation report produced
+- `/improve` detected 3 proposals, applied 2 (AGENT.md + CONVENTIONS.md CLI reference)
+- CLAUDE.md prompt research applied: identity declaration + priority signals + CLI-first reinforcement
+- 5 idea notes captured (cli-update-fields-flag, cluster-subtype-domain, relation-map-consumer, etc.)
+- Local LLM deployment: 4 models (bge-m3 1.2GB, phi4-mini 2.5GB 19.7 tok/s, qwen3.5:9b 6.6GB 3.8 tok/s, qwen3.5:35b-a3b ~20GB 1.6 tok/s experimental)
+
+---
+
+## Plans Summary
+
+| Plan | Title | Status | Key Metric |
+|------|-------|--------|------------|
+| 001 | Workflow self-iteration (`/improve`) | **Completed** | 2 cycles run, 4 proposals applied |
+| 002 | Obsidian-agent efficiency + knowledge loop | **Completed** | session-stop + sync + bridge commands |
+| 003 | Auto LLM tech research pipeline | Phase 2 done (7/11 units) | 39 tests, Docker PoC verified |
+| 004 | Vault knowledge framework upgrade | **Completed** | 31 notes migrated, 68->23 tags |
+| 005 | Local LLM infrastructure | Phase 2 done (2/3 units) | 4 models, 15 MCP tools |
+| 006 | Knowledge system unification | **Completed** | 3 systems -> 1 canonical store |
+
+---
+
+## Issues / Friction
+
+- obsidian-agent CLI `updateNote()` can only update existing keys, cannot INSERT new frontmatter fields — forced manual file editing for schema migration
+- obsidian-agent CLI template engine only replaces 5 known keys; new field `{{PLACEHOLDER}}` values persist — templates needed defaults instead
+- `obsidian-agent journal` uses UTC timezone, producing yesterday's journal after local midnight
+- `relation_map` has no CLI consumer — semantic information lives only in frontmatter, invisible to graph tools
+- session-stop hook writes too many raw fragments to journal, requiring manual cleanup
+- Disk space warning on Day 1: only ~49GB free on 1.83TB drive
+
+---
 
 ## Ideas
 
-- session-stop hook 的 journal 寫入應該用 append-only 的簡潔格式，避免碎片化
-- 12-agent parallel 模式非常高效，可以作為標準的 "深度推進" 工作模式文件化
+- obsidian-agent `research` command could add `--update` mode to diff against prior scans
+- pretext engine could be used for CSM TUI text layout optimization
+- session-stop hook journal writes should use append-only concise format to avoid fragmentation
+- 12-agent parallel mode is highly effective — should be documented as a standard "deep push" work pattern
+- `/improve` combo flow (analyze + immediate apply) significantly reduces friction
+
+---
 
 ## Updated Notes
 
 | File | Type | Summary |
 |------|------|---------|
-| [[claude-code-dev-tools]] | area | 圍繞 Claude Code 生態系打造的開發工具集合 |
-| [[開源開發者身分]] | area | sooneocean 開源開發者身分、發布策略、品牌定位 |
-| [[dev-vault-status]] | project | Obsidian PARA vault with self-iteration workflow, current progress and pending work |
-| [[tech-research-squad]] | project | 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering |
-| [[architecture-lessons]] | resource | Critical lessons about Stop hooks, global config safety, and slash command nature |
-| [[benchmark-first-rule]] | resource | Always benchmark before planning — local LLM estimates were 5-10x off from reality |
-| [[claude-agent-sdk-api]] | resource | Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility |
-| [[claude-code-configuration]] | resource | Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置 |
-| [[compound-engineering-plugin]] | resource | Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令 |
-| [[compound-engineering-research]] | resource | Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。 |
-| [[context-engineering-hygiene]] | resource | Actionable context hygiene rules — when to compact, when to use subagents, plugin overhead awareness |
-| [[context-engineering-research]] | resource | Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。 |
-| [[dexg16-ai-stack]] | resource | AI/ML 工具鏈 — PyTorch 2.11+cu126, Transformers, Ollama, LM Studio, Claude, OpenAI |
-| [[dexg16-all-projects-catalog]] | resource | DEX_data 與 Projects 目錄下所有專案的完整盤點 |
-| [[dexg16-dev-environment]] | resource | DEXG16 開發工具鏈 — Node 24, Python 3.14, CUDA 12.6, Rust, Docker |
-| [[dexg16-git-and-github]] | resource | Git 設定、GitHub 帳號（sooneocean）、SSH 金鑰、delta 分頁器 |
-| [[dexg16-machine-specs]] | resource | ASUS ROG Zephyrus G16 — i9-185H, 32GB, RTX 4090 Laptop, 2TB NVMe |
-| [[dexg16-project-layout]] | resource | 工作目錄配置 — DEX_data 分區、Projects 資料夾、主要 Repo |
-| [[github-全部-repo-清單]] | resource | sooneocean GitHub 帳號下所有 Repo 的完整盤點（35 個 Repo、22 個公開） |
-| [[github-發布流程]] | resource | 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護 |
-| [[harness-engineering-research]] | resource | Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。 |
-| [[improvement-2026-03-29-001]] | resource | CLAUDE.md CLI Quick Reference 只列出原始命令，缺少 obsidian-agent v0.7.0 新增的 6 個命令 |
-| [[improvement-2026-03-29-002]] | resource | docs/plans/ 和 docs/solutions/ 是 Compound Engineering 的標準輸出路徑，但 CLAUDE.md Directory Structure 未提及 |
-| [[improvement-2026-03-30-001]] | resource | AGENT.md 的 Rules for Manual Edits 缺少 subtype/maturity/domain/relation_map 欄位說明，CLI 範例也只列基礎命令 |
-| [[improvement-2026-03-30-002]] | resource | obsidian-agent journal 使用 UTC 時區，午夜後仍產出前一天的 journal，需設定 OA_TIMEZONE 或在 Stop hook 加 TZ |
-| [[improvement-2026-03-30-003]] | resource | CONVENTIONS.md 的 Using the CLI 段落只列 7 個基礎命令，缺少 patch/update/health/stale/suggest 等 v0.7.0 命令 |
-| [[local-llm-deployment]] | resource | RTX 4090 Laptop 16GB VRAM 上的本地模型部署、MCP 整合、任務路由決策 |
-| [[local-llm-task-routing]] | resource | RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API |
-| [[prompt-engineering-research]] | resource | Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。 |
-| [[research-scan-2026-03-30]] | resource | 自動掃描發現 0 個新工具/論文 |
-| [[toolchain-reference]] | resource | External repos, tools, plugins and config paths used in this project |
-| [[開源專案品質標準]] | resource | 開源專案上架前的品質檢查清單 — README、License、CI、Topics、文件 |
+| [[dev-vault-status]] | project | Vault health A 99%, 48 notes, 299 links |
+| [[tech-research-squad]] | project | Four-discipline research framework active |
+| [[claude-session-manager]] | project | Auto-compact bug fixed, MCP spec committed |
+| [[claude-code-dev-tools]] | area | Claude Code ecosystem tooling collection |
+| [[prompt-engineering-research]] | resource | 51 to 584 lines, Claude-specific techniques |
+| [[harness-engineering-research]] | resource | 136 to 813 lines, 22 hook events mapped |
+| [[compound-engineering-research]] | resource | 65 to 689 lines, six-stage loop anatomy |
+| [[context-engineering-research]] | resource | 370 lines, mature baseline established |
+| [[local-llm-deployment]] | resource | 4 models benchmarked on RTX 4090 Laptop |
+| [[local-llm-task-routing]] | resource | 5-dimension routing decision matrix |
+| [[claude-code-configuration]] | resource | 14 plugins, hooks, MCP servers documented |
+| [[compound-engineering-plugin]] | resource | CE plugin capabilities and workflow |
+| [[toolchain-reference]] | resource | External repos, tools, plugins, config paths |
+| [[architecture-lessons]] | resource | Stop hooks, global config safety lessons |
+| [[benchmark-first-rule]] | resource | Always benchmark first — estimates were 5-10x off |
+
+---
 
 ## Active Projects
 
-- [[claude-session-manager]] — Python TUI 儀表板，從單一終端管理多個 Claude Code Session
-- [[csm-feature-roadmap]] — CSM 的版本演進與未來功能規劃
-- [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
-- [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
+- [[claude-session-manager]] — Python TUI dashboard for multi-session Claude Code management. Next: MCP Phase 1 (ProjectManager)
+- [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow. Grade A 99% health achieved
+- [[tech-research-squad]] — Four-discipline research framework (Prompt / Context / Harness / Compound Engineering)
+- [[csm-feature-roadmap]] — CSM version roadmap and future feature planning
+
+---
 
 ## Next Week
 
-- [ ]
+- [ ] CSM MCP Phase 1 implementation (ProjectManager — evaluation report recommendation #2)
+- [ ] Plan 003 Phase 3: Units 8-11 (knowledge layer + closed loop)
+- [ ] Plan 005 Phase 3: quality verification + cost tracking
+- [ ] obsidian-agent PR #1 follow-up (OPEN/MERGEABLE, awaiting upstream review)
+- [ ] Consider `/improve` proposal: OA_TIMEZONE setting (high risk, requires manual review)
+- [ ] Restore CSM development momentum (suggest flagged as low)
+- [ ] Deep dive: Prompt Engineering — CLAUDE.md best practices
+- [ ] Deep dive: Context Engineering — compaction and memory strategies
+
+---
 
 ## Reflection
 
--
+This vault's first 72 hours demonstrated the power of compound engineering at an extreme pace. Starting from an empty directory on Saturday, the system reached 48 notes with 299 bidirectional links and zero orphans by Monday — a testament to the obsidian-agent CLI + PARA structure combination.
+
+Key patterns that emerged:
+
+1. **Knowledge loop closure** was the pivotal moment (Day 2). Once `brainstorm -> plan -> work -> compound -> bridge -> vault` formed a complete cycle, every subsequent session automatically enriched the knowledge base. This is the compound engineering thesis validated in practice.
+
+2. **12-agent parallel sessions** (Day 3) proved to be a transformative work pattern. Four research disciplines and two plan phases were advanced simultaneously, with subagent isolation preventing context pollution. The vault went from 30 to 48 notes in a single session.
+
+3. **Schema evolution under load** (Plan 004) showed that structural upgrades are best done early. Migrating 31 notes on Day 3 was manageable; at 200+ notes it would have been painful. The friction exposed (CLI limitations, tag fragmentation) was caught at the right scale.
+
+4. **Local LLM reality check**: the 35B model at 1.6 tok/s with empty responses proved that benchmarking before planning is non-negotiable. The 9B model at 3.8 tok/s and phi4-mini at 19.7 tok/s are the practical workhorses on 16GB VRAM.
+
+The velocity is unsustainable long-term — this was a sprint to establish foundations. Next week should shift from infrastructure buildout to steady-state usage: CSM development, research pipeline automation, and letting the compound loop run at a natural cadence.
+
+---
+< [[2026-03-30]] | [[2026-W15-review]] >
