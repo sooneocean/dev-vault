@@ -8,12 +8,16 @@ updated: 2026-03-30
 
 ### agent-framework
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
+- [[research-scan-2026-03-30]] — (no summary)
 
 ### agent-harness
 - [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
 
 ### agent-workflow
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
+
+### agentic-harness
+- [[research-scan-2026-03-30]] — (no summary)
 
 ### architecture
 - [[csm-architecture]] — Claude Session Manager 技術架構 — 程序模型、串流、持久化
@@ -29,6 +33,9 @@ updated: 2026-03-30
 - [[claude-agent-sdk-api]] — Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility
 - [[context-engineering-hygiene]] — Actionable context hygiene rules — when to compact, when to use subagents, plugin overhead awareness
 - [[toolchain-reference]] — External repos, tools, plugins and config paths used in this project
+
+### automation
+- [[research-scan-2026-03-30]] — (no summary)
 
 ### ci-cd
 - [[github-發布流程]] — 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護
@@ -179,6 +186,7 @@ updated: 2026-03-30
 
 ### research-scan
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
+- [[research-scan-2026-03-30]] — (no summary)
 
 ### task-routing
 - [[local-llm-task-routing]] — RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API
@@ -237,6 +245,8 @@ updated: 2026-03-30
 | workspace | 2 |
 | hardware | 2 |
 | text-layout | 2 |
+| research-scan | 2 |
+| agent-framework | 2 |
 | version-tracking | 1 |
 | product-iteration | 1 |
 | claude-code-hooks | 1 |
@@ -252,11 +262,11 @@ updated: 2026-03-30
 | typescript | 1 |
 | performance | 1 |
 | agent-workflow | 1 |
-| research-scan | 1 |
 | auto-generated | 1 |
-| agent-framework | 1 |
 | rag | 1 |
 | weekly-review | 1 |
+| agentic-harness | 1 |
+| automation | 1 |
 | frontmatter | 1 |
 | clustering | 1 |
 | pretext | 1 |
