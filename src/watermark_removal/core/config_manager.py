@@ -109,6 +109,26 @@ class ConfigManager:
             ensemble_model_accuracies=raw_config.get("ensemble_model_accuracies", {"yolov5s": 0.85, "yolov5m": 0.90, "yolov5l": 0.92}),
             streaming_queue_size=raw_config.get("streaming_queue_size", 100),
             streaming_result_ttl_sec=raw_config.get("streaming_result_ttl_sec", 300),
+            # Phase 3B Label Studio
+            label_studio_enabled=raw_config.get("label_studio_enabled", False),
+            label_studio_url=raw_config.get("label_studio_url", "http://localhost:8080"),
+            label_studio_api_key=raw_config.get("label_studio_api_key", None),
+            label_studio_project_id=raw_config.get("label_studio_project_id", None),
+            label_studio_wait_timeout_sec=raw_config.get("label_studio_wait_timeout_sec", 3600.0),
+            # Phase 3B Optuna
+            optuna_enabled=raw_config.get("optuna_enabled", False),
+            optuna_study_name=raw_config.get("optuna_study_name", "watermark_ensemble_tuning"),
+            optuna_storage=raw_config.get("optuna_storage", "sqlite:///optuna.db"),
+            optuna_n_trials=raw_config.get("optuna_n_trials", 150),
+            optuna_search_bounds=raw_config.get("optuna_search_bounds", {
+                "weight_yolov5s": (0.1, 1.0),
+                "weight_yolov5m": (0.1, 1.0),
+                "weight_yolov5l": (0.1, 1.0),
+                "confidence_threshold": (0.05, 0.95),
+                "iou_threshold": (0.3, 0.7),
+                "nms_threshold": (0.3, 0.7),
+                "augmentation_intensity": (0.0, 1.0),
+            }),
         )
 
         logger.info(
