@@ -278,6 +278,46 @@ class ProcessConfig:
     streaming_result_ttl_sec: int = 300
     """Time-to-live for cached streaming results in seconds (default 5 min)."""
 
+    # Phase 3B: Label Studio annotation integration
+    label_studio_enabled: bool = False
+    """Enable Label Studio annotation workflow integration."""
+
+    label_studio_url: str = "http://localhost:8080"
+    """Label Studio server URL (for annotation uploads)."""
+
+    label_studio_api_key: str | None = None
+    """API key for Label Studio authentication."""
+
+    label_studio_project_id: int | None = None
+    """Project ID in Label Studio (created on first annotation)."""
+
+    label_studio_wait_timeout_sec: float = 3600.0
+    """Timeout for waiting on annotation completion in seconds."""
+
+    # Phase 3B: Optuna hyperparameter tuning
+    optuna_enabled: bool = False
+    """Enable Optuna hyperparameter tuning for ensemble detection."""
+
+    optuna_study_name: str = "watermark_ensemble_tuning"
+    """Optuna study name for experiment tracking."""
+
+    optuna_storage: str = "sqlite:///optuna.db"
+    """Optuna storage backend (SQLite path or database URI)."""
+
+    optuna_n_trials: int = 150
+    """Number of Optuna trials to run."""
+
+    optuna_search_bounds: dict[str, tuple] = field(default_factory=lambda: {
+        "weight_yolov5s": (0.1, 1.0),
+        "weight_yolov5m": (0.1, 1.0),
+        "weight_yolov5l": (0.1, 1.0),
+        "confidence_threshold": (0.05, 0.95),
+        "iou_threshold": (0.3, 0.7),
+        "nms_threshold": (0.3, 0.7),
+        "augmentation_intensity": (0.0, 1.0),
+    })
+    """Hyperparameter search space bounds for Optuna."""
+
     def __post_init__(self):
         """Validate configuration."""
         if not self.video_path:
@@ -342,3 +382,22 @@ class ProcessConfig:
             raise ValueError("streaming_queue_size must be >= 1")
         if self.streaming_result_ttl_sec < 1:
             raise ValueError("streaming_result_ttl_sec must be >= 1")
+
+        # Phase 3B Label Studio parameter validation
+        if self.label_studio_enabled:
+            if not self.label_studio_url:
+                raise ValueError("label_studio_url required when enabled")
+            if not self.label_studio_api_key:
+                raise ValueError("label_studio_api_key required when enabled")
+            if self.label_studio_wait_timeout_sec <= 0:
+                raise ValueError("label_studio_wait_timeout_sec must be > 0")
+
+        # Phase 3B Optuna parameter validation
+        if self.optuna_enabled:
+            if self.optuna_n_trials < 1:
+                raise ValueError("optuna_n_trials must be >= 1")
+            if not self.optuna_search_bounds:
+                raise ValueError("optuna_search_bounds must not be empty")
+            for param_name, (low, high) in self.optuna_search_bounds.items():
+                if low >= high:
+                    raise ValueError(f"optuna_search_bounds[{param_name}]: low must be < high")

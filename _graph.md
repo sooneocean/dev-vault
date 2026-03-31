@@ -1,7 +1,7 @@
 ---
 title: Knowledge Graph
 type: index
-updated: 2026-03-30
+updated: 2026-03-31
 ---
 
 # Knowledge Graph
@@ -199,6 +199,8 @@ updated: 2026-03-30
 | [[2026-03-29]] | [[2026-03-30]] | nav-next |
 | [[2026-03-30]] | [[2026-03-29]] | nav-prev |
 | [[2026-03-30]] | [[2026-03-31]] | nav-next |
+| [[2026-03-31]] | [[2026-03-30]] | nav-prev |
+| [[2026-03-31]] | [[2026-04-01]] | nav-next |
 | [[cli-update-fields-flag]] | [[dexg16-ai-coding-tools]] | related |
 | [[cli-update-fields-flag]] | [[improvement-2026-03-29-001]] | related |
 | [[cli-update-fields-flag]] | [[session-stop-wrapper-learning]] | related |

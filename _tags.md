@@ -1,7 +1,7 @@
 ---
 title: Tags Index
 type: index
-updated: 2026-03-30
+updated: 2026-03-31
 ---
 
 # Tags Index
@@ -75,6 +75,9 @@ updated: 2026-03-30
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
 - [[context-engineering-hygiene]] — Actionable context hygiene rules — when to compact, when to use subagents, plugin overhead awareness
 - [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
+
+### daily
+- [[2026-03-31]] — (no summary)
 
 ### diff-tracking
 - [[research-update-mode]] — Add --update flag to obsidian-agent research command to diff against previous research and surface changes
@@ -264,6 +267,7 @@ updated: 2026-03-30
 | agent-workflow | 1 |
 | auto-generated | 1 |
 | rag | 1 |
+| daily | 1 |
 | weekly-review | 1 |
 | agentic-harness | 1 |
 | automation | 1 |

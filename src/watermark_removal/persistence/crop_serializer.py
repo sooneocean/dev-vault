@@ -12,7 +12,7 @@ from ..core.types import CropRegion, FlowData
 logger = logging.getLogger(__name__)
 
 # Checkpoint format version for compatibility tracking
-CHECKPOINT_VERSION = "1.2"  # 1.2 adds flow_data support
+CHECKPOINT_VERSION = "1.3"  # 1.3 adds annotation_tasks and tuning_metadata; backward compatible with 1.0
 
 
 class CropRegionSerializer:
@@ -22,17 +22,21 @@ class CropRegionSerializer:
     def serialize(
         crop_regions: Dict[int, CropRegion],
         flow_data_dict: Dict[str, Any] | None = None,
+        annotation_tasks: Dict[int, Dict[str, Any]] | None = None,
+        tuning_metadata: Dict[str, Any] | None = None,
     ) -> str:
-        """Serialize crop regions and flow data to JSON string.
+        """Serialize crop regions, flow data, annotation tasks, and tuning metadata.
 
         Args:
             crop_regions: Dictionary mapping frame index to CropRegion.
-            flow_data_dict: Optional dictionary of serialized flow data.
+            flow_data_dict: Optional dictionary of serialized flow data (Phase 3A).
+            annotation_tasks: Optional dictionary of annotation task metadata (Phase 3B).
+            tuning_metadata: Optional dictionary of tuning results (Phase 3B).
 
         Returns:
-            JSON string representation of crop regions and flow data.
+            JSON string representation (v1.3 format, backward compatible with v1.0).
         """
-        if not crop_regions and not flow_data_dict:
+        if not crop_regions and not flow_data_dict and not annotation_tasks and not tuning_metadata:
             return json.dumps({"version": CHECKPOINT_VERSION})
 
         # Convert each CropRegion to dict
@@ -58,44 +62,56 @@ class CropRegionSerializer:
                 "pad_bottom": crop.pad_bottom,
             }
 
-        # Add flow data if provided
+        # Add Phase 3A data if provided
         if flow_data_dict:
             serialized["flow_data"] = flow_data_dict
+
+        # Add Phase 3B data if provided
+        if annotation_tasks:
+            serialized["annotation_tasks"] = annotation_tasks
+        if tuning_metadata:
+            serialized["tuning_metadata"] = tuning_metadata
 
         return json.dumps(serialized, indent=2)
 
     @staticmethod
-    def deserialize(json_str: str) -> tuple[Dict[int, CropRegion], Dict[str, Any] | None]:
-        """Deserialize crop regions and flow data from JSON string.
+    def deserialize(json_str: str) -> tuple[Dict[int, CropRegion], Dict[str, Any] | None, Dict[int, Dict] | None, Dict[str, Any] | None]:
+        """Deserialize checkpoint data from JSON string (v1.0/1.2/1.3).
 
         Args:
-            json_str: JSON string representation of crop regions and flow data.
+            json_str: JSON string representation of checkpoint data.
 
         Returns:
-            Tuple of (crop_regions dict, flow_data dict or None).
+            Tuple of (crop_regions, flow_data, annotation_tasks, tuning_metadata).
+            Any may be None if not present in checkpoint.
 
         Raises:
             json.JSONDecodeError: If JSON is invalid.
             ValueError: If crop data is malformed.
         """
         if not json_str.strip():
-            return {}, None
+            return {}, None, None, None
 
         data = json.loads(json_str)
         if not data:
-            return {}, None
+            return {}, None, None, None
 
         # Handle both old and new formats
-        # Old format: {"0": {...}, "1": {...}, ...}
-        # New format: {"version": "1.2", "crop_regions": {...}, "flow_data": {...}}
+        # v1.0 format: {"0": {...}, "1": {...}, ...}
+        # v1.2 format: {"version": "1.2", "crop_regions": {...}, "flow_data": {...}}
+        # v1.3 format: above + "annotation_tasks" and "tuning_metadata"
         if "version" in data:
-            # New format
+            # Versioned format
             crop_data_dict = data.get("crop_regions", {})
             flow_data_dict = data.get("flow_data", None)
+            annotation_tasks = data.get("annotation_tasks", None)
+            tuning_metadata = data.get("tuning_metadata", None)
         else:
-            # Old format - treat data as crop_regions directly
+            # Old v1.0 format - treat data as crop_regions directly
             crop_data_dict = data
             flow_data_dict = None
+            annotation_tasks = None
+            tuning_metadata = None
 
         crop_regions = {}
         for frame_idx_str, crop_data in crop_data_dict.items():
@@ -125,7 +141,7 @@ class CropRegionSerializer:
                     f"Malformed crop data for frame {frame_idx_str}: {e}"
                 ) from e
 
-        return crop_regions, flow_data_dict
+        return crop_regions, flow_data_dict, annotation_tasks, tuning_metadata
 
     @staticmethod
     def save_checkpoint(
@@ -133,14 +149,18 @@ class CropRegionSerializer:
         output_dir: str,
         filename: str = "checkpoint_crops.json",
         flow_data_dict: Dict[str, Any] | None = None,
+        annotation_tasks: Dict[int, Dict[str, Any]] | None = None,
+        tuning_metadata: Dict[str, Any] | None = None,
     ) -> Path:
-        """Save crop regions and flow data to checkpoint file.
+        """Save checkpoint with crop regions, flow data, annotations, and tuning (v1.3).
 
         Args:
             crop_regions: Dictionary mapping frame index to CropRegion.
             output_dir: Output directory for checkpoint file.
             filename: Checkpoint filename (default: checkpoint_crops.json).
-            flow_data_dict: Optional dictionary of serialized flow data.
+            flow_data_dict: Optional dictionary of serialized flow data (Phase 3A).
+            annotation_tasks: Optional dictionary of annotation task metadata (Phase 3B).
+            tuning_metadata: Optional dictionary of tuning results (Phase 3B).
 
         Returns:
             Path to saved checkpoint file.
@@ -151,14 +171,18 @@ class CropRegionSerializer:
         output_path = Path(output_dir) / filename
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        json_str = CropRegionSerializer.serialize(crop_regions, flow_data_dict)
+        json_str = CropRegionSerializer.serialize(
+            crop_regions, flow_data_dict, annotation_tasks, tuning_metadata
+        )
 
         with open(output_path, "w") as f:
             f.write(json_str)
 
         logger.info(
-            f"Saved crop checkpoint: {output_path} ({len(crop_regions)} regions, "
-            f"flow_data={'yes' if flow_data_dict else 'no'})"
+            f"Saved checkpoint v1.3: {output_path} ({len(crop_regions)} crop regions, "
+            f"flow_data={'yes' if flow_data_dict else 'no'}, "
+            f"annotations={'yes' if annotation_tasks else 'no'}, "
+            f"tuning={'yes' if tuning_metadata else 'no'})"
         )
         return output_path
 
@@ -166,15 +190,15 @@ class CropRegionSerializer:
     def load_checkpoint(
         output_dir: str,
         filename: str = "checkpoint_crops.json",
-    ) -> tuple[Dict[int, CropRegion], Dict[str, Any] | None] | None:
-        """Load crop regions and flow data from checkpoint file if it exists.
+    ) -> tuple[Dict[int, CropRegion], Dict[str, Any] | None, Dict[int, Dict] | None, Dict[str, Any] | None] | None:
+        """Load checkpoint from file (v1.0/1.2/1.3 format, backward compatible).
 
         Args:
             output_dir: Output directory to check for checkpoint file.
             filename: Checkpoint filename (default: checkpoint_crops.json).
 
         Returns:
-            Tuple of (crop_regions, flow_data_dict), or None if checkpoint doesn't exist.
+            Tuple of (crop_regions, flow_data, annotation_tasks, tuning_metadata), or None if checkpoint doesn't exist.
 
         Raises:
             ValueError: If checkpoint JSON is malformed.
@@ -189,12 +213,14 @@ class CropRegionSerializer:
             with open(checkpoint_path, "r") as f:
                 json_str = f.read()
 
-            crop_regions, flow_data = CropRegionSerializer.deserialize(json_str)
+            crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize(json_str)
             logger.info(
-                f"Loaded crop checkpoint: {checkpoint_path} ({len(crop_regions)} regions, "
-                f"flow_data={'yes' if flow_data else 'no'})"
+                f"Loaded checkpoint v1.3: {checkpoint_path} ({len(crop_regions)} crop regions, "
+                f"flow_data={'yes' if flow_data else 'no'}, "
+                f"annotations={'yes' if annotation_tasks else 'no'}, "
+                f"tuning={'yes' if tuning_metadata else 'no'})"
             )
-            return crop_regions, flow_data
+            return crop_regions, flow_data, annotation_tasks, tuning_metadata
 
         except Exception as e:
             logger.error(f"Failed to load checkpoint {checkpoint_path}: {e}")
