@@ -108,6 +108,11 @@ updated: 2026-04-03
 ### clustering
 - [[cluster-subtype-domain-dimensions]] — Enhance obsidian-agent cluster algorithm to use subtype and domain as clustering dimensions alongside tags and related links
 
+### collaboration
+- [[Unit4-Gospel-Collaboration-Matrix]] — 編輯和寫手的角色矩陣、溝通時間表、決策樹
+- [[Unit4-Gospel-Recruitment-Plan]] — 「20世纪黑人音樂人系列」Unit 4 的完整寫手招募框架、協作流程與質量控制方案
+- [[Unit4-Gospel-Writer-WorkPackage]] — 面向錄用寫手的快速參考、核心要求、提交流程
+
 ### compound-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
@@ -451,6 +456,7 @@ updated: 2026-04-03
 | context-engineering | 3 |
 | harness-engineering | 3 |
 | compound-engineering | 3 |
+| collaboration | 3 |
 | plugins | 3 |
 | workflow | 3 |
 | mcp | 3 |

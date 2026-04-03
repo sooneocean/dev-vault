@@ -62,3 +62,5 @@ N=新增, Enter=發送指令, X=停止, D=刪除, R=重啟, E=匯出, C=複製, 
 - [[csm-key-design-decisions]]
 - [[csm-feature-roadmap]]
 - [[claude-code-dev-tools]]
+- [[dev-vault-status]] — 同屬 Claude Code 生態系的知識管理工具
+- [[tech-research-squad]] — 研究 context management 和工程化基礎

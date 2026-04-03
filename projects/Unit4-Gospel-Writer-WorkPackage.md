@@ -1,11 +1,12 @@
 ---
 updated: "2026-04-03"
-tags: [project, active]
+tags: [project, active, collaboration]
 title: Unit 4 Gospel — 寫手工作包（簡化版）
 type: project
 status: active
 created: 2026-04-02
 summary: 面向錄用寫手的快速參考、核心要求、提交流程
+related: ["[[Unit4-Gospel-Recruitment-Plan]]", "[[Unit4-Gospel-Collaboration-Matrix]]"]
 ---
 
 # Unit 4 Gospel — 寫手工作包

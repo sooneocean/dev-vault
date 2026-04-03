@@ -11,7 +11,7 @@ domain: ai-engineering
 summary: "四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering"
 goal: "透過持續 onboarding 與反思迭代，建立可複利的 AI 工程知識體系"
 deadline: ""
-related: ["[[compound-engineering-plugin]]", "[[claude-code-configuration]]", "[[claude-code-dev-tools]]", "[[research-update-mode]]", "[[context-engineering-hygiene]]"]
+related: ["[[compound-engineering-plugin]]", "[[claude-code-configuration]]", "[[claude-code-dev-tools]]", "[[research-update-mode]]", "[[context-engineering-hygiene]]", "[[claude-session-manager]]"]
 ---
 
 # Tech Research Squad

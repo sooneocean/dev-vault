@@ -8,9 +8,9 @@ status: active
 maturity: growing
 domain: "knowledge-management"
 summary: "Obsidian PARA vault with self-iteration workflow, current progress and pending work"
-goal: "Open-source developer knowledge base with self-iteration workflow"
+goal: "Build an open-source developer knowledge base (PARA structure) with continuous self-iteration loop: /improve → analyze → propose → apply → learn"
 deadline: ""
-related: ["[[compound-engineering-research]]", "[[2026-03-30]]", "[[architecture-lessons]]", "[[context-engineering-hygiene]]", "[[benchmark-first-rule]]", "[[toolchain-reference]]", "[[claude-agent-sdk-api]]"]
+related: ["[[compound-engineering-research]]", "[[2026-03-30]]", "[[architecture-lessons]]", "[[context-engineering-hygiene]]", "[[benchmark-first-rule]]", "[[toolchain-reference]]", "[[claude-agent-sdk-api]]", "[[claude-session-manager]]"]
 relation_map: ""
 ---
 

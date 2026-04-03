@@ -25,6 +25,7 @@ updated: 2026-04-03
 | [[csm-feature-roadmap]] | [[csm-key-design-decisions]] | weak |
 | [[csm-feature-roadmap]] | [[dexg16-git-and-github]] | weak |
 | [[csm-feature-roadmap]] | [[pretext-csm-tui-layout]] | weak |
+| [[csm-feature-roadmap]] | [[Unit4-Gospel-Recruitment-Plan]] | strong |
 | [[dev-vault-status]] | [[compound-engineering-research]] | medium |
 | [[dev-vault-status]] | [[2026-03-30]] | medium |
 | [[dev-vault-status]] | [[architecture-lessons]] | strong |
@@ -32,11 +33,19 @@ updated: 2026-04-03
 | [[dev-vault-status]] | [[benchmark-first-rule]] | strong |
 | [[dev-vault-status]] | [[toolchain-reference]] | strong |
 | [[dev-vault-status]] | [[claude-agent-sdk-api]] | strong |
+| [[dev-vault-status]] | [[claude-session-manager]] | strong |
 | [[tech-research-squad]] | [[compound-engineering-plugin]] | medium |
 | [[tech-research-squad]] | [[claude-code-configuration]] | weak |
 | [[tech-research-squad]] | [[claude-code-dev-tools]] | weak |
 | [[tech-research-squad]] | [[research-update-mode]] | weak |
 | [[tech-research-squad]] | [[context-engineering-hygiene]] | medium |
+| [[tech-research-squad]] | [[claude-session-manager]] | strong |
+| [[Unit4-Gospel-Collaboration-Matrix]] | [[Unit4-Gospel-Recruitment-Plan]] | strong |
+| [[Unit4-Gospel-Collaboration-Matrix]] | [[Unit4-Gospel-Writer-WorkPackage]] | strong |
+| [[Unit4-Gospel-Recruitment-Plan]] | [[Unit4-Gospel-Collaboration-Matrix]] | strong |
+| [[Unit4-Gospel-Recruitment-Plan]] | [[Unit4-Gospel-Writer-WorkPackage]] | strong |
+| [[Unit4-Gospel-Writer-WorkPackage]] | [[Unit4-Gospel-Recruitment-Plan]] | strong |
+| [[Unit4-Gospel-Writer-WorkPackage]] | [[Unit4-Gospel-Collaboration-Matrix]] | strong |
 | [[architecture-lessons]] | [[dev-vault-status]] | strong |
 | [[architecture-lessons]] | [[context-engineering-hygiene]] | strong |
 | [[architecture-lessons]] | [[benchmark-first-rule]] | strong |
@@ -362,21 +371,22 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[README]]
 - [[README]]
 
-### Cluster 2: dexg16-ai-coding-tools (44 notes)
+### Cluster 2: dexg16-ai-coding-tools (47 notes)
 - [[dexg16-ai-coding-tools]]
+- [[dev-vault-status]]
 - [[compound-engineering-plugin]]
 - [[context-engineering-hygiene]]
 - [[dexg16-git-and-github]]
-- [[dev-vault-status]]
 - [[dexg16-ai-stack]]
 - [[dexg16-all-projects-catalog]]
+- [[tech-research-squad]]
 - [[claude-code-configuration]]
 - [[compound-engineering-research]]
 - [[dexg16-dev-environment]]
 - [[harness-engineering-research]]
 - [[toolchain-reference]]
 - [[claude-session-manager]]
-- [[tech-research-squad]]
+- [[csm-feature-roadmap]]
 - [[architecture-lessons]]
 - [[benchmark-first-rule]]
 - [[claude-agent-sdk-api]]
@@ -389,7 +399,6 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[pretext-csm-tui-layout]]
 - [[claude-code-dev-tools]]
 - [[開源開發者身分]]
-- [[csm-feature-roadmap]]
 - [[github-發布流程]]
 - [[prompt-engineering-research]]
 - [[cli-update-fields-flag]]
@@ -400,6 +409,9 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[local-llm-deployment]]
 - [[開源專案品質標準]]
 - [[research-update-mode]]
+- [[Unit4-Gospel-Collaboration-Matrix]]
+- [[Unit4-Gospel-Recruitment-Plan]]
+- [[Unit4-Gospel-Writer-WorkPackage]]
 - [[improvement-2026-03-30-001]]
 - [[local-llm-task-routing]]
 - [[pretext-無-dom-文字測量引擎]]

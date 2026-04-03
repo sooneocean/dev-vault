@@ -1,5 +1,5 @@
 ---
-tags: [project, active]
+tags: [project, active, collaboration]
 title: Unit 4 Gospel 寫手招募與協作方案
 type: project
 status: active
@@ -8,6 +8,7 @@ deadline: 2026-04-24
 created: 2026-04-02
 updated: "2026-04-03"
 summary: 「20世纪黑人音樂人系列」Unit 4 的完整寫手招募框架、協作流程與質量控制方案
+related: ["[[Unit4-Gospel-Collaboration-Matrix]]", "[[Unit4-Gospel-Writer-WorkPackage]]"]
 ---
 
 # Unit 4 Gospel — 招募與協作完整方案

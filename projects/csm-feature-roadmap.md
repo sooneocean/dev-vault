@@ -10,7 +10,7 @@ domain: project-specific
 summary: "CSM 的版本演進與未來功能規劃"
 goal: ""
 deadline: ""
-related: ["[[csm-architecture]]", "[[csm-key-design-decisions]]", "[[dexg16-git-and-github]]", "[[pretext-csm-tui-layout]]"]
+related: ["[[csm-architecture]]", "[[csm-key-design-decisions]]", "[[dexg16-git-and-github]]", "[[pretext-csm-tui-layout]]", "[[Unit4-Gospel-Recruitment-Plan]]"]
 relation_map: "claude-session-manager:documents"
 ---
 
