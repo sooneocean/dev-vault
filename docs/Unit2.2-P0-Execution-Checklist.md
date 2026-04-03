@@ -1,3 +1,15 @@
+---
+title: Unit 2.2 P0 優先級執行清單 — 立即開始
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 2.2 P0 優先級執行清單 — 立即開始
 
 ## 🎯 今天的目標：編輯 8 篇 P0 文章

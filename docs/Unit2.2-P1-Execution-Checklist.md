@@ -1,3 +1,15 @@
+---
+title: Unit 2.2 P1 優先級執行清單 — 完成 P0 後執行
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 2.2 P1 優先級執行清單 — 完成 P0 後執行
 
 ## 🎯 P1 目標：編輯 15 篇文章

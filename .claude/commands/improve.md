@@ -1,3 +1,15 @@
+---
+title: Analyze Mode (default)
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 Analyze recent usage experience and suggest configuration improvements for Claude Code.
 
 Usage: `[apply|status]`

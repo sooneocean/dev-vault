@@ -1,3 +1,15 @@
+---
+title: 樂評評測｜Yohee、Jacob Collier、Kanye West 等藝人專題分析｜YOLO LAB
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 樂評評測｜Yohee、Jacob Collier、Kanye West 等藝人專題分析｜YOLO LAB
 
 ## 簡介

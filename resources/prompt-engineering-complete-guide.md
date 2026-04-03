@@ -1,3 +1,15 @@
+---
+title: 提示詞工程完全指南｜Chain-of-Thought × Few-Shot × 角色扮演最強技巧
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: "2026-04-03"
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 提示詞工程完全指南｜Chain-of-Thought × Few-Shot × 角色扮演最強技巧
 
 2026 年，能否駕馭大型語言模型的關鍵早已不是「會不會用」，而是「用得好不好」。提示詞工程（Prompt Engineering）正是決定 AI 輸出品質的核心技能。無論你是軟體工程師、產品經理還是內容創作者，掌握系統化的提示詞方法論，將讓你從「靠運氣獲得好結果」進化為「穩定產出高品質輸出」。

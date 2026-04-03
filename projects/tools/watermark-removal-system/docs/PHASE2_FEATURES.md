@@ -1,3 +1,15 @@
+---
+title: Phase 2 Features Guide
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Phase 2 Features Guide
 
 Complete reference for all Phase 2 optional features and their usage.

@@ -4,7 +4,7 @@ type: idea
 tags: [methodology, writing, automation, brainstorm, future, ai-engineering]
 created: "2026-03-31"
 updated: "2026-04-03"
-status: draft
+status: "archived"
 maturity: seed
 domain: ""
 summary: "Brainstorming a framework for dev-driven writing and batch publishing."

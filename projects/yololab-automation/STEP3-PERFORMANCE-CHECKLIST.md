@@ -1,3 +1,15 @@
+---
+title: ✅ Step 3：性能配置驗證清單
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # ✅ Step 3：性能配置驗證清單
 
 **時間**：2026-03-31 T+2h（Step 2 完成後）

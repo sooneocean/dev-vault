@@ -1,3 +1,15 @@
+---
+title: Untitled
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 Search notes in the knowledge base.
 
 Usage: `<keyword> [--type TYPE] [--tag TAG] [--status STATUS]`

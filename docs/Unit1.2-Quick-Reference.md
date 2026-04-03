@@ -1,3 +1,15 @@
+---
+title: Unit 1.2 快速參考 | Schema Markup 佈署速查表
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 1.2 快速參考 | Schema Markup 佈署速查表
 ## 可複製粘貼的命令與清單
 

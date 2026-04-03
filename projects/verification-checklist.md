@@ -1,3 +1,15 @@
+---
+title: 方案 2：進階優化設定驗證清單
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: "2026-04-03"
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 方案 2：進階優化設定驗證清單
 
 ## 第一部分：停用衝突外掛（手動操作）

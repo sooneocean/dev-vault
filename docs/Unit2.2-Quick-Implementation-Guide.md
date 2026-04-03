@@ -1,3 +1,15 @@
+---
+title: Unit 2.2 快速實施指南：內部連結部署
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 2.2 快速實施指南：內部連結部署
 
 ## ⚡ 5 分鐘快速上手

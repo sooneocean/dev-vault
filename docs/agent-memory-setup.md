@@ -1,3 +1,15 @@
+---
+title: Agent Memory System Setup Guide
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Agent Memory System Setup Guide
 
 ## Overview

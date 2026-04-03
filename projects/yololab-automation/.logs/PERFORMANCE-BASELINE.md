@@ -1,3 +1,15 @@
+---
+title: 性能基準線記錄
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 性能基準線記錄
 
 **記錄日期**：2026-03-31

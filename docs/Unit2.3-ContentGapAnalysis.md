@@ -1,3 +1,15 @@
+---
+title: Unit 2.3 內容缺口分析 — 2026-04-03
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 2.3 內容缺口分析 — 2026-04-03
 
 ## 📊 TOP 50 分類分布

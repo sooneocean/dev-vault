@@ -1,3 +1,15 @@
+---
+title: AI 科技｜LLM 工具評測、人物分析、最新趨勢｜YOLO LAB
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # AI 科技｜LLM 工具評測、人物分析、最新趨勢｜YOLO LAB
 
 ## 簡介

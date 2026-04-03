@@ -1,3 +1,15 @@
+---
+title: Week 2 執行進度總結 (2026-04-06)
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Week 2 執行進度總結 (2026-04-06)
 
 ## 📊 進度概覽

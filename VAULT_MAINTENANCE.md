@@ -1,3 +1,15 @@
+---
+title: Vault 維護計劃
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Vault 維護計劃
 
 此文檔定義 Clausidian vault 的自動化維護流程。根據分析：孤立笔记 332 個 (87.6%)，96% 为 project，100% 未分配域。

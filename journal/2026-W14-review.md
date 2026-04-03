@@ -173,4 +173,4 @@ Key patterns that emerged:
 The velocity is unsustainable long-term — this was a sprint to establish foundations. Next week should shift from infrastructure buildout to steady-state usage: CSM development, research pipeline automation, and letting the compound loop run at a natural cadence.
 
 ---
-< [[2026-03-30]] | [[2026-W15-review]] >
+< [[2026-03-30]] | [[2026-W14-review]] >

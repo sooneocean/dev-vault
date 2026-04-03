@@ -1,3 +1,15 @@
+---
+title: Untitled
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 Show research pipeline status: recent scans, pending proposals, model stats.
 
 Run:

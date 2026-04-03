@@ -1,3 +1,15 @@
+---
+title: YOLOv5 Watermark Detection Guide
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # YOLOv5 Watermark Detection Guide
 
 This guide explains how to use and customize watermark detection in Phase 2.

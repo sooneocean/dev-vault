@@ -1,3 +1,15 @@
+---
+title: YOLO LAB 設計系統（2026）
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: "2026-04-03"
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # YOLO LAB 設計系統（2026）
 
 ## 概述

@@ -1,3 +1,15 @@
+---
+title: 03 — Technical Design
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 03 — Technical Design
 
 ## 系統架構

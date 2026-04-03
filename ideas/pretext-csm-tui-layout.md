@@ -4,7 +4,7 @@ type: idea
 tags: [pretext, tui, text-layout, brainstorm, future, ai-engineering]
 created: "2026-03-29"
 updated: "2026-04-03"
-status: draft
+status: "archived"
 maturity: seed
 domain: project-specific
 summary: "Use pretext engine for CSM TUI text measurement and layout optimization"

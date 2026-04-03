@@ -1,3 +1,15 @@
+---
+title: Watermark Removal Pipeline — Test Coverage Review
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Watermark Removal Pipeline — Test Coverage Review
 
 **Reviewed commits:** 5 commits adding inpaint-executor, stitch-handler, video-encoder, pipeline orchestration, and linting fixes

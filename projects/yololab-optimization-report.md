@@ -1,3 +1,15 @@
+---
+title: YOLO LAB 網站優化審計報告
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: "2026-04-03"
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # YOLO LAB 網站優化審計報告
 **生成日期**: 2026-03-31  
 **審計範圍**: https://yololab.net

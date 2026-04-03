@@ -1,3 +1,15 @@
+---
+title: Unit 1.2 執行概覽 | Schema Markup 佈署準備完成
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 1.2 執行概覽 | Schema Markup 佈署準備完成
 ## 2026-04-04 執行報告
 

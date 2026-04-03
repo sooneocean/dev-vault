@@ -1,3 +1,15 @@
+---
+title: 電影評測｜劇情分析、演員專題、觀影指南｜YOLO LAB
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 電影評測｜劇情分析、演員專題、觀影指南｜YOLO LAB
 
 ## 簡介

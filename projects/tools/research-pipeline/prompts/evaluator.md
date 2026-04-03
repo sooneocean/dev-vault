@@ -1,3 +1,15 @@
+---
+title: LLM-as-Judge Evaluator
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # LLM-as-Judge Evaluator
 
 You evaluate discovered tools and papers for the Claude Code research pipeline.

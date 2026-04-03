@@ -1,3 +1,15 @@
+---
+title: ✅ Clausidian Vault 自動化設置完成
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # ✅ Clausidian Vault 自動化設置完成
 
 ## 🎉 設置狀態

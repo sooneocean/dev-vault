@@ -232,31 +232,31 @@ TF-IDF weighted (rare tags + content overlap score higher):
 
 | Note A | Note B | Score | Shared Tags |
 |--------|--------|-------|-------------|
-| [[cluster-subtype-domain-dimensions]] | [[research-update-mode]] | 9.5 | clausidian, brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[cluster-subtype-domain-dimensions]] | 9.4 | clausidian, brainstorm, future, ai-engineering |
-| [[relation-map-graph-consumer]] | [[research-update-mode]] | 9.4 | clausidian, brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[relation-map-graph-consumer]] | 9.2 | clausidian, brainstorm, future, ai-engineering |
-| [[cluster-subtype-domain-dimensions]] | [[pretext-csm-tui-layout]] | 6.8 | brainstorm, future, ai-engineering |
-| [[pretext-csm-tui-layout]] | [[writing-methodology-framework]] | 6.8 | brainstorm, future, ai-engineering |
-| [[cluster-subtype-domain-dimensions]] | [[writing-methodology-framework]] | 6.7 | brainstorm, future, ai-engineering |
-| [[pretext-csm-tui-layout]] | [[relation-map-graph-consumer]] | 6.7 | brainstorm, future, ai-engineering |
-| [[pretext-csm-tui-layout]] | [[research-update-mode]] | 6.7 | brainstorm, future, ai-engineering |
-| [[relation-map-graph-consumer]] | [[writing-methodology-framework]] | 6.7 | brainstorm, future, ai-engineering |
-| [[research-update-mode]] | [[writing-methodology-framework]] | 6.7 | brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[pretext-csm-tui-layout]] | 6.6 | brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[writing-methodology-framework]] | 6.6 | brainstorm, future, ai-engineering |
-| [[claude-session-manager]] | [[csm-architecture]] | 4.9 | claude-code, python |
-| [[harness-engineering-research]] | [[improvement-2026-03-30-002]] | 4.7 | claude-code, hooks, reference, knowledge-management |
-| [[dev-vault-product-version]] | [[dev-vault-status]] | 4.2 | project, active |
-| [[dexg16-machine-specs]] | [[local-llm-deployment]] | 4.2 | hardware, reference, knowledge-management |
-| [[Unit4-Gospel-Collaboration-Matrix]] | [[Unit4-Gospel-Recruitment-Plan]] | 4 | project, active |
-| [[Unit4-Gospel-Collaboration-Matrix]] | [[Unit4-Gospel-Writer-WorkPackage]] | 4 | project, active |
-| [[Unit4-Gospel-Recruitment-Plan]] | [[Unit4-Gospel-Writer-WorkPackage]] | 4 | project, active |
-| [[claude-session-manager]] | [[csm-feature-roadmap]] | 3.8 | project, active |
-| [[claude-session-manager]] | [[dev-vault-product-version]] | 3.8 | project, active |
-| [[claude-session-manager]] | [[dev-vault-status]] | 3.8 | project, active |
-| [[claude-session-manager]] | [[tech-research-squad]] | 3.8 | project, active |
-| [[claude-session-manager]] | [[Unit4-Gospel-Collaboration-Matrix]] | 3.8 | project, active |
+| [[cluster-subtype-domain-dimensions]] | [[research-update-mode]] | 10 | clausidian, brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[cluster-subtype-domain-dimensions]] | 9.9 | clausidian, brainstorm, future, ai-engineering |
+| [[relation-map-graph-consumer]] | [[research-update-mode]] | 9.9 | clausidian, brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[relation-map-graph-consumer]] | 9.7 | clausidian, brainstorm, future, ai-engineering |
+| [[cluster-subtype-domain-dimensions]] | [[pretext-csm-tui-layout]] | 7.2 | brainstorm, future, ai-engineering |
+| [[pretext-csm-tui-layout]] | [[writing-methodology-framework]] | 7.2 | brainstorm, future, ai-engineering |
+| [[cluster-subtype-domain-dimensions]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
+| [[pretext-csm-tui-layout]] | [[relation-map-graph-consumer]] | 7.1 | brainstorm, future, ai-engineering |
+| [[pretext-csm-tui-layout]] | [[research-update-mode]] | 7.1 | brainstorm, future, ai-engineering |
+| [[relation-map-graph-consumer]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
+| [[research-update-mode]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[pretext-csm-tui-layout]] | 7 | brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[writing-methodology-framework]] | 7 | brainstorm, future, ai-engineering |
+| [[claude-session-manager]] | [[csm-architecture]] | 5.2 | claude-code, python |
+| [[harness-engineering-research]] | [[improvement-2026-03-30-002]] | 5.2 | claude-code, hooks, reference, knowledge-management |
+| [[dexg16-machine-specs]] | [[local-llm-deployment]] | 4.6 | hardware, reference, knowledge-management |
+| [[harness-engineering-research]] | [[research-mcp-model-context-protocol-2026-03-29]] | 4.1 | mcp, reference, knowledge-management |
+| [[compound-engineering-plugin]] | [[github-發布流程]] | 4 | workflow, reference, knowledge-management |
+| [[compound-engineering-research]] | [[github-發布流程]] | 4 | workflow, reference, knowledge-management |
+| [[harness-engineering-research]] | [[local-llm-task-routing]] | 4 | mcp, reference, knowledge-management |
+| [[local-llm-task-routing]] | [[research-mcp-model-context-protocol-2026-03-29]] | 4 | mcp, reference, knowledge-management |
+| [[context-engineering-research]] | [[dexg16-ai-stack]] | 3.6 | llm, reference, knowledge-management |
+| [[context-engineering-research]] | [[local-llm-task-routing]] | 3.6 | llm, reference, knowledge-management |
+| [[dexg16-ai-stack]] | [[prompt-engineering-research]] | 3.6 | llm, reference, knowledge-management |
+| [[local-llm-task-routing]] | [[prompt-engineering-research]] | 3.6 | llm, reference, knowledge-management |
 
 ## Clusters
 

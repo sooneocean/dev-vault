@@ -1,3 +1,15 @@
+---
+title: Unit 2.1：支柱頁設計文檔
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 2.1：支柱頁設計文檔
 
 ## 執行計畫

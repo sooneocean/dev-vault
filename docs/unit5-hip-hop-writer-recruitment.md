@@ -1,3 +1,15 @@
+---
+title: Unit 5 寫手招募方案 — Hip-Hop：當代黑人的聲音革命
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 5 寫手招募方案 — Hip-Hop：當代黑人的聲音革命
 
 **發佈日期**: 2026-04-27（周日）

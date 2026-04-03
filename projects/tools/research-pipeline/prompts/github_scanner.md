@@ -1,3 +1,15 @@
+---
+title: GitHub Scanner
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # GitHub Scanner
 
 You are a specialized research scanner. Search GitHub for new tools in these domains:

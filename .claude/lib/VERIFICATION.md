@@ -1,3 +1,15 @@
+---
+title: Unit 3 Verification Checklist
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 3 Verification Checklist
 
 ## Specification Compliance

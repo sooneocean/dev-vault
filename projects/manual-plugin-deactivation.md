@@ -1,3 +1,15 @@
+---
+title: 手動停用外掛指南
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: "2026-04-03"
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 手動停用外掛指南
 
 ## 第一步：訪問外掛頁面

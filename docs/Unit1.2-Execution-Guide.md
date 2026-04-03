@@ -1,3 +1,15 @@
+---
+title: Unit 1.2 執行指南：基礎 Schema Markup 佈署
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 1.2 執行指南：基礎 Schema Markup 佈署
 ## 可操作步驟細節 | 2026-04-04
 

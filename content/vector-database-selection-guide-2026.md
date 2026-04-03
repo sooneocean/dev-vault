@@ -1,3 +1,15 @@
+---
+title: 向量數據庫選型指南 2026 — Pinecone vs Weaviate vs Milvus vs Qdrant
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 向量數據庫選型指南 2026 — Pinecone vs Weaviate vs Milvus vs Qdrant
 
 你的 AI 應用開始使用 embedding，現在需要存儲和查詢百萬級向量。選錯數據庫，輕則成本飆升、查詢延遲爆炸，重則整個系統架構推倒重來。本指南深度對比四大主流向量數據庫，從性能、成本、功能三個維度拆解差異，附上選型決策樹和 RAG 最佳實踐，幫你做出最適合的技術決策。

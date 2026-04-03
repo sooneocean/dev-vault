@@ -1,3 +1,15 @@
+---
+title: Week 3 WordPress Publishing Guide
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Week 3 WordPress Publishing Guide
 ## 10 Articles (Article 6-15) 批量發佈清單
 

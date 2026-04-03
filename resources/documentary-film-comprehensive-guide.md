@@ -5,7 +5,7 @@ subtype: article
 tags: [film, documentary, oscar, guide, cinema, reference, knowledge-management]
 created: "2026-04-03"
 updated: "2026-04-03"
-status: draft
+status: "archived"
 maturity: mature
 domain: "project-specific"
 summary: "深度探討紀錄電影與紀錄片的區別，分析5部必看奧斯卡提名作品，指南涵蓋導演視角、敘事手法與流媒體平台推薦。"

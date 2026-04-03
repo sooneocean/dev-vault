@@ -1,3 +1,15 @@
+---
+title: Phase 2 Migration Guide
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Phase 2 Migration Guide
 
 Upgrade from Phase 1 MVP to Phase 2 Enhanced system for temporal smoothing, automatic watermark detection, advanced blending, and quality monitoring.

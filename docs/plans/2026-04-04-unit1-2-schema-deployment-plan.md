@@ -1,3 +1,15 @@
+---
+title: Unit 1.2：基礎 Schema Markup 佈署計畫
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Unit 1.2：基礎 Schema Markup 佈署計畫
 ## 2026-04-04 執行版本
 

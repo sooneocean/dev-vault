@@ -1,3 +1,15 @@
+---
+title: Quality Metrics Guide
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Quality Metrics Guide
 
 Phase 2 automatically computes per-frame quality metrics to help assess watermark removal quality. This guide explains each metric and how to interpret results.

@@ -1,3 +1,15 @@
+---
+title: Week 2 執行成果——Executive Summary
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Week 2 執行成果——Executive Summary
 
 ## 🎯 一句話總結

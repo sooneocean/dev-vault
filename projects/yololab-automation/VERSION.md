@@ -1,3 +1,15 @@
+---
+title: 版本和變更日誌
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 版本和變更日誌
 
 **當前版本**：1.0.0

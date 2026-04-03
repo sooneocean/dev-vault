@@ -1,3 +1,15 @@
+---
+title: SEO 文案人類化重寫 - Batch 1-2 分析報告
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # SEO 文案人類化重寫 - Batch 1-2 分析報告
 
 **生成時間**: 2026-04-01

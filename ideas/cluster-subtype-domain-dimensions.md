@@ -4,7 +4,7 @@ type: idea
 tags: [clausidian, clustering, brainstorm, future, ai-engineering]
 created: "2026-03-29"
 updated: "2026-04-03"
-status: draft
+status: "archived"
 maturity: seed
 domain: knowledge-management
 summary: "Enhance obsidian-agent cluster algorithm to use subtype and domain as clustering dimensions alongside tags and related links"

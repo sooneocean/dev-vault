@@ -1,3 +1,15 @@
+---
+title: YOLO LAB 網站優化 - 快速操作指南
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: "2026-04-03"
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # YOLO LAB 網站優化 - 快速操作指南
 
 ## 🎯 已完成的自動化優化

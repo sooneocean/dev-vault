@@ -1,3 +1,15 @@
+---
+title: Checkpoint Resumption Guide
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Checkpoint Resumption Guide
 
 This guide explains how to use checkpoint resumption to handle interruptions in long video processing.

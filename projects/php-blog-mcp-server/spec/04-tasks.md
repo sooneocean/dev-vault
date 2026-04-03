@@ -1,3 +1,15 @@
+---
+title: 04 — Implementation Tasks (SDD Task Breakdown)
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 04 — Implementation Tasks (SDD Task Breakdown)
 
 ## 開發階段

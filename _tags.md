@@ -11,10 +11,18 @@ updated: 2026-04-03
 - [[csm-feature-roadmap]] — CSM 的版本演進與未來功能規劃
 - [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
 - [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
+- [[manual-plugin-deactivation]] — (no summary)
+- [[QUICK-START-GUIDE]] — (no summary)
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
 - [[Unit4-Gospel-Collaboration-Matrix]] — 編輯和寫手的角色矩陣、溝通時間表、決策樹
 - [[Unit4-Gospel-Recruitment-Plan]] — 「20世纪黑人音樂人系列」Unit 4 的完整寫手招募框架、協作流程與質量控制方案
 - [[Unit4-Gospel-Writer-WorkPackage]] — 面向錄用寫手的快速參考、核心要求、提交流程
+- [[verification-checklist]] — (no summary)
+- [[yololab-optimization-report]] — (no summary)
+- [[YOLO_LAB_Design_System]] — (no summary)
+- [[article-ai-coding-assistants-2026]] — (no summary)
+- [[llm-model-comparison-2026]] — (no summary)
+- [[prompt-engineering-complete-guide]] — (no summary)
 
 ### agent-framework
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
@@ -308,10 +316,18 @@ updated: 2026-04-03
 - [[csm-feature-roadmap]] — CSM 的版本演進與未來功能規劃
 - [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
 - [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
+- [[manual-plugin-deactivation]] — (no summary)
+- [[QUICK-START-GUIDE]] — (no summary)
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
 - [[Unit4-Gospel-Collaboration-Matrix]] — 編輯和寫手的角色矩陣、溝通時間表、決策樹
 - [[Unit4-Gospel-Recruitment-Plan]] — 「20世纪黑人音樂人系列」Unit 4 的完整寫手招募框架、協作流程與質量控制方案
 - [[Unit4-Gospel-Writer-WorkPackage]] — 面向錄用寫手的快速參考、核心要求、提交流程
+- [[verification-checklist]] — (no summary)
+- [[yololab-optimization-report]] — (no summary)
+- [[YOLO_LAB_Design_System]] — (no summary)
+- [[article-ai-coding-assistants-2026]] — (no summary)
+- [[llm-model-comparison-2026]] — (no summary)
+- [[prompt-engineering-complete-guide]] — (no summary)
 
 ### prompt-engineering
 - [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
@@ -419,11 +435,11 @@ updated: 2026-04-03
 |-----|-------|
 | knowledge-management | 49 |
 | reference | 38 |
+| project | 16 |
+| active | 16 |
 | claude-code | 15 |
 | daily | 10 |
 | log | 10 |
-| project | 8 |
-| active | 8 |
 | auto-memory-migration | 6 |
 | brainstorm | 6 |
 | future | 6 |

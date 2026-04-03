@@ -1,3 +1,15 @@
+---
+title: WordPress 發佈系統安裝與設定指南 (Pandoc & WP-CLI)
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # WordPress 發佈系統安裝與設定指南 (Pandoc & WP-CLI)
 
 本文件旨在協助您安裝與設定發佈文章至 WordPress 所需的工具：Pandoc (Markdown 轉 HTML) 與 WP-CLI (WordPress 命令行介面)。

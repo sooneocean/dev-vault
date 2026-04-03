@@ -1,3 +1,15 @@
+---
+title: 01 — Product Vision
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 01 — Product Vision
 
 ## 產品名稱

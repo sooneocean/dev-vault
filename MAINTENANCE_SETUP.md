@@ -1,3 +1,15 @@
+---
+title: Vault 維護自動化設置指南
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Vault 維護自動化設置指南
 
 本文檔說明如何設置自動化 Vault 維護任務。

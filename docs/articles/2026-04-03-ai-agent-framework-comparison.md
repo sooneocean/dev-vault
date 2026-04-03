@@ -1,3 +1,15 @@
+---
+title: AI智能體框架完全對比｜LangGraph vs Claude SDK vs AutoGPT 2026最新評測
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # AI智能體框架完全對比｜LangGraph vs Claude SDK vs AutoGPT 2026最新評測
 
 2026 年，AI 智能體市場規模突破 109 億美元，年複合成長率高達 46.3%。Gartner 預測今年將有 40% 的企業應用內建任務型智能體，而 Model Context Protocol（MCP）在數月內達到 9,700 萬次下載，正成為智能體工具連接的事實標準。

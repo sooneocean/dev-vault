@@ -1,3 +1,15 @@
+---
+title: ⚡ Step 2：SEO 批量優化 - 快速執行指南
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # ⚡ Step 2：SEO 批量優化 - 快速執行指南
 
 **目標**：一鍵優化 136 篇文章的 SEO 元數據

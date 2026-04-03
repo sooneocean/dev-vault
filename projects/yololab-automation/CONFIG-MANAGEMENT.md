@@ -1,3 +1,15 @@
+---
+title: 配置管理規範
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 配置管理規範
 
 **目的**：統一維護 YOLO LAB WordPress.com 網站的自動化配置和優化指令

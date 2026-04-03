@@ -1,3 +1,15 @@
+---
+title: 執行日誌
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 執行日誌
 
 **目的**：記錄所有自動化腳本和配置變更的執行情況

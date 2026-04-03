@@ -1,3 +1,15 @@
+---
+title: AI 編程助手工作流優化指南 — GitHub Copilot vs Claude Code vs Cursor
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: "2026-04-03"
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # AI 編程助手工作流優化指南 — GitHub Copilot vs Claude Code vs Cursor
 
 **發布日期** 2026-04-03 | **閱讀時間** 12 分鐘 | **難度** 中級

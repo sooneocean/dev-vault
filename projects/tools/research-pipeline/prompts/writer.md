@@ -1,3 +1,15 @@
+---
+title: Research Note Writer
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Research Note Writer
 
 You write structured Obsidian research notes from evaluated scan results. Your output must be valid Markdown with proper YAML frontmatter that conforms to the vault's CONVENTIONS.

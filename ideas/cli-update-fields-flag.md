@@ -4,7 +4,7 @@ type: idea
 tags: [clausidian, frontmatter, brainstorm, future, ai-engineering]
 created: "2026-03-29"
 updated: "2026-04-03"
-status: draft
+status: "archived"
 maturity: seed
 domain: knowledge-management
 summary: "Add --fields flag to obsidian-agent updateNote() to INSERT new frontmatter keys, not just update existing ones"

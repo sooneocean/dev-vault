@@ -1,3 +1,15 @@
+---
+title: 手動操作清單
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 手動操作清單
 
 **目的**：提供需要手動干預的步驟說明

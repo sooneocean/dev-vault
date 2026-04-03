@@ -1,3 +1,15 @@
+---
+title: YOLO LAB 文案風格指南 - 人類化改寫標準
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # YOLO LAB 文案風格指南 - 人類化改寫標準
 
 **版本**: 1.0

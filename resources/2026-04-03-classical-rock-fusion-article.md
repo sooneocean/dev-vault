@@ -2,7 +2,7 @@
 title: 古典 × 搖滾的藝術碰撞 — 當交響樂隊遇見電吉他
 type: resource
 subtype: article
-status: draft
+status: "archived"
 publish_status: draft
 target_site: yololab.net
 created: 2026-04-03

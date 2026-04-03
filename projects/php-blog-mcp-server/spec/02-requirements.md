@@ -1,3 +1,15 @@
+---
+title: 02 — Requirements Specification
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 02 — Requirements Specification
 
 ## 功能需求 (Functional Requirements)

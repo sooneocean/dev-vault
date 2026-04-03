@@ -1,3 +1,15 @@
+---
+title: P0 逐篇操作指南 — 复制粘贴模式
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # P0 逐篇操作指南 — 复制粘贴模式
 
 ## 📝 使用说明

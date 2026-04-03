@@ -1,3 +1,15 @@
+---
+title: 快速參考卡 — 貼在螢幕邊上
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 快速參考卡 — 貼在螢幕邊上
 
 ## 🎯 今天任務

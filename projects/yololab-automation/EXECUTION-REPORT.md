@@ -1,3 +1,15 @@
+---
+title: YOLO LAB 自動化優化 - 執行報告
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # YOLO LAB 自動化優化 - 執行報告
 
 **執行日期**：2026-03-31

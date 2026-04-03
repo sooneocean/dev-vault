@@ -1,3 +1,15 @@
+---
+title: 立即行動計劃
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # 立即行動計劃
 
 **當前狀態**：基礎優化完成，性能基準線已記錄

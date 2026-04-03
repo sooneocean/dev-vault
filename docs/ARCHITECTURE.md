@@ -1,3 +1,15 @@
+---
+title: Watermark Removal System — Architecture Documentation
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Watermark Removal System — Architecture Documentation
 
 ## Overview

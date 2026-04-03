@@ -1,3 +1,15 @@
+---
+title: Batch 1 發佈清單 — 2026-04-07 ~ 2026-04-11（5 篇 Tech）
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Batch 1 發佈清單 — 2026-04-07 ~ 2026-04-11（5 篇 Tech）
 
 **狀態**：✅ 文章已生成，準備發佈
