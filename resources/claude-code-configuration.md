@@ -1,9 +1,9 @@
 ---
 title: "Claude Code 設定"
 type: resource
-tags: [claude-code, hooks, plugins]
+tags: [claude-code, hooks, plugins, reference, knowledge-management]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: config
 maturity: mature

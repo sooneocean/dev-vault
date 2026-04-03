@@ -1,9 +1,9 @@
 ---
 title: "DEXG16 開發環境"
 type: resource
-tags: [toolchain]
+tags: [toolchain, reference, knowledge-management]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: catalog
 maturity: mature

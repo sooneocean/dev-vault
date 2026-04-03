@@ -1,9 +1,9 @@
 ---
 title: "cli-update-fields-flag"
 type: idea
-tags: [obsidian-agent, frontmatter]
+tags: [clausidian, frontmatter, brainstorm, future, ai-engineering]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-04-03"
 status: draft
 maturity: seed
 domain: knowledge-management

@@ -1,9 +1,9 @@
 ---
 title: "GitHub 全部 Repo 清單"
 type: resource
-tags: [github, inventory]
+tags: [github, inventory, reference, knowledge-management]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: catalog
 maturity: growing

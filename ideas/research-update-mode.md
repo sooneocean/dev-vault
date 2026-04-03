@@ -1,9 +1,9 @@
 ---
 title: "research-update-mode"
 type: idea
-tags: [obsidian-agent, diff-tracking]
+tags: [clausidian, diff-tracking, brainstorm, future, ai-engineering]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-04-03"
 status: draft
 maturity: seed
 domain: knowledge-management

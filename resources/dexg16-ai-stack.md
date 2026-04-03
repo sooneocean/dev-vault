@@ -1,9 +1,9 @@
 ---
 title: "DEXG16 AI 技術堆疊"
 type: resource
-tags: [llm]
+tags: [llm, reference, knowledge-management]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: catalog
 maturity: mature

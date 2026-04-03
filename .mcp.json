@@ -24,6 +24,9 @@
         "QUERY_MEMORY_API_KEY": "${QUERY_MEMORY_API_KEY:}",
         "LANCEDB_PATH": "${LANCEDB_PATH:./agent_memory_local.db}"
       }
+    },
+    "wpcom-mcp": {
+      "url": "https://public-api.wordpress.com/wpcom/v2/mcp/v1"
     }
   }
 }

@@ -1,9 +1,9 @@
 ---
 title: "本地 LLM 部署記錄"
 type: resource
-tags: [llm, hardware]
+tags: [llm, hardware, reference, knowledge-management]
 created: "2026-03-29"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: reference
 maturity: growing

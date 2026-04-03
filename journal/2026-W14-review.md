@@ -1,9 +1,9 @@
 ---
 title: "Weekly Review 2026-W14"
 type: journal
-tags: [weekly-review]
+tags: [weekly-review, daily, log, knowledge-management]
 created: "2026-03-30"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 maturity: mature
 domain: knowledge-management

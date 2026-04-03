@@ -1,9 +1,9 @@
 ---
 title: "Dev Vault Status"
 type: project
-tags: [knowledge-management, auto-memory-migration]
+tags: [knowledge-management, auto-memory-migration, project, active]
 created: "2026-03-30"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 maturity: growing
 domain: "knowledge-management"

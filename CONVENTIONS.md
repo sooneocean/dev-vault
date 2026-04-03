@@ -91,6 +91,7 @@ Resource notes **must** have a `subtype` field. Other types do not use subtypes.
 | `config` | Configuration documentation | Recording how something is configured | claude-code-configuration |
 | `learning` | Lessons learned from solving a problem | Post-mortem style: what happened, what we learned | session-stop-wrapper-learning |
 | `standard` | Process documentation or quality standards | Defining HOW to do something | github-發布流程, 開源專案品質標準 |
+| `article` | Finished writing piece for external platforms | Finalized content for WordPress, Dev.to, etc. | 2026-03-31-writing-framework |
 | `improvement` | Configuration improvement proposals from `/improve` | Auto-generated improvement suggestions | improvement-2026-03-29-001 |
 
 ### `subtype: improvement` — Additional Fields
@@ -105,6 +106,17 @@ friction_type: missing-hook | instruction-gap | command-gap
 ```
 
 File naming: `improvement-YYYY-MM-DD-NNN.md` (e.g., `improvement-2026-03-29-001.md`)
+
+### `subtype: article` — Additional Fields
+
+```yaml
+subtype: article
+publish_status: draft | published | scheduled
+target_site: yololab.net | other
+wordpress_id: integer           # ID from WordPress after publishing
+canonical_url: url              # Final live URL
+excerpt: string                 # SEO description
+```
 
 ### `subtype: iteration-log` — Additional Fields
 

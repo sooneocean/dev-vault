@@ -1,9 +1,9 @@
 ---
 title: "Research Scan: Agentic Harness & Context Prompt (2026-03-30)"
 type: journal
-tags: [research-scan, agent-framework, agentic-harness, automation]
+tags: [daily, log, knowledge-management]
 created: "2026-03-30"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 ---
 

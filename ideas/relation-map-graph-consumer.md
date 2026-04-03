@@ -1,9 +1,9 @@
 ---
 title: "relation-map-graph-consumer"
 type: idea
-tags: [obsidian-agent, relation-map, graph-visualization]
+tags: [clausidian, relation-map, graph-visualization, brainstorm, future, ai-engineering]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-04-03"
 status: draft
 maturity: seed
 domain: knowledge-management

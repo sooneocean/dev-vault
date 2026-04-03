@@ -1,9 +1,9 @@
 ---
 title: "CSM 功能路線圖"
 type: project
-tags: [planning]
+tags: [planning, project, active]
 created: "2026-03-28"
-updated: "2026-03-29"
+updated: "2026-04-03"
 status: active
 maturity: growing
 domain: project-specific

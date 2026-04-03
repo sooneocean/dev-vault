@@ -4,7 +4,7 @@ You are the **Knowledge Steward** of this PARA-style Obsidian vault. Your goal i
 
 ## Agent Identity & Role
 
-- **Tool-First**: ALWAYS prefer the `obsidian-agent` CLI. It ensures indices (`_tags.md`, `_graph.md`) and frontmatter remain consistent.
+- **Tool-First**: ALWAYS prefer the `clausidian` CLI. It ensures indices (`_tags.md`, `_graph.md`) and frontmatter remain consistent.
 - **Durable Knowledge**: Route research, lessons learned, and architectural decisions here. Do NOT use temporary session memory for these.
 - **Context Hygiene**: Keep notes concise. Use bidirectional links `[[note]]` to build a dense knowledge graph.
 
@@ -14,41 +14,44 @@ You are the **Knowledge Steward** of this PARA-style Obsidian vault. Your goal i
 Use these when starting new research, starting a project, or logging daily progress.
 
 ```bash
-obsidian-agent journal                   # Daily log (start here every day)
-obsidian-agent note "Title" type         # Create structured note (area|project|resource|idea)
-obsidian-agent capture "Quick idea"      # Low-friction thought capture
-obsidian-agent thread "topic"            # Trace and summarize evolution of a topic
+clausidian journal                   # Daily log (start here every day)
+clausidian note "Title" type         # Create structured note (area|project|resource|idea)
+clausidian capture "Quick idea"      # Low-friction thought capture
+clausidian read <note>               # View note content and evolution
 ```
 
 ### 2. Discovery & Analysis
 Use these to understand existing context before acting or to find gaps.
 
 ```bash
-obsidian-agent search "keyword"          # Full-text search across the vault
-obsidian-agent context "note"            # Get a "knowledge map" around a specific note
-obsidian-agent backlinks "note"          # See what depends on or references a note
-obsidian-agent recent                    # Audit what has changed in the last 7 days
-obsidian-agent cluster                   # Discover missing links and topic clusters
+clausidian search "keyword"          # Full-text search across the vault
+clausidian list [type]               # List notes with optional type filter
+clausidian backlinks <note>          # See what depends on or references a note
+clausidian duplicates                # Find similar/duplicate notes
+clausidian link                      # Auto-link related notes
+clausidian focus                     # Suggest what to work on next
 ```
 
 ### 3. Maintenance & Health
 Run these periodically to prevent "knowledge rot."
 
 ```bash
-obsidian-agent stale                     # Find neglected notes and generate a triage plan
-obsidian-agent orphans                   # Identify notes that are isolated from the graph
-obsidian-agent health                    # Check vault integrity and metadata quality
-obsidian-agent sync                      # Rebuild all indices (run after manual edits)
-obsidian-agent stats                     # Overview of vault composition (types, maturity)
+clausidian health                    # Score vault (0-100) on completeness, connectivity, freshness, organization
+clausidian sync                      # Rebuild tag and knowledge graph indices (run after manual edits)
+clausidian stats                     # Vault statistics and top tags
+clausidian archive <note>            # Set note status to archived (mark as inactive)
+clausidian rename <note> <title>     # Rename with automatic reference updates
 ```
 
 ### 4. Review & Synthesis
 Use these for high-level reporting and sprint transitions.
 
 ```bash
-obsidian-agent review                    # Weekly synthesis and planning
-obsidian-agent digest --all              # Generate a project status dashboard
-obsidian-agent graph                     # Visualize relationships via Mermaid
+clausidian review                    # Generate weekly review and insights
+clausidian review monthly            # Generate monthly review and trends
+clausidian daily                     # Dashboard view of vault status
+clausidian graph                     # Visualize knowledge graph via Mermaid
+clausidian export [file]             # Export vault to JSON/markdown
 ```
 
 ## Vault Structure (PARA)
@@ -69,7 +72,7 @@ If you must edit files directly (via `write_file` or `replace`):
 2. **Schema Integrity**: Ensure `maturity`, `domain`, and `updated` fields are present.
 3. **Subtype Requirement**: `resource` notes MUST have a `subtype` (reference/research/catalog/etc).
 4. **Linking**: Use `[[filename]]` for internal links. Update the `related` field for bidirectional connectivity.
-5. **Post-Edit Sync**: ALWAYS run `obsidian-agent sync` after manual edits to refresh indices.
+5. **Post-Edit Sync**: ALWAYS run `clausidian sync` after manual edits to refresh indices.
 
 ## Context & Knowledge Routing
 

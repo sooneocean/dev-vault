@@ -1,9 +1,9 @@
 ---
 title: "pretext-csm-tui-layout"
 type: idea
-tags: [pretext, tui, text-layout]
+tags: [pretext, tui, text-layout, brainstorm, future, ai-engineering]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-04-03"
 status: draft
 maturity: seed
 domain: project-specific

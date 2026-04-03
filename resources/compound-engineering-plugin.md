@@ -1,9 +1,9 @@
 ---
 title: "Compound Engineering Plugin"
 type: resource
-tags: [claude-code, compound-engineering, plugins, workflow, planning]
+tags: [claude-code, compound-engineering, plugins, workflow, planning, reference, knowledge-management]
 created: "2026-03-29"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: reference
 maturity: growing
