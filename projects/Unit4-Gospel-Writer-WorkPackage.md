@@ -1,11 +1,11 @@
 ---
-updated: "2026-04-03"
+updated: "2026-04-04"
 tags: [project, active, collaboration]
 title: Unit 4 Gospel — 寫手工作包（簡化版）
 type: project
 status: active
 created: 2026-04-02
-summary: true
+summary: "福音樂文章寫手工作包 — 2800-3200 字、核心人物 Mahalia Jackson summary: true Sister Rosetta Tharpe"
 related: ["[[Unit4-Gospel-Recruitment-Plan]]", "[[Unit4-Gospel-Collaboration-Matrix]]", "[[dev-vault-status]]", "[[yololab-optimization-report]]"]
 ---
 

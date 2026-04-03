@@ -3,11 +3,11 @@ title: "CSM 功能路線圖"
 type: project
 tags: [planning, project, active]
 created: "2026-03-28"
-updated: "2026-04-03"
+updated: "2026-04-04"
 status: active
 maturity: growing
 domain: project-specific
-summary: true
+summary: "Claude Session Manager 功能路線圖 — v0.53 到 v2 重構計畫，涵蓋 TUI、測試、外掛系統、跨機器同步"
 goal: "Define version roadmap from v0.53 (current stable) through v2 refactor: TUI optimization, async test fixes, plugin system, cross-machine sync, and PyPI release"
 deadline: ""
 related: ["[[csm-architecture]]", "[[csm-key-design-decisions]]", "[[dexg16-git-and-github]]", "[[pretext-csm-tui-layout]]", "[[Unit4-Gospel-Recruitment-Plan]]"]

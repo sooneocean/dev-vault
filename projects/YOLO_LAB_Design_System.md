@@ -3,11 +3,11 @@ title: YOLO LAB 設計系統（2026）
 type: project
 tags: [project, active, design, branding]
 created: 2026-04-03
-updated: "2026-04-03"
+updated: "2026-04-04"
 status: active
 maturity: growing
 domain: knowledge-management
-summary: true
+summary: "YOLO LAB 2026 設計系統 — 色彩調色板、排版規範、圖標系統、互動模式標準化"
 related: ["[[yololab-optimization-report]]", "[[QUICK-START-GUIDE]]", "[[dev-vault-status]]", "[[Unit4-Gospel-Recruitment-Plan]]"]
 ---
 

@@ -1,11 +1,11 @@
 ---
-updated: "2026-04-03"
+updated: "2026-04-04"
 tags: [project, active, collaboration]
 title: Unit 4 Gospel — 協作矩陣與快速參考
 type: project
 status: active
 created: 2026-04-02
-summary: true
+summary: "第四單元 Gospel 協作矩陣 — 編輯、寫手、審核流程與責任分配"
 related: ["[[Unit4-Gospel-Recruitment-Plan]]", "[[Unit4-Gospel-Writer-WorkPackage]]"]
 ---
 

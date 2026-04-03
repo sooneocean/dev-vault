@@ -3,11 +3,11 @@ title: "Claude Session Manager"
 type: project
 tags: [claude-code, python, project, active]
 created: "2026-03-28"
-updated: "2026-04-03"
+updated: "2026-04-04"
 status: active
 maturity: growing
 domain: project-specific
-summary: true
+summary: "Claude Session Manager — AI 輔助的多工作階段管理 TUI，支援實時流式輸出、成本追蹤、自動壓縮"
 goal: "Enable multi-session Claude Code management from a single TUI dashboard with real-time streaming, cost tracking, SOP detection, auto-compaction at 50K tokens, and persistent session state"
 deadline: ""
 related: ["[[claude-code-dev-tools]]", "[[dexg16-ai-coding-tools]]", "[[claude-code-configuration]]", "[[session-stop-wrapper-learning]]", "[[pretext-csm-tui-layout]]", "[[tech-research-squad]]"]

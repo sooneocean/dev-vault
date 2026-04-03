@@ -6,8 +6,8 @@ status: active
 priority: P1
 deadline: 2026-04-24
 created: 2026-04-02
-updated: "2026-04-03"
-summary: true
+updated: "2026-04-04"
+summary: "第四單元福音樂寫手招募與協作完整方案 — 招募框架、寫作流程、品質檢查、發佈時程"
 related: ["[[Unit4-Gospel-Collaboration-Matrix]]", "[[Unit4-Gospel-Writer-WorkPackage]]", "[[dev-vault-status]]", "[[yololab-optimization-report]]"]
 ---
 

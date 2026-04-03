@@ -7,19 +7,19 @@ updated: 2026-04-03
 # Tags Index
 
 ### active
-- [[claude-session-manager]] — true
-- [[csm-feature-roadmap]] — true
+- [[claude-session-manager]] — Claude Session Manager — AI 輔助的多工作階段管理 TUI，支援實時流式輸出、成本追蹤、自動壓縮
+- [[csm-feature-roadmap]] — Claude Session Manager 功能路線圖 — v0.53 到 v2 重構計畫，涵蓋 TUI、測試、外掛系統、跨機器同步
 - [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
-- [[dev-vault-status]] — true
+- [[dev-vault-status]] — Dev Vault 開發知識庫 — PARA 結構的開源知識管理系統，支援持續自迭代
 - [[manual-plugin-deactivation]] — (no summary)
 - [[QUICK-START-GUIDE]] — (no summary)
 - [[tech-research-squad]] — true
-- [[Unit4-Gospel-Collaboration-Matrix]] — true
-- [[Unit4-Gospel-Recruitment-Plan]] — true
-- [[Unit4-Gospel-Writer-WorkPackage]] — true
+- [[Unit4-Gospel-Collaboration-Matrix]] — 第四單元 Gospel 協作矩陣 — 編輯、寫手、審核流程與責任分配
+- [[Unit4-Gospel-Recruitment-Plan]] — 第四單元福音樂寫手招募與協作完整方案 — 招募框架、寫作流程、品質檢查、發佈時程
+- [[Unit4-Gospel-Writer-WorkPackage]] — 福音樂文章寫手工作包 — 2800-3200 字、核心人物 Mahalia Jackson summary: true Sister Rosetta Tharpe
 - [[verification-checklist]] — (no summary)
-- [[yololab-optimization-report]] — true
-- [[YOLO_LAB_Design_System]] — true
+- [[yololab-optimization-report]] — YOLO LAB 網站優化審計報告 — 23 個外掛、Gzip、快取、SEO、Core Web Vitals 完整優化方案
+- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統 — 色彩調色板、排版規範、圖標系統、互動模式標準化
 - [[article-ai-coding-assistants-2026]] — true
 - [[llm-model-comparison-2026]] — true
 - [[prompt-engineering-complete-guide]] — true
@@ -49,7 +49,7 @@ updated: 2026-04-03
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
 
 ### auto-memory-migration
-- [[dev-vault-status]] — true
+- [[dev-vault-status]] — Dev Vault 開發知識庫 — PARA 結構的開源知識管理系統，支援持續自迭代
 - [[architecture-lessons]] — Critical lessons about Stop hooks, global config safety, and slash command nature
 - [[benchmark-first-rule]] — Always benchmark before planning — local LLM estimates were 5-10x off from reality
 - [[claude-agent-sdk-api]] — Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility
@@ -68,7 +68,7 @@ updated: 2026-04-03
 - [[writing-methodology-framework]] — Brainstorming a framework for dev-driven writing and batch publishing.
 
 ### branding
-- [[YOLO_LAB_Design_System]] — true
+- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統 — 色彩調色板、排版規範、圖標系統、互動模式標準化
 
 ### ci-cd
 - [[github-發布流程]] — 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護
@@ -84,7 +84,7 @@ updated: 2026-04-03
 
 ### claude-code
 - [[claude-code-dev-tools]] — 圍繞 Claude Code 生態系打造的開發工具集合
-- [[claude-session-manager]] — true
+- [[claude-session-manager]] — Claude Session Manager — AI 輔助的多工作階段管理 TUI，支援實時流式輸出、成本追蹤、自動壓縮
 - [[claude-code-configuration]] — Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
 - [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
@@ -112,9 +112,9 @@ updated: 2026-04-03
 - [[cluster-subtype-domain-dimensions]] — Enhance obsidian-agent cluster algorithm to use subtype and domain as clustering dimensions alongside tags and related links
 
 ### collaboration
-- [[Unit4-Gospel-Collaboration-Matrix]] — true
-- [[Unit4-Gospel-Recruitment-Plan]] — true
-- [[Unit4-Gospel-Writer-WorkPackage]] — true
+- [[Unit4-Gospel-Collaboration-Matrix]] — 第四單元 Gospel 協作矩陣 — 編輯、寫手、審核流程與責任分配
+- [[Unit4-Gospel-Recruitment-Plan]] — 第四單元福音樂寫手招募與協作完整方案 — 招募框架、寫作流程、品質檢查、發佈時程
+- [[Unit4-Gospel-Writer-WorkPackage]] — 福音樂文章寫手工作包 — 2800-3200 字、核心人物 Mahalia Jackson summary: true Sister Rosetta Tharpe
 
 ### compound-engineering
 - [[tech-research-squad]] — true
@@ -142,7 +142,7 @@ updated: 2026-04-03
 - [[research-scan-2026-03-30]] — (no summary)
 
 ### design
-- [[YOLO_LAB_Design_System]] — true
+- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統 — 色彩調色板、排版規範、圖標系統、互動模式標準化
 
 ### diff-tracking
 - [[research-update-mode]] — Add --update flag to obsidian-agent research command to diff against previous research and surface changes
@@ -208,7 +208,7 @@ updated: 2026-04-03
 - [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
 
 ### knowledge-management
-- [[dev-vault-status]] — true
+- [[dev-vault-status]] — Dev Vault 開發知識庫 — PARA 結構的開源知識管理系統，支援持續自迭代
 - [[2026-04-03-classical-rock-fusion-article]] — 探討古典樂與搖滾音樂跨界合作的藝術價值，從台灣樂團四分衛、拍謝少年到國際大師Metallica的實例分析
 - [[architecture-lessons]] — Critical lessons about Stop hooks, global config safety, and slash command nature
 - [[benchmark-first-rule]] — Always benchmark before planning — local LLM estimates were 5-10x off from reality
@@ -302,7 +302,7 @@ updated: 2026-04-03
 - [[開源專案品質標準]] — 開源專案上架前的品質檢查清單 — README、License、CI、Topics、文件
 
 ### optimization
-- [[yololab-optimization-report]] — true
+- [[yololab-optimization-report]] — YOLO LAB 網站優化審計報告 — 23 個外掛、Gzip、快取、SEO、Core Web Vitals 完整優化方案
 
 ### oscar
 - [[documentary-film-comprehensive-guide]] — 深度探討紀錄電影與紀錄片的區別，分析5部必看奧斯卡提名作品，指南涵蓋導演視角、敘事手法與流媒體平台推薦。
@@ -311,7 +311,7 @@ updated: 2026-04-03
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
 
 ### planning
-- [[csm-feature-roadmap]] — true
+- [[csm-feature-roadmap]] — Claude Session Manager 功能路線圖 — v0.53 到 v2 重構計畫，涵蓋 TUI、測試、外掛系統、跨機器同步
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
 
 ### plugins
@@ -326,19 +326,19 @@ updated: 2026-04-03
 - [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
 
 ### project
-- [[claude-session-manager]] — true
-- [[csm-feature-roadmap]] — true
+- [[claude-session-manager]] — Claude Session Manager — AI 輔助的多工作階段管理 TUI，支援實時流式輸出、成本追蹤、自動壓縮
+- [[csm-feature-roadmap]] — Claude Session Manager 功能路線圖 — v0.53 到 v2 重構計畫，涵蓋 TUI、測試、外掛系統、跨機器同步
 - [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
-- [[dev-vault-status]] — true
+- [[dev-vault-status]] — Dev Vault 開發知識庫 — PARA 結構的開源知識管理系統，支援持續自迭代
 - [[manual-plugin-deactivation]] — (no summary)
 - [[QUICK-START-GUIDE]] — (no summary)
 - [[tech-research-squad]] — true
-- [[Unit4-Gospel-Collaboration-Matrix]] — true
-- [[Unit4-Gospel-Recruitment-Plan]] — true
-- [[Unit4-Gospel-Writer-WorkPackage]] — true
+- [[Unit4-Gospel-Collaboration-Matrix]] — 第四單元 Gospel 協作矩陣 — 編輯、寫手、審核流程與責任分配
+- [[Unit4-Gospel-Recruitment-Plan]] — 第四單元福音樂寫手招募與協作完整方案 — 招募框架、寫作流程、品質檢查、發佈時程
+- [[Unit4-Gospel-Writer-WorkPackage]] — 福音樂文章寫手工作包 — 2800-3200 字、核心人物 Mahalia Jackson summary: true Sister Rosetta Tharpe
 - [[verification-checklist]] — (no summary)
-- [[yololab-optimization-report]] — true
-- [[YOLO_LAB_Design_System]] — true
+- [[yololab-optimization-report]] — YOLO LAB 網站優化審計報告 — 23 個外掛、Gzip、快取、SEO、Core Web Vitals 完整優化方案
+- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統 — 色彩調色板、排版規範、圖標系統、互動模式標準化
 - [[article-ai-coding-assistants-2026]] — true
 - [[llm-model-comparison-2026]] — true
 - [[prompt-engineering-complete-guide]] — true
@@ -348,7 +348,7 @@ updated: 2026-04-03
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 
 ### python
-- [[claude-session-manager]] — true
+- [[claude-session-manager]] — Claude Session Manager — AI 輔助的多工作階段管理 TUI，支援實時流式輸出、成本追蹤、自動壓縮
 - [[csm-architecture]] — Claude Session Manager 技術架構 — 程序模型、串流、持久化
 
 ### rag
@@ -404,7 +404,7 @@ updated: 2026-04-03
 - [[2026-04-03-classical-rock-fusion-article]] — 探討古典樂與搖滾音樂跨界合作的藝術價值，從台灣樂團四分衛、拍謝少年到國際大師Metallica的實例分析
 
 ### seo
-- [[yololab-optimization-report]] — true
+- [[yololab-optimization-report]] — YOLO LAB 網站優化審計報告 — 23 個外掛、Gzip、快取、SEO、Core Web Vitals 完整優化方案
 
 ### taiwan-artists
 - [[2026-04-03-classical-rock-fusion-article]] — 探討古典樂與搖滾音樂跨界合作的藝術價值，從台灣樂團四分衛、拍謝少年到國際大師Metallica的實例分析
