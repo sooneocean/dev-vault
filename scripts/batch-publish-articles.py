@@ -14,8 +14,8 @@ import base64
 
 # WordPress 配置
 WP_SITE = "https://yololab.net"
-WP_USER = ""  # 設置你的 WordPress 用戶名
-WP_PASSWORD = ""  # 設置你的應用密碼
+WP_USER = "yololab.life@gmail.com"
+WP_PASSWORD = "1jaT SIl8 rnuj fs4D 8OHK UdHT"
 
 # 5 篇文章元數據 + 內容
 ARTICLES = [
@@ -26,7 +26,7 @@ ARTICLES = [
         "date": "2026-04-07T09:00:00",
         "categories": [96990383],
         "tags": ["LLM", "AI", "GPT-4", "Claude", "模型對比", "2026"],
-        "content_file": "/c/DEX_data/Claude Code DEV/resources/llm-model-comparison-2026.md"
+        "content_file": "C:\\DEX_data\\Claude Code DEV\\resources\\llm-model-comparison-2026.md"
     },
     {
         "title": "提示詞工程完全指南｜Chain-of-Thought × Few-Shot × 角色扮演最強技巧",
@@ -35,7 +35,7 @@ ARTICLES = [
         "date": "2026-04-08T09:00:00",
         "categories": [96990383],
         "tags": ["提示詞", "Prompt", "ChatGPT", "Claude", "AI使用技巧"],
-        "content_file": "/c/DEX_data/Claude Code DEV/resources/prompt-engineering-complete-guide.md"
+        "content_file": "C:\\DEX_data\\Claude Code DEV\\resources\\prompt-engineering-complete-guide.md"
     },
     {
         "title": "AI智能體框架完全對比｜LangGraph vs Claude SDK vs AutoGPT 2026最新評測",
@@ -44,7 +44,7 @@ ARTICLES = [
         "date": "2026-04-09T09:00:00",
         "categories": [96990383],
         "tags": ["AI Agent", "LangGraph", "Claude SDK", "智能體"],
-        "content_file": "/c/DEX_data/Claude Code DEV/docs/articles/2026-04-03-ai-agent-framework-comparison.md"
+        "content_file": "C:\\DEX_data\\Claude Code DEV\\docs\\articles\\2026-04-03-ai-agent-framework-comparison.md"
     },
     {
         "title": "向量數據庫選型指南2026｜Pinecone vs Weaviate vs Milvus vs Qdrant",
@@ -53,7 +53,7 @@ ARTICLES = [
         "date": "2026-04-10T09:00:00",
         "categories": [96990383],
         "tags": ["向量數據庫", "Embedding", "RAG", "Pinecone"],
-        "content_file": "/c/DEX_data/Claude Code DEV/content/vector-database-selection-guide-2026.md"
+        "content_file": "C:\\DEX_data\\Claude Code DEV\\content\\vector-database-selection-guide-2026.md"
     },
     {
         "title": "AI編程助手工作流完整優化指南｜GitHub Copilot vs Claude Code vs Cursor",
@@ -62,7 +62,7 @@ ARTICLES = [
         "date": "2026-04-11T09:00:00",
         "categories": [96990383],
         "tags": ["GitHub Copilot", "Claude Code", "Cursor", "AI編程"],
-        "content_file": "/c/DEX_data/Claude Code DEV/docs/articles/2026-04-03-ai-coding-assistant-workflow-optimization.md"
+        "content_file": "C:\\DEX_data\\Claude Code DEV\\docs\\articles\\2026-04-03-ai-coding-assistant-workflow-optimization.md"
     }
 ]
 
@@ -81,12 +81,41 @@ def get_auth_header(user, password):
     encoded = base64.b64encode(credentials.encode()).decode()
     return {"Authorization": f"Basic {encoded}"}
 
+def get_or_create_tags(tag_names, auth_header):
+    """獲取或創建標籤，返回標籤 ID 列表"""
+    tag_ids = []
+
+    for tag_name in tag_names:
+        try:
+            # 先查詢標籤是否已存在
+            url = f"{WP_SITE}/wp-json/wp/v2/tags?search={tag_name}"
+            response = requests.get(url, headers=auth_header, timeout=10)
+
+            if response.status_code == 200:
+                tags = response.json()
+                if tags:
+                    tag_ids.append(tags[0]['id'])
+                else:
+                    # 標籤不存在，創建新標籤
+                    create_url = f"{WP_SITE}/wp-json/wp/v2/tags"
+                    payload = {"name": tag_name}
+                    create_response = requests.post(create_url, json=payload, headers=auth_header, timeout=10)
+                    if create_response.status_code in [200, 201]:
+                        tag_ids.append(create_response.json()['id'])
+        except:
+            pass
+
+    return tag_ids
+
 def publish_article(article_data, auth_header):
     """發佈單篇文章"""
     # 讀取文章內容
     content = read_article_content(article_data["content_file"])
     if not content:
         return False
+
+    # 獲取或創建標籤 ID
+    tag_ids = get_or_create_tags(article_data.get("tags", []), auth_header)
 
     # 準備 API 請求
     url = f"{WP_SITE}/wp-json/wp/v2/posts"
@@ -98,12 +127,18 @@ def publish_article(article_data, auth_header):
         "date": article_data["date"],
         "status": "publish",
         "categories": article_data["categories"],
-        "tags": article_data["tags"],
-        "slug": article_data["slug"],
-        "meta": {
+        "slug": article_data["slug"]
+    }
+
+    # 如果有標籤 ID，加入 payload
+    if tag_ids:
+        payload["tags"] = tag_ids
+
+    # 添加元數據
+    if tag_ids or article_data.get("tags"):
+        payload["meta"] = {
             "internal_links": "ai-ide-agent-collaboration-survival-guide,ai-computing-power-rationing-survival,tech-pillar"
         }
-    }
 
     headers = {
         **auth_header,
