@@ -7,7 +7,7 @@ updated: "2026-04-03"
 status: active
 maturity: growing
 domain: knowledge-management
-summary: ""
+summary: true
 ---
 
 # AI 編程助手工作流優化指南 — GitHub Copilot vs Claude Code vs Cursor

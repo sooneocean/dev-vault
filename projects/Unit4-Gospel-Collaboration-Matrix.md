@@ -5,7 +5,7 @@ title: Unit 4 Gospel — 協作矩陣與快速參考
 type: project
 status: active
 created: 2026-04-02
-summary: 編輯和寫手的角色矩陣、溝通時間表、決策樹
+summary: true
 related: ["[[Unit4-Gospel-Recruitment-Plan]]", "[[Unit4-Gospel-Writer-WorkPackage]]"]
 ---
 

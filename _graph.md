@@ -23,6 +23,7 @@ updated: 2026-04-03
 | [[claude-session-manager]] | [[claude-code-configuration]] | medium |
 | [[claude-session-manager]] | [[session-stop-wrapper-learning]] | weak |
 | [[claude-session-manager]] | [[pretext-csm-tui-layout]] | weak |
+| [[claude-session-manager]] | [[tech-research-squad]] | strong |
 | [[csm-feature-roadmap]] | [[csm-architecture]] | weak |
 | [[csm-feature-roadmap]] | [[csm-key-design-decisions]] | weak |
 | [[csm-feature-roadmap]] | [[dexg16-git-and-github]] | weak |
@@ -36,6 +37,10 @@ updated: 2026-04-03
 | [[dev-vault-status]] | [[toolchain-reference]] | strong |
 | [[dev-vault-status]] | [[claude-agent-sdk-api]] | strong |
 | [[dev-vault-status]] | [[claude-session-manager]] | strong |
+| [[dev-vault-status]] | [[Unit4-Gospel-Recruitment-Plan]] | strong |
+| [[dev-vault-status]] | [[Unit4-Gospel-Writer-WorkPackage]] | strong |
+| [[dev-vault-status]] | [[yololab-optimization-report]] | strong |
+| [[dev-vault-status]] | [[YOLO_LAB_Design_System]] | strong |
 | [[tech-research-squad]] | [[compound-engineering-plugin]] | medium |
 | [[tech-research-squad]] | [[claude-code-configuration]] | weak |
 | [[tech-research-squad]] | [[claude-code-dev-tools]] | weak |
@@ -46,12 +51,19 @@ updated: 2026-04-03
 | [[Unit4-Gospel-Collaboration-Matrix]] | [[Unit4-Gospel-Writer-WorkPackage]] | strong |
 | [[Unit4-Gospel-Recruitment-Plan]] | [[Unit4-Gospel-Collaboration-Matrix]] | strong |
 | [[Unit4-Gospel-Recruitment-Plan]] | [[Unit4-Gospel-Writer-WorkPackage]] | strong |
+| [[Unit4-Gospel-Recruitment-Plan]] | [[dev-vault-status]] | strong |
+| [[Unit4-Gospel-Recruitment-Plan]] | [[yololab-optimization-report]] | strong |
 | [[Unit4-Gospel-Writer-WorkPackage]] | [[Unit4-Gospel-Recruitment-Plan]] | strong |
 | [[Unit4-Gospel-Writer-WorkPackage]] | [[Unit4-Gospel-Collaboration-Matrix]] | strong |
+| [[Unit4-Gospel-Writer-WorkPackage]] | [[dev-vault-status]] | strong |
+| [[Unit4-Gospel-Writer-WorkPackage]] | [[yololab-optimization-report]] | strong |
 | [[yololab-optimization-report]] | [[dev-vault-status]] | strong |
 | [[yololab-optimization-report]] | [[YOLO_LAB_Design_System]] | strong |
+| [[yololab-optimization-report]] | [[Unit4-Gospel-Recruitment-Plan]] | strong |
 | [[YOLO_LAB_Design_System]] | [[yololab-optimization-report]] | strong |
 | [[YOLO_LAB_Design_System]] | [[QUICK-START-GUIDE]] | strong |
+| [[YOLO_LAB_Design_System]] | [[dev-vault-status]] | strong |
+| [[YOLO_LAB_Design_System]] | [[Unit4-Gospel-Recruitment-Plan]] | strong |
 | [[architecture-lessons]] | [[dev-vault-status]] | strong |
 | [[architecture-lessons]] | [[context-engineering-hygiene]] | strong |
 | [[architecture-lessons]] | [[benchmark-first-rule]] | strong |
@@ -377,22 +389,22 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[README]]
 - [[README]]
 
-### Cluster 2: dexg16-ai-coding-tools (50 notes)
-- [[dexg16-ai-coding-tools]]
+### Cluster 2: dev-vault-status (50 notes)
 - [[dev-vault-status]]
+- [[dexg16-ai-coding-tools]]
 - [[compound-engineering-plugin]]
 - [[context-engineering-hygiene]]
 - [[dexg16-git-and-github]]
 - [[dexg16-ai-stack]]
 - [[dexg16-all-projects-catalog]]
 - [[claude-code-dev-tools]]
+- [[claude-session-manager]]
 - [[tech-research-squad]]
 - [[claude-code-configuration]]
 - [[compound-engineering-research]]
 - [[dexg16-dev-environment]]
 - [[harness-engineering-research]]
 - [[toolchain-reference]]
-- [[claude-session-manager]]
 - [[csm-feature-roadmap]]
 - [[architecture-lessons]]
 - [[benchmark-first-rule]]
@@ -405,9 +417,13 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[session-stop-wrapper-learning]]
 - [[pretext-csm-tui-layout]]
 - [[開源開發者身分]]
+- [[Unit4-Gospel-Recruitment-Plan]]
+- [[Unit4-Gospel-Writer-WorkPackage]]
+- [[YOLO_LAB_Design_System]]
 - [[github-發布流程]]
 - [[prompt-engineering-research]]
 - [[cli-update-fields-flag]]
+- [[yololab-optimization-report]]
 - [[csm-key-design-decisions]]
 - [[improvement-2026-03-29-001]]
 - [[improvement-2026-03-30-002]]
@@ -416,10 +432,6 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[開源專案品質標準]]
 - [[research-update-mode]]
 - [[Unit4-Gospel-Collaboration-Matrix]]
-- [[Unit4-Gospel-Recruitment-Plan]]
-- [[Unit4-Gospel-Writer-WorkPackage]]
-- [[yololab-optimization-report]]
-- [[YOLO_LAB_Design_System]]
 - [[improvement-2026-03-30-001]]
 - [[local-llm-task-routing]]
 - [[pretext-無-dom-文字測量引擎]]

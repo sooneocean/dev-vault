@@ -3,14 +3,14 @@ title: "Dev Vault Status"
 type: project
 tags: [knowledge-management, auto-memory-migration, project, active]
 created: "2026-03-30"
-updated: "2026-04-03"
+updated: "2026-04-04"
 status: active
 maturity: growing
 domain: "knowledge-management"
-summary: "Obsidian PARA vault with self-iteration workflow, current progress and pending work"
+summary: true
 goal: "Build an open-source developer knowledge base (PARA structure) with continuous self-iteration loop: /improve → analyze → propose → apply → learn"
 deadline: ""
-related: ["[[compound-engineering-research]]", "[[2026-03-30]]", "[[architecture-lessons]]", "[[context-engineering-hygiene]]", "[[benchmark-first-rule]]", "[[toolchain-reference]]", "[[claude-agent-sdk-api]]", "[[claude-session-manager]]"]
+related: ["[[compound-engineering-research]]", "[[2026-03-30]]", "[[architecture-lessons]]", "[[context-engineering-hygiene]]", "[[benchmark-first-rule]]", "[[toolchain-reference]]", "[[claude-agent-sdk-api]]", "[[claude-session-manager]]", "[[Unit4-Gospel-Recruitment-Plan]]", "[[Unit4-Gospel-Writer-WorkPackage]]", "[[yololab-optimization-report]]", "[[YOLO_LAB_Design_System]]"]
 relation_map: ""
 ---
 

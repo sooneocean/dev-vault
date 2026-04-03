@@ -3,12 +3,12 @@ title: "Tech Research Squad"
 type: project
 tags: [prompt-engineering, context-engineering, harness-engineering, compound-engineering, project, active]
 created: "2026-03-29"
-updated: "2026-04-03"
+updated: "2026-04-04"
 last_sprint: "Sprint 4 — Prompt Engineering"
 status: active
 maturity: growing
 domain: ai-engineering
-summary: "四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈"
+summary: true
 goal: "透過持續 onboarding 與反思迭代，建立可複利的 AI 工程知識體系"
 deadline: ""
 related: ["[[compound-engineering-plugin]]", "[[claude-code-configuration]]", "[[claude-code-dev-tools]]", "[[research-update-mode]]", "[[context-engineering-hygiene]]", "[[claude-session-manager]]"]

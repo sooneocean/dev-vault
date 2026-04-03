@@ -7,7 +7,7 @@ updated: "2026-04-03"
 status: active
 maturity: growing
 domain: project-specific
-summary: "CSM 的版本演進與未來功能規劃"
+summary: true
 goal: "Define version roadmap from v0.53 (current stable) through v2 refactor: TUI optimization, async test fixes, plugin system, cross-machine sync, and PyPI release"
 deadline: ""
 related: ["[[csm-architecture]]", "[[csm-key-design-decisions]]", "[[dexg16-git-and-github]]", "[[pretext-csm-tui-layout]]", "[[Unit4-Gospel-Recruitment-Plan]]"]

@@ -7,7 +7,7 @@ updated: "2026-04-03"
 status: active
 maturity: growing
 domain: knowledge-management
-summary: ""
+summary: true
 ---
 
 # 提示詞工程完全指南｜Chain-of-Thought × Few-Shot × 角色扮演最強技巧

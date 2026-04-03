@@ -7,22 +7,22 @@ updated: 2026-04-03
 # Tags Index
 
 ### active
-- [[claude-session-manager]] — Python TUI 儀表板，從單一終端管理多個 Claude Code Session
-- [[csm-feature-roadmap]] — CSM 的版本演進與未來功能規劃
+- [[claude-session-manager]] — true
+- [[csm-feature-roadmap]] — true
 - [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
-- [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
+- [[dev-vault-status]] — true
 - [[manual-plugin-deactivation]] — (no summary)
 - [[QUICK-START-GUIDE]] — (no summary)
-- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
-- [[Unit4-Gospel-Collaboration-Matrix]] — 編輯和寫手的角色矩陣、溝通時間表、決策樹
-- [[Unit4-Gospel-Recruitment-Plan]] — 完整的寫手招募與協作方案：招募框架 → 寫作流程 → 質量檢查 → 發佈。包含精神與人文平衡、台灣在地化融合、集體能量 vs 個人信仰的深度指引。發布日期：2026-04-24
-- [[Unit4-Gospel-Writer-WorkPackage]] — 面向錄用寫手的快速參考、核心要求、提交流程
+- [[tech-research-squad]] — true
+- [[Unit4-Gospel-Collaboration-Matrix]] — true
+- [[Unit4-Gospel-Recruitment-Plan]] — true
+- [[Unit4-Gospel-Writer-WorkPackage]] — true
 - [[verification-checklist]] — (no summary)
-- [[yololab-optimization-report]] — YOLO LAB 網站優化完整審計報告：23 個外掛配置、Gzip 壓縮、快取策略、SEO 優化、Core Web Vitals 改善。包含已完成項目、當前狀態、後續建議與監控計劃。
-- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統：色彩調色板、排版規範、圖標系統、互動模式。基於高對比度、大膽配色、前衛排版的品牌視覺表現系統，適用於所有數位內容。
-- [[article-ai-coding-assistants-2026]] — (no summary)
-- [[llm-model-comparison-2026]] — (no summary)
-- [[prompt-engineering-complete-guide]] — (no summary)
+- [[yololab-optimization-report]] — true
+- [[YOLO_LAB_Design_System]] — true
+- [[article-ai-coding-assistants-2026]] — true
+- [[llm-model-comparison-2026]] — true
+- [[prompt-engineering-complete-guide]] — true
 
 ### agent-framework
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
@@ -49,7 +49,7 @@ updated: 2026-04-03
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
 
 ### auto-memory-migration
-- [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
+- [[dev-vault-status]] — true
 - [[architecture-lessons]] — Critical lessons about Stop hooks, global config safety, and slash command nature
 - [[benchmark-first-rule]] — Always benchmark before planning — local LLM estimates were 5-10x off from reality
 - [[claude-agent-sdk-api]] — Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility
@@ -68,7 +68,7 @@ updated: 2026-04-03
 - [[writing-methodology-framework]] — Brainstorming a framework for dev-driven writing and batch publishing.
 
 ### branding
-- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統：色彩調色板、排版規範、圖標系統、互動模式。基於高對比度、大膽配色、前衛排版的品牌視覺表現系統，適用於所有數位內容。
+- [[YOLO_LAB_Design_System]] — true
 
 ### ci-cd
 - [[github-發布流程]] — 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護
@@ -84,7 +84,7 @@ updated: 2026-04-03
 
 ### claude-code
 - [[claude-code-dev-tools]] — 圍繞 Claude Code 生態系打造的開發工具集合
-- [[claude-session-manager]] — Python TUI 儀表板，從單一終端管理多個 Claude Code Session
+- [[claude-session-manager]] — true
 - [[claude-code-configuration]] — Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
 - [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
@@ -112,17 +112,17 @@ updated: 2026-04-03
 - [[cluster-subtype-domain-dimensions]] — Enhance obsidian-agent cluster algorithm to use subtype and domain as clustering dimensions alongside tags and related links
 
 ### collaboration
-- [[Unit4-Gospel-Collaboration-Matrix]] — 編輯和寫手的角色矩陣、溝通時間表、決策樹
-- [[Unit4-Gospel-Recruitment-Plan]] — 完整的寫手招募與協作方案：招募框架 → 寫作流程 → 質量檢查 → 發佈。包含精神與人文平衡、台灣在地化融合、集體能量 vs 個人信仰的深度指引。發布日期：2026-04-24
-- [[Unit4-Gospel-Writer-WorkPackage]] — 面向錄用寫手的快速參考、核心要求、提交流程
+- [[Unit4-Gospel-Collaboration-Matrix]] — true
+- [[Unit4-Gospel-Recruitment-Plan]] — true
+- [[Unit4-Gospel-Writer-WorkPackage]] — true
 
 ### compound-engineering
-- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
+- [[tech-research-squad]] — true
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
 - [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
 
 ### context-engineering
-- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
+- [[tech-research-squad]] — true
 - [[context-engineering-hygiene]] — Actionable context hygiene rules — when to compact, when to use subagents, plugin overhead awareness
 - [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 
@@ -142,7 +142,7 @@ updated: 2026-04-03
 - [[research-scan-2026-03-30]] — (no summary)
 
 ### design
-- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統：色彩調色板、排版規範、圖標系統、互動模式。基於高對比度、大膽配色、前衛排版的品牌視覺表現系統，適用於所有數位內容。
+- [[YOLO_LAB_Design_System]] — true
 
 ### diff-tracking
 - [[research-update-mode]] — Add --update flag to obsidian-agent research command to diff against previous research and surface changes
@@ -190,7 +190,7 @@ updated: 2026-04-03
 - [[local-llm-deployment]] — RTX 4090 Laptop 16GB VRAM 上的本地模型部署、MCP 整合、任務路由決策
 
 ### harness-engineering
-- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
+- [[tech-research-squad]] — true
 - [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
 - [[session-stop-wrapper-learning]] — Wrapper script 繞過 CLI 限制，從 Stop hook stdin 擷取 last_assistant_message 寫入 journal
 
@@ -208,7 +208,7 @@ updated: 2026-04-03
 - [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
 
 ### knowledge-management
-- [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
+- [[dev-vault-status]] — true
 - [[2026-04-03-classical-rock-fusion-article]] — 探討古典樂與搖滾音樂跨界合作的藝術價值，從台灣樂團四分衛、拍謝少年到國際大師Metallica的實例分析
 - [[architecture-lessons]] — Critical lessons about Stop hooks, global config safety, and slash command nature
 - [[benchmark-first-rule]] — Always benchmark before planning — local LLM estimates were 5-10x off from reality
@@ -302,7 +302,7 @@ updated: 2026-04-03
 - [[開源專案品質標準]] — 開源專案上架前的品質檢查清單 — README、License、CI、Topics、文件
 
 ### optimization
-- [[yololab-optimization-report]] — YOLO LAB 網站優化完整審計報告：23 個外掛配置、Gzip 壓縮、快取策略、SEO 優化、Core Web Vitals 改善。包含已完成項目、當前狀態、後續建議與監控計劃。
+- [[yololab-optimization-report]] — true
 
 ### oscar
 - [[documentary-film-comprehensive-guide]] — 深度探討紀錄電影與紀錄片的區別，分析5部必看奧斯卡提名作品，指南涵蓋導演視角、敘事手法與流媒體平台推薦。
@@ -311,7 +311,7 @@ updated: 2026-04-03
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
 
 ### planning
-- [[csm-feature-roadmap]] — CSM 的版本演進與未來功能規劃
+- [[csm-feature-roadmap]] — true
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
 
 ### plugins
@@ -326,29 +326,29 @@ updated: 2026-04-03
 - [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
 
 ### project
-- [[claude-session-manager]] — Python TUI 儀表板，從單一終端管理多個 Claude Code Session
-- [[csm-feature-roadmap]] — CSM 的版本演進與未來功能規劃
+- [[claude-session-manager]] — true
+- [[csm-feature-roadmap]] — true
 - [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
-- [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
+- [[dev-vault-status]] — true
 - [[manual-plugin-deactivation]] — (no summary)
 - [[QUICK-START-GUIDE]] — (no summary)
-- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
-- [[Unit4-Gospel-Collaboration-Matrix]] — 編輯和寫手的角色矩陣、溝通時間表、決策樹
-- [[Unit4-Gospel-Recruitment-Plan]] — 完整的寫手招募與協作方案：招募框架 → 寫作流程 → 質量檢查 → 發佈。包含精神與人文平衡、台灣在地化融合、集體能量 vs 個人信仰的深度指引。發布日期：2026-04-24
-- [[Unit4-Gospel-Writer-WorkPackage]] — 面向錄用寫手的快速參考、核心要求、提交流程
+- [[tech-research-squad]] — true
+- [[Unit4-Gospel-Collaboration-Matrix]] — true
+- [[Unit4-Gospel-Recruitment-Plan]] — true
+- [[Unit4-Gospel-Writer-WorkPackage]] — true
 - [[verification-checklist]] — (no summary)
-- [[yololab-optimization-report]] — YOLO LAB 網站優化完整審計報告：23 個外掛配置、Gzip 壓縮、快取策略、SEO 優化、Core Web Vitals 改善。包含已完成項目、當前狀態、後續建議與監控計劃。
-- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統：色彩調色板、排版規範、圖標系統、互動模式。基於高對比度、大膽配色、前衛排版的品牌視覺表現系統，適用於所有數位內容。
-- [[article-ai-coding-assistants-2026]] — (no summary)
-- [[llm-model-comparison-2026]] — (no summary)
-- [[prompt-engineering-complete-guide]] — (no summary)
+- [[yololab-optimization-report]] — true
+- [[YOLO_LAB_Design_System]] — true
+- [[article-ai-coding-assistants-2026]] — true
+- [[llm-model-comparison-2026]] — true
+- [[prompt-engineering-complete-guide]] — true
 
 ### prompt-engineering
-- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
+- [[tech-research-squad]] — true
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 
 ### python
-- [[claude-session-manager]] — Python TUI 儀表板，從單一終端管理多個 Claude Code Session
+- [[claude-session-manager]] — true
 - [[csm-architecture]] — Claude Session Manager 技術架構 — 程序模型、串流、持久化
 
 ### rag
@@ -404,7 +404,7 @@ updated: 2026-04-03
 - [[2026-04-03-classical-rock-fusion-article]] — 探討古典樂與搖滾音樂跨界合作的藝術價值，從台灣樂團四分衛、拍謝少年到國際大師Metallica的實例分析
 
 ### seo
-- [[yololab-optimization-report]] — YOLO LAB 網站優化完整審計報告：23 個外掛配置、Gzip 壓縮、快取策略、SEO 優化、Core Web Vitals 改善。包含已完成項目、當前狀態、後續建議與監控計劃。
+- [[yololab-optimization-report]] — true
 
 ### taiwan-artists
 - [[2026-04-03-classical-rock-fusion-article]] — 探討古典樂與搖滾音樂跨界合作的藝術價值，從台灣樂團四分衛、拍謝少年到國際大師Metallica的實例分析

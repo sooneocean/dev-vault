@@ -6,9 +6,9 @@ status: active
 priority: P1
 deadline: 2026-04-24
 created: 2026-04-02
-updated: "2026-04-03"
-summary: "完整的寫手招募與協作方案：招募框架 → 寫作流程 → 質量檢查 → 發佈。包含精神與人文平衡、台灣在地化融合、集體能量 vs 個人信仰的深度指引。發布日期：2026-04-24"
-related: ["[[Unit4-Gospel-Collaboration-Matrix]]", "[[Unit4-Gospel-Writer-WorkPackage]]"]
+updated: "2026-04-04"
+summary: true
+related: ["[[Unit4-Gospel-Collaboration-Matrix]]", "[[Unit4-Gospel-Writer-WorkPackage]]", "[[dev-vault-status]]", "[[yololab-optimization-report]]"]
 ---
 
 # Unit 4 Gospel — 招募與協作完整方案

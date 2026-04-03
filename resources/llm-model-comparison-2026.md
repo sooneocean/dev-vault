@@ -7,7 +7,7 @@ updated: "2026-04-03"
 status: active
 maturity: growing
 domain: knowledge-management
-summary: ""
+summary: true
 ---
 
 # LLM模型完整對比2026｜GPT-4o vs Claude vs Gemini vs Llama最強評測
