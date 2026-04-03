@@ -8,7 +8,7 @@ status: active
 maturity: growing
 domain: project-specific
 summary: "Python TUI 儀表板，從單一終端管理多個 Claude Code Session"
-goal: ""
+goal: "Enable multi-session Claude Code management from a single TUI dashboard with real-time streaming, cost tracking, SOP detection, auto-compaction at 50K tokens, and persistent session state"
 deadline: ""
 related: ["[[claude-code-dev-tools]]", "[[dexg16-ai-coding-tools]]", "[[claude-code-configuration]]", "[[session-stop-wrapper-learning]]", "[[pretext-csm-tui-layout]]"]
 relation_map: "csm-architecture:documents, csm-feature-roadmap:documents"

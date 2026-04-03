@@ -8,7 +8,7 @@ status: active
 maturity: growing
 domain: ai-engineering
 summary: "圍繞 Claude Code 生態系打造的開發工具集合"
-related: ["[[claude-session-manager]]", "[[dexg16-dev-environment]]", "[[dexg16-ai-coding-tools]]", "[[claude-code-configuration]]"]
+related: ["[[claude-session-manager]]", "[[dexg16-dev-environment]]", "[[dexg16-ai-coding-tools]]", "[[claude-code-configuration]]", "[[dev-vault-status]]", "[[tech-research-squad]]"]
 ---
 
 # Claude Code 開發工具

@@ -12,6 +12,8 @@ updated: 2026-04-03
 | [[claude-code-dev-tools]] | [[dexg16-dev-environment]] | weak |
 | [[claude-code-dev-tools]] | [[dexg16-ai-coding-tools]] | medium |
 | [[claude-code-dev-tools]] | [[claude-code-configuration]] | medium |
+| [[claude-code-dev-tools]] | [[dev-vault-status]] | weak |
+| [[claude-code-dev-tools]] | [[tech-research-squad]] | weak |
 | [[開源開發者身分]] | [[dexg16-git-and-github]] | medium |
 | [[開源開發者身分]] | [[github-全部-repo-清單]] | medium |
 | [[開源開發者身分]] | [[github-發布流程]] | medium |
@@ -46,6 +48,10 @@ updated: 2026-04-03
 | [[Unit4-Gospel-Recruitment-Plan]] | [[Unit4-Gospel-Writer-WorkPackage]] | strong |
 | [[Unit4-Gospel-Writer-WorkPackage]] | [[Unit4-Gospel-Recruitment-Plan]] | strong |
 | [[Unit4-Gospel-Writer-WorkPackage]] | [[Unit4-Gospel-Collaboration-Matrix]] | strong |
+| [[yololab-optimization-report]] | [[dev-vault-status]] | strong |
+| [[yololab-optimization-report]] | [[YOLO_LAB_Design_System]] | strong |
+| [[YOLO_LAB_Design_System]] | [[yololab-optimization-report]] | strong |
+| [[YOLO_LAB_Design_System]] | [[QUICK-START-GUIDE]] | strong |
 | [[architecture-lessons]] | [[dev-vault-status]] | strong |
 | [[architecture-lessons]] | [[context-engineering-hygiene]] | strong |
 | [[architecture-lessons]] | [[benchmark-first-rule]] | strong |
@@ -371,7 +377,7 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[README]]
 - [[README]]
 
-### Cluster 2: dexg16-ai-coding-tools (47 notes)
+### Cluster 2: dexg16-ai-coding-tools (50 notes)
 - [[dexg16-ai-coding-tools]]
 - [[dev-vault-status]]
 - [[compound-engineering-plugin]]
@@ -379,6 +385,7 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[dexg16-git-and-github]]
 - [[dexg16-ai-stack]]
 - [[dexg16-all-projects-catalog]]
+- [[claude-code-dev-tools]]
 - [[tech-research-squad]]
 - [[claude-code-configuration]]
 - [[compound-engineering-research]]
@@ -397,7 +404,6 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[github-全部-repo-清單]]
 - [[session-stop-wrapper-learning]]
 - [[pretext-csm-tui-layout]]
-- [[claude-code-dev-tools]]
 - [[開源開發者身分]]
 - [[github-發布流程]]
 - [[prompt-engineering-research]]
@@ -412,6 +418,8 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[Unit4-Gospel-Collaboration-Matrix]]
 - [[Unit4-Gospel-Recruitment-Plan]]
 - [[Unit4-Gospel-Writer-WorkPackage]]
+- [[yololab-optimization-report]]
+- [[YOLO_LAB_Design_System]]
 - [[improvement-2026-03-30-001]]
 - [[local-llm-task-routing]]
 - [[pretext-無-dom-文字測量引擎]]
@@ -419,6 +427,7 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[research-scan-2026-03-30]]
 - [[sample-article]]
 - [[writing-methodology-framework]]
+- [[QUICK-START-GUIDE]]
 
 ### Cluster 3: HISTORY (30 notes)
 - [[HISTORY]]

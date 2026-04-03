@@ -13,13 +13,13 @@ updated: 2026-04-03
 - [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
 - [[manual-plugin-deactivation]] — (no summary)
 - [[QUICK-START-GUIDE]] — (no summary)
-- [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
+- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
 - [[Unit4-Gospel-Collaboration-Matrix]] — 編輯和寫手的角色矩陣、溝通時間表、決策樹
-- [[Unit4-Gospel-Recruitment-Plan]] — 「20世纪黑人音樂人系列」Unit 4 的完整寫手招募框架、協作流程與質量控制方案
+- [[Unit4-Gospel-Recruitment-Plan]] — 完整的寫手招募與協作方案：招募框架 → 寫作流程 → 質量檢查 → 發佈。包含精神與人文平衡、台灣在地化融合、集體能量 vs 個人信仰的深度指引。發布日期：2026-04-24
 - [[Unit4-Gospel-Writer-WorkPackage]] — 面向錄用寫手的快速參考、核心要求、提交流程
 - [[verification-checklist]] — (no summary)
-- [[yololab-optimization-report]] — (no summary)
-- [[YOLO_LAB_Design_System]] — (no summary)
+- [[yololab-optimization-report]] — YOLO LAB 網站優化完整審計報告：23 個外掛配置、Gzip 壓縮、快取策略、SEO 優化、Core Web Vitals 改善。包含已完成項目、當前狀態、後續建議與監控計劃。
+- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統：色彩調色板、排版規範、圖標系統、互動模式。基於高對比度、大膽配色、前衛排版的品牌視覺表現系統，適用於所有數位內容。
 - [[article-ai-coding-assistants-2026]] — (no summary)
 - [[llm-model-comparison-2026]] — (no summary)
 - [[prompt-engineering-complete-guide]] — (no summary)
@@ -67,6 +67,9 @@ updated: 2026-04-03
 - [[research-update-mode]] — Add --update flag to obsidian-agent research command to diff against previous research and surface changes
 - [[writing-methodology-framework]] — Brainstorming a framework for dev-driven writing and batch publishing.
 
+### branding
+- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統：色彩調色板、排版規範、圖標系統、互動模式。基於高對比度、大膽配色、前衛排版的品牌視覺表現系統，適用於所有數位內容。
+
 ### ci-cd
 - [[github-發布流程]] — 開源專案的標準發布流程 — 版本命名、Release 建立、CHANGELOG 維護
 
@@ -110,16 +113,16 @@ updated: 2026-04-03
 
 ### collaboration
 - [[Unit4-Gospel-Collaboration-Matrix]] — 編輯和寫手的角色矩陣、溝通時間表、決策樹
-- [[Unit4-Gospel-Recruitment-Plan]] — 「20世纪黑人音樂人系列」Unit 4 的完整寫手招募框架、協作流程與質量控制方案
+- [[Unit4-Gospel-Recruitment-Plan]] — 完整的寫手招募與協作方案：招募框架 → 寫作流程 → 質量檢查 → 發佈。包含精神與人文平衡、台灣在地化融合、集體能量 vs 個人信仰的深度指引。發布日期：2026-04-24
 - [[Unit4-Gospel-Writer-WorkPackage]] — 面向錄用寫手的快速參考、核心要求、提交流程
 
 ### compound-engineering
-- [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
+- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
 - [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
 
 ### context-engineering
-- [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
+- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
 - [[context-engineering-hygiene]] — Actionable context hygiene rules — when to compact, when to use subagents, plugin overhead awareness
 - [[context-engineering-research]] — Context Engineering — 在有限 context window 中最大化有效資訊的策略。含 1M window 實測數據、compaction 陷阱、CLAUDE.md 最佳化、memory 架構、subagent 隔離模式。
 
@@ -137,6 +140,9 @@ updated: 2026-04-03
 - [[2026-W14-review]] — Vault 從零到 Grade A 99% 的三日旅程 — 48 notes, 7 plans, 12-agent parallel sessions, 知識複利迴路首次閉合
 - [[content-cycle-w1-2026-04-02]] — (no summary)
 - [[research-scan-2026-03-30]] — (no summary)
+
+### design
+- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統：色彩調色板、排版規範、圖標系統、互動模式。基於高對比度、大膽配色、前衛排版的品牌視覺表現系統，適用於所有數位內容。
 
 ### diff-tracking
 - [[research-update-mode]] — Add --update flag to obsidian-agent research command to diff against previous research and surface changes
@@ -184,7 +190,7 @@ updated: 2026-04-03
 - [[local-llm-deployment]] — RTX 4090 Laptop 16GB VRAM 上的本地模型部署、MCP 整合、任務路由決策
 
 ### harness-engineering
-- [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
+- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
 - [[harness-engineering-research]] — Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。
 - [[session-stop-wrapper-learning]] — Wrapper script 繞過 CLI 限制，從 Stop hook stdin 擷取 last_assistant_message 寫入 journal
 
@@ -295,6 +301,9 @@ updated: 2026-04-03
 - [[開源開發者身分]] — sooneocean 開源開發者身分、發布策略、品牌定位
 - [[開源專案品質標準]] — 開源專案上架前的品質檢查清單 — README、License、CI、Topics、文件
 
+### optimization
+- [[yololab-optimization-report]] — YOLO LAB 網站優化完整審計報告：23 個外掛配置、Gzip 壓縮、快取策略、SEO 優化、Core Web Vitals 改善。包含已完成項目、當前狀態、後續建議與監控計劃。
+
 ### oscar
 - [[documentary-film-comprehensive-guide]] — 深度探討紀錄電影與紀錄片的區別，分析5部必看奧斯卡提名作品，指南涵蓋導演視角、敘事手法與流媒體平台推薦。
 
@@ -323,19 +332,19 @@ updated: 2026-04-03
 - [[dev-vault-status]] — Obsidian PARA vault with self-iteration workflow, current progress and pending work
 - [[manual-plugin-deactivation]] — (no summary)
 - [[QUICK-START-GUIDE]] — (no summary)
-- [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
+- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
 - [[Unit4-Gospel-Collaboration-Matrix]] — 編輯和寫手的角色矩陣、溝通時間表、決策樹
-- [[Unit4-Gospel-Recruitment-Plan]] — 「20世纪黑人音樂人系列」Unit 4 的完整寫手招募框架、協作流程與質量控制方案
+- [[Unit4-Gospel-Recruitment-Plan]] — 完整的寫手招募與協作方案：招募框架 → 寫作流程 → 質量檢查 → 發佈。包含精神與人文平衡、台灣在地化融合、集體能量 vs 個人信仰的深度指引。發布日期：2026-04-24
 - [[Unit4-Gospel-Writer-WorkPackage]] — 面向錄用寫手的快速參考、核心要求、提交流程
 - [[verification-checklist]] — (no summary)
-- [[yololab-optimization-report]] — (no summary)
-- [[YOLO_LAB_Design_System]] — (no summary)
+- [[yololab-optimization-report]] — YOLO LAB 網站優化完整審計報告：23 個外掛配置、Gzip 壓縮、快取策略、SEO 優化、Core Web Vitals 改善。包含已完成項目、當前狀態、後續建議與監控計劃。
+- [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統：色彩調色板、排版規範、圖標系統、互動模式。基於高對比度、大膽配色、前衛排版的品牌視覺表現系統，適用於所有數位內容。
 - [[article-ai-coding-assistants-2026]] — (no summary)
 - [[llm-model-comparison-2026]] — (no summary)
 - [[prompt-engineering-complete-guide]] — (no summary)
 
 ### prompt-engineering
-- [[tech-research-squad]] — 四大工程學科的迭代研究與反思框架 — Prompt / Context / Harness / Compound Engineering
+- [[tech-research-squad]] — 四大 AI 工程學科 (Prompt / Context / Harness / Compound) 的深度研究與持續反思：從工具堆疊盤點 → 實踐應用 → 知識複利的完整迴圈
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 
 ### python
@@ -393,6 +402,9 @@ updated: 2026-04-03
 
 ### rock-music
 - [[2026-04-03-classical-rock-fusion-article]] — 探討古典樂與搖滾音樂跨界合作的藝術價值，從台灣樂團四分衛、拍謝少年到國際大師Metallica的實例分析
+
+### seo
+- [[yololab-optimization-report]] — YOLO LAB 網站優化完整審計報告：23 個外掛配置、Gzip 壓縮、快取策略、SEO 優化、Core Web Vitals 改善。包含已完成項目、當前狀態、後續建議與監控計劃。
 
 ### taiwan-artists
 - [[2026-04-03-classical-rock-fusion-article]] — 探討古典樂與搖滾音樂跨界合作的藝術價值，從台灣樂團四分衛、拍謝少年到國際大師Metallica的實例分析
@@ -471,6 +483,10 @@ updated: 2026-04-03
 | text-layout | 2 |
 | version-tracking | 1 |
 | product-iteration | 1 |
+| seo | 1 |
+| optimization | 1 |
+| design | 1 |
+| branding | 1 |
 | music-pillar | 1 |
 | cross-genre-fusion | 1 |
 | classical-music | 1 |
