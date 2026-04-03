@@ -1,5 +1,5 @@
 ---
-updated: "2026-04-04"
+updated: "2026-04-03"
 tags: [project, active, collaboration]
 title: Unit 4 Gospel — 寫手工作包（簡化版）
 type: project

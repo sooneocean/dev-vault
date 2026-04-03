@@ -3,7 +3,7 @@ title: "Claude Session Manager"
 type: project
 tags: [claude-code, python, project, active]
 created: "2026-03-28"
-updated: "2026-04-04"
+updated: "2026-04-03"
 status: active
 maturity: growing
 domain: project-specific

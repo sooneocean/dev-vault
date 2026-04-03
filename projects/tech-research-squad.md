@@ -3,7 +3,7 @@ title: "Tech Research Squad"
 type: project
 tags: [prompt-engineering, context-engineering, harness-engineering, compound-engineering, project, active]
 created: "2026-03-29"
-updated: "2026-04-04"
+updated: "2026-04-03"
 last_sprint: "Sprint 4 — Prompt Engineering"
 status: active
 maturity: growing
