@@ -1,10 +1,10 @@
 ---
 title: "research-update-mode"
 type: idea
-tags: [obsidian-agent, diff-tracking]
+tags: [clausidian, diff-tracking, brainstorm, future, ai-engineering]
 created: "2026-03-29"
-updated: "2026-03-29"
-status: draft
+updated: "2026-04-03"
+status: "archived"
 maturity: seed
 domain: knowledge-management
 summary: "Add --update flag to obsidian-agent research command to diff against previous research and surface changes"

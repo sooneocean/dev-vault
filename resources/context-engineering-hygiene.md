@@ -2,9 +2,9 @@
 title: "Context Engineering Hygiene"
 type: resource
 subtype: "learning"
-tags: [knowledge-management, auto-memory-migration, context-engineering]
+tags: [knowledge-management, auto-memory-migration, context-engineering, reference]
 created: "2026-03-30"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 maturity: mature
 domain: "ai-engineering"

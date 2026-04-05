@@ -1,0 +1,113 @@
+{
+  "reviewer": "testing",
+  "findings": [
+    {
+      "severity": "P1",
+      "file": "tests/test_inpaint_executor.py",
+      "line": 73,
+      "title": "Mock ComfyUIClient patch path may not match runtime import location",
+      "why_it_matters": "Implementation imports ComfyUIClient at runtime (line 79) to avoid circular deps, but tests patch 'projects.tools.comfyui.client.ComfyUIClient'. If the import path doesn't match, mocks are bypassed.",
+      "evidence": [
+        "inpaint_executor.py:79 imports inside function",
+        "test_inpaint_executor.py:74 patches module"
+      ],
+      "suggested_fix": "Patch at usage location after import",
+      "autofix_class": "manual",
+      "confidence": 0.85
+    },
+    {
+      "severity": "P1",
+      "file": "tests/test_inpaint_executor.py",
+      "line": 177,
+      "title": "asyncio.gather(return_exceptions=False) hides which crop in batch failed",
+      "why_it_matters": "If 2 out of 5 crops fail, first exception is raised but which pair failed is lost",
+      "evidence": [
+        "inpaint_executor.py:177 uses return_exceptions=False",
+        "test only tests all-success"
+      ],
+      "suggested_fix": "Add test for batch partial failure scenario",
+      "autofix_class": "gated_auto",
+      "confidence": 0.8
+    },
+    {
+      "severity": "P1",
+      "file": "tests/test_stitch_handler.py",
+      "line": 59,
+      "title": "Stitch tests never validate rescaling/unpadding math; only check shape/dtype",
+      "why_it_matters": "Complex transforms with off-by-one risks. Bug in pad/rescale math produces wrong output silently.",
+      "evidence": [
+        "test only checks shape not pixel values",
+        "stitch_handler.py has complex index math"
+      ],
+      "suggested_fix": "Add test validating mask gradient and rescaled dimensions",
+      "autofix_class": "manual",
+      "confidence": 0.75
+    },
+    {
+      "severity": "P1",
+      "file": "tests/test_video_encoder.py",
+      "line": 56,
+      "title": "VideoEncoder tests dont verify FFmpeg command construction, only success flag",
+      "why_it_matters": "Codec typo, flag order error would pass tests silently",
+      "evidence": [
+        "test doesn't check call args",
+        "complex command building untested"
+      ],
+      "suggested_fix": "Assert command contains correct flags",
+      "autofix_class": "safe_auto",
+      "confidence": 0.9
+    },
+    {
+      "severity": "P1",
+      "file": "src/watermark_removal/inpaint/inpaint_executor.py",
+      "line": 177,
+      "title": "Batch processing doesn't guarantee in-order results on partial failure",
+      "why_it_matters": "Pipeline assumes zip(crop_indices, results) preserves order. If batch fails, mapping is broken.",
+      "evidence": [
+        "batch logic fails if any task fails",
+        "pipeline.py assumes order preserved"
+      ],
+      "suggested_fix": "Use dict {frame_idx: result_path} instead of list results",
+      "autofix_class": "gated_auto",
+      "confidence": 0.85
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/postprocessing/video_encoder.py",
+      "line": 160,
+      "title": "encode_from_config() hardcodes fps=30.0 instead of reading config.output_fps",
+      "why_it_matters": "Users cannot control frame rate; always outputs 30fps",
+      "evidence": [
+        "fps=30.0 hardcoded",
+        "config field output_fps ignored"
+      ],
+      "suggested_fix": "Change to fps=config.output_fps",
+      "autofix_class": "safe_auto",
+      "confidence": 1.0
+    }
+  ],
+  "residual_risks": [
+    "Async timeout handling: Batch processing with timeout not tested under real network jitter",
+    "Feather blending visual quality: No rendered output validation; could have visible seams",
+    "Frame extraction robustness: No validation of frame count vs video duration",
+    "Mask loading edge cases: No tests for channel mismatch, all-zero masks, NaN values",
+    "ComfyUI API contract drift: Mocks don't validate against real schema",
+    "Crop region math fragility: Off-by-one errors compound through pipeline",
+    "Batch ordering under failure: Missing frames silently skipped",
+    "File I/O race conditions: No test for concurrent writes"
+  ],
+  "testing_gaps": [
+    "No test for empty/zero-sized crops",
+    "No test for single-pixel mask regions",
+    "No test for mask region partially outside frame",
+    "No test for ComfyUI naming variations",
+    "No test for 4K/8K frames",
+    "No test for variable frame rate video",
+    "No test for missing codec",
+    "No test for frame quality metrics",
+    "No stress test (100+ frames)",
+    "No test for user interruption",
+    "No test for partial recovery",
+    "No test for malformed input"
+  ]
+}

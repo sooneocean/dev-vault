@@ -248,3 +248,96 @@ class TestConfigManager:
         assert config.inpaint.prompt == "remove watermark, clean background"
         assert config.inpaint.steps == 20
         assert config.inpaint.cfg_scale == 7.5
+
+
+class TestEnsembleConfiguration:
+    """Test ensemble detection configuration handling."""
+
+    def test_ensemble_detection_disabled_by_default(self, base_config_dict):
+        """Test that ensemble detection is disabled by default."""
+        config_dict = base_config_dict.copy()
+        config = ProcessConfig(**config_dict)
+        assert config.ensemble_detection_enabled is False
+
+    def test_ensemble_detection_enabled(self, base_config_dict):
+        """Test enabling ensemble detection via config."""
+        config_dict = base_config_dict.copy()
+        config_dict["ensemble_detection_enabled"] = True
+        config_dict["ensemble_models"] = ["yolov5s", "yolov5m"]
+        config = ProcessConfig(**config_dict)
+        assert config.ensemble_detection_enabled is True
+        assert config.ensemble_models == ["yolov5s", "yolov5m"]
+
+    def test_ensemble_default_models(self, base_config_dict):
+        """Test default ensemble models."""
+        config_dict = base_config_dict.copy()
+        config = ProcessConfig(**config_dict)
+        assert config.ensemble_models == ["yolov5s", "yolov5m"]
+
+    def test_ensemble_custom_models(self, base_config_dict):
+        """Test custom ensemble models."""
+        config_dict = base_config_dict.copy()
+        config_dict["ensemble_models"] = ["yolov5m", "yolov5l"]
+        config = ProcessConfig(**config_dict)
+        assert config.ensemble_models == ["yolov5m", "yolov5l"]
+
+    def test_ensemble_voting_mode(self, base_config_dict):
+        """Test ensemble voting mode."""
+        config_dict = base_config_dict.copy()
+        config_dict["ensemble_voting_mode"] = "confidence_weighted"
+        config = ProcessConfig(**config_dict)
+        assert config.ensemble_voting_mode == "confidence_weighted"
+
+    def test_ensemble_iou_threshold(self, base_config_dict):
+        """Test ensemble IoU threshold configuration."""
+        config_dict = base_config_dict.copy()
+        config_dict["ensemble_iou_threshold"] = 0.4
+        config = ProcessConfig(**config_dict)
+        assert config.ensemble_iou_threshold == 0.4
+
+    def test_ensemble_nms_threshold(self, base_config_dict):
+        """Test ensemble NMS threshold configuration."""
+        config_dict = base_config_dict.copy()
+        config_dict["ensemble_nms_threshold"] = 0.5
+        config = ProcessConfig(**config_dict)
+        assert config.ensemble_nms_threshold == 0.5
+
+    def test_ensemble_model_accuracies(self, base_config_dict):
+        """Test ensemble model accuracies configuration."""
+        config_dict = base_config_dict.copy()
+        config_dict["ensemble_model_accuracies"] = {"yolov5s": 0.80, "yolov5m": 0.92}
+        config = ProcessConfig(**config_dict)
+        assert config.ensemble_model_accuracies["yolov5s"] == 0.80
+        assert config.ensemble_model_accuracies["yolov5m"] == 0.92
+
+    def test_ensemble_validation_models_empty_when_enabled(self, base_config_dict):
+        """Test validation: models list cannot be empty when ensemble is enabled."""
+        config_dict = base_config_dict.copy()
+        config_dict["ensemble_detection_enabled"] = True
+        config_dict["ensemble_models"] = []
+        with pytest.raises(ValueError, match="ensemble_models must not be empty"):
+            ProcessConfig(**config_dict)
+
+    def test_ensemble_validation_invalid_voting_mode(self, base_config_dict):
+        """Test validation: only 'confidence_weighted' voting mode is allowed."""
+        config_dict = base_config_dict.copy()
+        config_dict["ensemble_detection_enabled"] = True
+        config_dict["ensemble_voting_mode"] = "invalid_mode"
+        with pytest.raises(ValueError, match="ensemble_voting_mode must be"):
+            ProcessConfig(**config_dict)
+
+    def test_ensemble_validation_invalid_iou_threshold(self, base_config_dict):
+        """Test validation: IoU threshold must be in (0.0, 1.0]."""
+        config_dict = base_config_dict.copy()
+        config_dict["ensemble_detection_enabled"] = True
+        config_dict["ensemble_iou_threshold"] = 0.0
+        with pytest.raises(ValueError, match="ensemble_iou_threshold"):
+            ProcessConfig(**config_dict)
+
+    def test_ensemble_validation_nms_threshold_range(self, base_config_dict):
+        """Test validation: NMS threshold must be in [0.0, 1.0]."""
+        config_dict = base_config_dict.copy()
+        config_dict["ensemble_detection_enabled"] = True
+        config_dict["ensemble_nms_threshold"] = 1.5
+        with pytest.raises(ValueError, match="ensemble_nms_threshold"):
+            ProcessConfig(**config_dict)

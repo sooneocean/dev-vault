@@ -14,12 +14,18 @@ Thumbs.db
 # Dependencies
 node_modules/
 
+# Local databases
+*.db/
+
 # Python
 __pycache__/
 *.pyc
 *.egg-info/
 dist/
 build/
+.pytest_cache/
+.ruff_cache/
+.venv/
 
 # Claude Code projects (submodules, not vault content)
 projects/tools/*
@@ -28,8 +34,55 @@ projects/tools/*
 projects/tools/research-pipeline/state/
 projects/tools/research-pipeline/lancedb/
 projects/tools/research-pipeline/lightrag/
+projects/tools/research-pipeline/agent_memory_local.db/
 projects/tools/research-pipeline/__pycache__/
+
+# Artifacts
+*.log
+*.bak
+.playwright-mcp/
 
 # Editor
 .cursor/
 .vscode/
+
+# SEO Optimization Output
+seo-optimization-output/
+seo-optimization.log
+
+# Article Data (temporary)
+sample-articles-2025.json
+latest-articles.json
+articles-2025-real.json
+
+# Apply Scripts (generated)
+scripts/apply-seo-direct.js
+scripts/auto-login-apply.js
+scripts/execute-now.js
+scripts/yolo-lab-seo-optimizer-v3.js
+
+# Backup databases
+agent_memory_local.db.backup/
+
+# Documentation (temporary/generated)
+DELIVERY_COMPLETE.txt
+DELIVERY_REPORT.txt
+OPTIMIZATION_SUMMARY.md
+OPTIMIZATION_COMPLETE.md
+SEO-QUICK-START.md
+YOLOLAB_*.md
+PHASE*.md
+SETUP_COMPLETE.md
+MAINTENANCE_*.md
+FINAL_VAULT_ASSESSMENT.md
+GO_ALL_EXECUTION_SUMMARY.md
+VAULT_*.md
+CASE_STUDY_*.md
+SPRINT5_*.md
+UNIT4_*.md
+TECH_RESEARCH_SQUAD_*.md
+QUICK_REFERENCE.md
+vault_notes.json
+aggressive-seo-revival.json
+batch-1-*.csv
+batch-1-*.xml

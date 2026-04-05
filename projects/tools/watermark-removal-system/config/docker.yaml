@@ -1,0 +1,100 @@
+# Docker deployment configuration for watermark removal pipeline
+# Customize this for your specific use case
+
+# Input/Output Configuration
+video_path: /data/input/video.mp4
+mask_path: /data/input/mask.png
+output_dir: /data/output
+checkpoint_dir: /data/checkpoints
+
+# Phase 1: Core Watermark Removal
+context_padding: 64                    # Padding around watermark for context (pixels)
+target_inpaint_size: 1024             # Target size for inpaint model (square)
+blend_feather_width: 32               # Feather blend width at crop edges
+
+# Phase 2: Postprocessing - Temporal Smoothing
+temporal_smooth_alpha: 0.0            # Temporal smoothing factor (0.0 = disabled, 1.0 = max)
+use_adaptive_temporal_smoothing: false # Enable motion-aware temporal smoothing
+adaptive_motion_threshold: 0.05        # Motion threshold for adaptive smoothing (0.0-1.0)
+
+# Phase 2: Postprocessing - Poisson Blending
+use_poisson_blending: false            # Enable Poisson equation blending for seamless edges
+poisson_max_iterations: 100            # Maximum iterations for Poisson solver
+poisson_tolerance: 0.01                # Convergence tolerance for Poisson
+
+# Phase 2: Preprocessing - YOLO Detection
+use_yolo_detection: false              # Enable automatic watermark detection
+yolo_model_size: small                 # Model size: nano, small, medium, large
+yolo_confidence_threshold: 0.5         # Confidence threshold for detections (0.0-1.0)
+yolo_nms_threshold: 0.45              # NMS threshold for overlapping detections
+
+# Phase 2: Preprocessing - Multi-Watermark Support
+max_watermarks_per_frame: 1            # Maximum watermarks to process per frame (1 = single)
+watermark_merge_threshold: 0.3         # IoU threshold for merging overlapping watermarks
+
+# Phase 2: Preprocessing - Watermark Tracking
+use_watermark_tracker: false           # Enable watermark tracking with bbox interpolation
+yolo_model_path: null                  # Path to custom YOLO model (null = auto-download)
+tracker_sparse_interval: 1             # Interpolation interval for sparse detections
+tracker_smoothing_factor: 0.3          # Bbox smoothing factor (0.0-1.0)
+
+# Phase 2: Pipeline - Resumption
+use_checkpoints: false                 # Enable pipeline checkpointing for resumption
+resume_from_checkpoint: false          # Resume from last checkpoint if available
+
+# Execution Configuration
+batch_size: 4                          # Number of parallel inpaint jobs
+inpaint_timeout_sec: 300.0            # Timeout for each inpaint job (seconds)
+comfyui_host: comfyui                 # ComfyUI server hostname
+comfyui_port: 8188                    # ComfyUI server port
+keep_intermediate: false               # Keep intermediate frame/crop files
+
+# Inpainting Model Configuration
+inpaint:
+  model_name: flux-dev                 # Inpaint model: flux-dev, sdxl-base, etc
+  prompt: remove watermark seamlessly  # Positive prompt for inpainting
+  negative_prompt: watermark, text, logo, artifact  # Negative prompt
+  steps: 20                            # Number of diffusion steps
+  cfg_scale: 7.5                       # Classifier-free guidance scale
+  sampler: dpmpp_2m                    # Sampler type
+  scheduler: karras                    # Scheduler type
+  seed: -1                             # Random seed (-1 = random)
+
+---
+
+# Configuration Presets
+
+# Fast Processing (minimal quality)
+# temporal_smooth_alpha: 0.0
+# use_adaptive_temporal_smoothing: false
+# use_poisson_blending: false
+# batch_size: 8
+# max_watermarks_per_frame: 1
+
+# Balanced (good speed/quality ratio)
+# temporal_smooth_alpha: 0.3
+# use_adaptive_temporal_smoothing: false
+# use_poisson_blending: false
+# batch_size: 4
+# max_watermarks_per_frame: 2
+
+# High Quality (slower, best results)
+# temporal_smooth_alpha: 0.3
+# use_adaptive_temporal_smoothing: true
+# use_poisson_blending: true
+# poisson_max_iterations: 200
+# batch_size: 2
+# max_watermarks_per_frame: 3
+
+# Multi-Watermark (multiple logos/text)
+# max_watermarks_per_frame: 5
+# use_yolo_detection: true
+# yolo_model_size: medium
+# watermark_merge_threshold: 0.4
+# batch_size: 4
+
+# Tracking (moving watermarks)
+# use_watermark_tracker: true
+# yolo_model_size: small
+# tracker_smoothing_factor: 0.5
+# batch_size: 4

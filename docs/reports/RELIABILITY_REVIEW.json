@@ -1,0 +1,213 @@
+{
+  "reviewer": "reliability",
+  "findings": [
+    {
+      "severity": "P1",
+      "file": "src/watermark_removal/inpaint/inpaint_executor.py",
+      "line": 177,
+      "title": "asyncio.gather with return_exceptions=False causes one crop failure to abort entire batch",
+      "why_it_matters": "When any inpaint_single() task raises an exception, gather() immediately cancels remaining tasks and re-raises. With 100 crops and batch_size=4, one failure at position 47 halts 53% through, wasting 25+ GPU invocations. Pipeline cannot recover from transient ComfyUI errors.",
+      "evidence": [
+        "Line 177: asyncio.gather(*tasks, return_exceptions=False)",
+        "Line 184: Same pattern in final batch",
+        "InpaintConfig lacks timeout field; line 97 uses hasattr fallback defaulting to 300s even for 4-crop batches taking 600s"
+      ],
+      "suggested_fix": "Use return_exceptions=True to capture both Path and Exception objects. Filter results into successful paths and failed indices. Optionally retry failed crops with exponential backoff if config.enable_inpaint_retry=True.",
+      "autofix_class": "gated_auto",
+      "confidence": 0.95
+    },
+    {
+      "severity": "P1",
+      "file": "src/watermark_removal/inpaint/inpaint_executor.py",
+      "line": 318,
+      "title": "Zip mismatch: no validation that results count equals input pairs count",
+      "why_it_matters": "If inpaint_batch() returns fewer results than crop_indices due to exception dropping, zip() silently truncates mapping. Frames 47+ get no inpainted entry, causing _stitch_frames() to skip them. Frames dropped from output without error signal.",
+      "evidence": [
+        "Line 318-319: for idx, (frame_idx, result_path) in enumerate(zip(crop_indices, results))",
+        "No assertion: assert len(results) == len(crop_indices)",
+        "_stitch_frames() line 349-350 silently continues if frame_idx not in inpainted dict"
+      ],
+      "suggested_fix": "Add assertion: if len(results) != len(crop_indices): raise RuntimeError(...). Or with return_exceptions=True, map failed indices explicitly.",
+      "autofix_class": "safe_auto",
+      "confidence": 0.92
+    },
+    {
+      "severity": "P1",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 255,
+      "title": "Health check timeout only 5 seconds; ComfyUI model load takes 30+ seconds",
+      "why_it_matters": "aiohttp.ClientTimeout(total=5) fails on slow startup or high load. ComfyUI model load takes 30+ seconds. Health check fails before pipeline starts, blocking cleanup opportunity if async resources created earlier.",
+      "evidence": [
+        "Line 255: async with session.get(url, timeout=aiohttp.ClientTimeout(total=5))",
+        "ProcessConfig.timeout=300s applies to inpaint, not preflight"
+      ],
+      "suggested_fix": "Use configurable timeout: health_timeout = self.config.timeout if hasattr(self.config, 'health_check_timeout') else 30.0",
+      "autofix_class": "safe_auto",
+      "confidence": 0.85
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/inpaint/inpaint_executor.py",
+      "line": 87,
+      "title": "ComfyUIClient context manager unprotected against reentry; concurrent calls create multiple sessions",
+      "why_it_matters": "Multiple InpaintExecutor instances each open own aiohttp session. If pipeline calls _inpaint_crops() again after error recovery, new session leaks. No cleanup of lingering connections.",
+      "evidence": [
+        "Line 87: async with ComfyUIClient(...) as client:",
+        "InpaintExecutor has no __aenter__/__aexit__; multiple instances = multiple sessions",
+        "No pooling or singleton pattern"
+      ],
+      "suggested_fix": "Add class-level _session dict keyed by (host, port) to reuse connections across instances.",
+      "autofix_class": "gated_auto",
+      "confidence": 0.78
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 159,
+      "title": "Preprocessing exception handler only catches FileNotFoundError; OSError/IOError not caught",
+      "why_it_matters": "Disk full or permission denied on frame 50: OSError raised and uncaught. skip_errors_in_preprocessing only suppresses FileNotFoundError. Pipeline halts; no resume from frame 51.",
+      "evidence": [
+        "Line 195-199: except FileNotFoundError as e: if self.config.skip_errors_in_preprocessing",
+        "Line 159 loop processes sequentially with no recovery point"
+      ],
+      "suggested_fix": "Broaden except clause: except (FileNotFoundError, OSError, IOError) as e: with selective re-raise based on skip_errors flag.",
+      "autofix_class": "safe_auto",
+      "confidence": 0.88
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 103,
+      "title": "Generic except Exception in run() hides root cause when cleanup() itself fails",
+      "why_it_matters": "If inpainting fails with TimeoutError and _cleanup() raises (permission denied), cleanup exception suppresses original error. Logs show wrong root cause.",
+      "evidence": [
+        "Line 102-105: except Exception as e: logger.error(...) await self._cleanup() raise",
+        "_cleanup() line 425 catches exceptions but logs warning, not re-raised"
+      ],
+      "suggested_fix": "Separate exception handling: track both original and cleanup errors independently using contextvars or ExceptionGroup (Python 3.11+).",
+      "autofix_class": "gated_auto",
+      "confidence": 0.80
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/postprocessing/video_encoder.py",
+      "line": 109,
+      "title": "subprocess.run() uses capture_output=True but never reads pipes; large stderr blocks on full buffer",
+      "why_it_matters": "If FFmpeg writes >64KB error messages, stderr pipe fills and subprocess hangs. Deadlock: subprocess waits for drain, parent waits for exit.",
+      "evidence": [
+        "Line 109-115: result = subprocess.run(..., capture_output=True, text=True, timeout=3600.0)",
+        "No check for pipe buffer size; 1-hour timeout does not prevent deadlock"
+      ],
+      "suggested_fix": "Use stdout=PIPE, stderr=STDOUT to combine streams, or asyncio.create_subprocess_exec() for async reads.",
+      "autofix_class": "gated_auto",
+      "confidence": 0.82
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 300,
+      "title": "Mask file duplication creates mask_dir without validation; shutil.copy() can fail if mask_path invalid",
+      "why_it_matters": "Line 299 creates masks/ directory even if mask_path does not exist. shutil.copy() raises FileNotFoundError uncaught in _inpaint_crops. Exception propagates, loses all crops.",
+      "evidence": [
+        "Line 296-303: mask_path setup and copy without validation",
+        "config_manager.py line 43-49 validates mask_path at load time only, not at inpaint time"
+      ],
+      "suggested_fix": "Add early validation: before loop in _inpaint_crops(), assert self.config.mask_path exists. Use explicit error handling on shutil.copy().",
+      "autofix_class": "safe_auto",
+      "confidence": 0.85
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 409,
+      "title": "_cleanup() swallows all exceptions when deleting directories; partial deletion leaves orphaned temp files",
+      "why_it_matters": "Line 425-428 catches exceptions from shutil.rmtree() but continues. If crops_dir has permission denied, rmtree() partially succeeds, leaving orphaned images. Repeated runs accumulate garbage.",
+      "evidence": [
+        "Line 427: except Exception as e: logger.warning(...)",
+        "No retry, no fail-fast, no indication to caller"
+      ],
+      "suggested_fix": "Track cleanup failures in list and raise RuntimeError at end of _cleanup() if any occurred. Or delete files individually and aggregate errors.",
+      "autofix_class": "gated_auto",
+      "confidence": 0.80
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/inpaint/inpaint_executor.py",
+      "line": 97,
+      "title": "Timeout fallback via hasattr(config, 'timeout') is fragile; InpaintConfig has no timeout field",
+      "why_it_matters": "InpaintConfig defined in types.py with no timeout attribute. Line 97 always hits fallback 300.0s. If ProcessConfig.timeout=600s, inpaint_single() still uses 300s, causing premature timeout.",
+      "evidence": [
+        "inpaint_executor.py line 97: timeout=config.timeout if hasattr(config, 'timeout') else 300.0",
+        "InpaintConfig (types.py lines 100-122) has no timeout field",
+        "ProcessConfig.timeout (line 150) is separate, never passed to InpaintConfig"
+      ],
+      "suggested_fix": "Either: (1) add timeout field to InpaintConfig, (2) pass ProcessConfig.timeout explicitly to inpaint_batch(), or (3) use outer timeout envelope.",
+      "autofix_class": "safe_auto",
+      "confidence": 0.92
+    },
+    {
+      "severity": "P3",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 56,
+      "title": "await on sync function _extract_frames(); FrameExtractor.extract_frames() is not async",
+      "why_it_matters": "Line 56 awaits _extract_frames() which is async, but line 125 calls sync extractor.extract_frames() without run_in_executor(). Blocks event loop.",
+      "evidence": [
+        "Line 107-136: _extract_frames() is async but internally calls sync extractor.extract_frames()",
+        "No await or run_in_executor; blocks event loop during frame extraction"
+      ],
+      "suggested_fix": "Wrap sync call: await asyncio.get_event_loop().run_in_executor(None, extractor.extract_frames, ...) to free event loop.",
+      "autofix_class": "safe_auto",
+      "confidence": 0.78
+    },
+    {
+      "severity": "P3",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 62,
+      "title": "No validation that crops dict is non-empty after preprocessing; empty crops silently passed to inpainting",
+      "why_it_matters": "If all frames fail preprocessing and skip_errors_in_preprocessing=True, _preprocess_crops() returns empty dict. _encode_video() fails with generic error masking root cause.",
+      "evidence": [
+        "Line 62: No check: if not crops: raise ValueError(...)",
+        "video_encoder.py line 81: raise FileNotFoundError(...)"
+      ],
+      "suggested_fix": "Add guard after preprocessing: if not crops: raise RuntimeError(f'No frames produced after preprocessing (input={len(frames)})')",
+      "autofix_class": "safe_auto",
+      "confidence": 0.85
+    },
+    {
+      "severity": "P3",
+      "file": "src/watermark_removal/core/config_manager.py",
+      "line": 73,
+      "title": "Config default batch_size=4 may exhaust timeout under high load; no guidance on timeout/batch_size ratio",
+      "why_it_matters": "batch_size=4 x 300s timeout = up to 1200s per batch. If ComfyUI is slow, batch may exceed timeout. No automatic scaling or user guidance.",
+      "evidence": [
+        "ProcessConfig line 147-148: batch_size: int = 4",
+        "ProcessConfig line 150-151: timeout: float = 300.0",
+        "No relationship enforced between batch_size and timeout"
+      ],
+      "suggested_fix": "Add validation in ProcessConfig.__post_init__: if timeout / batch_size < 60: logger.warning('timeout per crop may be too tight')",
+      "autofix_class": "gated_auto",
+      "confidence": 0.75
+    }
+  ],
+  "residual_risks": [
+    "Batch failure abort (P1): 10% crop failure leads to 10% frame dropout with no recovery path",
+    "Frame enumeration mismatch: _stitch_frames() skips frames not in inpainted dict, creating off-by-one output indexing on partial failure",
+    "Disk space exhaustion: if disk full during encoding, cleanup fails silently, filling disk further on retry",
+    "ComfyUI connection leaks: multiple InpaintExecutor instances or retries create connection leaks; no upper limit on concurrent connections",
+    "Timeout cascades: preflight 5s + inpaint 300s + encode 3600s = 3905s total. Single phase timeout cuts entire pipeline",
+    "Async deadlock: large crops (>1GB) with batch_size=4 may cause OOM during gather(), leaving temp files orphaned",
+    "Race condition in cleanup: cleanup() while _inpaint_crops() writing to inpainted_dir may cause rm -rf to delete in-flight output"
+  ],
+  "testing_gaps": [
+    "No test for partial batch failure: 5 crops with crop[2] timeout; verify crops 0,1,3,4 still processed",
+    "No test for cascading exceptions: preprocessing fails frame 5/10, inpaint called with 5 crops, verify frame indices align",
+    "No test for cleanup failure: make crops_dir read-only, verify _cleanup() reports failure",
+    "No test for timeout exhaustion: timeout=5s, batch_size=4, submit 100 crops, verify explicit TimeoutError",
+    "No test for async deadlock: simulate OOM during gather(), verify no orphaned processes",
+    "No test for connection pooling: submit 10 crops sequentially, verify only 1 session created",
+    "No integration test for skip_errors recovery: preprocessing+inpaint skip different subsets, verify frame count matches expected",
+    "No test for FFmpeg pipe buffer overflow: 1000-frame video with verbose logging, verify no deadlock",
+    "No fuzz test on config: timeout=0.1s, batch_size=100, CRF=999, verify validation catches invalid combinations",
+    "No test for cleanup race condition: spawn cleanup() while inpaint_executor writes to same output_dir"
+  ]
+}

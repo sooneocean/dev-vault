@@ -1,9 +1,9 @@
 ---
 title: "Session-Stop Wrapper Learning"
 type: resource
-tags: [hooks, harness-engineering]
+tags: [hooks, harness-engineering, reference, knowledge-management]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-04-03"
 status: active
 subtype: learning
 maturity: mature

@@ -1,3 +1,15 @@
+---
+title: Steps
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 Estimate cost savings from local LLM usage vs Claude API.
 
 ## Steps

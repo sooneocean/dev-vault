@@ -1,9 +1,9 @@
 ---
 title: "Compound Engineering 研究"
 type: resource
-tags: [compound-engineering, knowledge-loop, workflow, learning-capture]
+tags: [compound-engineering, knowledge-loop, workflow, learning-capture, reference, knowledge-management]
 created: "2026-03-29"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: research
 maturity: growing

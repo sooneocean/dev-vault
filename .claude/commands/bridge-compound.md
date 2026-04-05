@@ -1,3 +1,15 @@
+---
+title: Untitled
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 Bridge a Compound Engineering learning document into the vault as a resource note.
 
 Usage: `<path-to-CE-compound-file>`

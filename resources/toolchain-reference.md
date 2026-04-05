@@ -2,9 +2,9 @@
 title: "Toolchain Reference"
 type: resource
 subtype: "reference"
-tags: [knowledge-management, auto-memory-migration]
+tags: [knowledge-management, auto-memory-migration, reference]
 created: "2026-03-30"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 maturity: growing
 domain: "dev-environment"

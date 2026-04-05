@@ -1,19 +1,26 @@
 {
   "mcpServers": {
-    "arxiv": {
+    "_disabled_arxiv": {
+      "comment": "disabled: 研究論文不常用，用WebSearch替代",
       "command": "uvx",
       "args": ["arxiv-mcp-server"],
       "type": "stdio"
     },
-    "huggingface": {
+    "_disabled_huggingface": {
+      "comment": "disabled: SEO工作不需要",
       "command": "uvx",
       "args": ["huggingface-mcp-server"],
       "type": "stdio"
     },
-    "fetch": {
+    "_disabled_fetch": {
+      "comment": "disabled: 用WebFetch工具替代，更高效",
       "command": "uvx",
       "args": ["mcp-server-fetch"],
       "type": "stdio"
+    },
+    "wpcom-mcp": {
+      "url": "https://public-api.wordpress.com/wpcom/v2/mcp/v1",
+      "comment": "保留：SEO優化用"
     }
   }
 }

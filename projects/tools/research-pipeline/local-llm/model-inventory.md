@@ -1,3 +1,15 @@
+---
+title: Local Model Inventory
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Local Model Inventory
 
 > RTX 4090 Laptop (16GB VRAM) | Ollama 0.18.3 | CUDA 12.4+12.6

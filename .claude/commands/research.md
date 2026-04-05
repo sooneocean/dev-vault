@@ -1,3 +1,15 @@
+---
+title: Untitled
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 Trigger a research pipeline scan to discover new LLM tools and papers.
 
 Usage: /research [mode]

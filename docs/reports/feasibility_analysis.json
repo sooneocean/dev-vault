@@ -1,0 +1,289 @@
+[
+  {
+    "section": "Phase 3A Dependency",
+    "title": "Phase 3A Completion Status Unclear in Implementation Plans",
+    "severity": "P1",
+    "finding_type": "omission",
+    "why_it_matters": "Plan states 'after Phase 3A stabilizes' but does not specify concrete stabilization criteria (passing tests, performance benchmarks, integration tests complete). This creates ambiguity on when Phase 3B can truly start in parallel.",
+    "evidence": [
+      "Plan §Sequencing: 'parallel execution after Phase 3A stabilizes (both read-only of Phase 3A components)'",
+      "No explicit gate conditions defined (e.g., 'test coverage >90%', 'streaming service handles 1000+ req/min')",
+      "Phase 3A completion report exists and is marked complete, but plan does not reference it"
+    ],
+    "suggested_fix": "Add explicit Phase 3A stabilization criteria to plan: (1) All Phase 3A unit tests pass >95%, (2) Integration tests verify streaming + ensemble detection working together, (3) Streaming service handles ≥500 req/min without timeouts, (4) Checkpoint v1.2 backward-compatible deserialization verified",
+    "autofix_class": "present",
+    "confidence": 0.75
+  },
+  {
+    "section": "Unit 24: Label Studio Integration",
+    "title": "Label Studio API Reliability and SLA Not Addressed",
+    "severity": "P1",
+    "finding_type": "omission",
+    "why_it_matters": "Plan assumes Label Studio API is available and responsive (task upload, annotation export) but provides no fallback for extended outages. Production deployments require explicit SLA/timeout strategy. Current plan only mentions 'graceful degradation' without specifics.",
+    "evidence": [
+      "§Unit 24 Workflow: 'Upload to Label Studio as pre-annotations' but no SLA defined",
+      "§Graceful degradation: 'Graceful degradation if Label Studio unavailable' but no implementation details",
+      "§Error handling: 'Retry logic with exponential backoff' mentioned in file descriptions (280–320 LOC) but no max retries, backoff curve, or circuit breaker pattern specified",
+      "Test scenario: 'test_label_studio_timeout()' exists but timeout values (default 5s?) not documented"
+    ],
+    "suggested_fix": "Specify in ProcessConfig: (1) label_studio_request_timeout_sec (default 10s, max 300s), (2) label_studio_max_retries (default 3), (3) label_studio_backoff_base_sec (default 1s, exponential). Add test: verify requests timeout cleanly at 10s, streaming continues processing other frames.",
+    "autofix_class": "present",
+    "confidence": 0.82
+  },
+  {
+    "section": "Unit 24: Label Studio Integration",
+    "title": "Streaming Server Route Integration Missing from Spec",
+    "severity": "P1",
+    "finding_type": "omission",
+    "why_it_matters": "Plan specifies '/annotation/upload route' but does not define request/response schema, parameter validation, or integration with existing FastAPI auth. Current streaming server (Unit 23) has auth + rate limiting; annotation route must respect both.",
+    "evidence": [
+      "§Type System Updates: 'New route: POST /annotation/upload' but no Pydantic request model provided",
+      "§Parameters listed: 'session_id, frame_id, detections (list[BBox]), label_studio_config (dict)' but BBox type not imported in streaming/server.py",
+      "No reference to existing auth mechanisms (verify_api_key, rate limiting) that should be inherited",
+      "No error response schema (e.g., '401 Unauthorized', '429 Rate Limit', '503 Label Studio Unavailable')"
+    ],
+    "suggested_fix": "Define in plan: (1) AnnotationUploadRequest Pydantic model with required fields, (2) Inherit auth/rate-limiting from existing @app routes, (3) Return 202 Accepted with task_id (async), (4) Document error codes: 401 (auth), 429 (rate limit), 503 (Label Studio down, streaming continues), (5) Add integration test with mocked Label Studio API",
+    "autofix_class": "present",
+    "confidence": 0.85
+  },
+  {
+    "section": "Unit 24: Label Studio Integration",
+    "title": "Coordinate System Conversion Edge Cases Not Fully Specified",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "BBox conversion pixel to percentage is critical for annotation correctness. Plan specifies test case (1920x1080 example) but does not address sub-pixel precision, rounding behavior, or invalid bbox handling (e.g., negative coords, coords outside frame).",
+    "evidence": [
+      "§Test Scenarios: 'test_pixel_to_percentage(): BBox (100, 150, 200, 80) in 1920x1080' documented",
+      "§Verification: 'Coordinate conversion pixel to percentage numerically correct (plus-minus 0.01%)' but rounding mode (floor/ceil/round) not specified",
+      "§TestCoordinateConversion includes 'test_edge_cases()' but details not provided (corners, boundaries, zero coords)"
+    ],
+    "suggested_fix": "Specify rounding: use Python round() with 4 decimal places for percentage coords (0.0001 precision). Add validation: reject bbox if (x<0 or y<0 or x+w>frame_w or y+h>frame_h). Add tests: (1) sub-pixel bbox (x=100.5), (2) bbox at frame boundary (x=0, w=frame_w), (3) zero-size bbox (w=0), (4) invalid: negative w/h.",
+    "autofix_class": "present",
+    "confidence": 0.78
+  },
+  {
+    "section": "Unit 24: Label Studio Integration",
+    "title": "Frame Sampling Strategy Not Quantified",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "Plan mentions 'Frame sampling (configurable) reduces API load' as test scenario but does not specify sampling rate defaults or guidelines for different video lengths. This impacts both Label Studio load and training data quality.",
+    "evidence": [
+      "§Test Scenarios: 'Frame sampling: Every 10th frame' mentioned",
+      "§ProcessConfig: No sampling_rate or frame_interval parameter defined in Phase 3B fields",
+      "§Implementation: No mention of sampling in label_studio_client.py, dataset_exporter.py file descriptions"
+    ],
+    "suggested_fix": "Add to ProcessConfig: (1) annotation_frame_interval (default 10, e.g., every 10th frame), (2) annotation_max_frames_per_video (default 5000, to limit Label Studio project size). Add guidance: use interval=5 for videos <1000 frames, interval=10 for 1000–10k, interval=20 for >10k. Test: verify export preserves sampled frames.",
+    "autofix_class": "present",
+    "confidence": 0.72
+  },
+  {
+    "section": "Unit 25: Optuna Hyperparameter Tuning",
+    "title": "CUDA Memory Requirements and Pruning Strategy Under-Specified",
+    "severity": "P1",
+    "finding_type": "omission",
+    "why_it_matters": "Plan claims 'wall-clock time ≤32 GPU hours' but does not validate CUDA memory constraints for ensemble inference on validation set, nor specify how pruner is configured. RTX4090 has 24GB; running 3 models + mAP computation may exceed memory on typical GPUs.",
+    "evidence": [
+      "§Success Criteria Unit 25: 'Wall-clock time ≤32 GPU hours (verified on RTX4090)' but no memory validation steps",
+      "§Objective Function: 'ensemble inference on val set, compute mAP' but no batch size strategy for memory efficiency",
+      "§TestPrunerConfiguration: 'test_pruner_efficiency(): 40–60% compute savings' but no actual RTX4090 benchmark provided",
+      "§Search space: 150–200 trials; inference cost unclear if val set is large (e.g., 10k frames)"
+    ],
+    "suggested_fix": "Benchmark ensemble inference memory: (1) Load YOLOv5s/m/l on GPU, measure VRAM usage (expect ~8-12GB), (2) Benchmark single trial inference time on 1000-frame val set, (3) Calculate total trials × inference time, validate <32 hours on target hardware. Add config: batch_size_trials (default 8), memory_limit_pct (default 80). Add test: mock trial with large val set, verify memory doesn't exceed limit.",
+    "autofix_class": "present",
+    "confidence": 0.81
+  },
+  {
+    "section": "Unit 25: Optuna Hyperparameter Tuning",
+    "title": "Hyperparameter Search Space May Be Under-Tuned",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "Plan specifies 6–8 hyperparameters with bounds like [0.1, 1.0] for model weights, but does not justify bounds or indicate whether these are realistic. Model weight bounds may exclude optimal solutions if one model should be heavily favored.",
+    "evidence": [
+      "§Search space: '3 model weights (confidence-weighted voting)', bounds (0.1, 1.0)",
+      "§Test scenario: 'Search space: All suggest_float calls within bounds' but no validation that bounds are reasonable",
+      "§Baseline: 'baseline_mAP: 0.801' but no explanation of how baseline is computed"
+    ],
+    "suggested_fix": "Add to plan: (1) Rationale for bounds: why [0.1, 1.0] for weights? If one model dominates, expand to [0.0, 1.0]?, (2) Run preliminary grid search on subset (50 trials) to estimate optimal region, adjust bounds. (3) Add test: sample bounds, verify no edge cases (e.g., all weights=0.1 should not be valid). (4) Include baseline mAP calculation in test setup.",
+    "autofix_class": "present",
+    "confidence": 0.70
+  },
+  {
+    "section": "Unit 25: Optuna Hyperparameter Tuning",
+    "title": "Distributed Optuna Support Not Planned, But Multi-GPU Execution Unclear",
+    "severity": "P1",
+    "finding_type": "omission",
+    "why_it_matters": "Plan defers distributed Optuna to Phase 3B+ but does not clarify whether single-process optimization on multi-GPU can use parallel workers. If validation set is large and only 1 GPU is used, wall-clock time may exceed 32 hours.",
+    "evidence": [
+      "§Post-Phase 3B Work: 'Implement distributed Optuna workers' deferred",
+      "§OptunaTuner design: No mention of parallel workers, sampler, or batch trial execution",
+      "§Test scenario: 'Concurrent workers: Multiple GPU processes' marked deferred"
+    ],
+    "suggested_fix": "Clarify in plan: (1) Single-process Optuna can use Python multiprocessing + multiple GPUs if inference is parallelized within each trial OR (2) Plan parallel trials: investigate optuna.study.ask()/tell() async API to run N trials in parallel on N GPUs. Add benchmark: 150 trials on 1 GPU vs 4 GPUs, measure wall-clock time speedup.",
+    "autofix_class": "present",
+    "confidence": 0.78
+  },
+  {
+    "section": "Unit 25: Optuna Hyperparameter Tuning",
+    "title": "Validation Dataset Not Specified; Annotation Source Ambiguous",
+    "severity": "P1",
+    "finding_type": "omission",
+    "why_it_matters": "Plan requires 'validation-only tuning' using 'Unit 24 exported annotations (COCO JSON) as ground truth', but does not specify how validation set is created, whether it's pre-annotated, size/distribution assumptions. Critical for reproducibility and mAP improvement estimates.",
+    "evidence": [
+      "§Phase 3B Unit 25 Workflow: 'Loads Unit 24 exported annotations (COCO JSON) as ground truth'",
+      "§Test scenario: 'Validation set' assumed to exist but no generation logic or size specified",
+      "§CLI args: '--ground_truth (required, COCO JSON annotations)' but no guidance on contents"
+    ],
+    "suggested_fix": "Add to plan: (1) Validation set definition: 'Use 10–20% of annotated frames from Unit 24 export, separate from training set', (2) Minimum size: ≥500 frames for statistical significance, (3) Add split_train_val() utility to dataset_exporter.py, (4) Test: mock COCO JSON generation with known mAP, verify optimization improves it. (5) Document in run_optuna_tuning.py help.",
+    "autofix_class": "present",
+    "confidence": 0.83
+  },
+  {
+    "section": "Unit 25: Optuna Hyperparameter Tuning",
+    "title": "Trial Timeout and Error Recovery Strategy Not Detailed",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "Plan mentions 'trial timeouts' and 'CUDA OOM' handling but does not specify timeout values or error recovery (e.g., should a failed trial be retried, or skipped?). This impacts optimization robustness and final trial count.",
+    "evidence": [
+      "§Objective Function: 'Graceful error handling (model failures, CUDA OOM, trial timeouts)'",
+      "§Test cases: 'test_trial_timeout()' and 'test_cuda_oom_caught()' mentioned",
+      "No timeout value specified, no max retries per trial, no strategy for updating best_params if many trials fail"
+    ],
+    "suggested_fix": "Specify in tuning_config.py: (1) trial_timeout_sec (default 300s), (2) max_retries_per_trial (default 1), (3) on_trial_error: 'skip' (continue) or 'stop' (halt). Add test: set timeout=5s on slow mock objective, verify trial raises TrialPruned, optimization continues. Add metric: track failed_trial_count, log if >20% trials fail.",
+    "autofix_class": "present",
+    "confidence": 0.75
+  },
+  {
+    "section": "Checkpoint Versioning & Backward Compatibility",
+    "title": "v1.3 Checkpoint Migration Path Not Tested",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "Plan claims 'Backward-compatible with v1.0/1.2' but does not specify test coverage for v1.3 load/save cycles or round-trip serialization. Checkpoint corruption on format change would be critical in production.",
+    "evidence": [
+      "§Checkpoint Versioning: 'version': '1.3' specified, but no test_checkpoint_v13_deserialization() test mentioned",
+      "§Backward Compatibility: 'Phase 2 checkpoints (v1.0) load unchanged' but how is v1.3 deserialized from v1.0?",
+      "§crop_serializer.py: Currently handles v1.0 and v1.2; no code shown for v1.3 annotation_tasks + tuning_metadata fields"
+    ],
+    "suggested_fix": "Add test file test_checkpoint_versioning.py with: (1) test_load_v10_in_v13(), (2) test_load_v12_in_v13(), (3) test_save_v13_round_trip(), (4) test_v13_export_compatibility(). Minimum 4 tests, >90% coverage of new serialization code.",
+    "autofix_class": "present",
+    "confidence": 0.79
+  },
+  {
+    "section": "Project Configuration & Feature Flags",
+    "title": "ProcessConfig v1.3 Fields Exceed Reasonable Dataclass Size",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "Adding 11+ new ProcessConfig fields increases config complexity. No mention of migration strategy for existing YAML/JSON configs or config file versioning.",
+    "evidence": [
+      "§ProcessConfig Extension: '# Unit 24: Label Studio annotation' block adds 4 fields, '# Unit 25: Optuna' block adds 6+ fields",
+      "Plan does not address: (1) Existing configs + adding fields, (2) YAML loading with missing keys (backward compat), (3) Documentation for new fields in config example"
+    ],
+    "suggested_fix": "Add to plan: (1) ProcessConfig versioning: add __version__ field, (2) YAML loader uses getattr(config, field, default) for new fields, (3) Example config template provided (docs/examples/config_v31_phase3b.yaml), (4) Validation: ProcessConfig.__post_init__() raises ValueError if label_studio_enabled=True but api_key=None. Test: load v3.0 config in v3.1 code, verify Phase 3B features disabled by default.",
+    "autofix_class": "present",
+    "confidence": 0.72
+  },
+  {
+    "section": "Timeline & Resource Planning",
+    "title": "6–8 Week Timeline May Be Optimistic for Integration Testing",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "Plan allocates only 1 week for 'Integration tests; production Docker setup' and 'Compute-heavy optimization' in parallel. Integration testing + 150–200 trials are sequential bottlenecks.",
+    "evidence": [
+      "§Timeline Estimate: 'Week 3–4: Integration tests; production Docker setup' (1 week) vs 'Compute-heavy optimization (16–32 GPU hrs)'",
+      "Week 3–4 is only 5 working days; 32 GPU hours on 1 GPU = 32 hours continuous",
+      "§Post-Phase 3B Work: Defers distributed Optuna, implying single-GPU optimization in Phase 3B"
+    ],
+    "suggested_fix": "Revise timeline: (1) Week 3–4: Unit 24 integration tests + Label Studio Docker MVP, (2) Week 4–5 (overlapping): Start Optuna trials (background), (3) Week 5–6: Extract best_params, validate improvement, (4) Week 6–8: Buffer for rework. OR parallelize Optuna: use multi-GPU if available to compress 32 hours. Add risk note.",
+    "autofix_class": "present",
+    "confidence": 0.76
+  },
+  {
+    "section": "Testing & Coverage",
+    "title": "Integration Test Coverage Ambiguous for Label Studio + Streaming",
+    "severity": "P1",
+    "finding_type": "omission",
+    "why_it_matters": "Plan specifies '24–28 unit tests + 6–12 integration tests per unit' but does not clarify what 'integration test' means. Does it require real Label Studio instance, mock API, or Docker container? This impacts CI/CD setup and test reliability.",
+    "evidence": [
+      "§Unit 24 Verification: 'Integration tests verify annotation workflow → tuning → training' but annotation requires Label Studio running",
+      "§Test Scenarios: 'test_annotation_disabled()' mentioned but no test for enabled case with real/mocked API",
+      "§Deployment Readiness: 'Docker Compose for Label Studio tested and documented' but no GitHub Actions workflow provided"
+    ],
+    "suggested_fix": "Clarify: (1) Unit tests: mock all Label Studio API calls via pytest.mock.patch, (2) Integration tests (6–12 per unit): spin up Label Studio Docker container in CI. (3) CI/CD: Add GitHub Actions workflow that runs unit tests (fast, <2 min), then integration tests with Docker (slower, <10 min). (4) Document: 'Integration tests require Docker; set CI_ENVIRONMENT=unit-only to skip.'",
+    "autofix_class": "present",
+    "confidence": 0.80
+  },
+  {
+    "section": "Testing & Coverage",
+    "title": "Optuna Convergence Tests Lack Reproducibility",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "Plan specifies convergence and improvement tests but does not specify: (1) random seed for reproducibility, (2) how 'convergence' is measured (plateau in best_mAP?), (3) what counts as valid improvement (>5% or >15%).",
+    "evidence": [
+      "§TestOptimizationLoop: 'test_optimize_convergence()' mentioned but no implementation guidance",
+      "§Verification: 'Best params improve baseline mAP 5–15%' but is this hard requirement or guideline?",
+      "§Sampler config: 'Sampler consistency: Same seed' test exists, but no seed management in OptunaTuner.__init__()"
+    ],
+    "suggested_fix": "Specify: (1) Add seed parameter to OptunaTuner (default None), sampler = TPESampler(seed=seed), (2) Convergence: plot best_mAP over trial index, verify plateau detected (no improvement >0.5% over last 20 trials), (3) Improvement threshold: >=5% is passing. Add test: run 150 trials with seed=42, repeat 3 times with same seed, verify improvement ±0.1%.",
+    "autofix_class": "present",
+    "confidence": 0.74
+  },
+  {
+    "section": "Documentation & Operational Readiness",
+    "title": "Label Studio Production Deployment Guide Missing",
+    "severity": "P1",
+    "finding_type": "omission",
+    "why_it_matters": "Plan specifies 'Self-hosted Docker MVP deployment guide' and 'generate_docker_compose() — Docker Compose YAML' but does not provide actual guide content: (1) security (API key storage, HTTPS), (2) persistence (PostgreSQL vs SQLite), (3) monitoring (log aggregation), (4) scaling (multi-node). MVP is unclear.",
+    "evidence": [
+      "§Deployment Readiness: 'Docker Compose for Label Studio tested and documented' as checklist item",
+      "§Files to Create: 'label_studio_setup.py' (150–180 LOC) with 'generate_docker_compose()' but no docs specified",
+      "No mention of docker-compose.yml location, PostgreSQL setup, reverse proxy (Nginx), monitoring"
+    ],
+    "suggested_fix": "Add to deliverables: (1) docker-compose.yml template (docs/docker-compose.label-studio.yml) with Label Studio + PostgreSQL + Nginx, (2) docs/LABEL_STUDIO_DEPLOYMENT.md covering quick-start, API key setup, persistence, monitoring, security, (3) generate_docker_compose() writes template to disk with configurable ports, API key from env. (4) Test: spin up container, verify Label Studio API responds at localhost:8080.",
+    "autofix_class": "present",
+    "confidence": 0.81
+  },
+  {
+    "section": "Documentation & Operational Readiness",
+    "title": "Optuna Monitoring & Observability Not Specified",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "Plan specifies optimization logging but does not define metrics, alerting, or dashboard integration. Running 150–200 trials over 16–32 GPU hours requires observability to detect premature convergence, stuck trials, or resource exhaustion.",
+    "evidence": [
+      "§Deployment Readiness: 'Operational monitoring (if wall-clock time exceeds 32 GPU hours)'",
+      "§Post-Phase 3B Work: Defers 'webhook callbacks' but no Optuna metrics/webhooks mentioned",
+      "No logging strategy for trial progress, best_mAP updates, or resource utilization"
+    ],
+    "suggested_fix": "Add to plan: (1) Metrics per trial: trial_id, mAP, hyperparameters, elapsed_time_sec, memory_used_mb, (2) Logging frequency: every 10 trials, (3) Example: 'trial=42, mAP=0.812 (+0.011 vs baseline), elapsed=180s, memory=18.5GB', (4) Optional: export to Prometheus/Grafana, (5) Test: run mock optimization, parse logs, verify format matches spec.",
+    "autofix_class": "present",
+    "confidence": 0.71
+  },
+  {
+    "section": "Risk & Assumptions",
+    "title": "Label Studio Pre-Annotation Quality Not Validated",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "Plan assumes ensemble detector pre-annotations are of sufficient quality for human review. However, Phase 3A does not specify expected mAP on unlabeled data. Poor pre-annotations may frustrate annotators and delay Unit 24 progress.",
+    "evidence": [
+      "§Unit 24 Workflow: 'Ensemble detector BBox predictions per frame → Upload to Label Studio as pre-annotations'",
+      "No baseline mAP specified for ensemble detector on realistic videos",
+      "§Success Criteria: 'Detections uploadable' but not 'Detections correct' or 'Human annotators spend <5 min per frame'"
+    ],
+    "suggested_fix": "Add assumption: 'Ensemble detector achieves >=80% mAP on validation data.' Add validation: before deploying to production Label Studio, test ensemble on 100-frame sample, measure mAP, get feedback from 1–2 annotators on time/difficulty. If mAP <75%, improve ensemble before Unit 24 handoff.",
+    "autofix_class": "present",
+    "confidence": 0.68
+  },
+  {
+    "section": "Risk & Assumptions",
+    "title": "Phase 4 Fine-Tuning Data Requirements Not Aligned",
+    "severity": "P2",
+    "finding_type": "omission",
+    "why_it_matters": "Plan defers Phase 4 (fine-tuning YOLOv5 models) but does not specify minimum annotated dataset size needed for fine-tuning, how annotation volume per week is tracked, or whether Phase 3B can proceed if annotation is slow. Hidden dependency.",
+    "evidence": [
+      "§Unit 24 Success: 'Human review enabled' but no SLA on annotation rate",
+      "§Phase 4 (Future): 'Fine-tune YOLOv5s/m/l on annotated dataset from Unit 24' but no dataset size requirement",
+      "§Timeline: '6–8 weeks' is fixed, but annotation is human-dependent"
+    ],
+    "suggested_fix": "Add to plan: (1) Annotation target: >=2000 frames annotated by end of Phase 3B, (2) Monitor: track annotations_per_week metric, alert if <300 frames/week, (3) Document: 'Phase 4 starts only after >=2000 frames annotated', (4) Success criteria Unit 24: 'Annotation workflow operational; team can sustain >=300 frames/week'",
+    "autofix_class": "present",
+    "confidence": 0.70
+  }
+]

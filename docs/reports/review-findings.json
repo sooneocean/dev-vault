@@ -1,0 +1,268 @@
+{
+  "reviewer": "kieran-python",
+  "timestamp": "2026-03-30",
+  "findings": [
+    {
+      "severity": "P1",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 6,
+      "title": "Imports use capitalized generics (Dict, List) instead of lowercase builtins",
+      "why_it_matters": "Python 3.9+ supports PEP 585 lowercase generics (dict, list, tuple). Using capitalized typing.Dict/List is deprecated since 3.9 and will eventually be removed. Codebase should adopt modern idioms for consistency and forward compatibility.",
+      "evidence": [
+        "Line 6: `from typing import Any, Dict, List`",
+        "Lines 32, 37, 107, 138, 145, 271-273, 326-328, 383: All Dict and List usage should use dict and list instead"
+      ],
+      "suggested_fix": "Replace `from typing import Any, Dict, List` with `from typing import Any`. Change type hints: `Dict[int, CropRegion]` → `dict[int, CropRegion]`, `List[Path]` → `list[Path]`.",
+      "autofix_class": "safe_auto",
+      "confidence": 0.95
+    },
+    {
+      "severity": "P1",
+      "file": "src/watermark_removal/inpaint/inpaint_executor.py",
+      "line": 6,
+      "title": "Imports use capitalized generics (Dict, List, Tuple) instead of lowercase builtins",
+      "why_it_matters": "Same as pipeline.py — PEP 585 lowercase generics are the modern standard since Python 3.9.",
+      "evidence": [
+        "Line 6: `from typing import Dict, Any, List, Tuple`",
+        "Lines 129, 133, 137, 143: All Dict, List, Tuple usage should be lowercase"
+      ],
+      "suggested_fix": "Replace import with `from typing import Any`. Change: `List[Tuple[str, str]]` → `list[tuple[str, str]]`, `List[Path]` → `list[Path]`.",
+      "autofix_class": "safe_auto",
+      "confidence": 0.95
+    },
+    {
+      "severity": "P1",
+      "file": "src/watermark_removal/postprocessing/video_encoder.py",
+      "line": 7,
+      "title": "Import of Optional is unused; modern union syntax preferred",
+      "why_it_matters": "Optional is imported (line 7) but never used in the file. Modern Python 3.10+ uses `X | None` instead of `Optional[X]`. Dead imports indicate incomplete refactoring or cleanup.",
+      "evidence": [
+        "Line 7: `from typing import Optional`",
+        "No usage of Optional anywhere in the file"
+      ],
+      "suggested_fix": "Remove `from typing import Optional` entirely. The only union hint is `str | None` on line 17, which is already modern syntax.",
+      "autofix_class": "safe_auto",
+      "confidence": 1.0
+    },
+    {
+      "severity": "P1",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 204,
+      "title": "Method _region_from_mask lacks type annotation for mask parameter and numpy import is inside method",
+      "why_it_matters": "The mask parameter is untyped (should be `np.ndarray`). The `import numpy as np` inside the method (line 213) is wasteful and suggests incomplete refactoring. Imports should be at module top.",
+      "evidence": [
+        "Line 204: `def _region_from_mask(self, mask) -> CropRegion:` — mask type missing",
+        "Line 213: `import numpy as np` — reimported inside method when it's not at module level"
+      ],
+      "suggested_fix": "Add type hint: `def _region_from_mask(self, mask: np.ndarray) -> CropRegion:`. Move `import numpy as np` to module-level imports (line 6 area) and remove redundant import on line 213.",
+      "autofix_class": "safe_auto",
+      "confidence": 0.95
+    },
+    {
+      "severity": "P1",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 48,
+      "title": "import time and import cv2 appear inside async method instead of at module level",
+      "why_it_matters": "Lines 48 (`import time`), 183 (`import cv2`), 213 (`import numpy as np`), 301 (`import shutil`), 338 (`import cv2`), 339 (`import numpy as np`), 412 (`import shutil`) are scattered throughout methods. This is unconventional and suggests incomplete refactoring. Imports should be consolidated at the top.",
+      "evidence": [
+        "Line 48: `import time` inside `async def run()`",
+        "Line 183: `import cv2` inside loop in `_preprocess_crops`",
+        "Line 338-339: `import cv2` and `import numpy as np` inside `_stitch_frames`",
+        "Line 412: `import shutil` inside `_cleanup`"
+      ],
+      "suggested_fix": "Move all imports to module-level (lines 1-20): `import time`, `import cv2`, `import numpy as np`, `import shutil`. Remove inline imports.",
+      "autofix_class": "safe_auto",
+      "confidence": 0.95
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 183,
+      "title": "Hard-coded video dimensions (1920x1080) in frame preprocessing",
+      "why_it_matters": "Lines 164-165 hard-code width=1920, height=1080. These should either be extracted from frame metadata or stored in ProcessConfig. This reduces reusability and makes the code fragile for non-1080p videos.",
+      "evidence": [
+        "Lines 164-165:\n    width=1920,  # Default, should come from frame metadata\n    height=1080,"
+      ],
+      "suggested_fix": "Extract frame dimensions at frame load time (in FrameExtractor or Frame object), pass to mask_loader. Or add `frame_width` and `frame_height` fields to ProcessConfig with validation.",
+      "autofix_class": "manual",
+      "confidence": 0.85
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 173,
+      "title": "Placeholder _region_from_mask with hard-coded padding and scale values",
+      "why_it_matters": "Lines 226-240 in _region_from_mask hard-code scale_factor=2.0 and pad_left/pad_top/pad_right/pad_bottom=362. These should be derived from the target inpaint size or config. Comment on line 172 says 'Phase 2 feature'.",
+      "evidence": [
+        "Lines 231-239:\n    scale_factor=2.0,\n    context_x=int(x_min) - 50,\n    context_y=int(y_min) - 50,\n    context_w=width + 100,\n    context_h=height + 100,\n    pad_left=362,\n    pad_top=362,\n    pad_right=362,\n    pad_bottom=362,"
+      ],
+      "suggested_fix": "Compute scale_factor and padding from mask bbox and target_inpaint_size. Use ProcessConfig.context_padding and ProcessConfig.target_inpaint_size. Document the scaling math or reference CropHandler logic.",
+      "autofix_class": "manual",
+      "confidence": 0.8
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 396,
+      "title": "Async encoding delegated to sync executor without cancellation handling",
+      "why_it_matters": "Lines 396-404 use `asyncio.get_event_loop().run_in_executor()` to call the sync `VideoEncoder.encode_frames_to_video()`. If the pipeline is cancelled or times out, the executor task may not be properly cancelled. No timeout is set on the executor call, and encoder has a 3600s timeout hardcoded.",
+      "evidence": [
+        "Lines 396-404: run_in_executor with no timeout parameter",
+        "VideoEncoder.encode_frames_to_video line 114: hardcoded 3600s timeout"
+      ],
+      "suggested_fix": "Pass timeout to run_in_executor: `await asyncio.wait_for(..., timeout=self.config.timeout)`. Or allow VideoEncoder to accept timeout as parameter. Document the timeout contract.",
+      "autofix_class": "manual",
+      "confidence": 0.75
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/inpaint/inpaint_executor.py",
+      "line": 97,
+      "title": "Defensive hasattr check for config.timeout suggests incomplete type contract",
+      "why_it_matters": "Line 97 checks `if hasattr(config, 'timeout')` before accessing timeout. InpaintConfig in types.py does not have a timeout field; timeout is on ProcessConfig. This suggests confusion or incomplete refactoring of the config hierarchy.",
+      "evidence": [
+        "Line 97: `timeout=config.timeout if hasattr(config, 'timeout') else 300.0`",
+        "InpaintConfig (types.py lines 100-123) has no timeout field",
+        "ProcessConfig (types.py line 150) has timeout: float = 300.0"
+      ],
+      "suggested_fix": "Remove the hasattr check. Either: (a) Add timeout to InpaintConfig, or (b) Pass timeout separately to inpaint_single, or (c) Document that caller must ensure config has timeout. Current code is confusing.",
+      "autofix_class": "manual",
+      "confidence": 0.9
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/inpaint/inpaint_executor.py",
+      "line": 79,
+      "title": "Dynamic import of ComfyUIClient inside try-except masks design issue",
+      "why_it_matters": "Lines 79-84 import ComfyUIClient inside the method with a fallback error. This should be a module-level import or the dependency should be declared clearly. The error message mentions 'projects/tools/comfyui/client' which looks like a submodule path that may not exist in the repo.",
+      "evidence": [
+        "Lines 79-84:\n    try:\n        from projects.tools.comfyui.client import ComfyUIClient\n    except ImportError:\n        raise RuntimeError(...)"
+      ],
+      "suggested_fix": "Either: (a) Move import to top-level if comfyui is a required dependency, or (b) Use a proper optional dependency pattern (try-import at module level with a module-level availability flag). Clarify whether ComfyUIClient is part of the repo or an external dependency.",
+      "autofix_class": "manual",
+      "confidence": 0.75
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/core/types.py",
+      "line": 186,
+      "title": "ProcessConfig.__post_init__ resolves paths to absolute but doesn't validate file existence",
+      "why_it_matters": "Lines 196-198 resolve paths to absolute, but never check if input files exist (only raises ValueError for empty strings). FileNotFoundError should be checked here, not later in Pipeline._extract_frames. This delays validation.",
+      "evidence": [
+        "Lines 186-210: __post_init__ validates some constraints but not file existence",
+        "Lines 188-193: Check for empty strings but not file existence"
+      ],
+      "suggested_fix": "Add existence checks after path resolution: `if not Path(self.video_path).exists(): raise FileNotFoundError(...)`. Fail fast during config construction.",
+      "autofix_class": "manual",
+      "confidence": 0.8
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/postprocessing/stitch_handler.py",
+      "line": 154,
+      "title": "Inefficient feather mask generation using explicit loops instead of vectorized numpy",
+      "why_it_matters": "Lines 154-168 use nested Python loops to compute feather mask distances. This is O(H*W*4) and slow. NumPy has efficient ways to compute distance maps (np.meshgrid, np.minimum, etc).",
+      "evidence": [
+        "Lines 154-168:\n        for y in range(h):\n            for x in range(w):\n                # Distance to nearest edge\n                dist_top = y\n                dist_bottom = h - 1 - y\n                dist_left = x\n                dist_right = w - 1 - x\n                min_dist = min(dist_top, dist_bottom, dist_left, dist_right)\n                if min_dist < max_feather:\n                    mask[y, x] = min_dist / max_feather\n                else:\n                    mask[y, x] = 1.0"
+      ],
+      "suggested_fix": "Vectorize using NumPy:\n```python\ny_coords, x_coords = np.ogrid[:h, :w]\ndist_top = y_coords\ndist_bottom = h - 1 - y_coords\ndist_left = x_coords\ndist_right = w - 1 - x_coords\nmin_dist = np.minimum(np.minimum(dist_top, dist_bottom), np.minimum(dist_left, dist_right))\nmask = np.where(min_dist < max_feather, min_dist / max_feather, 1.0)\n```",
+      "autofix_class": "safe_auto",
+      "confidence": 0.9
+    },
+    {
+      "severity": "P2",
+      "file": "src/watermark_removal/postprocessing/video_encoder.py",
+      "line": 160,
+      "title": "Hard-coded default FPS (30.0) in encode_from_config ignores ProcessConfig.output_fps",
+      "why_it_matters": "Line 160 hard-codes fps=30.0 instead of using config.output_fps. This is a silent bug — the method will always use 30 FPS regardless of config.",
+      "evidence": [
+        "Line 160: `fps=30.0,  # Default FPS (should be read from config if stored)`",
+        "ProcessConfig.output_fps exists (line 159 in types.py) and is 30.0, but the comment suggests awareness of the issue"
+      ],
+      "suggested_fix": "Change line 160 to: `fps=config.output_fps,`. Remove the misleading comment.",
+      "autofix_class": "safe_auto",
+      "confidence": 1.0
+    },
+    {
+      "severity": "P3",
+      "file": "src/watermark_removal/core/pipeline.py",
+      "line": 37,
+      "title": "Return type annotation uses Dict[str, Any] which is too loose",
+      "why_it_matters": "Line 37 `async def run(self) -> Dict[str, Any]` returns a dictionary with a known schema (documented in lines 41-46), but the type is unspecified. A TypedDict or dataclass would be clearer and type-check.",
+      "evidence": [
+        "Lines 37-46: Return type is Dict[str, Any] but docstring specifies exact keys and types"
+      ],
+      "suggested_fix": "Define a TypedDict or dataclass: `class PipelineSummary(TypedDict): frame_count: int; duration_seconds: float; output_path: str; ...` and use as return type.",
+      "autofix_class": "manual",
+      "confidence": 0.7
+    },
+    {
+      "severity": "P3",
+      "file": "src/watermark_removal/inpaint/inpaint_executor.py",
+      "line": 177,
+      "title": "asyncio.gather with return_exceptions=False swallows early exceptions without context",
+      "why_it_matters": "Lines 177 and 184 use `asyncio.gather(*tasks, return_exceptions=False)`. If any task fails, the exception propagates immediately, but partial results are lost and no indication which task failed. For robustness, consider return_exceptions=True with selective re-raising.",
+      "evidence": [
+        "Lines 177, 184: `batch_results = await asyncio.gather(*tasks, return_exceptions=False)`"
+      ],
+      "suggested_fix": "Either: (a) Use return_exceptions=True and filter for exceptions, re-raising with context, or (b) wrap each task with try-catch that logs and raises with the frame index. Current code leaves callers guessing which crop failed.",
+      "autofix_class": "manual",
+      "confidence": 0.7
+    },
+    {
+      "severity": "P3",
+      "file": "src/watermark_removal/postprocessing/stitch_handler.py",
+      "line": 24,
+      "title": "Docstring promises to handle Frame objects but accepts np.ndarray directly",
+      "why_it_matters": "Imports Frame type (line 8) and docstring uses 'Frame' language, but the method signature (lines 26-28) takes raw np.ndarray parameters. This mismatch is confusing.",
+      "evidence": [
+        "Line 8: `from ..core.types import CropRegion, Frame`",
+        "Lines 26-28: `original_frame: np.ndarray, inpainted_crop: np.ndarray`",
+        "Docstring (lines 30-34) refers to frames as 'Original frame image'"
+      ],
+      "suggested_fix": "Either: (a) Accept Frame objects and extract .image, or (b) remove unused Frame import and clarify docstring refers to raw ndarray, not Frame type.",
+      "autofix_class": "manual",
+      "confidence": 0.6
+    }
+  ],
+  "residual_risks": [
+    {
+      "area": "Type Safety",
+      "risk": "Using Dict[str, Any] returns and untyped config parameters reduces mypy effectiveness. No type checker appears to have run on the codebase.",
+      "mitigation": "Introduce TypedDict or dataclasses for all return types. Run mypy with strict mode in CI."
+    },
+    {
+      "area": "Async Coordination",
+      "risk": "Pipeline uses asyncio but calls sync I/O (cv2.imread, cv2.imwrite, shutil) in async context without proper executor isolation. If any sync call blocks, the entire pipeline stalls.",
+      "mitigation": "Wrap all sync I/O in run_in_executor with threadpool. Document why each sync call cannot be async."
+    },
+    {
+      "area": "Error Messages",
+      "risk": "Error messages are generic (e.g., 'FFmpeg encoding failed', 'Inpaint execution failed'). Operators cannot distinguish between transient failures and bad config without reading logs.",
+      "mitigation": "Include frame index, file path, and config snapshot in exception messages. Use structured logging (JSON)."
+    },
+    {
+      "area": "Configuration Validation",
+      "risk": "ProcessConfig validates ranges but not file existence or cross-field dependencies (e.g., context_padding should be < crop dimensions).",
+      "mitigation": "Move file existence checks to __post_init__. Add semantic validation for field interactions in a validate() method."
+    }
+  ],
+  "testing_gaps": [
+    {
+      "area": "Type Hints",
+      "gap": "No mypy or pyright checks detected in CI. Codebase uses deprecated typing syntax without enforcement."
+    },
+    {
+      "area": "Edge Cases",
+      "gap": "No tests for: (1) feather mask at image boundaries when context_x < 0, (2) batch_size > number of crops, (3) empty crop regions, (4) missing intermediate directories."
+    },
+    {
+      "area": "Async Cancellation",
+      "gap": "No tests for task cancellation or graceful shutdown when pipeline is interrupted (e.g., KeyboardInterrupt during inpaint)."
+    },
+    {
+      "area": "Integration",
+      "gap": "Tests appear to mock ComfyUI and file I/O. Need end-to-end tests with real video and mock inpaint model to catch ordering/state bugs."
+    }
+  ]
+}

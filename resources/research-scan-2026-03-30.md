@@ -1,9 +1,9 @@
 ---
 title: "研究掃描 2026-03-30"
 type: resource
-tags: [research-scan, auto-generated, agent-framework, rag]
+tags: [research-scan, auto-generated, agent-framework, rag, reference, knowledge-management]
 created: "2026-03-30"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 summary: "自動掃描發現 0 個新工具/論文"
 related: ["[[tech-research-squad]]"]

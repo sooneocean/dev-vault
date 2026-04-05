@@ -1,9 +1,9 @@
 ---
 title: "CSM 關鍵設計決策"
 type: resource
-tags: [architecture]
+tags: [architecture, reference, knowledge-management]
 created: "2026-03-28"
-updated: "2026-03-29"
+updated: "2026-04-03"
 status: active
 subtype: reference
 maturity: mature

@@ -1,10 +1,10 @@
 ---
 title: "Dev Vault — Version Tracker"
 type: project
-tags: [version-tracking, product-iteration]
+tags: [version-tracking, product-iteration, project, active]
 created: "2026-03-30"
-updated: "2026-03-30"
-status: active
+updated: "2026-04-03"
+status: "archived"
 maturity: mature
 domain: project-specific
 summary: "Central version and iteration history tracker for Dev Vault"
