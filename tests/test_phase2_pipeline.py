@@ -181,10 +181,10 @@ class TestPhase2CropRegionSerialization:
         assert isinstance(json_str, str)
 
         # Deserialize
-        restored = CropRegionSerializer.deserialize(json_str)
-        assert len(restored) == 2
-        assert restored[0].x == crop.x
-        assert restored[1].scale_factor == crop.scale_factor
+        crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize(json_str)
+        assert len(crop_regions) == 2
+        assert crop_regions[0].x == crop.x
+        assert crop_regions[1].scale_factor == crop.scale_factor
 
     def test_checkpoint_save_load(self):
         """Test checkpoint save and load workflow."""
@@ -204,10 +204,11 @@ class TestPhase2CropRegionSerialization:
             assert checkpoint_path.exists()
 
             # Load
-            crops_loaded = CropRegionSerializer.load_checkpoint(tmpdir)
-            assert crops_loaded is not None
-            assert len(crops_loaded) == 5
-            assert crops_loaded[0].x == crop.x
+            result = CropRegionSerializer.load_checkpoint(tmpdir)
+            assert result is not None
+            crop_regions, flow_data, annotation_tasks, tuning_metadata = result
+            assert len(crop_regions) == 5
+            assert crop_regions[0].x == crop.x
 
     def test_resumption_from_checkpoint(self):
         """Test pipeline resumption from checkpoint."""
@@ -224,10 +225,11 @@ class TestPhase2CropRegionSerialization:
             CropRegionSerializer.save_checkpoint(crops_phase1, tmpdir)
 
             # Phase 2: load checkpoint (resume)
-            crops_phase2 = CropRegionSerializer.load_checkpoint(tmpdir)
+            result = CropRegionSerializer.load_checkpoint(tmpdir)
+            assert result is not None
+            crops_phase2, flow_data, annotation_tasks, tuning_metadata = result
 
             # Verify crops are identical
-            assert crops_phase2 is not None
             for i in range(3):
                 assert crops_phase2[i].x == crops_phase1[i].x
 

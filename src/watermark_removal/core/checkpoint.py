@@ -146,7 +146,7 @@ class Checkpoint:
         # Deserialize crop_regions using CropRegionSerializer
         # The crop_regions_data in state includes version/crop_regions structure
         crop_regions_json = json.dumps(state.get("crop_regions", {}))
-        crop_regions, _ = CropRegionSerializer.deserialize(crop_regions_json)
+        crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize(crop_regions_json)
 
         # Parse inpaint results (stored as lists in JSON)
         inpaint_results = {}

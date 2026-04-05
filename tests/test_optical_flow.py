@@ -370,11 +370,13 @@ class TestCheckpointSerialization:
             }
         })
 
-        crop_regions, flow_data = CropRegionSerializer.deserialize(old_json)
+        crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize(old_json)
 
         assert len(crop_regions) == 1
         assert 0 in crop_regions
         assert flow_data is None
+        assert annotation_tasks is None
+        assert tuning_metadata is None
 
     def test_deserialize_new_format_with_flow(self) -> None:
         """Test deserialization of new checkpoint format with flow data."""
@@ -398,11 +400,13 @@ class TestCheckpointSerialization:
             },
         })
 
-        crop_regions, flow_data = CropRegionSerializer.deserialize(new_json)
+        crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize(new_json)
 
         assert len(crop_regions) == 1
         assert flow_data is not None
         assert "0_1" in flow_data
+        assert annotation_tasks is None
+        assert tuning_metadata is None
 
     def test_checkpoint_roundtrip(self, sample_crop_region: CropRegion) -> None:
         """Test save and load cycle preserves data."""
@@ -418,7 +422,7 @@ class TestCheckpointSerialization:
             # Load
             result = CropRegionSerializer.load_checkpoint(tmpdir)
             assert result is not None
-            crop_regions_loaded, flow_data = result
+            crop_regions_loaded, flow_data, annotation_tasks, tuning_metadata = result
 
             # Verify data
             assert len(crop_regions_loaded) == len(crop_regions_orig)
@@ -443,7 +447,7 @@ class TestCheckpointSerialization:
             # Load
             result = CropRegionSerializer.load_checkpoint(tmpdir)
             assert result is not None
-            crop_regions_loaded, flow_data_loaded = result
+            crop_regions_loaded, flow_data_loaded, annotation_tasks, tuning_metadata = result
 
             # Verify flow data preserved
             assert flow_data_loaded is not None
