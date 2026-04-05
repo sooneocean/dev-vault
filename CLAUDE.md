@@ -1,15 +1,3 @@
----
-title: CLAUDE.md
-type: project
-tags: [project, active]
-created: 2026-04-03
-updated: 2026-04-03
-status: active
-maturity: growing
-domain: knowledge-management
-summary: ""
----
-
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -45,6 +33,10 @@ npm run test:proposal-integration  # Integration tests (use --forceExit)
   - `core/` — Pipeline orchestration, config management, types
   - `annotation/` — Label Studio integration, dataset export
   - `blending/` — Poisson blending and post-processing algorithms
+  - `streaming/` — Real-time watermark removal for video/frame sequences
+  - `optimization/` — Hyperparameter tuning via Optuna
+  - `detection/`, `inpaint/`, `optical_flow/` — Detection and inpainting backends
+  - `temporal/`, `persistence/` — State management and checkpointing
   - `tests/` — Pytest suite (3.12, 3.13, 3.14 CI compatibility)
 
 - **Node.js Layer**: Knowledge management, GitHub API integration, Anthropic SDK
@@ -63,8 +55,9 @@ npm run test:proposal-integration  # Integration tests (use --forceExit)
 - **Automation & Scripts**: `scripts/` directory
   - `benchmark_phase3.py` — Performance tuning via Optuna
   - `label_studio_setup.py` — Data annotation pipeline
-  - `batch_publisher.py`, `batch_tag_allocator.py` — WordPress SEO batch ops
-  - `yolo_lab_seo_optimizer.js` — Website SEO optimization
+  - `batch_publisher.py`, `batch_tag_allocator.py` — WordPress batch operations
+  - `yolo_lab_2025_seo_batch_optimizer.js` — Bulk SEO optimization (meta tags, schema markup, OG tags, internal linking)
+  - `auto-login-apply.js` — WordPress authentication & batch apply
   - `session_stop_wrapper.sh` — Vault sync hook (runs on Claude exit)
 
 ## Key Workflows
@@ -89,10 +82,26 @@ npm run test:proposal-integration  # Integration tests (use --forceExit)
 - **Type Hints**: Check `src/watermark_removal/core/types.py` for domain objects
 
 ### Node.js Development
-- **Proposal Engine**: `.claude/lib/proposal-engine.js` — Custom logic for decisions
-- **GitHub API**: Uses Octokit for PR/issue automation
-- **Anthropic SDK**: For Claude API integration
+- **Proposal Engine**: `.claude/lib/proposal-engine.js` — Custom decision logic (test via `npm run test:proposal`)
+- **GitHub API Wrapper**: `.claude/lib/github-api.js` — PR/issue automation, rate limiting, changelog generation
+- **Vault Iteration**: `.claude/lib/vault-iteration.js` — Syncs knowledge base changes with git
+- **Changelog Generator**: `.claude/lib/changelog-generator.js` — Auto-generates release notes from commits
+- **Anthropic SDK**: For Claude API integration (tested in proposal engine)
 - **Fallback to Manual**: If `clausidian` CLI unavailable, follow rules in AGENT.md § Manual Editing Rules
+
+## MCP Servers
+
+Configured in `.mcp.json` for context enrichment and automation:
+
+| Server | Purpose | Usage |
+|--------|---------|-------|
+| **arxiv** | Research papers & ML preprints | `@arxiv` references for academic context |
+| **huggingface** | Models, datasets, space browsing | Dataset research, model comparisons |
+| **fetch** | Web content retrieval | Research papers, documentation |
+| **agent-memory** | Query memory persistence | Cross-session knowledge recall (`LANCEDB_PATH` configurable) |
+| **wpcom-mcp** | WordPress.com site management | SEO batch optimization, content publishing |
+
+Verify server connectivity: `npm run test:proposal-integration --forceExit`
 
 ## Knowledge Management (Vault)
 
@@ -186,12 +195,28 @@ Set in `.env` or shell:
 3. **Token Limits**: Plugin tools ~10-15K; use subagents for >50K output or 3+ large files
 4. **Rollback**: Project-level changes = git; global config = `.bak` files
 
+## Active Initiatives
+
+### SEO Optimization Batch (Phase 3 Complete)
+Bulk metadata optimization for 898+ articles. Generates:
+- Meta titles & descriptions (optimized for CTR)
+- Schema.org JSON-LD (rich snippets)
+- Open Graph tags (social sharing)
+- Internal linking recommendations
+
+**Quick Start**: `node scripts/yolo-lab-2025-seo-batch-optimizer.js --source json --file sample-articles-2025.json --sample 2 --demo --output both`
+
+**Outputs**: `seo-optimization-output/` (reports + WordPress apply scripts)
+
+See `docs/YOLOLAB_*` and `SEO-QUICK-START.md` for full docs.
+
 ## Troubleshooting
 
 - **Proposal engine fails**: Check `.claude/lib/proposal-engine.js` and test via `npm run test:proposal`
 - **Python import errors**: Ensure `.venv` is activated and `pip install -r requirements.txt` completed
 - **Vault inconsistencies**: Run `clausidian sync` to rebuild indices
 - **Label Studio setup fails**: Check FFmpeg availability and Docker daemon status
+- **SEO scripts fail**: Set `ANTHROPIC_API_KEY` env var; test with `--demo` flag first
 
 ## References
 
