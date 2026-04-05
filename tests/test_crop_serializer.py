@@ -16,7 +16,9 @@ class TestSerializeCropRegion:
     def test_serialize_empty(self):
         """Test serializing empty crop dictionary."""
         result = CropRegionSerializer.serialize({})
-        assert result == "{}"
+        parsed = json.loads(result)
+        assert "version" in parsed
+        assert parsed["version"] == "1.3"
 
     def test_serialize_single_crop(self):
         """Test serializing single CropRegion."""
@@ -41,10 +43,12 @@ class TestSerializeCropRegion:
 
         # Parse back to verify structure
         parsed = json.loads(result)
-        assert "0" in parsed
-        assert parsed["0"]["x"] == 100
-        assert parsed["0"]["w"] == 300
-        assert parsed["0"]["scale_factor"] == 2.0
+        assert "version" in parsed
+        assert "crop_regions" in parsed
+        assert "0" in parsed["crop_regions"]
+        assert parsed["crop_regions"]["0"]["x"] == 100
+        assert parsed["crop_regions"]["0"]["w"] == 300
+        assert parsed["crop_regions"]["0"]["scale_factor"] == 2.0
 
     def test_serialize_multiple_crops(self):
         """Test serializing multiple crops."""
@@ -69,11 +73,13 @@ class TestSerializeCropRegion:
         result = CropRegionSerializer.serialize(crops)
         parsed = json.loads(result)
 
-        assert len(parsed) == 5
+        assert "version" in parsed
+        assert "crop_regions" in parsed
+        assert len(parsed["crop_regions"]) == 5
         for i in range(5):
-            assert str(i) in parsed
-            assert parsed[str(i)]["x"] == i * 100
-            assert parsed[str(i)]["scale_factor"] == pytest.approx(1.5 + i * 0.1)
+            assert str(i) in parsed["crop_regions"]
+            assert parsed["crop_regions"][str(i)]["x"] == i * 100
+            assert parsed["crop_regions"][str(i)]["scale_factor"] == pytest.approx(1.5 + i * 0.1)
 
 
 class TestDeserializeCropRegion:
@@ -81,16 +87,22 @@ class TestDeserializeCropRegion:
 
     def test_deserialize_empty(self):
         """Test deserializing empty JSON."""
-        result = CropRegionSerializer.deserialize("{}")
-        assert result == {}
+        crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize("{}")
+        assert crop_regions == {}
+        assert flow_data is None
+        assert annotation_tasks is None
+        assert tuning_metadata is None
 
     def test_deserialize_empty_string(self):
         """Test deserializing empty string."""
-        result = CropRegionSerializer.deserialize("")
-        assert result == {}
+        crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize("")
+        assert crop_regions == {}
+        assert flow_data is None
+        assert annotation_tasks is None
+        assert tuning_metadata is None
 
     def test_deserialize_single_crop(self):
-        """Test deserializing single crop."""
+        """Test deserializing single crop (backward compatible v1.0 format)."""
         json_str = """{
             "0": {
                 "x": 100,
@@ -109,11 +121,11 @@ class TestDeserializeCropRegion:
             }
         }"""
 
-        result = CropRegionSerializer.deserialize(json_str)
+        crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize(json_str)
 
-        assert len(result) == 1
-        assert 0 in result
-        crop = result[0]
+        assert len(crop_regions) == 1
+        assert 0 in crop_regions
+        crop = crop_regions[0]
         assert crop.x == 100
         assert crop.y == 200
         assert crop.w == 300
@@ -136,12 +148,12 @@ class TestDeserializeCropRegion:
             )
 
         json_str = CropRegionSerializer.serialize(crops_orig)
-        result = CropRegionSerializer.deserialize(json_str)
+        crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize(json_str)
 
-        assert len(result) == 3
+        assert len(crop_regions) == 3
         for i in range(3):
-            assert i in result
-            assert result[i].x == i * 100
+            assert i in crop_regions
+            assert crop_regions[i].x == i * 100
 
     def test_deserialize_invalid_json(self):
         """Test deserializing invalid JSON."""
@@ -200,10 +212,10 @@ class TestRoundTripSerialization:
 
         # Serialize and deserialize
         json_str = CropRegionSerializer.serialize(crops_orig)
-        crops_restored = CropRegionSerializer.deserialize(json_str)
+        crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize(json_str)
 
         # Compare all fields
-        restored = crops_restored[0]
+        restored = crop_regions[0]
         assert restored.x == original.x
         assert restored.y == original.y
         assert restored.w == original.w
@@ -240,14 +252,14 @@ class TestRoundTripSerialization:
 
         # Serialize and deserialize
         json_str = CropRegionSerializer.serialize(crops_orig)
-        crops_restored = CropRegionSerializer.deserialize(json_str)
+        crop_regions, flow_data, annotation_tasks, tuning_metadata = CropRegionSerializer.deserialize(json_str)
 
         # Verify all crops preserved
-        assert len(crops_restored) == 100
+        assert len(crop_regions) == 100
         for i in range(100):
-            assert i in crops_restored
-            assert crops_restored[i].x == crops_orig[i].x
-            assert crops_restored[i].scale_factor == crops_orig[i].scale_factor
+            assert i in crop_regions
+            assert crop_regions[i].x == crops_orig[i].x
+            assert crop_regions[i].scale_factor == crops_orig[i].scale_factor
 
 
 class TestCheckpointFileOperations:
@@ -271,8 +283,10 @@ class TestCheckpointFileOperations:
             # Verify contents
             with open(checkpoint_path) as f:
                 data = json.load(f)
-            assert "0" in data
-            assert data["0"]["x"] == 100
+            assert "version" in data
+            assert "crop_regions" in data
+            assert "0" in data["crop_regions"]
+            assert data["crop_regions"]["0"]["x"] == 100
 
     def test_save_checkpoint_custom_filename(self):
         """Test saving checkpoint with custom filename."""
@@ -303,7 +317,8 @@ class TestCheckpointFileOperations:
             CropRegionSerializer.save_checkpoint(crops_orig, tmpdir)
 
             # Load checkpoint
-            crops_loaded = CropRegionSerializer.load_checkpoint(tmpdir)
+            result = CropRegionSerializer.load_checkpoint(tmpdir)
+            crops_loaded = result[0] if result else None
 
             assert crops_loaded is not None
             assert len(crops_loaded) == 1
@@ -346,7 +361,8 @@ class TestCheckpointFileOperations:
             CropRegionSerializer.save_checkpoint(crops_orig, tmpdir)
 
             # Load
-            crops_loaded = CropRegionSerializer.load_checkpoint(tmpdir)
+            result = CropRegionSerializer.load_checkpoint(tmpdir)
+            crops_loaded = result[0] if result else None
 
             # Verify
             assert crops_loaded is not None
@@ -382,7 +398,8 @@ class TestCheckpointIntegration:
             assert checkpoint_path.exists()
 
             # Later: load checkpoint and skip preprocessing
-            crops_phase2 = CropRegionSerializer.load_checkpoint(tmpdir)
+            result = CropRegionSerializer.load_checkpoint(tmpdir)
+            crops_phase2 = result[0] if result else None
             assert crops_phase2 is not None
             assert len(crops_phase2) == 5
 
@@ -410,7 +427,8 @@ class TestCheckpointIntegration:
 
             # Save and load
             CropRegionSerializer.save_checkpoint(crops, tmpdir)
-            crops_loaded = CropRegionSerializer.load_checkpoint(tmpdir)
+            result = CropRegionSerializer.load_checkpoint(tmpdir)
+            crops_loaded = result[0] if result else None
 
             # Float precision should be preserved (JSON round-trip)
             assert crops_loaded[0].scale_factor == pytest.approx(1.3333333)
