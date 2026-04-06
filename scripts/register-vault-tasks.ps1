@@ -63,12 +63,11 @@ try {
 Write-Host ""
 Write-Host "📆 Registering MONTHLY task (1st day of month, 09:00 AM)..."
 
-# Note: PowerShell doesn't have native "first Monday" trigger, so we use monthly on day 1
-# Alternative: Use Task Scheduler GUI for more complex schedules
-$MonthlytTrigger = New-ScheduledTaskTrigger -Monthly -At "09:00" -DaysOfMonth 1
-$MonthlyAction = New-ScheduledTaskAction -Execute $BashPath -Argument "-c 'cd $VaultPath && ./scripts/vault-maintenance.sh monthly && git add -A && git commit -m \"chore(vault): Monthly maintenance $(date +%Y-%m-%d)\" || true'"
-$MonthlySettings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -RunOnlyIfNetworkAvailable
-$MonthlyTask = New-ScheduledTask -Action $MonthlyAction -Trigger $MonthlytTrigger -Settings $MonthlySettings -Description "Monthly vault maintenance: full health check, backup, review, git commit"
+# Note: Use CIM instead of deprecated -DaysOfMonth parameter
+$MonthlytTrigger = New-ScheduledTaskTrigger -Monthly -DaysOfMonth 1 -At "09:00"
+$MonthlyAction = New-ScheduledTaskAction -Execute $BashPath -Argument "-c 'cd $VaultPath && ./scripts/vault-maintenance.sh monthly || true'"
+$MonthlySettings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
+$MonthlyTask = New-ScheduledTask -Action $MonthlyAction -Trigger $MonthlytTrigger -Settings $MonthlySettings -Description "Monthly vault maintenance: full health check, backup, review"
 
 try {
     Register-ScheduledTask -TaskPath "\Vault Maintenance\" -TaskName "Monthly-Maintenance" -InputObject $MonthlyTask -Force | Out-Null
