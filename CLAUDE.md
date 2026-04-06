@@ -184,7 +184,7 @@ Set in `.env` or shell:
 
 - **Line Endings**: `.gitattributes` set to `* text=auto`
 - **Tracked**: `.claude/commands/` (prompt templates for slash commands)
-- **Ignored**: `projects/tools/` (submodules), `.venv`, `node_modules`, `__pycache__`
+- **Ignored**: `projects/_tools/` (code projects, `_` prefix excludes from clausidian), `projects/_php-blog-mcp-server/`, `projects/_yololab-automation/`, `.venv`, `node_modules`, `__pycache__`
 - **Commit Style**: Conventional commits (feat:, fix:, refactor:) — describe WHY, not WHAT
 - **Branches**: main/master (CI runs on push and PR)
 
