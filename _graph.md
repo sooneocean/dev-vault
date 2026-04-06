@@ -59,6 +59,11 @@ updated: 2026-04-06
 | [[YOLO_LAB_Design_System]] | [[QUICK-START-GUIDE]] | strong |
 | [[YOLO_LAB_Design_System]] | [[dev-vault-status]] | strong |
 | [[YOLO_LAB_Design_System]] | [[Unit4-Gospel-Recruitment-Plan]] | strong |
+| [[agent-safe-partial-note-rewrite]] | [[harness-engineering-research]] | weak |
+| [[agent-safe-partial-note-rewrite]] | [[dev-vault-status]] | weak |
+| [[agent-safe-partial-note-rewrite]] | [[tech-research-squad]] | weak |
+| [[agent-safe-partial-note-rewrite]] | [[architecture-lessons]] | weak |
+| [[agent-safe-partial-note-rewrite]] | [[claude-agent-sdk-api]] | weak |
 | [[architecture-lessons]] | [[dev-vault-status]] | strong |
 | [[architecture-lessons]] | [[context-engineering-hygiene]] | strong |
 | [[architecture-lessons]] | [[benchmark-first-rule]] | strong |
@@ -195,6 +200,7 @@ updated: 2026-04-06
 | [[local-llm-deployment]] | [[local-llm-task-routing]] | strong |
 | [[local-llm-task-routing]] | [[local-llm-deployment]] | strong |
 | [[local-llm-task-routing]] | [[dexg16-ai-stack]] | strong |
+| [[202604061430-para-zk-are-orthogonal-layers]] | [[areas/knowledge-management]] | weak |
 | [[pretext-無-dom-文字測量引擎]] | [[pretext-csm-tui-layout]] | medium |
 | [[prompt-engineering-research]] | [[tech-research-squad]] | medium |
 | [[prompt-engineering-research]] | [[context-engineering-research]] | strong |
@@ -256,35 +262,35 @@ TF-IDF weighted (rare tags + content overlap score higher):
 
 | Note A | Note B | Score | Shared Tags |
 |--------|--------|-------|-------------|
-| [[cluster-subtype-domain-dimensions]] | [[research-update-mode]] | 9.8 | clausidian, brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[cluster-subtype-domain-dimensions]] | 9.7 | clausidian, brainstorm, future, ai-engineering |
-| [[relation-map-graph-consumer]] | [[research-update-mode]] | 9.7 | clausidian, brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[relation-map-graph-consumer]] | 9.5 | clausidian, brainstorm, future, ai-engineering |
-| [[cluster-subtype-domain-dimensions]] | [[pretext-csm-tui-layout]] | 7.1 | brainstorm, future, ai-engineering |
-| [[pretext-csm-tui-layout]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
-| [[cluster-subtype-domain-dimensions]] | [[writing-methodology-framework]] | 7 | brainstorm, future, ai-engineering |
-| [[pretext-csm-tui-layout]] | [[relation-map-graph-consumer]] | 7 | brainstorm, future, ai-engineering |
-| [[pretext-csm-tui-layout]] | [[research-update-mode]] | 7 | brainstorm, future, ai-engineering |
-| [[relation-map-graph-consumer]] | [[writing-methodology-framework]] | 7 | brainstorm, future, ai-engineering |
-| [[research-update-mode]] | [[writing-methodology-framework]] | 7 | brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[pretext-csm-tui-layout]] | 6.9 | brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[writing-methodology-framework]] | 6.9 | brainstorm, future, ai-engineering |
-| [[article-ai-coding-assistants-2026]] | [[llm-model-comparison-2026]] | 6.4 | resource, article, knowledge-management |
-| [[article-ai-coding-assistants-2026]] | [[prompt-engineering-complete-guide]] | 6.3 | resource, article, knowledge-management |
-| [[llm-model-comparison-2026]] | [[prompt-engineering-complete-guide]] | 6.3 | resource, article, knowledge-management |
+| [[cluster-subtype-domain-dimensions]] | [[research-update-mode]] | 10 | clausidian, brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[cluster-subtype-domain-dimensions]] | 9.9 | clausidian, brainstorm, future, ai-engineering |
+| [[relation-map-graph-consumer]] | [[research-update-mode]] | 9.9 | clausidian, brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[relation-map-graph-consumer]] | 9.7 | clausidian, brainstorm, future, ai-engineering |
+| [[cluster-subtype-domain-dimensions]] | [[pretext-csm-tui-layout]] | 7.2 | brainstorm, future, ai-engineering |
+| [[pretext-csm-tui-layout]] | [[writing-methodology-framework]] | 7.2 | brainstorm, future, ai-engineering |
+| [[cluster-subtype-domain-dimensions]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
+| [[pretext-csm-tui-layout]] | [[relation-map-graph-consumer]] | 7.1 | brainstorm, future, ai-engineering |
+| [[pretext-csm-tui-layout]] | [[research-update-mode]] | 7.1 | brainstorm, future, ai-engineering |
+| [[relation-map-graph-consumer]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
+| [[research-update-mode]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[pretext-csm-tui-layout]] | 7 | brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[writing-methodology-framework]] | 7 | brainstorm, future, ai-engineering |
+| [[article-ai-coding-assistants-2026]] | [[llm-model-comparison-2026]] | 6.5 | resource, article, knowledge-management |
+| [[article-ai-coding-assistants-2026]] | [[prompt-engineering-complete-guide]] | 6.4 | resource, article, knowledge-management |
+| [[llm-model-comparison-2026]] | [[prompt-engineering-complete-guide]] | 6.4 | resource, article, knowledge-management |
 | [[claude-session-manager]] | [[csm-architecture]] | 5.1 | claude-code, python |
-| [[harness-engineering-research]] | [[improvement-2026-03-30-002]] | 4.9 | claude-code, hooks, reference, knowledge-management |
+| [[harness-engineering-research]] | [[improvement-2026-03-30-002]] | 5 | claude-code, hooks, reference, knowledge-management |
 | [[dexg16-machine-specs]] | [[local-llm-deployment]] | 4.4 | hardware, reference, knowledge-management |
+| [[202604061430-para-zk-are-orthogonal-layers]] | [[2026-04-06-1430-para-zk-overlay-insight]] | 4.1 | knowledge-management, vault-design |
 | [[harness-engineering-research]] | [[research-mcp-model-context-protocol-2026-03-29]] | 3.9 | mcp, reference, knowledge-management |
+| [[QUICK-START-GUIDE]] | [[yololab-optimization-report]] | 3.8 | project, active |
 | [[compound-engineering-plugin]] | [[github-發布流程]] | 3.8 | workflow, reference, knowledge-management |
 | [[compound-engineering-research]] | [[github-發布流程]] | 3.8 | workflow, reference, knowledge-management |
 | [[harness-engineering-research]] | [[local-llm-task-routing]] | 3.8 | mcp, reference, knowledge-management |
-| [[local-llm-task-routing]] | [[research-mcp-model-context-protocol-2026-03-29]] | 3.8 | mcp, reference, knowledge-management |
-| [[QUICK-START-GUIDE]] | [[yololab-optimization-report]] | 3.7 | project, active |
 
 ## Clusters
 
-### Cluster 1: dev-vault-status (50 notes)
+### Cluster 1: dev-vault-status (51 notes)
 - [[dev-vault-status]]
 - [[dexg16-ai-coding-tools]]
 - [[compound-engineering-plugin]]
@@ -300,6 +306,7 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[dexg16-dev-environment]]
 - [[harness-engineering-research]]
 - [[toolchain-reference]]
+- [[agent-safe-partial-note-rewrite]]
 - [[architecture-lessons]]
 - [[benchmark-first-rule]]
 - [[claude-agent-sdk-api]]

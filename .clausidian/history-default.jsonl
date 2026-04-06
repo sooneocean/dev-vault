@@ -1,12 +1,3 @@
-{"ts":"2026-04-03T14:54:37.296Z","vault":"default","event":"note:updated","payload":{"note":"projects/README","dir":"projects/README.md"},"success":true,"errors":[],"hash":"14e234d7"}
-{"ts":"2026-04-03T14:54:37.300Z","vault":"default","event":"note:updated","payload":{"note":"projects/README","dir":"projects/README.md"},"success":true,"errors":[],"hash":"14e234d7"}
-{"ts":"2026-04-03T14:54:37.306Z","vault":"default","event":"note:updated","payload":{"note":"projects/README","dir":"projects/README.md"},"success":true,"errors":[],"hash":"14e234d7"}
-{"ts":"2026-04-03T14:54:37.311Z","vault":"default","event":"note:updated","payload":{"note":"projects/README","dir":"projects/README.md"},"success":true,"errors":[],"hash":"14e234d7"}
-{"ts":"2026-04-03T14:54:37.316Z","vault":"default","event":"note:updated","payload":{"note":"projects/readme","dir":"projects/readme.md"},"success":true,"errors":[],"hash":"4b5d7207"}
-{"ts":"2026-04-03T14:54:37.320Z","vault":"default","event":"note:updated","payload":{"note":"projects/README","dir":"projects/README.md"},"success":true,"errors":[],"hash":"14e234d7"}
-{"ts":"2026-04-03T14:54:37.325Z","vault":"default","event":"note:updated","payload":{"note":"projects/README","dir":"projects/README.md"},"success":true,"errors":[],"hash":"14e234d7"}
-{"ts":"2026-04-03T14:54:37.329Z","vault":"default","event":"note:updated","payload":{"note":"projects/readme","dir":"projects/readme.md"},"success":true,"errors":[],"hash":"4b5d7207"}
-{"ts":"2026-04-03T14:54:37.334Z","vault":"default","event":"note:updated","payload":{"note":"projects/README","dir":"projects/README.md"},"success":true,"errors":[],"hash":"14e234d7"}
 {"ts":"2026-04-03T14:54:37.338Z","vault":"default","event":"note:updated","payload":{"note":"projects/readme","dir":"projects/readme.md"},"success":true,"errors":[],"hash":"4b5d7207"}
 {"ts":"2026-04-03T14:54:37.343Z","vault":"default","event":"note:updated","payload":{"note":"projects/README","dir":"projects/README.md"},"success":true,"errors":[],"hash":"14e234d7"}
 {"ts":"2026-04-03T14:54:37.348Z","vault":"default","event":"note:updated","payload":{"note":"projects/README","dir":"projects/README.md"},"success":true,"errors":[],"hash":"14e234d7"}
@@ -998,3 +989,12 @@
 {"ts":"2026-04-06T05:15:19.431Z","vault":"default","event":"note:updated","payload":{"note":"_graph","dir":"_graph.md"},"success":true,"errors":[],"hash":"7916f0ce"}
 {"ts":"2026-04-06T05:15:24.556Z","vault":"default","event":"note:updated","payload":{"note":"ideas/_index","dir":"ideas/_index.md"},"success":true,"errors":[],"hash":"73e248ed"}
 {"ts":"2026-04-06T05:15:57.451Z","vault":"default","event":"note:updated","payload":{"note":"ideas/_index","dir":"ideas/_index.md"},"success":true,"errors":[],"hash":"73e248ed"}
+{"ts":"2026-04-06T10:52:28.629Z","vault":"default","event":"note:created","payload":{"note":"agent-safe-partial-note-rewrite","dir":"resources"},"success":true,"errors":[],"hash":"9be0c59a"}
+{"ts":"2026-04-06T10:52:28.633Z","vault":"default","event":"note:updated","payload":{"note":"resources/_index","dir":"resources/_index.md"},"success":true,"errors":[],"hash":"95f471b6"}
+{"ts":"2026-04-06T10:52:28.664Z","vault":"default","event":"note:updated","payload":{"note":"_tags","dir":"_tags.md"},"success":true,"errors":[],"hash":"3566c415"}
+{"ts":"2026-04-06T10:52:28.676Z","vault":"default","event":"note:updated","payload":{"note":"_graph","dir":"_graph.md"},"success":true,"errors":[],"hash":"7916f0ce"}
+{"ts":"2026-04-06T10:52:28.686Z","vault":"default","event":"note:updated","payload":{"note":"resources/harness-engineering-research","dir":"resources/harness-engineering-research.md"},"success":true,"errors":[],"hash":"6d329973"}
+{"ts":"2026-04-06T10:52:28.700Z","vault":"default","event":"note:updated","payload":{"note":"projects/dev-vault-status","dir":"projects/dev-vault-status.md"},"success":true,"errors":[],"hash":"ece6059c"}
+{"ts":"2026-04-06T10:52:28.706Z","vault":"default","event":"note:updated","payload":{"note":"projects/tech-research-squad","dir":"projects/tech-research-squad.md"},"success":true,"errors":[],"hash":"cbd564f8"}
+{"ts":"2026-04-06T10:52:28.711Z","vault":"default","event":"note:updated","payload":{"note":"resources/architecture-lessons","dir":"resources/architecture-lessons.md"},"success":true,"errors":[],"hash":"5a654461"}
+{"ts":"2026-04-06T10:52:28.716Z","vault":"default","event":"note:updated","payload":{"note":"resources/claude-agent-sdk-api","dir":"resources/claude-agent-sdk-api.md"},"success":true,"errors":[],"hash":"964d9a62"}

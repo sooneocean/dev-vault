@@ -4,13 +4,13 @@ type: resource
 subtype: "learning"
 tags: [knowledge-management, auto-memory-migration, claude-code-hooks, reference]
 created: "2026-03-30"
-updated: "2026-04-03"
+updated: "2026-04-06"
 status: active
 maturity: mature
 domain: "ai-engineering"
 summary: "Critical lessons about Stop hooks, global config safety, and slash command nature"
 source: ""
-related: ["[[dev-vault-status]]", "[[context-engineering-hygiene]]", "[[benchmark-first-rule]]", "[[toolchain-reference]]", "[[claude-agent-sdk-api]]"]
+related: ["[[dev-vault-status]]", "[[context-engineering-hygiene]]", "[[benchmark-first-rule]]", "[[toolchain-reference]]", "[[claude-agent-sdk-api]]", "[[agent-safe-partial-note-rewrite]]"]
 relation_map: ""
 ---
 

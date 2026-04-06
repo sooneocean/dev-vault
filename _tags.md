@@ -136,7 +136,6 @@ updated: 2026-04-06
 - [[2026-04-01]] — (no summary)
 - [[2026-04-02]] — (no summary)
 - [[2026-04-03]] — (no summary)
-- [[2026-04-06]] — (no summary)
 - [[2026-W14-review]] — Vault 從零到 Grade A 99% 的三日旅程 — 48 notes, 7 plans, 12-agent parallel sessions, 知識複利迴路首次閉合
 - [[content-cycle-w1-2026-04-02]] — (no summary)
 - [[research-scan-2026-03-30]] — (no summary)
@@ -241,6 +240,7 @@ updated: 2026-04-06
 - [[llm-model-comparison-2026]] — (no summary)
 - [[local-llm-deployment]] — RTX 4090 Laptop 16GB VRAM 上的本地模型部署、MCP 整合、任務路由決策
 - [[local-llm-task-routing]] — RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API
+- [[202604061430-para-zk-are-orthogonal-layers]] — PARA 管位置（檔案住哪裡），ZK 管概念（想法的成熟度）。用 note_class 欄位做 overlay，不需建新目錄。
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
 - [[prompt-engineering-complete-guide]] — (no summary)
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
@@ -260,6 +260,7 @@ updated: 2026-04-06
 - [[2026-W14-review]] — Vault 從零到 Grade A 99% 的三日旅程 — 48 notes, 7 plans, 12-agent parallel sessions, 知識複利迴路首次閉合
 - [[content-cycle-w1-2026-04-02]] — (no summary)
 - [[research-scan-2026-03-30]] — (no summary)
+- [[2026-04-06-1430-para-zk-overlay-insight]] — ZK 層不需要新目錄，note_class 欄位就夠了——PARA 做位置，ZK 做概念分類
 
 ### learning-capture
 - [[compound-engineering-research]] — Compound Engineering 深度研究 — 知識複利迴路解剖、CE Plugin 六大指令深入分析、反模式與度量、本 vault 實測數據（Plans 001-005 → compound → bridge → vault）、與傳統軟體工程的範式對比。
@@ -309,6 +310,9 @@ updated: 2026-04-06
 
 ### oscar
 - [[documentary-film-comprehensive-guide]] — 深度探討紀錄電影與紀錄片的區別，分析5部必看奧斯卡提名作品，指南涵蓋導演視角、敘事手法與流媒體平台推薦。
+
+### para
+- [[202604061430-para-zk-are-orthogonal-layers]] — PARA 管位置（檔案住哪裡），ZK 管概念（想法的成熟度）。用 note_class 欄位做 overlay，不需建新目錄。
 
 ### performance
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
@@ -423,6 +427,10 @@ updated: 2026-04-06
 ### typescript
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
 
+### vault-design
+- [[202604061430-para-zk-are-orthogonal-layers]] — PARA 管位置（檔案住哪裡），ZK 管概念（想法的成熟度）。用 note_class 欄位做 overlay，不需建新目錄。
+- [[2026-04-06-1430-para-zk-overlay-insight]] — ZK 層不需要新目錄，note_class 欄位就夠了——PARA 做位置，ZK 做概念分類
+
 ### visual-analysis
 - [[feminist-film-criticism-complete-guide]] — 深入解析女性主義電影學核心概念，從凝視理論到敘述權力，附 3 部經典案例分析
 
@@ -442,16 +450,19 @@ updated: 2026-04-06
 ### writing
 - [[writing-methodology-framework]] — Brainstorming a framework for dev-driven writing and batch publishing.
 
+### zettelkasten
+- [[202604061430-para-zk-are-orthogonal-layers]] — PARA 管位置（檔案住哪裡），ZK 管概念（想法的成熟度）。用 note_class 欄位做 overlay，不需建新目錄。
+
 ## Stats
 
 | Tag | Count |
 |-----|-------|
-| knowledge-management | 52 |
+| knowledge-management | 54 |
 | reference | 38 |
 | claude-code | 15 |
-| daily | 11 |
 | project | 10 |
 | active | 10 |
+| daily | 10 |
 | log | 10 |
 | auto-memory-migration | 6 |
 | brainstorm | 6 |
@@ -477,6 +488,7 @@ updated: 2026-04-06
 | inventory | 2 |
 | workspace | 2 |
 | hardware | 2 |
+| vault-design | 2 |
 | text-layout | 2 |
 | weekly-review | 2 |
 | seo | 1 |
@@ -508,6 +520,8 @@ updated: 2026-04-06
 | agent-harness | 1 |
 | task-routing | 1 |
 | ollama | 1 |
+| para | 1 |
+| zettelkasten | 1 |
 | typescript | 1 |
 | performance | 1 |
 | agent-workflow | 1 |
