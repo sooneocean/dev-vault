@@ -29,7 +29,7 @@ for r in results:
 ```
 
 If the knowledge layer (LanceDB) is not available, fall back to:
-1. Use `obsidian-agent search "$ARGUMENTS"` for full-text search
+1. Use `clausidian search "$ARGUMENTS"` for full-text search
 2. Or use `grep -rl "$ARGUMENTS" resources/research-*.md` for basic matching
 3. Display matching notes with context
 

@@ -27,6 +27,6 @@ If the venv or orchestrator is not available, perform a manual scan:
 1. Use WebSearch to find "new AI agent framework 2026", "RAG tools trending", "MCP server new"
 2. For each discovery, note: name, URL, description, stars, tags
 3. Create a research note at `resources/research-scan-YYYY-MM-DD.md` with proper frontmatter
-4. Run `obsidian-agent sync` to update indices
+4. Run `clausidian sync` to update indices
 
 $ARGUMENTS

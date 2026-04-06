@@ -65,8 +65,8 @@ weekly_maintenance() {
 
     # 生成周報
     log "  • 生成周報..."
-    "$CLAUSIDIAN" review > "weekly_review_$(date +%Y-W%V).txt" || true
-    log "  ✅ 周報已保存"
+    "$CLAUSIDIAN" review || log "  ⚠️  周報生成失敗"
+    log "  ✅ 周報已保存至 journal/"
 }
 
 # ==================== 月度任務 ====================
@@ -87,7 +87,7 @@ monthly_maintenance() {
 
     # 月度回顧
     log "  • 生成月度回顧..."
-    "$CLAUSIDIAN" review monthly > "monthly_review_$(date +%Y-%m).txt" || true
+    "$CLAUSIDIAN" review monthly || log "  ⚠️  月度回顧生成失敗"
 
     # 更新指標
     log "  • 更新追蹤指標..."
