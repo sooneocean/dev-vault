@@ -100,7 +100,7 @@ class TestYOLODetectorInference:
         # Use actual numpy array that will be properly converted
         xyxy_array = np.array([10.0, 20.0, 110.0, 70.0], dtype=np.float32)
         mock_box.xyxy = [xyxy_array]
-        mock_box.conf = [np.array([0.95], dtype=np.float32)]
+        mock_box.conf = [np.float32(0.95)]
 
         mock_result = MagicMock()
         mock_result.boxes = [mock_box]
@@ -132,11 +132,11 @@ class TestYOLODetectorInference:
         # Create two mock boxes
         mock_box1 = MagicMock()
         mock_box1.xyxy = [np.array([10.0, 20.0, 110.0, 70.0], dtype=np.float32)]
-        mock_box1.conf = [np.array([0.95], dtype=np.float32)]
+        mock_box1.conf = [np.float32(0.95)]
 
         mock_box2 = MagicMock()
         mock_box2.xyxy = [np.array([300.0, 200.0, 400.0, 300.0], dtype=np.float32)]
-        mock_box2.conf = [np.array([0.85], dtype=np.float32)]
+        mock_box2.conf = [np.float32(0.85)]
 
         mock_result = MagicMock()
         mock_result.boxes = [mock_box1, mock_box2]
@@ -187,7 +187,7 @@ class TestYOLODetectorInference:
         detector = YOLODetector()
 
         # Mock _load_model to raise an error
-        with patch.object(detector, '_load_model', side_effect=RuntimeError("Model not found")):
+        with patch.object(detector, '_load_model', side_effect=RuntimeError("Failed to load YOLO model: checkpoint not found")):
             image = np.zeros((480, 640, 3), dtype=np.uint8)
 
             with pytest.raises(RuntimeError, match="Failed to load YOLO model"):
@@ -237,7 +237,7 @@ class TestYOLODetectorBatch:
         # Frame 1: 1 detection, Frame 2: 0 detections, Frame 3: 2 detections
         mock_box = MagicMock()
         mock_box.xyxy = [np.array([10.0, 20.0, 110.0, 70.0])]
-        mock_box.conf = [np.array([0.95])]
+        mock_box.conf = [np.float32(0.95)]
 
         mock_result1 = MagicMock()
         mock_result1.boxes = [mock_box]
@@ -273,7 +273,7 @@ class TestYOLODetectorWithConfidence:
 
         mock_box = MagicMock()
         mock_box.xyxy = [np.array([10.0, 20.0, 110.0, 70.0])]
-        mock_box.conf = [np.array([0.95])]
+        mock_box.conf = [0.95]
 
         mock_result = MagicMock()
         mock_result.boxes = [mock_box]
@@ -303,11 +303,11 @@ class TestYOLODetectorWithConfidence:
         # Create boxes with different confidences
         mock_box1 = MagicMock()
         mock_box1.xyxy = [np.array([10.0, 20.0, 110.0, 70.0])]
-        mock_box1.conf = [np.array([0.70])]
+        mock_box1.conf = [0.70]
 
         mock_box2 = MagicMock()
         mock_box2.xyxy = [np.array([300.0, 200.0, 400.0, 300.0])]
-        mock_box2.conf = [np.array([0.95])]
+        mock_box2.conf = [0.95]
 
         mock_result = MagicMock()
         mock_result.boxes = [mock_box1, mock_box2]
