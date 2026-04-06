@@ -210,6 +210,13 @@ Bulk metadata optimization for 898+ articles. Generates:
 
 See `docs/YOLOLAB_*` and `SEO-QUICK-START.md` for full docs.
 
+### Research Pipeline (WebSearch-only mode)
+LLM tool discovery via `projects/_tools/research-pipeline/`. Scanners use WebSearch as the primary data source — arxiv, huggingface, fetch, and agent-memory MCP servers are all disabled. Only the GitHub plugin MCP is active.
+
+**Quick Start**: `cd projects/_tools/research-pipeline && python orchestrator.py`
+
+Outputs land in `state/` as JSON; proposals appear in `state/proposals/` for review via `/research-apply`.
+
 ## Troubleshooting
 
 - **Proposal engine fails**: Check `.claude/lib/proposal-engine.js` and test via `npm run test:proposal`

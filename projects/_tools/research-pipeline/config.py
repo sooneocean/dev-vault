@@ -61,12 +61,16 @@ DEDUP_EXPIRY = {
 LOCK_STALE_HOURS = 6
 
 # MCP server names (as configured in .mcp.json)
+# NOTE: Only "github" (via plugin) and "wpcom-mcp" are currently active.
+# arxiv, huggingface, fetch, and agent-memory are disabled in .mcp.json.
+# Scanners that reference these fall back to WebSearch (WebFetch for fetch).
+# To re-enable: rename the _disabled_<name> key in .mcp.json back to <name>.
 MCP_SERVERS = {
-    "github": "github",       # via plugin
-    "arxiv": "arxiv",
-    "huggingface": "huggingface",
-    "fetch": "fetch",
-    "agent-memory": "agent-memory",
+    "github": "github",           # active — via GitHub plugin
+    # "arxiv": "arxiv",           # disabled — use WebSearch instead
+    # "huggingface": "huggingface",  # disabled — not needed for current work
+    # "fetch": "fetch",           # disabled — use WebFetch tool instead
+    # "agent-memory": "agent-memory",  # disabled — not in .mcp.json
 }
 
 # Agent Memory Configuration
