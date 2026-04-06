@@ -1,16 +1,16 @@
 ---
 title: "Claude Session Manager"
 type: project
-tags: [claude-code, python]
+tags: [claude-code, python, project, active]
 created: "2026-03-28"
-updated: "2026-03-29"
+updated: "2026-04-04"
 status: active
 maturity: growing
 domain: project-specific
-summary: "Python TUI 儀表板，從單一終端管理多個 Claude Code Session"
-goal: ""
+summary: "Claude Session Manager — AI 輔助的多工作階段管理 TUI，支援實時流式輸出、成本追蹤、自動壓縮"
+goal: "Enable multi-session Claude Code management from a single TUI dashboard with real-time streaming, cost tracking, SOP detection, auto-compaction at 50K tokens, and persistent session state"
 deadline: ""
-related: ["[[claude-code-dev-tools]]", "[[dexg16-ai-coding-tools]]", "[[claude-code-configuration]]", "[[session-stop-wrapper-learning]]", "[[pretext-csm-tui-layout]]"]
+related: ["[[claude-code-dev-tools]]", "[[dexg16-ai-coding-tools]]", "[[claude-code-configuration]]", "[[session-stop-wrapper-learning]]", "[[pretext-csm-tui-layout]]", "[[tech-research-squad]]"]
 relation_map: "csm-architecture:documents, csm-feature-roadmap:documents"
 ---
 
@@ -62,3 +62,5 @@ N=新增, Enter=發送指令, X=停止, D=刪除, R=重啟, E=匯出, C=複製, 
 - [[csm-key-design-decisions]]
 - [[csm-feature-roadmap]]
 - [[claude-code-dev-tools]]
+- [[dev-vault-status]] — 同屬 Claude Code 生態系的知識管理工具
+- [[tech-research-squad]] — 研究 context management 和工程化基礎

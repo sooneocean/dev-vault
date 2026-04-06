@@ -1,9 +1,9 @@
 ---
 title: "DEXG16 全部專案清單"
 type: resource
-tags: [inventory, workspace]
+tags: [inventory, workspace, reference, knowledge-management]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: catalog
 maturity: growing

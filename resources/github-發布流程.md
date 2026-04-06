@@ -1,9 +1,9 @@
 ---
 title: "GitHub 發布流程"
 type: resource
-tags: [github, ci-cd, workflow]
+tags: [github, ci-cd, workflow, reference, knowledge-management]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: standard
 maturity: mature

@@ -1,0 +1,51 @@
+pillar_page,pillar_slug,layer,layer_description,article_id,article_title_placeholder,link_anchor_text,link_type,priority
+Music Pillar,music-pillar,Layer 1 - TOP 5,Core high-traffic articles,30121,Yohee 樂評,Yohee 又熙《如果我是個玩咖》樂評,Pillar→Article,P0
+Music Pillar,music-pillar,Layer 1 - TOP 5,Core high-traffic articles,34942,Kanye West 樂評,Kanye West《Bully》深度分析,Pillar→Article,P0
+Music Pillar,music-pillar,Layer 1 - TOP 5,Core high-traffic articles,34935,Central Cee 樂評,Central Cee《All Roads Lead Home》評測,Pillar→Article,P0
+Music Pillar,music-pillar,Layer 1 - TOP 5,Core high-traffic articles,34893,Sarah Chen 樂評,Sarah Chen 靈魂樂專題,Pillar→Article,P0
+Music Pillar,music-pillar,Layer 1 - TOP 5,Core high-traffic articles,26085,Jacob Collier 樂評,Jacob Collier 編曲分析,Pillar→Article,P0
+Music Pillar,music-pillar,Layer 2 - Related Artists,Same-category artist connections,,屁孩專題,屁孩與台灣嘻哈新聲,Pillar→Article,P1
+Music Pillar,music-pillar,Layer 2 - Related Artists,Same-category artist connections,,Barry Chen 音樂故事,Barry Chen 合作分析,Pillar→Article,P1
+Music Pillar,music-pillar,Layer 2 - Related Artists,Same-category artist connections,,台灣嘻哈生態,台灣嘻哈藝人地圖,Pillar→Article,P1
+Music Pillar,music-pillar,Layer 3 - Music Education,Foundational music knowledge,,嘻哈歷史簡編,Hip-Hop 文化與社會運動,Pillar→Article,P2
+Music Pillar,music-pillar,Layer 3 - Music Education,Foundational music knowledge,,爵士樂基礎概念,爵士樂即興與編排,Pillar→Article,P2
+Music Pillar,music-pillar,Layer 3 - Music Education,Foundational music knowledge,,編曲技巧工作坊,現代編曲與和聲設計,Pillar→Article,P2
+Music Pillar,music-pillar,Layer 3 - Music Education,Foundational music knowledge,,樂器介紹系列 - 鋼琴,鋼琴在現代製作中的角色,Pillar→Article,P2
+Music Pillar,music-pillar,Layer 3 - Music Education,Foundational music knowledge,,樂器介紹系列 - 吉他,吉他技巧與音色選擇,Pillar→Article,P2
+Music Pillar,music-pillar,Layer 3 - Music Education,Foundational music knowledge,,樂器介紹系列 - 鼓組,鼓組編程與節奏設計,Pillar→Article,P2
+Music Pillar,music-pillar,Layer 3 - Music Education,Foundational music knowledge,,製作工具對比,DAW 軟體選擇指南,Pillar→Article,P2
+Music Pillar,music-pillar,Layer 4 - Trends & News,Discovery & long-tail content,,2024 音樂年度回顧,年度最佳專輯與趨勢分析,Pillar→Article,P3
+Music Pillar,music-pillar,Layer 4 - Trends & News,Discovery & long-tail content,,AI 與音樂製作,生成式 AI 如何改變作曲?,Pillar→Article,P3
+Music Pillar,music-pillar,Layer 4 - Trends & News,Discovery & long-tail content,,音樂版權與商業,創作者的收入新模式,Pillar→Article,P3
+Film Pillar,film-pillar,Layer 1 - TOP 3,Core high-traffic articles,34899,NO GOOD 電影評測,《NO GOOD》電影評測,Pillar→Article,P0
+Film Pillar,film-pillar,Layer 1 - TOP 3,Core high-traffic articles,34888,2026 電影院指南,2026 電影院觀影體驗評測,Pillar→Article,P0
+Film Pillar,film-pillar,Layer 1 - TOP 3,Core high-traffic articles,34870,Moto 極速傳奇評測,《Moto 極速傳奇》評測,Pillar→Article,P0
+Film Pillar,film-pillar,Layer 2 - Actor Profiles,Actor and director studies,,李銘順專題,李銘順演技賞析,Pillar→Article,P1
+Film Pillar,film-pillar,Layer 2 - Actor Profiles,Actor and director studies,,梁家輝專題,梁家輝香港電影傳奇,Pillar→Article,P1
+Film Pillar,film-pillar,Layer 2 - Actor Profiles,Actor and director studies,,成龍功夫電影傳奇,成龍與功夫電影美學,Pillar→Article,P1
+Film Pillar,film-pillar,Layer 2 - Actor Profiles,Actor and director studies,,許效舜喜劇風格,台灣喜劇電影史,Pillar→Article,P1
+Film Pillar,film-pillar,Layer 3 - Film Genres,Genre and technical analysis,,A24 電影美學指南,A24 風格的藝術電影解析,Pillar→Article,P2
+Film Pillar,film-pillar,Layer 3 - Film Genres,Genre and technical analysis,,劇情片深度剖析,社會劇與家庭敘事分析,Pillar→Article,P2
+Film Pillar,film-pillar,Layer 3 - Film Genres,Genre and technical analysis,,動作片經典回顧,動作美學與視覺語言,Pillar→Article,P2
+Film Pillar,film-pillar,Layer 3 - Film Genres,Genre and technical analysis,,攝影技巧與視覺設計,電影光影與構圖分析,Pillar→Article,P2
+Film Pillar,film-pillar,Layer 3 - Film Genres,Genre and technical analysis,,電影音效與配樂,聲音設計的藝術,Pillar→Article,P2
+Film Pillar,film-pillar,Layer 4 - Practical Guides,Viewing tips and cinema guides,,搶票秘訣與時間表,電影票搶票戰略指南,Pillar→Article,P3
+Film Pillar,film-pillar,Layer 4 - Practical Guides,Viewing tips and cinema guides,,選座位完全指南,電影院最佳座位分析,Pillar→Article,P3
+Film Pillar,film-pillar,Layer 4 - Practical Guides,Viewing tips and cinema guides,,2026 上映電影預告,未來 3 個月必看電影,Pillar→Article,P3
+Tech Pillar,tech-pillar,Layer 1 - TOP 3,Core high-traffic articles,34881,AI IDE 深度評測,AI IDE 編程工具評測,Pillar→Article,P0
+Tech Pillar,tech-pillar,Layer 1 - TOP 3,Core high-traffic articles,34853,OpenAI 算力更新,OpenAI 計算能力分析,Pillar→Article,P0
+Tech Pillar,tech-pillar,Layer 1 - TOP 3,Core high-traffic articles,,LLM 完全對比 2026,GPT vs Claude vs Gemini vs Kimi,Pillar→Article,P0
+Tech Pillar,tech-pillar,Layer 2 - AI Foundations,Basic AI concepts,,LLM 基礎概念指南,大語言模型如何工作,Pillar→Article,P1
+Tech Pillar,tech-pillar,Layer 2 - AI Foundations,Basic AI concepts,,Token 與成本計算,如何理解 Token 與上下文,Pillar→Article,P1
+Tech Pillar,tech-pillar,Layer 2 - AI Foundations,Basic AI concepts,,Agent 與自主 AI,Agent 框架與自動化,Pillar→Article,P1
+Tech Pillar,tech-pillar,Layer 2 - AI Foundations,Basic AI concepts,,Prompt 工程入門,與 AI 對話的藝術,Pillar→Article,P1
+Tech Pillar,tech-pillar,Layer 3 - Tool Reviews,Specific tool evaluations,,ChatGPT 詳解與最佳實踐,ChatGPT 功能與應用,Pillar→Article,P2
+Tech Pillar,tech-pillar,Layer 3 - Tool Reviews,Specific tool evaluations,,Claude 深度評測,Claude 與長上下文應用,Pillar→Article,P2
+Tech Pillar,tech-pillar,Layer 3 - Tool Reviews,Specific tool evaluations,,Gemini Advanced 分析,Google AI 工具全景,Pillar→Article,P2
+Tech Pillar,tech-pillar,Layer 3 - Tool Reviews,Specific tool evaluations,,Kimi 中文優化評測,中文 LLM 工具對比,Pillar→Article,P2
+Tech Pillar,tech-pillar,Layer 3 - Tool Reviews,Specific tool evaluations,,GitHub Copilot X 完全指南,AI 編程助手對比,Pillar→Article,P2
+Tech Pillar,tech-pillar,Layer 4 - AI People & Companies,Industry figures and trends,,Sam Altman 與 OpenAI 故事,OpenAI 創立與發展歷程,Pillar→Article,P3
+Tech Pillar,tech-pillar,Layer 4 - AI People & Companies,Industry figures and trends,,Google AI 與 Gemini 戰略,Google 的 AI 投資與布局,Pillar→Article,P3
+Tech Pillar,tech-pillar,Layer 4 - AI People & Companies,Industry figures and trends,,Anthropic 與 Claude,安全 AI 的代言人,Pillar→Article,P3
+Tech Pillar,tech-pillar,Layer 4 - AI People & Companies,Industry figures and trends,,中文 LLM 生態地圖,中國 AI 創業公司分析,Pillar→Article,P3
+Tech Pillar,tech-pillar,Layer 4 - AI People & Companies,Industry figures and trends,,AI 倫理與監管,AI 治理的全球動向,Pillar→Article,P3

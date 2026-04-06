@@ -1,9 +1,9 @@
 ---
 title: "Research: MCP model context protocol"
 type: resource
-tags: [mcp]
+tags: [mcp, reference, knowledge-management]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-04-03"
 status: active
 subtype: research
 maturity: seed

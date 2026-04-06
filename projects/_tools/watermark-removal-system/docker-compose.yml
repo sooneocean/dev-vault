@@ -1,0 +1,106 @@
+version: '3.9'
+
+services:
+  # Watermark removal service
+  watermark-removal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: watermark-removal-service
+    environment:
+      - PYTHONUNBUFFERED=1
+      - COMFYUI_HOST=${COMFYUI_HOST:-comfyui}
+      - COMFYUI_PORT=${COMFYUI_PORT:-8188}
+    volumes:
+      # Input/output directories
+      - ./data/input:/data/input:ro
+      - ./data/output:/data/output:rw
+      - ./data/checkpoints:/data/checkpoints:rw
+      - ./config:/data/config:ro
+      # Optional: mounted config file
+      - ${CONFIG_FILE:-./config/docker.yaml}:/app/config/docker.yaml:ro
+    ports:
+      - "${WATERMARK_REMOVAL_PORT:-8000}:8000"
+    depends_on:
+      - comfyui
+    networks:
+      - watermark-removal-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ComfyUI service (inpainting backend)
+  comfyui:
+    image: ghcr.io/comfyui/comfyui:latest
+    container_name: comfyui-service
+    environment:
+      - CUDA_VISIBLE_DEVICES=${GPU_INDEX:-0}
+      - COMFYUI_PORT=${COMFYUI_PORT:-8188}
+    volumes:
+      # Model cache
+      - ${MODELS_CACHE:-./models}:/root/.cache/huggingface:rw
+      - comfyui-data:/app/models:rw
+      # Output directory
+      - ./data/inpaint-output:/app/output:rw
+    ports:
+      - "${COMFYUI_PORT:-8188}:8188"
+    networks:
+      - watermark-removal-network
+    restart: unless-stopped
+    shm_size: '4gb'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8188/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Optional: Monitoring service (Prometheus)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus-monitoring
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus:rw
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    networks:
+      - watermark-removal-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  # Optional: Grafana dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana-dashboards
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    networks:
+      - watermark-removal-network
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+volumes:
+  comfyui-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+networks:
+  watermark-removal-network:
+    driver: bridge

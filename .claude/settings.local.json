@@ -2,7 +2,7 @@
   "mcpServers": {
     "ollama-claude": {
       "command": "node",
-      "args": ["projects/tools/local-llm/ollama-claude/index.js"],
+      "args": ["projects/_tools/local-llm/ollama-claude/index.js"],
       "cwd": "C:\\DEX_data\\Claude Code DEV"
     }
   }

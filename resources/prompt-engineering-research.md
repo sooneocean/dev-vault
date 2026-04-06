@@ -1,9 +1,9 @@
 ---
 title: "Prompt Engineering 研究"
 type: resource
-tags: [prompt-engineering, claude-code, llm, agent-workflow]
+tags: [prompt-engineering, claude-code, llm, agent-workflow, reference, knowledge-management]
 created: "2026-03-29"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: research
 maturity: growing

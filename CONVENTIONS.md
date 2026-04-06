@@ -91,6 +91,7 @@ Resource notes **must** have a `subtype` field. Other types do not use subtypes.
 | `config` | Configuration documentation | Recording how something is configured | claude-code-configuration |
 | `learning` | Lessons learned from solving a problem | Post-mortem style: what happened, what we learned | session-stop-wrapper-learning |
 | `standard` | Process documentation or quality standards | Defining HOW to do something | github-發布流程, 開源專案品質標準 |
+| `article` | Finished writing piece for external platforms | Finalized content for WordPress, Dev.to, etc. | 2026-03-31-writing-framework |
 | `improvement` | Configuration improvement proposals from `/improve` | Auto-generated improvement suggestions | improvement-2026-03-29-001 |
 
 ### `subtype: improvement` — Additional Fields
@@ -105,6 +106,17 @@ friction_type: missing-hook | instruction-gap | command-gap
 ```
 
 File naming: `improvement-YYYY-MM-DD-NNN.md` (e.g., `improvement-2026-03-29-001.md`)
+
+### `subtype: article` — Additional Fields
+
+```yaml
+subtype: article
+publish_status: draft | published | scheduled
+target_site: yololab.net | other
+wordpress_id: integer           # ID from WordPress after publishing
+canonical_url: url              # Final live URL
+excerpt: string                 # SEO description
+```
 
 ### `subtype: iteration-log` — Additional Fields
 
@@ -176,48 +188,48 @@ All templates are in `templates/` with `{{PLACEHOLDER}}` syntax. When creating n
 
 ## Using the CLI (recommended)
 
-Instead of manual file operations, agents can use the `obsidian-agent` CLI.
+Instead of manual file operations, agents can use the `clausidian` CLI.
 The CLI handles frontmatter, linking, and index updates automatically.
 
 ```bash
 # Create & read
-obsidian-agent journal              # Create/open today's journal
-obsidian-agent note "Title" type    # Create a note (auto-links related notes)
-obsidian-agent capture "idea"       # Quick idea capture
-obsidian-agent read "note"          # Read a note's content
-obsidian-agent recent               # Recently updated notes (last 7 days)
+clausidian journal              # Create/open today's journal
+clausidian note "Title" type    # Create a note (auto-links related notes)
+clausidian capture "idea"       # Quick idea capture
+clausidian read "note"          # Read a note's content
+clausidian recent               # Recently updated notes (last 7 days)
 
 # Search & discover
-obsidian-agent search "keyword"     # Full-text search
-obsidian-agent list [type]          # List notes with filters
-obsidian-agent backlinks "note"     # What links here?
-obsidian-agent orphans              # Find unlinked notes
+clausidian search "keyword"     # Full-text search
+clausidian list [type]          # List notes with filters
+clausidian backlinks "note"     # What links here?
+clausidian orphans              # Find unlinked notes
 
 # Edit existing notes (prefer over direct file editing)
-obsidian-agent patch "note" --heading "Section" --append "content"
-obsidian-agent update "note" --status active --summary "Updated"
-obsidian-agent archive "old-note"   # Set status to archived
-obsidian-agent delete "old-note"    # Delete and clean up references
+clausidian patch "note" --heading "Section" --append "content"
+clausidian update "note" --status active --summary "Updated"
+clausidian archive "old-note"   # Set status to archived
+clausidian delete "old-note"    # Delete and clean up references
 
 # Tags
-obsidian-agent tag list             # List all tags with counts
-obsidian-agent tag rename "old" "new"
+clausidian tag list             # List all tags with counts
+clausidian tag rename "old" "new"
 
 # Reviews
-obsidian-agent review               # Weekly review
-obsidian-agent review monthly       # Monthly review
+clausidian review               # Weekly review
+clausidian review monthly       # Monthly review
 
 # Discovery & analysis
-obsidian-agent stale                # Find stale notes + triage plan
-obsidian-agent cluster              # Topic clustering + missing links
-obsidian-agent digest --all         # Project status dashboard
-obsidian-agent thread "topic"       # Trace topic evolution over time
-obsidian-agent suggest              # Smart daily action suggestions
-obsidian-agent context "note"       # Full context around a note
+clausidian stale                # Find stale notes + triage plan
+clausidian cluster              # Topic clustering + missing links
+clausidian digest --all         # Project status dashboard
+clausidian thread "topic"       # Trace topic evolution over time
+clausidian suggest              # Smart daily action suggestions
+clausidian context "note"       # Full context around a note
 
 # Maintenance
-obsidian-agent sync                 # Rebuild tag & graph indices
-obsidian-agent health               # Vault health score
-obsidian-agent stats                # Vault statistics overview
-obsidian-agent graph                # Generate Mermaid knowledge graph
+clausidian sync                 # Rebuild tag & graph indices
+clausidian health               # Vault health score
+clausidian stats                # Vault statistics overview
+clausidian graph                # Generate Mermaid knowledge graph
 ```

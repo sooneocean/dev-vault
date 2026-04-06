@@ -1,10 +1,18 @@
 ---
+status: archived
+title: dev-vault-product-version
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
+---
 title: "Dev Vault — Version Tracker"
 type: project
-tags: [version-tracking, product-iteration]
+tags: [version-tracking, product-iteration, project, active]
 created: "2026-03-30"
-updated: "2026-03-30"
-status: active
+updated: "2026-04-03"
+status: "archived"
 maturity: mature
 domain: project-specific
 summary: "Central version and iteration history tracker for Dev Vault"
@@ -42,11 +50,11 @@ Ordered by release date (newest first).
 
 ### Latest Iteration
 
-- [[0.1.0 — Iteration 2026-03-30|iterations/2026-03-30-v0.1.0-iteration]]
+- [[v1.1.0 — Iteration 2026-04-06|iterations/2026-04-06-v1.1.0-iteration]]
 
 ### Previous Iterations
 
-(None — initial release)
+- [[v1.0.0 — Iteration 2026-03-30|iterations/2026-03-30-v0.1.0-iteration]]
 
 ## Next Planned Features
 

@@ -1,9 +1,9 @@
 ---
 title: "DEXG16 AI 程式設計工具"
 type: resource
-tags: [claude-code]
+tags: [claude-code, reference, knowledge-management]
 created: "2026-03-28"
-updated: "2026-03-29"
+updated: "2026-04-03"
 status: active
 subtype: catalog
 maturity: mature

@@ -2,9 +2,9 @@
 title: "本地 LLM 任務路由規則"
 type: resource
 subtype: config
-tags: [llm, mcp, task-routing, ollama]
+tags: [llm, mcp, task-routing, ollama, reference, knowledge-management]
 created: "2026-03-30"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 maturity: growing
 domain: ai-engineering

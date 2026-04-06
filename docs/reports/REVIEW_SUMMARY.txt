@@ -1,0 +1,113 @@
+KIERAN-PYTHON CODE REVIEW SUMMARY
+Watermark Removal Pipeline (5 files, 2497 LOC added)
+Date: 2026-03-30
+
+CRITICAL FINDINGS (Must Fix)
+============================
+
+1. DEPRECATED TYPE HINTS (P1)
+   Files: pipeline.py, inpaint_executor.py
+   Issue: Using typing.Dict, typing.List instead of dict, list (PEP 585)
+   Impact: Code is outdated and will break in Python 3.14+
+   Fix: Migrate to lowercase generics (safe_auto)
+
+2. SCATTERED IMPORTS (P1) 
+   File: pipeline.py
+   Issue: import time, import cv2, import numpy, import shutil appear inside methods
+   Impact: Slow startup, unconventional, suggests incomplete refactoring
+   Fix: Move all imports to module-level (safe_auto)
+
+3. UNUSED IMPORT (P1)
+   File: video_encoder.py
+   Issue: from typing import Optional imported but never used
+   Impact: Dead code, indicates incomplete cleanup
+   Fix: Remove unused import (safe_auto)
+
+4. MISSING TYPE HINTS (P1)
+   File: pipeline.py line 204
+   Issue: _region_from_mask(mask) parameter untyped, should be np.ndarray
+   Impact: Type checker cannot validate, reduces code safety
+   Fix: Add type hint (safe_auto)
+
+IMPORTANT FINDINGS (Should Fix)
+===============================
+
+5. HARD-CODED VIDEO DIMENSIONS (P2)
+   File: pipeline.py lines 164-165
+   Issue: Width=1920, height=1080 hard-coded, should come from frame metadata
+   Impact: Breaks for non-1080p videos, reduces reusability
+   Fix: Extract from frame or add to ProcessConfig (manual)
+
+6. HARD-CODED CROP PADDING (P2)
+   File: pipeline.py lines 231-239
+   Issue: scale_factor=2.0, pad_*=362 are magic numbers
+   Impact: Not derived from target_inpaint_size, fragile
+   Fix: Compute from config and bbox (manual)
+
+7. MISSING CONFIG TIMEOUT CONTRACT (P2)
+   File: inpaint_executor.py line 97
+   Issue: hasattr(config, 'timeout') check suggests incomplete type design
+   Impact: Config hierarchy is confused (InpaintConfig vs ProcessConfig)
+   Fix: Add timeout to InpaintConfig or pass separately (manual)
+
+8. INEFFICIENT FEATHER MASK (P2)
+   File: stitch_handler.py lines 154-168
+   Issue: Nested Python loops for distance mask (O(H*W) slow)
+   Impact: Performance bottleneck on each stitch operation
+   Fix: Vectorize with NumPy (safe_auto)
+
+9. SILENT BUG: FPS OVERRIDE (P2)
+   File: video_encoder.py line 160
+   Issue: encode_from_config ignores config.output_fps, hard-codes 30.0
+   Impact: Output video always 30 FPS regardless of config
+   Fix: Use config.output_fps (safe_auto, confidence 100%)
+
+MINOR FINDINGS (Consider Fixing)
+================================
+
+10. LOOSE RETURN TYPE (P3)
+    File: pipeline.py line 37
+    Issue: run() returns Dict[str, Any] instead of TypedDict
+    Impact: Type checker cannot validate return fields
+    Fix: Define PipelineResult TypedDict (manual)
+
+11. EXCEPTION CONTEXT LOSS (P3)
+    File: inpaint_executor.py lines 177, 184
+    Issue: asyncio.gather with return_exceptions=False loses partial progress
+    Impact: Hard to debug which crop failed
+    Fix: Log frame indices with exceptions (manual)
+
+12. UNUSED IMPORT (P3)
+    File: stitch_handler.py line 8
+    Issue: Frame imported but never used; methods take raw np.ndarray
+    Impact: Confusing API contract
+    Fix: Remove import or accept Frame objects (manual)
+
+RESIDUAL RISKS
+==============
+
+Type Safety:     No mypy/strict type checking in CI detected
+Async Safety:    Sync I/O (cv2, shutil) in async context; needs executor wraps
+Error Messages:  Generic; operators can't distinguish config vs transient failures
+Configuration:   Validates ranges but not file existence or cross-field dependencies
+
+TESTING GAPS
+============
+
+- No mypy runs in CI
+- Missing edge case tests: boundary feathering, empty crops, missing dirs
+- No async cancellation/graceful shutdown tests
+- No end-to-end tests with real video
+
+SEVERITY BREAKDOWN
+==================
+
+P0 (Critical):    0
+P1 (High):        4 items (deprecated types, scattered imports)
+P2 (Medium):      5 items (hard-coded values, config mismatches)
+P3 (Low):         3 items (loose types, error context)
+
+Actionable Summary:
+- 7 items can be auto-fixed (safe_auto)
+- 5 items require manual review
+- Estimated effort: 2-3 hours for full remediation
