@@ -1,13 +1,14 @@
 ---
 title: LLM模型完整對比2026｜GPT-4o vs Claude vs Gemini vs Llama最強評測
-type: project
-tags: [project, active]
+type: resource
+subtype: article
+tags: [resource, article, knowledge-management]
 created: 2026-04-03
-updated: "2026-04-03"
+updated: "2026-04-06"
 status: active
 maturity: growing
 domain: knowledge-management
-summary: true
+summary: ""
 ---
 
 # LLM模型完整對比2026｜GPT-4o vs Claude vs Gemini vs Llama最強評測

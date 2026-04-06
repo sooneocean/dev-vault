@@ -1,10 +1,13 @@
 ---
 title: "研究掃描 {{DATE}}"
 type: resource
+subtype: research
 tags: [research-scan, auto-generated, {{TOPIC_TAGS}}]
 created: "{{DATE}}"
 updated: "{{DATE}}"
 status: active
+maturity: seed
+domain: ai-engineering
 summary: "自動掃描發現 {{COUNT}} 個新工具/論文"
 related: ["[[tech-research-squad]]"]
 ---

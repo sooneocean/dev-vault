@@ -1,13 +1,14 @@
 ---
 title: AI 編程助手工作流優化指南 — GitHub Copilot vs Claude Code vs Cursor
-type: project
-tags: [project, active]
+type: resource
+subtype: article
+tags: [resource, article, knowledge-management]
 created: 2026-04-03
-updated: "2026-04-04"
+updated: "2026-04-06"
 status: active
 maturity: growing
 domain: knowledge-management
-summary: true
+summary: ""
 ---
 
 # AI 編程助手工作流優化指南 — GitHub Copilot vs Claude Code vs Cursor

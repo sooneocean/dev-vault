@@ -267,18 +267,18 @@ TF-IDF weighted (rare tags + content overlap score higher):
 | [[research-update-mode]] | [[writing-methodology-framework]] | 7 | brainstorm, future, ai-engineering |
 | [[cli-update-fields-flag]] | [[pretext-csm-tui-layout]] | 6.9 | brainstorm, future, ai-engineering |
 | [[cli-update-fields-flag]] | [[writing-methodology-framework]] | 6.9 | brainstorm, future, ai-engineering |
+| [[article-ai-coding-assistants-2026]] | [[llm-model-comparison-2026]] | 6.4 | resource, article, knowledge-management |
+| [[article-ai-coding-assistants-2026]] | [[prompt-engineering-complete-guide]] | 6.3 | resource, article, knowledge-management |
+| [[llm-model-comparison-2026]] | [[prompt-engineering-complete-guide]] | 6.3 | resource, article, knowledge-management |
 | [[claude-session-manager]] | [[csm-architecture]] | 5.1 | claude-code, python |
-| [[harness-engineering-research]] | [[improvement-2026-03-30-002]] | 5 | claude-code, hooks, reference, knowledge-management |
+| [[harness-engineering-research]] | [[improvement-2026-03-30-002]] | 4.9 | claude-code, hooks, reference, knowledge-management |
 | [[dexg16-machine-specs]] | [[local-llm-deployment]] | 4.4 | hardware, reference, knowledge-management |
 | [[harness-engineering-research]] | [[research-mcp-model-context-protocol-2026-03-29]] | 3.9 | mcp, reference, knowledge-management |
 | [[compound-engineering-plugin]] | [[github-發布流程]] | 3.8 | workflow, reference, knowledge-management |
 | [[compound-engineering-research]] | [[github-發布流程]] | 3.8 | workflow, reference, knowledge-management |
 | [[harness-engineering-research]] | [[local-llm-task-routing]] | 3.8 | mcp, reference, knowledge-management |
 | [[local-llm-task-routing]] | [[research-mcp-model-context-protocol-2026-03-29]] | 3.8 | mcp, reference, knowledge-management |
-| [[context-engineering-research]] | [[dexg16-ai-stack]] | 3.4 | llm, reference, knowledge-management |
-| [[context-engineering-research]] | [[local-llm-task-routing]] | 3.4 | llm, reference, knowledge-management |
-| [[dexg16-ai-stack]] | [[prompt-engineering-research]] | 3.4 | llm, reference, knowledge-management |
-| [[local-llm-task-routing]] | [[prompt-engineering-research]] | 3.4 | llm, reference, knowledge-management |
+| [[QUICK-START-GUIDE]] | [[yololab-optimization-report]] | 3.7 | project, active |
 
 ## Clusters
 

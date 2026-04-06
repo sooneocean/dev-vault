@@ -1,13 +1,14 @@
 ---
 title: 提示詞工程完全指南｜Chain-of-Thought × Few-Shot × 角色扮演最強技巧
-type: project
-tags: [project, active]
+type: resource
+subtype: article
+tags: [resource, article, knowledge-management]
 created: 2026-04-03
-updated: "2026-04-04"
+updated: "2026-04-06"
 status: active
 maturity: growing
 domain: knowledge-management
-summary: true
+summary: ""
 ---
 
 # 提示詞工程完全指南｜Chain-of-Thought × Few-Shot × 角色扮演最強技巧

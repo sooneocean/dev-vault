@@ -17,9 +17,6 @@ updated: 2026-04-06
 - [[verification-checklist]] — (no summary)
 - [[yololab-optimization-report]] — YOLO LAB 網站優化審計報告 — 23 個外掛、Gzip、快取、SEO、Core Web Vitals 完整優化方案
 - [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統 — 色彩調色板、排版規範、圖標系統、互動模式標準化
-- [[article-ai-coding-assistants-2026]] — true
-- [[llm-model-comparison-2026]] — true
-- [[prompt-engineering-complete-guide]] — true
 
 ### agent-framework
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
@@ -41,6 +38,11 @@ updated: 2026-04-06
 ### architecture
 - [[csm-architecture]] — Claude Session Manager 技術架構 — 程序模型、串流、持久化
 - [[csm-key-design-decisions]] — 架構決策紀錄：不用互動式子程序、短命程序、stream-json 解析
+
+### article
+- [[article-ai-coding-assistants-2026]] — (no summary)
+- [[llm-model-comparison-2026]] — (no summary)
+- [[prompt-engineering-complete-guide]] — (no summary)
 
 ### auto-generated
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
@@ -208,6 +210,7 @@ updated: 2026-04-06
 - [[dev-vault-status]] — Dev Vault 開發知識庫 — PARA 結構的開源知識管理系統，支援持續自迭代
 - [[2026-04-03-classical-rock-fusion-article]] — 探討古典樂與搖滾音樂跨界合作的藝術價值，從台灣樂團四分衛、拍謝少年到國際大師Metallica的實例分析
 - [[architecture-lessons]] — Critical lessons about Stop hooks, global config safety, and slash command nature
+- [[article-ai-coding-assistants-2026]] — (no summary)
 - [[benchmark-first-rule]] — Always benchmark before planning — local LLM estimates were 5-10x off from reality
 - [[claude-agent-sdk-api]] — Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility
 - [[claude-code-configuration]] — Claude Code 的設定、外掛、Hook、MCP 伺服器與專案層級配置
@@ -234,9 +237,11 @@ updated: 2026-04-06
 - [[improvement-2026-03-30-001]] — AGENT.md 的 Rules for Manual Edits 缺少 subtype/maturity/domain/relation_map 欄位說明，CLI 範例也只列基礎命令
 - [[improvement-2026-03-30-002]] — obsidian-agent journal 使用 UTC 時區，午夜後仍產出前一天的 journal，需設定 OA_TIMEZONE 或在 Stop hook 加 TZ
 - [[improvement-2026-03-30-003]] — CONVENTIONS.md 的 Using the CLI 段落只列 7 個基礎命令，缺少 patch/update/health/stale/suggest 等 v0.7.0 命令
+- [[llm-model-comparison-2026]] — (no summary)
 - [[local-llm-deployment]] — RTX 4090 Laptop 16GB VRAM 上的本地模型部署、MCP 整合、任務路由決策
 - [[local-llm-task-routing]] — RTX 4090 Laptop 上本地模型任務路由決策矩陣 — 定義哪些任務走本地、哪些走 Claude API
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
+- [[prompt-engineering-complete-guide]] — (no summary)
 - [[prompt-engineering-research]] — Prompt Engineering 深度研究 — Claude 特有技巧、XML 結構化、CoT/Few-shot 模式、CLAUDE.md 指令最佳化、Agent 工作流提示、反模式與 Opus/Sonnet 差異。
 - [[research-mcp-model-context-protocol-2026-03-29]] — Tech research — 5 repos, 10 issues, 5 emerging
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
@@ -329,9 +334,6 @@ updated: 2026-04-06
 - [[verification-checklist]] — (no summary)
 - [[yololab-optimization-report]] — YOLO LAB 網站優化審計報告 — 23 個外掛、Gzip、快取、SEO、Core Web Vitals 完整優化方案
 - [[YOLO_LAB_Design_System]] — YOLO LAB 2026 設計系統 — 色彩調色板、排版規範、圖標系統、互動模式標準化
-- [[article-ai-coding-assistants-2026]] — true
-- [[llm-model-comparison-2026]] — true
-- [[prompt-engineering-complete-guide]] — true
 
 ### prompt-engineering
 - [[tech-research-squad]] — true
@@ -390,6 +392,11 @@ updated: 2026-04-06
 ### research-scan
 - [[research-scan-2026-03-30]] — 自動掃描發現 0 個新工具/論文
 
+### resource
+- [[article-ai-coding-assistants-2026]] — (no summary)
+- [[llm-model-comparison-2026]] — (no summary)
+- [[prompt-engineering-complete-guide]] — (no summary)
+
 ### rock-music
 - [[2026-04-03-classical-rock-fusion-article]] — 探討古典樂與搖滾音樂跨界合作的藝術價值，從台灣樂團四分衛、拍謝少年到國際大師Metallica的實例分析
 
@@ -437,11 +444,11 @@ updated: 2026-04-06
 
 | Tag | Count |
 |-----|-------|
-| knowledge-management | 49 |
+| knowledge-management | 52 |
 | reference | 38 |
 | claude-code | 15 |
-| project | 13 |
-| active | 13 |
+| project | 10 |
+| active | 10 |
 | daily | 10 |
 | log | 10 |
 | auto-memory-migration | 6 |
@@ -456,6 +463,8 @@ updated: 2026-04-06
 | harness-engineering | 3 |
 | compound-engineering | 3 |
 | collaboration | 3 |
+| resource | 3 |
+| article | 3 |
 | plugins | 3 |
 | workflow | 3 |
 | mcp | 3 |
