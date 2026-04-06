@@ -7,7 +7,7 @@ from pathlib import Path
 
 # Paths
 VAULT_ROOT = Path(r"C:\DEX_data\Claude Code DEV")
-PIPELINE_ROOT = VAULT_ROOT / "projects" / "tools" / "research-pipeline"
+PIPELINE_ROOT = VAULT_ROOT / "projects" / "_tools" / "research-pipeline"
 STATE_DIR = PIPELINE_ROOT / "state"
 PROMPTS_DIR = PIPELINE_ROOT / "prompts"
 
@@ -74,7 +74,9 @@ MCP_SERVERS = {
 }
 
 # Agent Memory Configuration
-AGENT_MEMORY_ENABLED = os.getenv("AGENT_MEMORY_ENABLED", "true").lower() == "true"
+# NOTE: agent-memory MCP is disabled in .mcp.json — these settings have no effect
+# unless the MCP is re-enabled. Pipeline falls back to WebSearch.
+AGENT_MEMORY_ENABLED = os.getenv("AGENT_MEMORY_ENABLED", "false").lower() == "true"
 AGENT_MEMORY_USE_QUERY_MEMORY = os.getenv("AGENT_MEMORY_USE_QUERY_MEMORY", "true").lower() == "true"
 AGENT_MEMORY_API_URL = os.getenv("AGENT_MEMORY_API_URL", "http://localhost:8765")
 AGENT_MEMORY_HTTP_SERVER_PORT = int(os.getenv("AGENT_MEMORY_HTTP_SERVER_PORT", "8765"))
