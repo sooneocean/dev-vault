@@ -56,7 +56,7 @@ fi
 APPEND_LINE="- [$TS] $SUMMARY"
 
 # Ensure today's journal entry exists
-obsidian-agent journal --vault "$VAULT" &>/dev/null || true
+clausidian journal --vault "$VAULT" &>/dev/null || true
 
 # Append to Records section
-obsidian-agent patch "$TODAY" --heading "Records" --append "$APPEND_LINE" --vault "$VAULT" &>/dev/null || true
+clausidian patch "$TODAY" --heading "Records" --append "$APPEND_LINE" --vault "$VAULT" &>/dev/null || true
