@@ -9,6 +9,7 @@
  * Usage:
  *   node scripts/windows-nodejs-rewriter.js --query "SEO自動化" --heading "SEO改寫版" --mode draft
  *   node scripts/windows-nodejs-rewriter.js --query "SEO自動化" --heading "摘要" --mode replace
+ *   node scripts/windows-nodejs-rewriter.js --query "SEO自動化" --heading "Agent更新區" --mode draft --dry-run
  *
  * Required env vars:
  *   OLR_API_KEY   - Obsidian Local REST API bearer token
@@ -20,10 +21,8 @@
  *   AGENT_NAME    - default: dex-rewriter
  */
 
-const { execSync, spawnSync } = require("node:child_process");
+const { spawnSync } = require("node:child_process");
 const https = require("node:https");
-const { existsSync } = require("node:fs");
-const { join } = require("node:path");
 
 // ── CLI args ──────────────────────────────────────────────────────────────────
 
@@ -34,6 +33,8 @@ if (!args.heading) fail("缺少 --heading");
 
 // ── Config ────────────────────────────────────────────────────────────────────
 
+const DRY_RUN = args.dryRun === true;
+
 const CONFIG = {
   apiKey:    process.env.OLR_API_KEY || "",
   baseUrl:   process.env.OLR_BASE_URL || "https://127.0.0.1:27124",
@@ -42,7 +43,7 @@ const CONFIG = {
   llmCmd:    process.env.LLM_COMMAND || "",
 };
 
-if (!CONFIG.apiKey)  fail("缺少環境變數 OLR_API_KEY");
+if (!DRY_RUN && !CONFIG.apiKey)  fail("缺少環境變數 OLR_API_KEY（dry-run 模式可省略）");
 if (!CONFIG.llmCmd)  fail("缺少環境變數 LLM_COMMAND");
 
 const MODE           = args.mode || "draft";
@@ -54,41 +55,42 @@ const RISK_POLICY = {
   machineWritableDefault: ["Agent更新區", "摘要", "SEO改寫版", "下一步"],
 };
 
-// ── Resolve clausidian binary (mirrors scripts/vlt.mjs:487-497) ──────────────
+// ── Resolve clausidian binary ─────────────────────────────────────────────────
+// npm bin -g was removed in npm 9+; use npm root -g to derive the bin path.
+// On Windows, spawnSync without shell:true can't resolve .cmd wrappers, so we
+// use shell:true throughout clausidian invocations instead of a bare binary path.
 
-function clausidianBin() {
-  try {
-    const npmBin = execSync("npm bin -g", {
-      encoding: "utf8",
-      stdio: ["pipe", "pipe", "pipe"],
-    }).trim();
-    const candidate = join(npmBin, "clausidian");
-    if (existsSync(candidate)) return candidate;
-  } catch { /* fall through */ }
-  return "clausidian"; // rely on PATH
-}
-
-const CLAUSIDIAN_BIN = clausidianBin();
+const CLAUSIDIAN_BIN = "clausidian"; // resolved via PATH with shell:true
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
+  if (DRY_RUN) console.log("[dry-run] 不會呼叫 Obsidian REST API，不會寫入任何筆記");
+
   // 1. Search for target note
   const notePath = searchNotePath(args.query);
   console.log(`[1/7] 目標筆記：${notePath}`);
 
   // 2. Read full note and validate permissions
-  const fullNote = await getNote(notePath);
+  const fullNote = DRY_RUN
+    ? `---\ntitle: ${args.query}\n---\n\n## ${TARGET_HEADING}\n(dry-run 佔位內容)\n`
+    : await getNote(notePath);
   const frontmatter = parseFrontmatter(fullNote);
   validateWritePermission(frontmatter, TARGET_HEADING, MODE);
   console.log(`[2/7] 已讀取筆記，權限驗證通過`);
 
   // 3. Verify target heading exists via document-map
-  await verifyHeadingExists(notePath, TARGET_HEADING);
-  console.log(`[3/7] heading「${TARGET_HEADING}」確認存在`);
+  if (DRY_RUN) {
+    console.log(`[3/7] [dry-run] 跳過 document-map 驗證`);
+  } else {
+    await verifyHeadingExists(notePath, TARGET_HEADING);
+    console.log(`[3/7] heading「${TARGET_HEADING}」確認存在`);
+  }
 
   // 4. Read current section content
-  const currentSection = await getHeading(notePath, TARGET_HEADING).catch(() => "");
+  const currentSection = DRY_RUN
+    ? "(dry-run 佔位)"
+    : await getHeading(notePath, TARGET_HEADING).catch(() => "");
   console.log(`[4/7] 已讀取 heading 內容（${currentSection.length} chars）`);
 
   // 5. Generate rewrite via LLM
@@ -109,11 +111,25 @@ async function main() {
   const finalMode   = chooseMode({ requestedMode: MODE, confidence });
   console.log(`[6/7] 寫入模式：${finalMode}，confidence=${confidence}`);
 
-  await patchHeading(notePath, TARGET_HEADING, finalMode === "append" ? "append" : "replace", rewritten);
-  console.log(`[6/7] 已寫入 heading：${TARGET_HEADING}`);
+  if (DRY_RUN) {
+    console.log(`[6/7] [dry-run] 跳過 PATCH heading。預覽內容：`);
+    console.log("---");
+    console.log(rewritten);
+    console.log("---");
+  } else {
+    await patchHeading(notePath, TARGET_HEADING, finalMode === "append" ? "append" : "replace", rewritten);
+    console.log(`[6/7] 已寫入 heading：${TARGET_HEADING}`);
+  }
 
   // 7. Update frontmatter + append Agent Log
   const now = new Date().toISOString();
+
+  if (DRY_RUN) {
+    console.log(`[7/7] [dry-run] 跳過 frontmatter/Agent Log 寫入`);
+    console.log(`完成（dry-run）`);
+    return;
+  }
+
   await patchFrontmatter(notePath, "updated",    now);
   await patchFrontmatter(notePath, "agent",      CONFIG.agentName);
   await patchFrontmatter(notePath, "confidence", confidence);
@@ -142,6 +158,7 @@ async function main() {
 function searchNotePath(query) {
   const result = spawnSync(CLAUSIDIAN_BIN, ["search", query, "--json"], {
     encoding: "utf8",
+    shell:    true,
     stdio:    ["pipe", "pipe", "pipe"],
   });
 
@@ -444,6 +461,7 @@ function parseArgs(argv) {
     if (key === "--query")   { out.query   = val; i++; }
     if (key === "--heading") { out.heading = val; i++; }
     if (key === "--mode")    { out.mode    = val; i++; }
+    if (key === "--dry-run") { out.dryRun  = true; }
   }
   return out;
 }
