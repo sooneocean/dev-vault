@@ -3,7 +3,7 @@ title: "Dev Vault Status"
 type: project
 tags: [knowledge-management, auto-memory-migration, project, active]
 created: "2026-03-30"
-updated: "2026-04-06"
+updated: "2026-04-06T02"
 status: active
 maturity: growing
 domain: "knowledge-management"
@@ -39,7 +39,7 @@ Open-source developer knowledge base (PARA structure) with self-iteration workfl
 
 ## TODO
 
-- [ ] CSM (Claude Session Manager): flagged low momentum, needs development push
+- [x] CSM (Claude Session Manager): v0.21.0 complete — 150+ tests, full TUI. Old duplicate dir removed, `claude-session-manager-new/` is canonical
 - [ ] obsidian-agent PR #1: OPEN/MERGEABLE at redredchen01/obsidian-agent, waiting upstream review
 - [ ] Deep research: Prompt Engineering best practices
 - [ ] Plan 003: LLM research pipeline (11 units, 4 phases) — cleaned, local LLM content split out
