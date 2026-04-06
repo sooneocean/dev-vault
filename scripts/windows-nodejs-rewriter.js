@@ -377,6 +377,16 @@ function encodePath(vaultRelPath) {
   return vaultRelPath.split("/").map(encodeURIComponent).join("/");
 }
 
+/**
+ * Build the heading Target value required by Obsidian Local REST API 3.x.
+ * Format: "NoteName::HeadingText"  (note name without .md extension)
+ * This matches the format returned by document-map headings.
+ */
+function headingTarget(vaultRelPath, heading) {
+  const noteName = vaultRelPath.split("/").pop().replace(/\.md$/i, "");
+  return `${noteName}::${heading}`;
+}
+
 async function getNote(vaultRelPath) {
   return apiRequest("GET", `/vault/${encodePath(vaultRelPath)}`);
 }
@@ -396,12 +406,16 @@ async function getDocumentMap(vaultRelPath) {
 
 async function verifyHeadingExists(vaultRelPath, heading) {
   const map = await getDocumentMap(vaultRelPath);
-  // document-map returns {headings: [{heading: string, level: number}]}
-  const headings = (map.headings || []).map((h) => (h.heading || "").trim());
-  if (!headings.includes(heading)) {
+  // document-map returns {headings: ["NoteName::HeadingName", ...]}
+  // Strip the "NoteName::" prefix to get bare heading text.
+  const headingNames = (map.headings || []).map((h) => {
+    const sep = h.indexOf("::");
+    return sep >= 0 ? h.slice(sep + 2) : h;
+  });
+  if (!headingNames.includes(heading)) {
     fail(
       `heading「${heading}」不存在於筆記中。` +
-      `可用 heading：${headings.join("、") || "(無)"}。` +
+      `可用 heading：${headingNames.join("、") || "(無)"}。` +
       `請確認 --heading 參數拼寫正確。`
     );
   }
@@ -413,7 +427,7 @@ async function getHeading(vaultRelPath, heading) {
     `/vault/${encodePath(vaultRelPath)}`,
     {
       "Target-Type": "heading",
-      "Target":       encodeURIComponent(heading),
+      "Target":      headingTarget(vaultRelPath, heading),
     }
   );
 }
@@ -422,8 +436,8 @@ async function patchHeading(vaultRelPath, heading, operation, content, opts = {}
   const headers = {
     "Operation":    operation,
     "Target-Type":  "heading",
-    "Target":       encodeURIComponent(heading),
-    "Content-Type": "text/markdown; charset=utf-8",
+    "Target":       headingTarget(vaultRelPath, heading),
+    "Content-Type": "text/markdown",
   };
   if (opts.createIfMissing) {
     headers["Create-Target-If-Missing"] = "true";
