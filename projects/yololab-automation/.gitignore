@@ -1,0 +1,119 @@
+# YOLO LAB 自動化配置 - Git 忽略規則
+
+# 🔐 安全性：不提交敏感信息
+config/credentials.json
+config/credentials.*.json
+.env
+.env.local
+*.key
+*.pem
+*.pfx
+
+# 📝 應用密碼和認證令牌
+app-password.txt
+WP_PASS
+WP_USER
+
+# 📊 執行日誌和臨時文件
+.logs/*.log
+.logs/temp/
+*.tmp
+/tmp/
+
+# 🔍 IDE 和編輯器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# 📦 依賴和構建
+node_modules/
+vendor/
+.composer/
+
+# 🏃 執行時生成的文件
+performance-*.json
+baseline-*.txt
+*.heapdump
+
+# 🎥 大型媒體文件（如有）
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# 📋 個人備註（本地開發）
+PERSONAL-NOTES.md
+TODO.md
+.scratch/
+
+# 💾 數據庫備份
+*.sql
+*.sql.gz
+*.dump
+
+# 🐛 調試文件
+debug.log
+error.log
+access.log
+
+# 🔧 OS 特定
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
+# 📁 備份和存檔
+*.bak
+*.backup
+*.old
+*.archive
+*.tar.gz
+*.zip
+*.rar
+
+# 🚫 被廢棄或過期的腳本
+scripts/*.old
+scripts/*.deprecated
+scripts/*.backup
+
+# 🔐 環境變數文件
+.env*
+!.env.example
+
+---
+
+# 📌 允許提交的重要文件
+# （這些文件 SHOULD 提交）
+
+# 必須提交：
+# ✅ scripts/optimize.sh
+# ✅ scripts/optimize.js
+# ✅ scripts/optimize.php
+# ✅ README.md
+# ✅ CONFIG-MANAGEMENT.md
+# ✅ VERSION.md
+# ✅ docs/*.md
+# ✅ .gitignore
+# ✅ config/site-settings.json
+# ✅ config/plugin-status.json
+
+# 條件提交（謹慎）：
+# ⚠️  .logs/EXECUTION-LOG.md （包含時間戳，但保留歷史有用）
+# ⚠️  config/*.example.md （僅示例，不含敏感信息）
+
+---
+
+# 💡 使用說明
+
+# 如需強制提交被忽略的文件：
+# git add -f <filename>
+
+# 檢查哪些文件被忽略：
+# git check-ignore -v <filename>
+
+# 列出所有將被提交的文件：
+# git status --short

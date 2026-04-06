@@ -1,3 +1,15 @@
+---
+title: Proposal Engine Integration Example
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Proposal Engine Integration Example
 
 This document shows how to integrate the proposal engine with GitHub API and vault context to create the `/iterate propose` command.

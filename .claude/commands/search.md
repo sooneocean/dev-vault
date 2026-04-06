@@ -1,8 +1,20 @@
+---
+title: Untitled
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 Search notes in the knowledge base.
 
 Usage: `<keyword> [--type TYPE] [--tag TAG] [--status STATUS]`
 
-Run: `obsidian-agent search "<keyword>" [--type TYPE] [--tag TAG] [--status STATUS]`
+Run: `clausidian search "<keyword>" [--type TYPE] [--tag TAG] [--status STATUS]`
 
 If the CLI is not available:
 1. Parse search parameters

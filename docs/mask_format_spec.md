@@ -1,3 +1,15 @@
+---
+title: Mask Format Specification
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Mask Format Specification
 
 This document defines the formats for specifying watermark regions in the Dynamic Watermark Removal System.

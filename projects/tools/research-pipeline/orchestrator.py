@@ -11,6 +11,7 @@ from pathlib import Path
 
 from claude_agent_sdk import AgentDefinition, ClaudeAgentOptions, query
 
+from agent_memory import AgentMemoryClient
 from config import (
     AGENT_MODELS,
     DEDUP_EXPIRY,
@@ -178,6 +179,14 @@ async def run_pipeline(mode: str = "quick-scan", dry_run: bool = False) -> None:
     run_id = f"{date.today().isoformat()}-{uuid.uuid4().hex[:8]}"
     state = PipelineRunState(run_id=run_id, mode=mode)
 
+    # Initialize memory client for evaluation storage
+    try:
+        memory_client = AgentMemoryClient()
+        print(f"Agent memory initialized for evaluation storage")
+    except Exception as e:
+        print(f"Warning: Could not initialize agent memory: {e}")
+        memory_client = None
+
     if not acquire_lock():
         print("ERROR: Pipeline lock is held by another run. Exiting.")
         sys.exit(1)
@@ -303,6 +312,11 @@ async def run_pipeline(mode: str = "quick-scan", dry_run: bool = False) -> None:
         raise
     finally:
         release_lock()
+        if memory_client:
+            try:
+                await memory_client.close()
+            except Exception as e:
+                print(f"Warning: Error closing memory client: {e}")
 
 
 async def run_scanners(mode: str) -> list[ScanResult]:

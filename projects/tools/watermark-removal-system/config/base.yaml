@@ -1,10 +1,12 @@
 # Base configuration for watermark removal pipeline
+# Phase 1 (MVP) + Phase 2 (Advanced) parameters
 # Copy this file and customize for your project
 
 # Input/Output
 video_path: ./input/video.mp4
 mask_path: ./input/watermark_mask.png
 output_dir: ./output
+checkpoint_dir: ./checkpoints
 
 # Inpaint model parameters
 inpaint:
@@ -21,9 +23,30 @@ inpaint:
 context_padding: 64
 target_inpaint_size: 1024
 
-# Postprocessing
+# Postprocessing (Phase 1)
 blend_feather_width: 32
 temporal_smooth_alpha: 0.0
+
+# Postprocessing (Phase 2 - Advanced)
+# Temporal smoothing
+use_adaptive_temporal_smoothing: false
+adaptive_motion_threshold: 0.05
+
+# Poisson blending (advanced edge blending)
+use_poisson_blending: false
+poisson_max_iterations: 100
+poisson_tolerance: 0.01
+
+# Watermark tracking (dynamic watermarks)
+use_watermark_tracker: false
+yolo_model_path: null
+yolo_confidence_threshold: 0.5
+tracker_sparse_interval: 1
+tracker_smoothing_factor: 0.3
+
+# Pipeline resumption
+use_checkpoints: false
+resume_from_checkpoint: false
 
 # Execution
 batch_size: 4

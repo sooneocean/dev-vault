@@ -1,0 +1,113 @@
+{
+  "total_no_tags": 326,
+  "total_notes": 379,
+  "recommendations": [
+    {
+      "file": "Unit4-Gospel-Recruitment-Plan",
+      "type": "project",
+      "suggested_tags": [
+        "project",
+        "active"
+      ],
+      "suggested_domain": "project-specific"
+    },
+    {
+      "file": "2026-03-28",
+      "type": "journal",
+      "suggested_tags": [
+        "daily",
+        "log"
+      ],
+      "suggested_domain": "knowledge-management"
+    },
+    {
+      "file": "2026-03-29",
+      "type": "journal",
+      "suggested_tags": [
+        "daily",
+        "log"
+      ],
+      "suggested_domain": "knowledge-management"
+    },
+    {
+      "file": "2026-03-30",
+      "type": "journal",
+      "suggested_tags": [
+        "daily",
+        "log"
+      ],
+      "suggested_domain": "knowledge-management"
+    },
+    {
+      "file": "batch-update-page6",
+      "type": "project",
+      "suggested_tags": [
+        "project",
+        "active"
+      ],
+      "suggested_domain": "project-specific"
+    },
+    {
+      "file": "BATCH_UPDATE_STRATEGY",
+      "type": "project",
+      "suggested_tags": [
+        "project",
+        "active"
+      ],
+      "suggested_domain": "project-specific"
+    },
+    {
+      "file": "COMPLETION_REPORT_TEMPLATE",
+      "type": "project",
+      "suggested_tags": [
+        "project",
+        "active"
+      ],
+      "suggested_domain": "project-specific"
+    },
+    {
+      "file": "EXECUTION_STATUS",
+      "type": "project",
+      "suggested_tags": [
+        "project",
+        "active"
+      ],
+      "suggested_domain": "project-specific"
+    },
+    {
+      "file": "FINAL-CHECKLIST",
+      "type": "project",
+      "suggested_tags": [
+        "project",
+        "active"
+      ],
+      "suggested_domain": "project-specific"
+    },
+    {
+      "file": "IMPLEMENTATION-ROADMAP",
+      "type": "project",
+      "suggested_tags": [
+        "project",
+        "active"
+      ],
+      "suggested_domain": "project-specific"
+    }
+  ],
+  "batch_operations": [
+    {
+      "operation": "batch_tag",
+      "type": "project",
+      "add": "project,active"
+    },
+    {
+      "operation": "batch_tag",
+      "type": "resource",
+      "add": "reference"
+    },
+    {
+      "operation": "batch_tag",
+      "type": "idea",
+      "add": "brainstorm,future"
+    }
+  ]
+}

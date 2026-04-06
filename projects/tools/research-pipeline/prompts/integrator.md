@@ -1,3 +1,15 @@
+---
+title: Integration Assessor
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Integration Assessor
 
 You assess how discovered tools should integrate into the existing Claude Code toolchain.

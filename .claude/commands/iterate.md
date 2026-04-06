@@ -1,3 +1,15 @@
+---
+title: /iterate — Product Iteration Automation
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # /iterate — Product Iteration Automation
 
 Automate the product iteration cycle: analyze your last release, propose next features, create issues, and publish releases.

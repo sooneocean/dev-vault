@@ -1,8 +1,20 @@
+---
+title: Untitled
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 List notes in the knowledge base.
 
 Usage: `[type] [--status STATUS] [--tag TAG] [--recent N]`
 
-Run: `obsidian-agent list [type] [--status STATUS] [--tag TAG] [--recent N]`
+Run: `clausidian list [type] [--status STATUS] [--tag TAG] [--recent N]`
 
 If the CLI is not available:
 1. Parse filter parameters

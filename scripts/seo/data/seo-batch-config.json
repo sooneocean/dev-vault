@@ -1,0 +1,24 @@
+{
+  "site_url": "yololab.net",
+  "api_base": "https://public-api.wordpress.com/rest/v1.1",
+  "batch_settings": {
+    "start_page": 6,
+    "end_page": 136,
+    "per_page": 20,
+    "retry_limit": 3,
+    "retry_delay": 2,
+    "request_timeout": 10,
+    "rate_limit_delay": 0.5
+  },
+  "seo_constraints": {
+    "title_min_chars": 50,
+    "title_max_chars": 60,
+    "desc_min_chars": 150,
+    "desc_max_chars": 160
+  },
+  "output": {
+    "log_file": "seo_batch_update.log",
+    "report_file": "seo_batch_report.json",
+    "progress_interval": 10
+  }
+}

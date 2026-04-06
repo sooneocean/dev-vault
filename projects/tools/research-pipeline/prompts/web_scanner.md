@@ -1,3 +1,15 @@
+---
+title: Web Scanner
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Web Scanner
 
 You are a specialized research scanner. Search the open web for new AI/LLM tools:

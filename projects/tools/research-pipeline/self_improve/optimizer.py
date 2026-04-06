@@ -3,15 +3,20 @@
 Monthly manual trigger. Requires:
   pip install "dspy>=2.5"
 
-Collects (evaluation_input, human_verdict) pairs from experience-metrics.json +
-manual verdict overrides, then optimizes the evaluator prompt using:
+Collects (evaluation_input, human_verdict) pairs from:
+1. Agent memory (evaluator:evaluation documents)
+2. Manual verdict overrides (JSONL file)
+
+Then optimizes the evaluator prompt using:
   1. BootstrapFewShot — selects best few-shot examples
   2. MIPROv2 — optimizes rubric weights and instructions (optional, ≥30 examples)
 """
 
 from __future__ import annotations
 
+import asyncio
 import json
+import logging
 import shutil
 import sys
 from datetime import datetime
@@ -19,7 +24,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from agent_memory import AgentMemoryClient
 from config import PIPELINE_ROOT, STATE_DIR
+
+logger = logging.getLogger(__name__)
 
 
 # Versioned prompt storage
@@ -29,30 +37,89 @@ MIN_EXAMPLES_BOOTSTRAP = 10
 MIN_EXAMPLES_MIPRO = 30
 
 
-def collect_training_data() -> list[dict]:
-    """Collect (input, verdict) pairs from evaluation results + human overrides.
+async def collect_training_data(memory_client: AgentMemoryClient | None = None) -> list[dict]:
+    """Collect (input, verdict) pairs from memory + manual overrides.
 
     Training data structure:
     {
         "scan_result": {...},     # raw scan result as context
         "eval_scores": [...],     # model's original scores
         "model_verdict": "...",   # model's verdict
-        "human_verdict": "...",   # human override (ground truth)
+        "human_verdict": "...",   # human override (ground truth, if available)
+        "source": "memory" | "jsonl"  # where this data came from
     }
+
+    Sources (in priority order):
+    1. JSONL file: verdict-overrides.jsonl (explicit human verdicts override memory)
+    2. Agent memory: evaluator:evaluation documents (raw evaluation results)
+
+    Args:
+        memory_client: Optional pre-initialized memory client. If None, creates a new one.
     """
-    data_file = TRAINING_DATA_DIR / "verdict-overrides.jsonl"
-    if not data_file.exists():
-        return []
-
     examples = []
-    for line in data_file.read_text(encoding="utf-8").strip().split("\n"):
-        if not line.strip():
-            continue
-        try:
-            examples.append(json.loads(line))
-        except json.JSONDecodeError:
-            continue
 
+    # Source 1: Memory-based evaluations
+    try:
+        # Use provided client or create a new one
+        should_close_client = False
+        if memory_client is None:
+            memory_client = AgentMemoryClient()
+            should_close_client = True
+
+        memory_docs = await memory_client.search(
+            query="evaluation verdict scores",
+            agent_id="evaluator",
+            top_k=100,
+        )
+
+        if should_close_client:
+            await memory_client.close()
+
+        for doc in memory_docs:
+            try:
+                # Parse stored evaluation result
+                eval_data = json.loads(doc.content)
+                scan_result = eval_data.get("scan_result", {})
+                scores = eval_data.get("scores", [])
+
+                # Create training example from memory
+                example = {
+                    "source": "memory",
+                    "scan_result": scan_result,
+                    "eval_scores": scores,
+                    "model_verdict": eval_data.get("verdict", "not_applicable"),
+                    "human_verdict": eval_data.get("verdict", "not_applicable"),  # Use model verdict as fallback
+                    "timestamp": doc.metadata.get("timestamp"),
+                    "doc_id": doc.doc_id,
+                }
+                examples.append(example)
+            except (json.JSONDecodeError, KeyError) as e:
+                logger.warning(f"Failed to parse memory document {doc.doc_id}: {e}")
+                continue
+
+    except Exception as e:
+        logger.warning(f"Failed to retrieve training data from memory: {e}")
+
+    # Source 2: JSONL file (human verdicts override memory)
+    data_file = TRAINING_DATA_DIR / "verdict-overrides.jsonl"
+    if data_file.exists():
+        jsonl_entries = []
+        for line in data_file.read_text(encoding="utf-8").strip().split("\n"):
+            if not line.strip():
+                continue
+            try:
+                entry = json.loads(line)
+                entry["source"] = "jsonl"
+                jsonl_entries.append(entry)
+            except json.JSONDecodeError:
+                continue
+
+        # Merge: JSONL entries with same URL override memory entries
+        override_urls = {e.get("tool_url") for e in jsonl_entries if e.get("tool_url")}
+        examples = [e for e in examples if e.get("scan_result", {}).get("url") not in override_urls]
+        examples.extend(jsonl_entries)
+
+    logger.info(f"Collected {len(examples)} training examples ({len([e for e in examples if e.get('source')=='memory'])} from memory, {len([e for e in examples if e.get('source')=='jsonl'])} from JSONL)")
     return examples
 
 
@@ -91,7 +158,7 @@ def _check_dspy() -> bool:
         return False
 
 
-def optimize_evaluator(
+async def optimize_evaluator(
     strategy: str = "bootstrap",  # "bootstrap" or "mipro"
     model: str = "ollama_chat/phi4-mini",
 ) -> Path | None:
@@ -111,7 +178,7 @@ def optimize_evaluator(
 
     import dspy
 
-    examples = collect_training_data()
+    examples = await collect_training_data()
     min_required = MIN_EXAMPLES_MIPRO if strategy == "mipro" else MIN_EXAMPLES_BOOTSTRAP
 
     if len(examples) < min_required:
@@ -300,20 +367,25 @@ def list_versions() -> list[dict]:
     return versions
 
 
-def training_data_stats() -> dict:
+async def training_data_stats() -> dict:
     """Return stats about available training data."""
-    examples = collect_training_data()
+    examples = await collect_training_data()
     if not examples:
         return {"total": 0, "ready_for_bootstrap": False, "ready_for_mipro": False}
 
     verdicts = {}
+    sources = {}
     for ex in examples:
         v = ex.get("human_verdict", "unknown")
         verdicts[v] = verdicts.get(v, 0) + 1
 
+        src = ex.get("source", "unknown")
+        sources[src] = sources.get(src, 0) + 1
+
     return {
         "total": len(examples),
         "verdict_distribution": verdicts,
+        "source_distribution": sources,
         "ready_for_bootstrap": len(examples) >= MIN_EXAMPLES_BOOTSTRAP,
         "ready_for_mipro": len(examples) >= MIN_EXAMPLES_MIPRO,
     }
@@ -324,9 +396,8 @@ def training_data_stats() -> dict:
 # ---------------------------------------------------------------------------
 
 
-def main():
-    import sys
-
+async def main_async():
+    """Async main handler for optimize and stats commands."""
     if len(sys.argv) < 2:
         print("Usage: python optimizer.py [optimize|rollback|versions|stats]")
         print("  optimize [bootstrap|mipro]  — Run prompt optimization")
@@ -339,7 +410,21 @@ def main():
 
     if action == "optimize":
         strategy = sys.argv[2] if len(sys.argv) > 2 else "bootstrap"
-        optimize_evaluator(strategy=strategy)
+        await optimize_evaluator(strategy=strategy)
+
+    elif action == "stats":
+        stats = await training_data_stats()
+        print(f"Training examples: {stats['total']}")
+        if stats.get("verdict_distribution"):
+            print("Verdict distribution:")
+            for v, c in stats["verdict_distribution"].items():
+                print(f"  {v}: {c}")
+        if stats.get("source_distribution"):
+            print("Source distribution:")
+            for src, c in stats["source_distribution"].items():
+                print(f"  {src}: {c}")
+        print(f"Ready for BootstrapFewShot: {'✓' if stats['ready_for_bootstrap'] else '✗'} (need {MIN_EXAMPLES_BOOTSTRAP})")
+        print(f"Ready for MIPROv2: {'✓' if stats['ready_for_mipro'] else '✗'} (need {MIN_EXAMPLES_MIPRO})")
 
     elif action == "rollback":
         version = sys.argv[2] if len(sys.argv) > 2 else None
@@ -350,15 +435,33 @@ def main():
             status_mark = "✓" if v.get("status") == "active" else "○"
             print(f"  {status_mark} {v['name']} ({v.get('strategy', '?')}, {v.get('num_examples', '?')} examples)")
 
-    elif action == "stats":
-        stats = training_data_stats()
-        print(f"Training examples: {stats['total']}")
-        if stats.get("verdict_distribution"):
-            for v, c in stats["verdict_distribution"].items():
-                print(f"  {v}: {c}")
-        print(f"Ready for BootstrapFewShot: {'✓' if stats['ready_for_bootstrap'] else '✗'} (need {MIN_EXAMPLES_BOOTSTRAP})")
-        print(f"Ready for MIPROv2: {'✓' if stats['ready_for_mipro'] else '✗'} (need {MIN_EXAMPLES_MIPRO})")
+    else:
+        print(f"Unknown action: {action}")
+        sys.exit(1)
 
+
+def main():
+    """CLI entrypoint that handles both sync and async commands."""
+    if len(sys.argv) < 2:
+        print("Usage: python optimizer.py [optimize|rollback|versions|stats]")
+        print("  optimize [bootstrap|mipro]  — Run prompt optimization")
+        print("  rollback [version-name]     — Revert to previous prompt version")
+        print("  versions                    — List all prompt versions")
+        print("  stats                       — Show training data statistics")
+        sys.exit(1)
+
+    action = sys.argv[1]
+
+    # Run async operations with asyncio
+    if action in ("optimize", "stats"):
+        asyncio.run(main_async())
+    elif action == "rollback":
+        version = sys.argv[2] if len(sys.argv) > 2 else None
+        rollback(version)
+    elif action == "versions":
+        for v in list_versions():
+            status_mark = "✓" if v.get("status") == "active" else "○"
+            print(f"  {status_mark} {v['name']} ({v.get('strategy', '?')}, {v.get('num_examples', '?')} examples)")
     else:
         print(f"Unknown action: {action}")
         sys.exit(1)

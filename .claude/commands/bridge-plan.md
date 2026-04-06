@@ -1,12 +1,24 @@
+---
+title: Untitled
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 Bridge a Compound Engineering plan document into the vault as a project note.
 
 Usage: `<path-to-CE-plan-file>`
-Example: `/bridge-plan docs/plans/2026-03-29-002-feat-obsidian-agent-efficiency-plan.md`
+Example: `/bridge-plan docs/plans/2026-03-29-002-feat-clausidian-efficiency-plan.md`
 
 Steps:
 1. Read the CE plan file at the given path (usually under `docs/plans/`)
 2. Extract YAML frontmatter: `title`, `type`, `date`, `status`, `origin`
-3. Run: `obsidian-agent note "<title>" project` to create a vault project note
+3. Run: `clausidian note "<title>" project` to create a vault project note
 4. Populate the note content:
    - Copy the `Overview` section from the plan
    - Copy the `Requirements Trace` (or list requirement IDs with brief descriptions)
@@ -24,7 +36,7 @@ Steps:
    - Search the vault for a note matching the brainstorm topic
    - If found, add bidirectional links between the new project note and the brainstorm-related note
 7. Update bidirectional links on `tech-research-squad.md`
-8. Run: `obsidian-agent sync` to rebuild indices
+8. Run: `clausidian sync` to rebuild indices
 
 If the plan file does not exist, show an error.
 If a vault note with the same title already exists, update it instead of creating a duplicate.

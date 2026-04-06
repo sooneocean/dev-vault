@@ -1,9 +1,9 @@
 ---
 title: "DEXG16 專案目錄結構"
 type: resource
-tags: [workspace]
+tags: [workspace, reference, knowledge-management]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: catalog
 maturity: mature

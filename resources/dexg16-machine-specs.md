@@ -1,9 +1,9 @@
 ---
 title: "DEXG16 硬體規格"
 type: resource
-tags: [hardware, claude-code]
+tags: [hardware, claude-code, reference, knowledge-management]
 created: "2026-03-28"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 subtype: catalog
 maturity: mature

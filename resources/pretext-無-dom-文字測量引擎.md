@@ -1,9 +1,9 @@
 ---
 title: "Pretext — 無 DOM 文字測量引擎"
 type: resource
-tags: [typescript, text-layout, performance]
+tags: [typescript, text-layout, performance, reference, knowledge-management]
 created: "2026-03-29"
-updated: "2026-03-29"
+updated: "2026-04-03"
 status: active
 subtype: reference
 maturity: seed

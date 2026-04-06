@@ -2,9 +2,9 @@
 title: "Benchmark First Rule"
 type: resource
 subtype: "learning"
-tags: [knowledge-management, auto-memory-migration, local-llm]
+tags: [knowledge-management, auto-memory-migration, local-llm, reference]
 created: "2026-03-30"
-updated: "2026-03-30"
+updated: "2026-04-03"
 status: active
 maturity: mature
 domain: "ai-engineering"

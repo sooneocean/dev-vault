@@ -3,15 +3,19 @@
 from __future__ import annotations
 
 import json
+import logging
 from datetime import date
 from pathlib import Path
 
 from claude_agent_sdk import AgentDefinition, ClaudeAgentOptions, query
 
+from agent_memory import AgentMemoryClient, AgentMemoryDocument
 from config import AGENT_MODELS, MAX_TURNS, MCP_SERVERS, PIPELINE_ROOT, STATE_DIR
 from models import EvaluationResult, EvaluationScore, ScanResult
 from rubric import build_evaluation_result, format_rubric_prompt
 from sanitizer import sanitize, sanitize_metadata
+
+logger = logging.getLogger(__name__)
 
 
 def build_evaluator_agent() -> AgentDefinition:
@@ -65,18 +69,46 @@ Before scoring, gather:
 
 async def evaluate_scan_results(
     scan_results: list[ScanResult],
+    store_to_memory: bool = True,
 ) -> list[EvaluationResult]:
-    """Evaluate a batch of scan results using the LLM-as-Judge pattern."""
+    """Evaluate a batch of scan results using the LLM-as-Judge pattern.
+
+    Args:
+        scan_results: Results from scanners to evaluate
+        store_to_memory: Whether to store evaluation results to agent memory (default: True)
+    """
     evaluator = build_evaluator_agent()
     results: list[EvaluationResult] = []
+    memory_client = None
+
+    if store_to_memory:
+        try:
+            memory_client = AgentMemoryClient()
+        except Exception as e:
+            logger.warning(f"Could not initialize memory client: {e}. Evaluation results will not be stored.")
+            memory_client = None
 
     for sr in scan_results:
         try:
             result = await evaluate_single(sr, evaluator)
             results.append(result)
+
+            # Store to memory if enabled
+            if memory_client and result:
+                try:
+                    await _store_evaluation_to_memory(memory_client, result)
+                except Exception as e:
+                    logger.warning(f"Failed to store evaluation result for {sr.name}: {e}")
         except Exception as e:
             print(f"Warning: Failed to evaluate {sr.name}: {e}")
             continue
+
+    # Close memory client if we created one
+    if memory_client:
+        try:
+            await memory_client.close()
+        except Exception as e:
+            logger.warning(f"Error closing memory client: {e}")
 
     return results
 
@@ -179,3 +211,40 @@ def save_evaluation_results(results: list[EvaluationResult]) -> Path:
     data = [r.model_dump(mode="json") for r in results]
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
     return path
+
+
+async def _store_evaluation_to_memory(
+    client: AgentMemoryClient,
+    result: EvaluationResult,
+) -> None:
+    """Store an evaluation result to agent memory for future training.
+
+    Stores the evaluation with metadata for filtering and retrieval:
+    - agent_id: "evaluator"
+    - source: "evaluation"
+    - content: JSON serialized evaluation result
+    - metadata: verdict, domain_tags, tool_name, url, total_score, percentage
+    """
+    sr = result.scan_result
+
+    # Extract domain tags from scan result tags
+    domain_tags = [t for t in sr.tags if t in ["rag", "agent-framework", "embedding-model", "tool"]]
+
+    # Create memory document
+    doc = AgentMemoryDocument(
+        agent_id="evaluator",
+        source="evaluation",
+        content=json.dumps(result.model_dump(mode="json"), ensure_ascii=False),
+        metadata={
+            "verdict": result.verdict.value,
+            "domain_tags": domain_tags,
+            "tool_name": sr.name,
+            "url": sr.url,
+            "source_type": sr.source.value,
+            "total_score": result.total_score,
+            "percentage": result.percentage,
+            "max_score": result.max_score,
+        },
+    )
+
+    await client.store(doc)

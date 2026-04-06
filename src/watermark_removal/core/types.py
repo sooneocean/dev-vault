@@ -3,7 +3,7 @@
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 import numpy as np
 
@@ -123,6 +123,30 @@ class InpaintConfig:
 
 
 @dataclass
+class FlowData:
+    """Optical flow data between frame pairs for temporal alignment.
+
+    Stores forward and backward optical flow vectors computed from consecutive
+    frames, along with metadata for flow-based boundary warping.
+    """
+
+    forward_flow: np.ndarray
+    """Forward flow: H×W×2 array of motion vectors from frame_t to frame_t+1."""
+
+    backward_flow: np.ndarray
+    """Backward flow: H×W×2 array of motion vectors from frame_t+1 to frame_t."""
+
+    frame_pair_id: tuple[int, int]
+    """Frame pair indices (frame_idx_t, frame_idx_t+1)."""
+
+    confidence_map: Optional[np.ndarray] = None
+    """Optional: Confidence scores for each flow vector (0.0-1.0)."""
+
+    metadata: dict = field(default_factory=dict)
+    """Optional metadata: model_version, compute_time_ms, resolution, etc."""
+
+
+@dataclass
 class ProcessConfig:
     """System-wide configuration for watermark removal pipeline."""
 
@@ -180,8 +204,119 @@ class ProcessConfig:
     skip_errors_in_postprocessing: bool = False
     """Skip frames that fail postprocessing instead of stopping."""
 
+    temporal_smooth_enabled: bool = True
+    """Enable temporal smoothing to reduce inter-frame flicker."""
+
+    temporal_smooth_alpha: float = 0.3
+    """Alpha blending factor for temporal smoothing (0.0-1.0)."""
+
+    use_adaptive_temporal_smoothing: bool = False
+    """Enable motion-aware adaptive alpha for temporal smoothing."""
+
+    adaptive_motion_threshold: float = 0.05
+    """Motion threshold for adaptive temporal smoothing (0.0-1.0)."""
+
+    use_poisson_blending: bool = False
+    """Enable Poisson blending to smooth stitch boundaries."""
+
+    poisson_max_iterations: int = 100
+    """Max iterations for Poisson solver convergence."""
+
+    poisson_tolerance: float = 0.01
+    """Convergence tolerance for Poisson solver."""
+
+    use_watermark_tracker: bool = False
+    """Enable YOLO-based watermark tracking for moving watermarks."""
+
+    yolo_model_path: str | None = None
+    """Path to YOLO model weights (null = disabled, auto-download if available)."""
+
+    yolo_confidence_threshold: float = 0.5
+    """YOLO detection confidence threshold (0.0-1.0)."""
+
+    tracker_smoothing_factor: float = 0.3
+    """BBox trajectory smoothing factor for tracking (0.0-1.0)."""
+
+    use_checkpoints: bool = False
+    """Enable checkpoint save/resume for long video processing."""
+
     crop_region: "CropRegion | None" = None
     """Override crop region (if None, derived from mask)."""
+
+    optical_flow_enabled: bool = False
+    """Enable optical flow-based temporal alignment (RAFT model)."""
+
+    optical_flow_weight: float = 0.5
+    """Blending weight for optical flow alignment (0.0-1.0)."""
+
+    optical_flow_resolution: str = "480"
+    """Optical flow computation resolution: '480' (optimized) or '1080'."""
+
+    ensemble_detection_enabled: bool = False
+    """Enable multi-model ensemble detection for improved accuracy."""
+
+    ensemble_models: list[str] = field(default_factory=lambda: ["yolov5s", "yolov5m"])
+    """List of YOLO model variants to use in ensemble (e.g., ['yolov5s', 'yolov5m'])."""
+
+    ensemble_voting_mode: str = "confidence_weighted"
+    """Ensemble voting strategy: 'confidence_weighted' (average by model accuracy)."""
+
+    ensemble_iou_threshold: float = 0.3
+    """Minimum IoU to match detections across ensemble models (0.0-1.0)."""
+
+    ensemble_nms_threshold: float = 0.45
+    """NMS threshold for post-processing ensemble results (0.0-1.0)."""
+
+    ensemble_model_accuracies: dict[str, float] = field(
+        default_factory=lambda: {"yolov5s": 0.85, "yolov5m": 0.90, "yolov5l": 0.92}
+    )
+    """Baseline accuracy baseline for each model (used for confidence weighting)."""
+
+    streaming_queue_size: int = 100
+    """Maximum size of frame processing queue (frames dropped if exceeded)."""
+
+    streaming_result_ttl_sec: int = 300
+    """Time-to-live for cached streaming results in seconds (default 5 min)."""
+
+    # Phase 3B: Label Studio annotation integration
+    label_studio_enabled: bool = False
+    """Enable Label Studio annotation workflow integration."""
+
+    label_studio_url: str = "http://localhost:8080"
+    """Label Studio server URL (for annotation uploads)."""
+
+    label_studio_api_key: str | None = None
+    """API key for Label Studio authentication."""
+
+    label_studio_project_id: int | None = None
+    """Project ID in Label Studio (created on first annotation)."""
+
+    label_studio_wait_timeout_sec: float = 3600.0
+    """Timeout for waiting on annotation completion in seconds."""
+
+    # Phase 3B: Optuna hyperparameter tuning
+    optuna_enabled: bool = False
+    """Enable Optuna hyperparameter tuning for ensemble detection."""
+
+    optuna_study_name: str = "watermark_ensemble_tuning"
+    """Optuna study name for experiment tracking."""
+
+    optuna_storage: str = "sqlite:///optuna.db"
+    """Optuna storage backend (SQLite path or database URI)."""
+
+    optuna_n_trials: int = 150
+    """Number of Optuna trials to run."""
+
+    optuna_search_bounds: dict[str, tuple] = field(default_factory=lambda: {
+        "weight_yolov5s": (0.1, 1.0),
+        "weight_yolov5m": (0.1, 1.0),
+        "weight_yolov5l": (0.1, 1.0),
+        "confidence_threshold": (0.05, 0.95),
+        "iou_threshold": (0.3, 0.7),
+        "nms_threshold": (0.3, 0.7),
+        "augmentation_intensity": (0.0, 1.0),
+    })
+    """Hyperparameter search space bounds for Optuna."""
 
     def __post_init__(self):
         """Validate configuration."""
@@ -208,3 +343,61 @@ class ProcessConfig:
             raise ValueError("timeout must be > 0")
         if not (0 <= self.output_crf <= 51):
             raise ValueError("output_crf must be 0-51")
+        if not (0.0 <= self.temporal_smooth_alpha <= 1.0):
+            raise ValueError("temporal_smooth_alpha must be 0.0-1.0")
+
+        # Phase 2 parameter validation
+        if not (0.0 <= self.adaptive_motion_threshold <= 1.0):
+            raise ValueError("adaptive_motion_threshold must be 0.0-1.0")
+        if self.poisson_max_iterations < 1:
+            raise ValueError("poisson_max_iterations must be >= 1")
+        if self.poisson_tolerance <= 0.0:
+            raise ValueError("poisson_tolerance must be > 0.0")
+        if not (0.0 <= self.yolo_confidence_threshold <= 1.0):
+            raise ValueError("yolo_confidence_threshold must be 0.0-1.0")
+        if not (0.0 <= self.tracker_smoothing_factor <= 1.0):
+            raise ValueError("tracker_smoothing_factor must be 0.0-1.0")
+
+        # Phase 3 optical flow parameter validation
+        if not (0.0 <= self.optical_flow_weight <= 1.0):
+            raise ValueError("optical_flow_weight must be 0.0-1.0")
+        if self.optical_flow_resolution not in ("480", "1080"):
+            raise ValueError("optical_flow_resolution must be '480' or '1080'")
+
+        # Phase 3 ensemble detection parameter validation
+        if self.ensemble_detection_enabled:
+            if not self.ensemble_models:
+                raise ValueError("ensemble_models must not be empty when ensemble_detection_enabled=true")
+            if self.ensemble_voting_mode not in ("confidence_weighted",):
+                raise ValueError("ensemble_voting_mode must be 'confidence_weighted'")
+            if not (0.0 < self.ensemble_iou_threshold <= 1.0):
+                raise ValueError("ensemble_iou_threshold must be in (0.0, 1.0]")
+            if not (0.0 <= self.ensemble_nms_threshold <= 1.0):
+                raise ValueError("ensemble_nms_threshold must be 0.0-1.0")
+            if not self.ensemble_model_accuracies:
+                raise ValueError("ensemble_model_accuracies must not be empty")
+
+        # Phase 3 streaming parameter validation
+        if self.streaming_queue_size < 1:
+            raise ValueError("streaming_queue_size must be >= 1")
+        if self.streaming_result_ttl_sec < 1:
+            raise ValueError("streaming_result_ttl_sec must be >= 1")
+
+        # Phase 3B Label Studio parameter validation
+        if self.label_studio_enabled:
+            if not self.label_studio_url:
+                raise ValueError("label_studio_url required when enabled")
+            if not self.label_studio_api_key:
+                raise ValueError("label_studio_api_key required when enabled")
+            if self.label_studio_wait_timeout_sec <= 0:
+                raise ValueError("label_studio_wait_timeout_sec must be > 0")
+
+        # Phase 3B Optuna parameter validation
+        if self.optuna_enabled:
+            if self.optuna_n_trials < 1:
+                raise ValueError("optuna_n_trials must be >= 1")
+            if not self.optuna_search_bounds:
+                raise ValueError("optuna_search_bounds must not be empty")
+            for param_name, (low, high) in self.optuna_search_bounds.items():
+                if low >= high:
+                    raise ValueError(f"optuna_search_bounds[{param_name}]: low must be < high")

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 # Paths
@@ -65,7 +66,21 @@ MCP_SERVERS = {
     "arxiv": "arxiv",
     "huggingface": "huggingface",
     "fetch": "fetch",
+    "agent-memory": "agent-memory",
 }
+
+# Agent Memory Configuration
+AGENT_MEMORY_ENABLED = os.getenv("AGENT_MEMORY_ENABLED", "true").lower() == "true"
+AGENT_MEMORY_USE_QUERY_MEMORY = os.getenv("AGENT_MEMORY_USE_QUERY_MEMORY", "true").lower() == "true"
+AGENT_MEMORY_API_URL = os.getenv("AGENT_MEMORY_API_URL", "http://localhost:8765")
+AGENT_MEMORY_HTTP_SERVER_PORT = int(os.getenv("AGENT_MEMORY_HTTP_SERVER_PORT", "8765"))
+
+# Query Memory specific
+QUERY_MEMORY_API_URL = os.getenv("QUERY_MEMORY_API_URL", "https://api.querymemory.com")
+QUERY_MEMORY_API_KEY = os.getenv("QUERY_MEMORY_API_KEY", "")
+
+# LanceDB fallback path
+LANCEDB_PATH = os.getenv("LANCEDB_PATH", str(STATE_DIR / "agent_memory.db"))
 
 # Agent model assignments
 AGENT_MODELS = {

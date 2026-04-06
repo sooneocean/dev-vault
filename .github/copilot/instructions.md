@@ -1,3 +1,15 @@
+---
+title: Obsidian Vault — Copilot Instructions
+type: project
+tags: [project, active]
+created: 2026-04-03
+updated: 2026-04-03
+status: active
+maturity: growing
+domain: knowledge-management
+summary: ""
+---
+
 # Obsidian Vault — Copilot Instructions
 
 This is an agent-managed Obsidian vault. Use the `obsidian-agent` CLI for all vault operations.

@@ -1,0 +1,234 @@
+{
+  "campaign": "Week 3 Content Rollout",
+  "period": "2026-04-15 to 2026-04-19",
+  "timezone": "UTC+8",
+  "website": "yololab.net",
+  "total_articles": 10,
+  "total_words": 15733,
+  "average_words_per_article": 1573.3,
+  "articles": [
+    {
+      "article_number": 6,
+      "title": "K-pop 二代團怎麼贏 BLACKPINK？粉絲經濟軍備競賽解碼",
+      "filename": "article-06-kpop-neogen.md",
+      "slug": "kpop-neogen-fan-economy-2026",
+      "category": "Music",
+      "tags": ["K-pop", "粉絲經濟", "NewJeans", "IVE", "應援色"],
+      "publish_date": "2026-04-15T18:00:00+08:00",
+      "publish_date_unix": 1744768800,
+      "publish_day": "Tuesday",
+      "publish_time_slot": "18:00 (6 PM)",
+      "word_count": 1680,
+      "seo_difficulty": "Medium-High",
+      "expected_rank_positions": "3-6",
+      "expected_traffic_growth": "40-50%"
+    },
+    {
+      "article_number": 7,
+      "title": "Taylor Swift 從政治中立到公然對抗，52 億美元帝國怎麼被綁架了",
+      "filename": "article-07-taylor-political.md",
+      "slug": "taylor-swift-political-transformation-2026",
+      "category": "Music",
+      "tags": ["Taylor-Swift", "政治言論", "Eras-Tour"],
+      "publish_date": "2026-04-15T19:00:00+08:00",
+      "publish_date_unix": 1744772400,
+      "publish_day": "Tuesday",
+      "publish_time_slot": "19:00 (7 PM)",
+      "word_count": 1595,
+      "seo_difficulty": "Medium-High",
+      "expected_rank_positions": "4-7",
+      "expected_traffic_growth": "45-55%"
+    },
+    {
+      "article_number": 8,
+      "title": "Phoebe Bridgers 怎麼變成奢侈品？獨立音樂的反商業悖論",
+      "filename": "article-08-indie-pop.md",
+      "slug": "indie-pop-luxury-paradox-2026",
+      "category": "Music",
+      "tags": ["Indie-Pop", "Phoebe-Bridgers", "身份消費"],
+      "publish_date": "2026-04-16T18:00:00+08:00",
+      "publish_date_unix": 1744855200,
+      "publish_day": "Wednesday",
+      "publish_time_slot": "18:00 (6 PM)",
+      "word_count": 1720,
+      "seo_difficulty": "Medium",
+      "expected_rank_positions": "5-8",
+      "expected_traffic_growth": "35-45%"
+    },
+    {
+      "article_number": 9,
+      "title": "抖音超越 Spotify？音樂產業的碎片化時代來臨",
+      "filename": "article-09-tiktok-spotify.md",
+      "slug": "tiktok-spotify-music-fragmentation-2026",
+      "category": "Music",
+      "tags": ["TikTok", "Spotify", "音樂產業", "短視頻"],
+      "publish_date": "2026-04-16T19:00:00+08:00",
+      "publish_date_unix": 1744858800,
+      "publish_day": "Wednesday",
+      "publish_time_slot": "19:00 (7 PM)",
+      "word_count": 1645,
+      "seo_difficulty": "Medium",
+      "expected_rank_positions": "4-7",
+      "expected_traffic_growth": "40-50%"
+    },
+    {
+      "article_number": 10,
+      "title": "好萊塢 2026 Q2 檔期崩盤：110 億製片成本 vs 全球票房腰斬",
+      "filename": "article-10-hollywood-q2.md",
+      "slug": "hollywood-q2-2026-box-office-collapse",
+      "category": "Film",
+      "tags": ["Hollywood", "票房危機", "大片檔期"],
+      "publish_date": "2026-04-17T18:00:00+08:00",
+      "publish_date_unix": 1744941600,
+      "publish_day": "Thursday",
+      "publish_time_slot": "18:00 (6 PM)",
+      "word_count": 1847,
+      "seo_difficulty": "Medium",
+      "expected_rank_positions": "3-8",
+      "expected_traffic_growth": "25-35%"
+    },
+    {
+      "article_number": 11,
+      "title": "Deadpool 3 內地禁映：好萊塢創意自由的最後一戰",
+      "filename": "article-11-deadpool.md",
+      "slug": "deadpool-3-china-censorship-2026",
+      "category": "Film",
+      "tags": ["Deadpool", "電影審查", "中國市場"],
+      "publish_date": "2026-04-17T19:00:00+08:00",
+      "publish_date_unix": 1744945200,
+      "publish_day": "Thursday",
+      "publish_time_slot": "19:00 (7 PM)",
+      "word_count": 1280,
+      "seo_difficulty": "Medium-High",
+      "expected_rank_positions": "4-8",
+      "expected_traffic_growth": "30-40%"
+    },
+    {
+      "article_number": 12,
+      "title": "Netflix 為什麼要殺死院線？2026 年串流 vs 電影院的最後一戰",
+      "filename": "article-12-netflix-cinema.md",
+      "slug": "netflix-cinema-death-2026",
+      "category": "Film",
+      "tags": ["Netflix", "院線", "串流戰爭"],
+      "publish_date": "2026-04-18T18:00:00+08:00",
+      "publish_date_unix": 1745028000,
+      "publish_day": "Friday",
+      "publish_time_slot": "18:00 (6 PM)",
+      "word_count": 1645,
+      "seo_difficulty": "Medium-High",
+      "expected_rank_positions": "4-8",
+      "expected_traffic_growth": "40-50%"
+    },
+    {
+      "article_number": 13,
+      "title": "迪士尼版權帝國為什麼在衰退？2026 年從 IP 壟斷到 IP 洗牌",
+      "filename": "article-13-disney-ip.md",
+      "slug": "disney-ip-empire-2026-crisis",
+      "category": "Film",
+      "tags": ["Disney", "版權", "IP帝國", "漫威"],
+      "publish_date": "2026-04-18T19:00:00+08:00",
+      "publish_date_unix": 1745031600,
+      "publish_day": "Friday",
+      "publish_time_slot": "19:00 (7 PM)",
+      "word_count": 1723,
+      "seo_difficulty": "Medium-High",
+      "expected_rank_positions": "4-8",
+      "expected_traffic_growth": "35-45%"
+    },
+    {
+      "article_number": 14,
+      "title": "Google I/O 2026 的 AI 助理陷阱：隱私幻象 vs 個性化欲望",
+      "filename": "article-14-google-io.md",
+      "slug": "google-io-ai-assistant-privacy-paradox-2026",
+      "category": "Tech",
+      "tags": ["Google", "AI", "隱私", "Google-I/O"],
+      "publish_date": "2026-04-19T18:00:00+08:00",
+      "publish_date_unix": 1745114400,
+      "publish_day": "Saturday",
+      "publish_time_slot": "18:00 (6 PM)",
+      "word_count": 1521,
+      "seo_difficulty": "Medium-High",
+      "expected_rank_positions": "4-8",
+      "expected_traffic_growth": "35-45%"
+    },
+    {
+      "article_number": 15,
+      "title": "TikTok 算法透明化是障眼法：歐盟強制公開背後的終極營利邏輯",
+      "filename": "article-15-tiktok-transparency.md",
+      "slug": "tiktok-algorithm-transparency-illusion-2026",
+      "category": "Tech",
+      "tags": ["TikTok", "算法", "透明化", "監管", "歐盟"],
+      "publish_date": "2026-04-19T19:00:00+08:00",
+      "publish_date_unix": 1745118000,
+      "publish_day": "Saturday",
+      "publish_time_slot": "19:00 (7 PM)",
+      "word_count": 1487,
+      "seo_difficulty": "Medium-High",
+      "expected_rank_positions": "3-8",
+      "expected_traffic_growth": "40-50%"
+    }
+  ],
+  "category_distribution": {
+    "Music": 4,
+    "Film": 4,
+    "Tech": 2
+  },
+  "timeline": {
+    "2026-04-15": {
+      "day": "Tuesday",
+      "articles_count": 2,
+      "articles": ["Article 6", "Article 7"],
+      "total_words": 3275
+    },
+    "2026-04-16": {
+      "day": "Wednesday",
+      "articles_count": 2,
+      "articles": ["Article 8", "Article 9"],
+      "total_words": 3365
+    },
+    "2026-04-17": {
+      "day": "Thursday",
+      "articles_count": 2,
+      "articles": ["Article 10", "Article 11"],
+      "total_words": 3127
+    },
+    "2026-04-18": {
+      "day": "Friday",
+      "articles_count": 2,
+      "articles": ["Article 12", "Article 13"],
+      "total_words": 3368
+    },
+    "2026-04-19": {
+      "day": "Saturday",
+      "articles_count": 2,
+      "articles": ["Article 14", "Article 15"],
+      "total_words": 3008
+    }
+  },
+  "publishing_instructions": {
+    "method_1": {
+      "name": "自動化發佈 (推薦)",
+      "command": "export WP_TOKEN='your_token' && python3 scripts/batch-create-week3-posts.py",
+      "estimated_time": "5-10 分鐘",
+      "requirements": ["WP_TOKEN", "Python 3.6+"]
+    },
+    "method_2": {
+      "name": "手動發佈 (WordPress 後台)",
+      "estimated_time": "20-30 分鐘",
+      "steps": [
+        "登錄 WordPress.com",
+        "導覽到 yololab.net",
+        "文章 → 新增",
+        "貼上文章內容",
+        "設置發佈時間為 UTC+8",
+        "設置分類和標籤",
+        "點擊『排程發佈』"
+      ]
+    }
+  },
+  "metadata": {
+    "created_at": "2026-04-02T00:00:00Z",
+    "version": "1.0",
+    "status": "ready_for_publishing"
+  }
+}

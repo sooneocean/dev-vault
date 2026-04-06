@@ -1,9 +1,9 @@
 ---
 title: "Harness Engineering 研究"
 type: resource
-tags: [harness-engineering, claude-code, mcp, hooks, plugins, agent-harness]
+tags: [harness-engineering, claude-code, mcp, hooks, plugins, agent-harness, reference, knowledge-management]
 created: "2026-03-29"
-updated: "2026-03-30"
+updated: "2026-04-04"
 status: active
 subtype: research
 maturity: growing
