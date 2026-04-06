@@ -58,6 +58,14 @@ weekly_maintenance() {
     log "  • 重建索引..."
     "$CLAUSIDIAN" sync
 
+    # Domain 審計
+    log "  • Domain 欄位審計..."
+    bash "$VAULT_PATH/scripts/domain-audit.sh" 2>/dev/null || log "  ⚠️  Domain 審計失敗"
+
+    # Maturity 自動提升
+    log "  • 檢查 Maturity 提升..."
+    python3 "$VAULT_PATH/scripts/maturity-promote.py" 2>/dev/null || log "  ⚠️  Maturity 提升失敗"
+
     # 統計孤立笔記
     log "  • 分析孤立笔記..."
     ORPHANS=$("$CLAUSIDIAN" stats 2>/dev/null | grep "Orphan notes:" | awk '{print $NF}' || echo "unknown")
