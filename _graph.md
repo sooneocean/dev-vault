@@ -231,6 +231,8 @@ updated: 2026-04-06
 | [[2026-04-02]] | [[2026-04-03]] | nav-next |
 | [[2026-04-03]] | [[2026-04-02]] | nav-prev |
 | [[2026-04-03]] | [[2026-04-04]] | nav-next |
+| [[2026-04-06]] | [[2026-04-05]] | nav-prev |
+| [[2026-04-06]] | [[2026-04-07]] | nav-next |
 | [[cli-update-fields-flag]] | [[dexg16-ai-coding-tools]] | weak |
 | [[cli-update-fields-flag]] | [[improvement-2026-03-29-001]] | weak |
 | [[cli-update-fields-flag]] | [[session-stop-wrapper-learning]] | weak |

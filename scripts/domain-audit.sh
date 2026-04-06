@@ -11,6 +11,11 @@ REPORT_FILE="$VAULT_PATH/logs/domain-audit-$(date +%Y-%m-%d).log"
 DRY_RUN=true
 FIX_MODE=false
 
+# Parse arguments
+for arg in "$@"; do
+  [[ "$arg" == "--fix" ]] && FIX_MODE=true && DRY_RUN=false
+done
+
 # Domain vocabulary (from CONVENTIONS.md)
 VALID_DOMAINS=(
     "ai-engineering"

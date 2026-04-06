@@ -1,13 +1,15 @@
 ---
 title: journal index
 type: index
-updated: 2026-04-03
+updated: 2026-04-06
 ---
 
 # Journal
 
 | File | Summary |
 |------|---------|
+| [[2026-W15-review]] | 2026 Week 15 Review |
+| [[2026-04-06]] | Daily journal |
 | [[2026-04-03]] | Daily journal |
 | [[2026-04-02]] | Daily journal |
 | [[2026-04-01]] | Daily journal |

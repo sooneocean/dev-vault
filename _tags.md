@@ -136,6 +136,7 @@ updated: 2026-04-06
 - [[2026-04-01]] — (no summary)
 - [[2026-04-02]] — (no summary)
 - [[2026-04-03]] — (no summary)
+- [[2026-04-06]] — (no summary)
 - [[2026-W14-review]] — Vault 從零到 Grade A 99% 的三日旅程 — 48 notes, 7 plans, 12-agent parallel sessions, 知識複利迴路首次閉合
 - [[content-cycle-w1-2026-04-02]] — (no summary)
 - [[research-scan-2026-03-30]] — (no summary)
@@ -427,6 +428,7 @@ updated: 2026-04-06
 
 ### weekly-review
 - [[2026-W14-review]] — Vault 從零到 Grade A 99% 的三日旅程 — 48 notes, 7 plans, 12-agent parallel sessions, 知識複利迴路首次閉合
+- [[2026-W15-review]] — 2026 Week 15 Review
 
 ### workflow
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
@@ -447,9 +449,9 @@ updated: 2026-04-06
 | knowledge-management | 52 |
 | reference | 38 |
 | claude-code | 15 |
+| daily | 11 |
 | project | 10 |
 | active | 10 |
-| daily | 10 |
 | log | 10 |
 | auto-memory-migration | 6 |
 | brainstorm | 6 |
@@ -476,6 +478,7 @@ updated: 2026-04-06
 | workspace | 2 |
 | hardware | 2 |
 | text-layout | 2 |
+| weekly-review | 2 |
 | seo | 1 |
 | optimization | 1 |
 | design | 1 |
@@ -512,7 +515,6 @@ updated: 2026-04-06
 | auto-generated | 1 |
 | agent-framework | 1 |
 | rag | 1 |
-| weekly-review | 1 |
 | frontmatter | 1 |
 | clustering | 1 |
 | pretext | 1 |

@@ -42,6 +42,10 @@ daily_maintenance() {
     log "  • 檢查新笔記..."
     NEW_NOTES=$("$CLAUSIDIAN" list --json 2>/dev/null | grep -c '"created":"'$(date +%Y-%m-%d)'"' || echo "0")
     log "  ✅ 今日新笔記: $NEW_NOTES 個"
+
+    # 補齊前置事項欄位
+    log "  • 自動補齊缺失的前置事項欄位..."
+    bash "$VAULT_PATH/scripts/frontmatter-backfill.sh" 2>/dev/null || log "  ⚠️  前置事項補齊失敗"
 }
 
 # ==================== 周間任務 ====================
@@ -58,13 +62,17 @@ weekly_maintenance() {
     log "  • 重建索引..."
     "$CLAUSIDIAN" sync
 
-    # Domain 審計
-    log "  • Domain 欄位審計..."
-    bash "$VAULT_PATH/scripts/domain-audit.sh" 2>/dev/null || log "  ⚠️  Domain 審計失敗"
+    # Domain 審計 (自動修復)
+    log "  • Domain 欄位審計並修復..."
+    bash "$VAULT_PATH/scripts/domain-audit.sh" --fix 2>/dev/null || log "  ⚠️  Domain 審計失敗"
 
     # Maturity 自動提升
-    log "  • 檢查 Maturity 提升..."
-    python3 "$VAULT_PATH/scripts/maturity-promote.py" 2>/dev/null || log "  ⚠️  Maturity 提升失敗"
+    log "  • Maturity 自動提升..."
+    python3 "$VAULT_PATH/scripts/maturity-promote.py" --fix 2>/dev/null || log "  ⚠️  Maturity 提升失敗"
+
+    # 自動連結孤立笔記
+    log "  • 自動連結孤立笔記..."
+    bash "$VAULT_PATH/scripts/orphan-linker.sh" --fix 2>/dev/null || log "  ⚠️  孤立笔記連結失敗"
 
     # 統計孤立笔記
     log "  • 分析孤立笔記..."
@@ -75,6 +83,18 @@ weekly_maintenance() {
     log "  • 生成周報..."
     "$CLAUSIDIAN" review || log "  ⚠️  周報生成失敗"
     log "  ✅ 周報已保存至 journal/"
+
+    # Auto git commit + push
+    log "  • 提交並推送維護變更..."
+    cd "$VAULT_PATH"
+    if ! git diff --quiet HEAD 2>/dev/null || git status --porcelain | grep -q . ; then
+        git add -A
+        git commit -m "chore(vault): automated weekly maintenance $(date +%Y-%m-%d)" --no-verify || true
+        git push origin HEAD --no-verify || log "  ⚠️  Push 失敗"
+        log "  ✅ 已提交並推送"
+    else
+        log "  ℹ️  無變更需提交"
+    fi
 }
 
 # ==================== 月度任務 ====================
