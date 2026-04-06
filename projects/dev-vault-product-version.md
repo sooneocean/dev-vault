@@ -1,4 +1,12 @@
 ---
+status: archived
+title: dev-vault-product-version
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
+---
 title: "Dev Vault — Version Tracker"
 type: project
 tags: [version-tracking, product-iteration, project, active]

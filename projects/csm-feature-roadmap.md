@@ -1,4 +1,12 @@
 ---
+status: archived
+title: csm-feature-roadmap
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
+---
 title: "CSM 功能路線圖"
 type: project
 tags: [planning, project, active]

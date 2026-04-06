@@ -1,4 +1,12 @@
 ---
+status: archived
+title: manual-plugin-deactivation
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
+---
 title: 手動停用外掛指南
 type: project
 tags: [project, active]

@@ -1,3 +1,11 @@
+---
+status: archived
+title: batch-update-page6
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
 # Page 6 剩余 13 篇文章 SEO 更新任务
 
 ## 已完成（7/20）

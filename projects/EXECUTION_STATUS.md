@@ -1,3 +1,11 @@
+---
+status: archived
+title: EXECUTION_STATUS
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
 # 🚀 YOLOLAB SEO 批量优化 - 实时执行状态
 
 **更新时间**: 2026-03-31 09:35 UTC+8

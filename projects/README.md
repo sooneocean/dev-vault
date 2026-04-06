@@ -1,3 +1,11 @@
+---
+status: archived
+title: README
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
 # YOLO LAB 網站優化專案
 
 **狀態**: ✅ 自動化優化完成，準備進階優化  

@@ -1,3 +1,11 @@
+---
+status: archived
+title: seo-batch-3-4-keyword-strategy
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
 # SEO Batch 3 & 4 關鍵字佈局戰略圖
 
 **策略核心：** 從 Batch 2 的通用詞搭橋，透過 Batch 3-4 的漸進式細分，建立長尾關鍵字生態

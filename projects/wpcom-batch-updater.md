@@ -1,3 +1,9 @@
+---
+status: archived
+title: wpcom-batch-updater
+type: project
+---
+
 # wpcom-mcp 批量 SEO 更新方案
 **改用** WordPress.com MCP (已驗證 100% 可靠)
 

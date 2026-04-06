@@ -1,3 +1,11 @@
+---
+status: archived
+title: seo-batch-3-4-quick-reference
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
 # SEO Batch 3 & 4 快速參考卡
 
 **用途：** 執行時的現場指南 | **更新日期：** 2026-04-01

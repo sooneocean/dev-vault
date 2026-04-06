@@ -1,3 +1,11 @@
+---
+status: archived
+title: README-BATCH-3-4
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
 # SEO Batch 3 & 4 優化方案 - 完整文件集
 
 **生成日期：** 2026-04-01  

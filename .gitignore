@@ -64,6 +64,12 @@ scripts/yolo-lab-seo-optimizer-v3.js
 # Backup databases
 agent_memory_local.db.backup/
 
+# Agent memory (local session persistence)
+.ai-memory/
+
+# Vault staging (temporary structure)
+2. Areas/
+
 # Documentation (temporary/generated)
 DELIVERY_COMPLETE.txt
 DELIVERY_REPORT.txt

@@ -1,3 +1,11 @@
+---
+status: archived
+title: seo-batch3-articles-21-30
+type: project
+created: 2026-04-06
+updated: 2026-04-06
+---
+
 # Batch 3: 新興內容層 (21-30) — SEO 優化方案
 
 *流量排名 21-30 的文章 | 優化目標：初期搜尋可見性、長尾關鍵字、新讀者引導*

@@ -1,17 +1,14 @@
 ---
 title: Tags Index
 type: index
-updated: 2026-04-03
+updated: 2026-04-06
 ---
 
 # Tags Index
 
 ### active
 - [[claude-session-manager]] — Claude Session Manager — AI 輔助的多工作階段管理 TUI，支援實時流式輸出、成本追蹤、自動壓縮
-- [[csm-feature-roadmap]] — Claude Session Manager 功能路線圖 — v0.53 到 v2 重構計畫，涵蓋 TUI、測試、外掛系統、跨機器同步
-- [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
 - [[dev-vault-status]] — Dev Vault 開發知識庫 — PARA 結構的開源知識管理系統，支援持續自迭代
-- [[manual-plugin-deactivation]] — (no summary)
 - [[QUICK-START-GUIDE]] — (no summary)
 - [[tech-research-squad]] — true
 - [[Unit4-Gospel-Collaboration-Matrix]] — 第四單元 Gospel 協作矩陣 — 編輯、寫手、審核流程與責任分配
@@ -311,7 +308,6 @@ updated: 2026-04-03
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
 
 ### planning
-- [[csm-feature-roadmap]] — Claude Session Manager 功能路線圖 — v0.53 到 v2 重構計畫，涵蓋 TUI、測試、外掛系統、跨機器同步
 - [[compound-engineering-plugin]] — Claude Code 外掛 — 累積式工程工作流，含規劃、審查、知識複利六大指令
 
 ### plugins
@@ -322,15 +318,9 @@ updated: 2026-04-03
 ### pretext
 - [[pretext-csm-tui-layout]] — Use pretext engine for CSM TUI text measurement and layout optimization
 
-### product-iteration
-- [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
-
 ### project
 - [[claude-session-manager]] — Claude Session Manager — AI 輔助的多工作階段管理 TUI，支援實時流式輸出、成本追蹤、自動壓縮
-- [[csm-feature-roadmap]] — Claude Session Manager 功能路線圖 — v0.53 到 v2 重構計畫，涵蓋 TUI、測試、外掛系統、跨機器同步
-- [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
 - [[dev-vault-status]] — Dev Vault 開發知識庫 — PARA 結構的開源知識管理系統，支援持續自迭代
-- [[manual-plugin-deactivation]] — (no summary)
 - [[QUICK-START-GUIDE]] — (no summary)
 - [[tech-research-squad]] — true
 - [[Unit4-Gospel-Collaboration-Matrix]] — 第四單元 Gospel 協作矩陣 — 編輯、寫手、審核流程與責任分配
@@ -425,9 +415,6 @@ updated: 2026-04-03
 ### typescript
 - [[pretext-無-dom-文字測量引擎]] — chenglou/pretext：兩階段架構（prepare + layout），用 Canvas measureText 取代 DOM reflow，sub-μs 熱路徑
 
-### version-tracking
-- [[dev-vault-product-version]] — Central version and iteration history tracker for Dev Vault
-
 ### visual-analysis
 - [[feminist-film-criticism-complete-guide]] — 深入解析女性主義電影學核心概念，從凝視理論到敘述權力，附 3 部經典案例分析
 
@@ -452,9 +439,9 @@ updated: 2026-04-03
 |-----|-------|
 | knowledge-management | 49 |
 | reference | 38 |
-| project | 16 |
-| active | 16 |
 | claude-code | 15 |
+| project | 13 |
+| active | 13 |
 | daily | 10 |
 | log | 10 |
 | auto-memory-migration | 6 |
@@ -474,15 +461,12 @@ updated: 2026-04-03
 | mcp | 3 |
 | open-source | 2 |
 | python | 2 |
-| planning | 2 |
 | prompt-engineering | 2 |
 | architecture | 2 |
 | inventory | 2 |
 | workspace | 2 |
 | hardware | 2 |
 | text-layout | 2 |
-| version-tracking | 1 |
-| product-iteration | 1 |
 | seo | 1 |
 | optimization | 1 |
 | design | 1 |
@@ -495,6 +479,7 @@ updated: 2026-04-03
 | claude-code-hooks | 1 |
 | local-llm | 1 |
 | claude-agent-sdk | 1 |
+| planning | 1 |
 | knowledge-loop | 1 |
 | learning-capture | 1 |
 | toolchain | 1 |

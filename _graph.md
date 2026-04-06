@@ -1,7 +1,7 @@
 ---
 title: Knowledge Graph
 type: index
-updated: 2026-04-03
+updated: 2026-04-06
 ---
 
 # Knowledge Graph
@@ -24,11 +24,6 @@ updated: 2026-04-03
 | [[claude-session-manager]] | [[session-stop-wrapper-learning]] | weak |
 | [[claude-session-manager]] | [[pretext-csm-tui-layout]] | weak |
 | [[claude-session-manager]] | [[tech-research-squad]] | strong |
-| [[csm-feature-roadmap]] | [[csm-architecture]] | weak |
-| [[csm-feature-roadmap]] | [[csm-key-design-decisions]] | weak |
-| [[csm-feature-roadmap]] | [[dexg16-git-and-github]] | weak |
-| [[csm-feature-roadmap]] | [[pretext-csm-tui-layout]] | weak |
-| [[csm-feature-roadmap]] | [[Unit4-Gospel-Recruitment-Plan]] | strong |
 | [[dev-vault-status]] | [[compound-engineering-research]] | medium |
 | [[dev-vault-status]] | [[2026-03-30]] | medium |
 | [[dev-vault-status]] | [[architecture-lessons]] | strong |
@@ -259,31 +254,31 @@ TF-IDF weighted (rare tags + content overlap score higher):
 
 | Note A | Note B | Score | Shared Tags |
 |--------|--------|-------|-------------|
-| [[cluster-subtype-domain-dimensions]] | [[research-update-mode]] | 10 | clausidian, brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[cluster-subtype-domain-dimensions]] | 9.9 | clausidian, brainstorm, future, ai-engineering |
-| [[relation-map-graph-consumer]] | [[research-update-mode]] | 9.9 | clausidian, brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[relation-map-graph-consumer]] | 9.7 | clausidian, brainstorm, future, ai-engineering |
-| [[cluster-subtype-domain-dimensions]] | [[pretext-csm-tui-layout]] | 7.2 | brainstorm, future, ai-engineering |
-| [[pretext-csm-tui-layout]] | [[writing-methodology-framework]] | 7.2 | brainstorm, future, ai-engineering |
-| [[cluster-subtype-domain-dimensions]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
-| [[pretext-csm-tui-layout]] | [[relation-map-graph-consumer]] | 7.1 | brainstorm, future, ai-engineering |
-| [[pretext-csm-tui-layout]] | [[research-update-mode]] | 7.1 | brainstorm, future, ai-engineering |
-| [[relation-map-graph-consumer]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
-| [[research-update-mode]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[pretext-csm-tui-layout]] | 7 | brainstorm, future, ai-engineering |
-| [[cli-update-fields-flag]] | [[writing-methodology-framework]] | 7 | brainstorm, future, ai-engineering |
-| [[claude-session-manager]] | [[csm-architecture]] | 5.2 | claude-code, python |
-| [[harness-engineering-research]] | [[improvement-2026-03-30-002]] | 5.2 | claude-code, hooks, reference, knowledge-management |
-| [[dexg16-machine-specs]] | [[local-llm-deployment]] | 4.6 | hardware, reference, knowledge-management |
-| [[harness-engineering-research]] | [[research-mcp-model-context-protocol-2026-03-29]] | 4.1 | mcp, reference, knowledge-management |
-| [[compound-engineering-plugin]] | [[github-發布流程]] | 4 | workflow, reference, knowledge-management |
-| [[compound-engineering-research]] | [[github-發布流程]] | 4 | workflow, reference, knowledge-management |
-| [[harness-engineering-research]] | [[local-llm-task-routing]] | 4 | mcp, reference, knowledge-management |
-| [[local-llm-task-routing]] | [[research-mcp-model-context-protocol-2026-03-29]] | 4 | mcp, reference, knowledge-management |
-| [[context-engineering-research]] | [[dexg16-ai-stack]] | 3.6 | llm, reference, knowledge-management |
-| [[context-engineering-research]] | [[local-llm-task-routing]] | 3.6 | llm, reference, knowledge-management |
-| [[dexg16-ai-stack]] | [[prompt-engineering-research]] | 3.6 | llm, reference, knowledge-management |
-| [[local-llm-task-routing]] | [[prompt-engineering-research]] | 3.6 | llm, reference, knowledge-management |
+| [[cluster-subtype-domain-dimensions]] | [[research-update-mode]] | 9.8 | clausidian, brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[cluster-subtype-domain-dimensions]] | 9.7 | clausidian, brainstorm, future, ai-engineering |
+| [[relation-map-graph-consumer]] | [[research-update-mode]] | 9.7 | clausidian, brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[relation-map-graph-consumer]] | 9.5 | clausidian, brainstorm, future, ai-engineering |
+| [[cluster-subtype-domain-dimensions]] | [[pretext-csm-tui-layout]] | 7.1 | brainstorm, future, ai-engineering |
+| [[pretext-csm-tui-layout]] | [[writing-methodology-framework]] | 7.1 | brainstorm, future, ai-engineering |
+| [[cluster-subtype-domain-dimensions]] | [[writing-methodology-framework]] | 7 | brainstorm, future, ai-engineering |
+| [[pretext-csm-tui-layout]] | [[relation-map-graph-consumer]] | 7 | brainstorm, future, ai-engineering |
+| [[pretext-csm-tui-layout]] | [[research-update-mode]] | 7 | brainstorm, future, ai-engineering |
+| [[relation-map-graph-consumer]] | [[writing-methodology-framework]] | 7 | brainstorm, future, ai-engineering |
+| [[research-update-mode]] | [[writing-methodology-framework]] | 7 | brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[pretext-csm-tui-layout]] | 6.9 | brainstorm, future, ai-engineering |
+| [[cli-update-fields-flag]] | [[writing-methodology-framework]] | 6.9 | brainstorm, future, ai-engineering |
+| [[claude-session-manager]] | [[csm-architecture]] | 5.1 | claude-code, python |
+| [[harness-engineering-research]] | [[improvement-2026-03-30-002]] | 5 | claude-code, hooks, reference, knowledge-management |
+| [[dexg16-machine-specs]] | [[local-llm-deployment]] | 4.4 | hardware, reference, knowledge-management |
+| [[harness-engineering-research]] | [[research-mcp-model-context-protocol-2026-03-29]] | 3.9 | mcp, reference, knowledge-management |
+| [[compound-engineering-plugin]] | [[github-發布流程]] | 3.8 | workflow, reference, knowledge-management |
+| [[compound-engineering-research]] | [[github-發布流程]] | 3.8 | workflow, reference, knowledge-management |
+| [[harness-engineering-research]] | [[local-llm-task-routing]] | 3.8 | mcp, reference, knowledge-management |
+| [[local-llm-task-routing]] | [[research-mcp-model-context-protocol-2026-03-29]] | 3.8 | mcp, reference, knowledge-management |
+| [[context-engineering-research]] | [[dexg16-ai-stack]] | 3.4 | llm, reference, knowledge-management |
+| [[context-engineering-research]] | [[local-llm-task-routing]] | 3.4 | llm, reference, knowledge-management |
+| [[dexg16-ai-stack]] | [[prompt-engineering-research]] | 3.4 | llm, reference, knowledge-management |
+| [[local-llm-task-routing]] | [[prompt-engineering-research]] | 3.4 | llm, reference, knowledge-management |
 
 ## Clusters
 
@@ -405,7 +400,6 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[dexg16-dev-environment]]
 - [[harness-engineering-research]]
 - [[toolchain-reference]]
-- [[csm-feature-roadmap]]
 - [[architecture-lessons]]
 - [[benchmark-first-rule]]
 - [[claude-agent-sdk-api]]
@@ -439,6 +433,7 @@ TF-IDF weighted (rare tags + content overlap score higher):
 - [[research-scan-2026-03-30]]
 - [[sample-article]]
 - [[writing-methodology-framework]]
+- [[csm-feature-roadmap]]
 - [[QUICK-START-GUIDE]]
 
 ### Cluster 3: HISTORY (30 notes)
