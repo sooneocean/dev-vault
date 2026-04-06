@@ -1,13 +1,13 @@
 ---
-title: Analyze Mode (default)
+title: Analyze Claude Code config and suggest improvements
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
-domain: knowledge-management
-summary: ""
+domain: dev-environment
+summary: "Analyzes recent usage experience and suggests configuration improvements for Claude Code."
 ---
 
 Analyze recent usage experience and suggest configuration improvements for Claude Code.

@@ -1,20 +1,20 @@
 ---
-title: Untitled
+title: Show research pipeline status
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
-domain: knowledge-management
-summary: ""
+domain: research
+summary: "Shows recent scans, pending proposals, and model stats for the research pipeline."
 ---
 
 Show research pipeline status: recent scans, pending proposals, model stats.
 
 Run:
 ```bash
-cd "C:\DEX_data\Claude Code DEV\projects\tools\research-pipeline"
+cd "/c/DEX_data/Claude Code DEV/projects/_tools/research-pipeline"
 
 echo "=== Recent Scans ==="
 ls -la state/scan-results-*.json 2>/dev/null | tail -5 || echo "No scan results yet"
@@ -59,7 +59,7 @@ fi
 
 echo ""
 echo "=== Research Notes ==="
-ls -la "C:\DEX_data\Claude Code DEV\resources\research-scan-"*.md 2>/dev/null | tail -5 || echo "No research notes yet"
+ls -la "/c/DEX_data/Claude Code DEV/resources/research-scan-"*.md 2>/dev/null | tail -5 || echo "No research notes yet"
 ```
 
 If the pipeline directory is not available:
