@@ -10,7 +10,7 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from watermark_removal.tuning import OptunaTuner, TuningConfig, OPTUNA_AVAILABLE
+from watermark_removal.optimization import OptunaTuner, TuningConfig, OPTUNA_AVAILABLE
 
 logging.basicConfig(
     level=logging.INFO,

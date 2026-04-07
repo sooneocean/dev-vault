@@ -5,7 +5,13 @@ from dataclasses import dataclass
 from typing import Any, Optional
 
 import numpy as np
-from optuna.trial import Trial
+
+try:
+    from optuna.trial import Trial
+    OPTUNA_AVAILABLE = True
+except ImportError:
+    OPTUNA_AVAILABLE = False
+    Trial = None  # type: ignore[assignment, misc]
 
 from src.watermark_removal.core.types import ProcessConfig
 from src.watermark_removal.metrics.quality_monitor import QualityMonitor
