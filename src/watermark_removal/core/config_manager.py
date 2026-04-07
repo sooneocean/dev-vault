@@ -109,6 +109,8 @@ class ConfigManager:
             ensemble_model_accuracies=raw_config.get("ensemble_model_accuracies", {"yolov5s": 0.85, "yolov5m": 0.90, "yolov5l": 0.92}),
             streaming_queue_size=raw_config.get("streaming_queue_size", 100),
             streaming_result_ttl_sec=raw_config.get("streaming_result_ttl_sec", 300),
+            # Quality metrics
+            quality_metrics_enabled=raw_config.get("quality_metrics_enabled", True),
             # Phase 3B Label Studio
             label_studio_enabled=raw_config.get("label_studio_enabled", False),
             label_studio_url=raw_config.get("label_studio_url", "http://localhost:8080"),
