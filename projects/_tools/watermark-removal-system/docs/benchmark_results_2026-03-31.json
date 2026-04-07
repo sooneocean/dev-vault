@@ -1,0 +1,58 @@
+{
+  "temporal_smoothing": {
+    "feature": "temporal_smoothing",
+    "frames": 10,
+    "alpha_results": {
+      "alpha_0.0": {
+        "total_time_sec": 3.5999983083456755e-06,
+        "per_frame_ms": 0.00035999983083456755
+      },
+      "alpha_0.1": {
+        "total_time_sec": 0.10436839999965741,
+        "per_frame_ms": 10.436839999965741
+      },
+      "alpha_0.3": {
+        "total_time_sec": 0.07849530000021332,
+        "per_frame_ms": 7.849530000021332
+      },
+      "alpha_0.5": {
+        "total_time_sec": 0.014053700000658864,
+        "per_frame_ms": 1.4053700000658864
+      }
+    }
+  },
+  "adaptive_temporal_smoothing": {
+    "feature": "adaptive_temporal_smoothing",
+    "frames": 10,
+    "total_time_sec": 0.016996000002109213,
+    "per_frame_ms": 1.6996000002109213,
+    "mean_alpha_used": 0.3
+  },
+  "poisson_blending": {
+    "feature": "poisson_blending",
+    "crop_size": 128,
+    "iteration_results": {
+      "iterations_50": {
+        "mean_time_ms": 2761.783300001601,
+        "std_time_ms": 291.22822474945656
+      },
+      "iterations_100": {
+        "mean_time_ms": 5785.769400000087,
+        "std_time_ms": 1447.4890505946687
+      },
+      "iterations_200": {
+        "mean_time_ms": 14406.805000001137,
+        "std_time_ms": 1783.1314591345274
+      }
+    }
+  },
+  "full_pipeline": {
+    "feature": "full_pipeline",
+    "frames": 10,
+    "baseline_total_sec": 2.4000000848900527e-06,
+    "baseline_per_frame_ms": 0.00024000000848900527,
+    "phase2_total_sec": 72.98930889999974,
+    "phase2_per_frame_ms": 7298.930889999974,
+    "overhead_percent": 3041220996.5960646
+  }
+}

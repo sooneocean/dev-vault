@@ -1,9 +1,9 @@
 ---
-status: archived
+status: "archived"
 title: BATCH_UPDATE_STRATEGY
 type: project
 created: 2026-04-06
-updated: 2026-04-06
+updated: "2026-04-06"
 ---
 
 # 🚀 YOLOLAB SEO 批量优化最终方案

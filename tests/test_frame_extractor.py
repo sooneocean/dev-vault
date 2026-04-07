@@ -7,8 +7,8 @@ import cv2
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import Frame
-from src.watermark_removal.preprocessing.frame_extractor import FrameExtractor
+from watermark_removal.core.types import Frame
+from watermark_removal.preprocessing.frame_extractor import FrameExtractor
 
 
 @pytest.fixture

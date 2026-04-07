@@ -1,7 +1,7 @@
 ---
 title: "feat: Agent Rewrite Protocol — Vault 局部重寫系統"
 type: feat
-status: active
+status: complete
 date: 2026-04-06
 origin: docs/brainstorms/2026-04-06-agent-rewrite-protocol-requirements.md
 ---
@@ -146,7 +146,7 @@ windows-nodejs-rewriter.js
 
 ---
 
-- [ ] **Unit 1: 修正 `scripts/windows-nodejs-rewriter.js`（R12, R14, R16）**
+- [x] **Unit 1: 修正 `scripts/windows-nodejs-rewriter.js`（R12, R14, R16）**
 
 **Goal:** 修正兩個破壞性 bug（clausidian binary、HTTPS fetch）並改善 heading 驗證流程，讓腳本在 Node.js 24 + Windows 環境中正確運行。
 
@@ -212,7 +212,7 @@ windows-nodejs-rewriter.js
 
 ---
 
-- [ ] **Unit 2: 建立 `scripts/llm-adapter.js`（R17–R20）**
+- [x] **Unit 2: 建立 `scripts/llm-adapter.js`（R17–R20）**
 
 **Goal:** 提供 `stdin → Claude API → stdout` 的橋接器，讓 `windows-nodejs-rewriter.js` 透過 `LLM_COMMAND` 呼叫。
 
@@ -258,7 +258,7 @@ windows-nodejs-rewriter.js
 
 ---
 
-- [ ] **Unit 3: 落地靜態 artifacts（R9, R21）**
+- [x] **Unit 3: 落地靜態 artifacts（R9, R21）**
 
 **Goal:** 把兩份已有草稿的靜態文件寫入 repo，完成系統的協議文件與筆記範本。
 

@@ -1,0 +1,17 @@
+# SEO Batch Optimizer Dependencies
+# Python 3.8+
+
+# No external dependencies required for core functionality
+# All modules use Python standard library only:
+# - json, logging, datetime, pathlib, typing, subprocess, enum, dataclasses, argparse, shutil, hashlib, re, time
+
+# Optional: For enhanced features
+# requests>=2.28.0        # If using HTTP monitoring for 404 detection
+# python-dotenv>=0.20.0   # If using .env for configuration
+# click>=8.0.0            # If refactoring CLI to use Click instead of argparse
+
+# Development dependencies (optional)
+# pytest>=7.0.0           # For unit testing
+# black>=22.0.0           # Code formatting
+# pylint>=2.13.0          # Linting
+# mypy>=0.950             # Type checking

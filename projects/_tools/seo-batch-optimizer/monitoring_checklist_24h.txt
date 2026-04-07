@@ -1,0 +1,87 @@
+
+================================================================================
+MONITORING CHECKLIST: 24h Checkpoint
+================================================================================
+
+Target Date: 2026-04-12 00:00
+Purpose: Verify initial indexing and technical integrity post-deployment
+
+TECHNICAL CHECKS
+─────────────────────────────────────────────────────────────────────────────
+[ ] Google Search Console Errors
+    • Login to GSC for {yololab.net}
+    • Check "Coverage" tab
+    • Expected: 0 new 404 errors from deployed posts
+    • Log finding: gsc_404_errors = [actual count]
+
+[ ] Indexation Queue Status
+    • Check "Pages" > "Coverage" for 2,800 posts
+    • Verify Batch 1-2 (100 posts) are in "Discovered" or "Indexed"
+    • Log finding: batch_1_2_indexation_status = "[status]"
+
+[ ] Crawl Errors
+    • Check "Crawl stats" tab
+    • Verify no new crawl errors on deployed posts
+    • Log finding: crawl_errors_count = [actual count]
+
+SERP VERIFICATION (Sample 10 Posts)
+─────────────────────────────────────────────────────────────────────────────
+Run Google search for each post and verify:
+
+Post ID 30001: [Check SERP title]
+  • Title appears optimized: [Yes/No]
+  • Meta description showing: [Yes/No]
+  • Snippet length correct: [Yes/No]
+
+(Repeat for posts: 30005, 30010, 30020, 30030, 30040, 30050, 30051, 30075, 30100)
+
+Summary: [X]/10 posts have updated SERP snippets
+
+TECHNICAL AUDITS
+─────────────────────────────────────────────────────────────────────────────
+[ ] Mobile Rendering
+    • Google Mobile-Friendly Test (test up to 5 posts)
+    • Expected: All pass (100%)
+    • Result: [Pass/Fail]
+
+[ ] No Redirect Chains
+    • Check sample posts for 301/302 chains
+    • Expected: Direct to canonical
+    • Result: [Pass/Fail]
+
+[ ] Core Web Vitals Status
+    • Check PageSpeed Insights for sample posts
+    • Expected: No regression vs pre-deployment
+    • Result: [No change/Improved/Degraded]
+
+INTERNAL LINK VERIFICATION
+─────────────────────────────────────────────────────────────────────────────
+[ ] Internal Links Working
+    • Spot-check 5 internal links in Batch 1
+    • All should be 200 OK (no 404)
+    • Result: [Pass/Fail]
+
+PERFORMANCE BASELINE (Optional)
+─────────────────────────────────────────────────────────────────────────────
+[ ] Analytics Dashboard Check
+    • Login to Google Analytics
+    • Set date range: Last 24h
+    • Screenshot baseline metrics (for later comparison)
+    • Sessions, Users, Pageviews, Avg Duration, Bounce Rate
+
+================================================================================
+SUMMARY & NEXT STEPS
+================================================================================
+
+24h Status: [GREEN/YELLOW/RED]
+
+Critical Issues Found: [0/specify]
+  If any: [list issues]
+
+Next Checkpoint: 7d (2026-04-18)
+
+To record observations:
+  python monitor_performance.py --record-observation gsc_404_errors 0 --date 2026-04-12
+  python monitor_performance.py --record-observation batch_1_2_indexation_status "Indexed" --date 2026-04-12
+
+================================================================================

@@ -1,0 +1,82 @@
+
+================================================================================
+MONITORING CHECKLIST: 7d Checkpoint
+================================================================================
+
+Target Date: 2026-04-18
+Purpose: Early performance signals and ranking monitoring
+
+INDEXATION COVERAGE
+─────────────────────────────────────────────────────────────────────────────
+[ ] GSC Coverage Status
+    • Check "Coverage" tab in GSC
+    • Target: >95% of 2,800 posts indexed
+    • Actual count indexed: [___] / 2,800 ({____%}')
+    • Status: [On track / Behind / Ahead]
+
+RANKING POSITION TRACKING
+─────────────────────────────────────────────────────────────────────────────
+[ ] Keyword Position Snapshot
+    • Use ranking tracker or Google Search Console Performance tab
+    • Track top 50 keywords from Batch 1-2 (100 posts)
+    • Baseline positions (from pre-deployment): [snapshot file]
+    • Current positions (7d): [snapshot file]
+    • Avg position change: [___ positions]
+    • Status: [Stable / Moving up / Moving down / Volatile]
+
+FEATURED SNIPPET CAPTURE
+─────────────────────────────────────────────────────────────────────────────
+[ ] Position 0 Tracking
+    • Check which posts now own featured snippets
+    • Run: site:yololab.net "answer box" OR "rich snippet" on Google
+    • Count: [___] featured snippets captured
+    • Target: >50
+    • Status: [On track / Need adjustment]
+
+CTR BASELINE MEASUREMENT
+─────────────────────────────────────────────────────────────────────────────
+[ ] Google Search Console Performance Tab
+    • Date range: 2026-04-11 to 2026-04-18 (first 7 days)
+    • Metric: Average CTR for deployed posts
+    • Baseline CTR (pre-deployment): [___]%
+    • Current CTR (7d average): [___]%
+    • Delta: [___]% (target: +8-15%)
+
+CORE WEB VITALS TREND
+─────────────────────────────────────────────────────────────────────────────
+[ ] PageSpeed Insights (Re-audit sample posts)
+    • Desktop scores: [LCP / FID / CLS]
+    • Mobile scores: [LCP / FID / CLS]
+    • Change vs 24h: [Same / Improved / Degraded]
+
+USER BEHAVIOR BASELINE
+─────────────────────────────────────────────────────────────────────────────
+[ ] Analytics Metrics (First 7 days)
+    • Total users (optimized posts): [___]
+    • Total sessions: [___]
+    • Avg session duration: [__._] minutes
+    • Bounce rate: [__]%
+    • Pages/session: [_._]
+
+================================================================================
+SUMMARY & DECISION POINT
+================================================================================
+
+7d Overall Status: [GREEN / YELLOW / RED]
+
+Key Findings:
+  • Indexation: [___]% complete
+  • Avg ranking change: [___] positions
+  • Featured snippets: [___] captured
+  • CTR delta: [___]%
+
+On Track for 14d Goals? [Yes / Needs attention]
+
+Next Checkpoint: 14d (2026-04-25)
+
+To record observations:
+  python monitor_performance.py --record-observation indexation_coverage_pct 95 --date 2026-04-18
+  python monitor_performance.py --record-observation avg_ranking_change -3 --date 2026-04-18
+  python monitor_performance.py --record-observation featured_snippets_count 52 --date 2026-04-18
+
+================================================================================

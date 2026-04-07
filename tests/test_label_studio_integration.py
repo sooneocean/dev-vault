@@ -6,15 +6,11 @@
 import asyncio
 import json
 import logging
-import sys
 from pathlib import Path
 from typing import Optional
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
-
-# Add src to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from watermark_removal.annotation.label_studio_client import LabelStudioClient
 from watermark_removal.annotation.dataset_exporter import DatasetExporter

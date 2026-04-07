@@ -3,14 +3,14 @@ title: "Harness Engineering 研究"
 type: resource
 tags: [harness-engineering, claude-code, mcp, hooks, plugins, agent-harness, reference, knowledge-management]
 created: "2026-03-29"
-updated: "2026-04-04"
+updated: "2026-04-06"
 status: active
 subtype: research
 maturity: growing
 domain: ai-engineering
 summary: "Harness Engineering 深度研究 — hooks 生命週期 22 事件、MCP 生態系、plugin 架構與評估框架、agent tool chain 設計模式、scaffolding vs runtime 區分、反模式與實測數據。"
 source: "https://martinfowler.com/articles/exploring-gen-ai/harness-engineering.html, https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents, https://code.claude.com/docs/en/hooks"
-related: ["[[tech-research-squad]]", "[[prompt-engineering-research]]", "[[context-engineering-research]]", "[[compound-engineering-research]]", "[[claude-code-configuration]]", "[[compound-engineering-plugin]]"]
+related: ["[[tech-research-squad]]", "[[prompt-engineering-research]]", "[[context-engineering-research]]", "[[compound-engineering-research]]", "[[claude-code-configuration]]", "[[compound-engineering-plugin]]", "[[agent-safe-partial-note-rewrite]]"]
 relation_map: "tech-research-squad:extends, compound-engineering-plugin:documents"
 ---
 

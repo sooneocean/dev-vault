@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from src.watermark_removal.detection import BBox, WatermarkDetector
+from watermark_removal.detection import BBox, WatermarkDetector
 
 
 class TestBBoxDataclass:

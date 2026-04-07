@@ -23,9 +23,9 @@ from pathlib import Path
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.watermark_removal.core.config_manager import ConfigManager
-from src.watermark_removal.core.pipeline import Pipeline
-from src.watermark_removal.core.types import InpaintConfig, ProcessConfig
+from watermark_removal.core.config_manager import ConfigManager
+from watermark_removal.core.pipeline import Pipeline
+from watermark_removal.core.types import InpaintConfig, ProcessConfig
 
 
 def setup_logging(verbose: bool = False) -> None:

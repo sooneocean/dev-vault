@@ -12,9 +12,9 @@ from fastapi import FastAPI, HTTPException, UploadFile, File, BackgroundTasks
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from src.watermark_removal.core.types import ProcessConfig
-from src.watermark_removal.annotation.label_studio_client import LabelStudioClient
-from src.watermark_removal.detection.watermark_detector import BBox
+from watermark_removal.core.types import ProcessConfig
+from watermark_removal.annotation.label_studio_client import LabelStudioClient
+from watermark_removal.detection.watermark_detector import BBox
 from .queue_processor import BackgroundTaskRunner
 from .session_manager import SessionManager, StreamingSession
 

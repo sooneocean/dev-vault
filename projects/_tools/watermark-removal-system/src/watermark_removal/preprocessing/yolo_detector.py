@@ -151,6 +151,9 @@ class YOLODetector:
         Returns:
             List of bboxes lists, one per image
         """
+        if not images:
+            return []
+
         if self.model is None:
             self._load_model()
 

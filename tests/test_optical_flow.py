@@ -9,14 +9,14 @@ from typing import Dict
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import CropRegion, FlowData, ProcessConfig
-from src.watermark_removal.optical_flow import (
+from watermark_removal.core.types import CropRegion, FlowData, ProcessConfig
+from watermark_removal.optical_flow import (
     OpticalFlowProcessor,
     align_inpaint_region,
     compute_flow_confidence,
     warp_region_boundary,
 )
-from src.watermark_removal.persistence.crop_serializer import CropRegionSerializer
+from watermark_removal.persistence.crop_serializer import CropRegionSerializer
 
 
 # ============================================================================

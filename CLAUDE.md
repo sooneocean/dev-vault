@@ -93,13 +93,14 @@ npm run test:proposal-integration  # Integration tests (use --forceExit)
 
 Configured in `.mcp.json` for context enrichment and automation:
 
-| Server | Purpose | Usage |
-|--------|---------|-------|
-| **arxiv** | Research papers & ML preprints | `@arxiv` references for academic context |
-| **huggingface** | Models, datasets, space browsing | Dataset research, model comparisons |
-| **fetch** | Web content retrieval | Research papers, documentation |
-| **agent-memory** | Query memory persistence | Cross-session knowledge recall (`LANCEDB_PATH` configurable) |
-| **wpcom-mcp** | WordPress.com site management | SEO batch optimization, content publishing |
+| Server | Status | Purpose |
+|--------|--------|---------|
+| **wpcom-mcp** | ✅ Active | WordPress.com site management — SEO optimization, content publishing |
+| **arxiv** | ❌ Disabled | Research papers (WebSearch 替代) |
+| **huggingface** | ❌ Disabled | Models/datasets (SEO 工作不需要) |
+| **fetch** | ❌ Disabled | Web content retrieval (WebFetch 工具替代) |
+
+> To re-enable: rename key from `_disabled_<name>` to `<name>` in `.mcp.json`
 
 Verify server connectivity: `npm run test:proposal-integration --forceExit`
 

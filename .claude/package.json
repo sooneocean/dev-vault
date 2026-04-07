@@ -8,10 +8,7 @@
     "test": "node lib/github-api.test.js",
     "test:github-api": "node lib/github-api.test.js"
   },
-  "dependencies": {
-    "@octokit/rest": "^20.0.0",
-    "@octokit/plugin-throttling": "^9.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "keywords": [
     "github",

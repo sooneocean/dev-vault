@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from src.watermark_removal.detection import BBox, BBoxVoter, EnsembleDetector, VotingResult
+from watermark_removal.detection import BBox, BBoxVoter, EnsembleDetector, VotingResult
 
 
 class TestBBoxVoterInitialization:
@@ -479,7 +479,7 @@ class TestDetectionOrchestrator:
 
     def test_orchestrator_initialization_single_mode(self):
         """Test orchestrator initializes in single mode."""
-        from src.watermark_removal.detection import DetectionOrchestrator
+        from watermark_removal.detection import DetectionOrchestrator
 
         orchestrator = DetectionOrchestrator(ensemble_detection_enabled=False)
 
@@ -488,7 +488,7 @@ class TestDetectionOrchestrator:
 
     def test_orchestrator_initialization_ensemble_mode(self):
         """Test orchestrator initializes in ensemble mode."""
-        from src.watermark_removal.detection import DetectionOrchestrator
+        from watermark_removal.detection import DetectionOrchestrator
 
         orchestrator = DetectionOrchestrator(
             ensemble_detection_enabled=True,
@@ -500,7 +500,7 @@ class TestDetectionOrchestrator:
 
     def test_orchestrator_single_mode_detect_frame(self):
         """Test orchestrator detects frames in single mode."""
-        from src.watermark_removal.detection import DetectionOrchestrator
+        from watermark_removal.detection import DetectionOrchestrator
 
         orchestrator = DetectionOrchestrator(ensemble_detection_enabled=False)
         frame = np.zeros((480, 640, 3), dtype=np.uint8)
@@ -511,7 +511,7 @@ class TestDetectionOrchestrator:
 
     def test_orchestrator_ensemble_mode_detect_frame(self):
         """Test orchestrator detects frames in ensemble mode."""
-        from src.watermark_removal.detection import DetectionOrchestrator
+        from watermark_removal.detection import DetectionOrchestrator
 
         orchestrator = DetectionOrchestrator(
             ensemble_detection_enabled=True,
@@ -525,7 +525,7 @@ class TestDetectionOrchestrator:
 
     def test_orchestrator_detect_frames(self):
         """Test orchestrator batch detection."""
-        from src.watermark_removal.detection import DetectionOrchestrator
+        from watermark_removal.detection import DetectionOrchestrator
 
         orchestrator = DetectionOrchestrator(ensemble_detection_enabled=False)
         frames = [np.zeros((480, 640, 3), dtype=np.uint8) for _ in range(2)]
@@ -536,7 +536,7 @@ class TestDetectionOrchestrator:
 
     def test_orchestrator_get_detector_status_single(self):
         """Test orchestrator status reporting in single mode."""
-        from src.watermark_removal.detection import DetectionOrchestrator
+        from watermark_removal.detection import DetectionOrchestrator
 
         orchestrator = DetectionOrchestrator(ensemble_detection_enabled=False)
         status = orchestrator.get_detector_status()
@@ -546,7 +546,7 @@ class TestDetectionOrchestrator:
 
     def test_orchestrator_get_detector_status_ensemble(self):
         """Test orchestrator status reporting in ensemble mode."""
-        from src.watermark_removal.detection import DetectionOrchestrator
+        from watermark_removal.detection import DetectionOrchestrator
 
         orchestrator = DetectionOrchestrator(
             ensemble_detection_enabled=True,
@@ -559,7 +559,7 @@ class TestDetectionOrchestrator:
 
     def test_orchestrator_empty_frame_returns_empty(self):
         """Test orchestrator returns empty list for empty frames."""
-        from src.watermark_removal.detection import DetectionOrchestrator
+        from watermark_removal.detection import DetectionOrchestrator
 
         orchestrator = DetectionOrchestrator(ensemble_detection_enabled=False)
         result = orchestrator.detect_frame(None)
@@ -568,7 +568,7 @@ class TestDetectionOrchestrator:
 
     def test_orchestrator_lazy_loading(self):
         """Test that detector is lazily loaded on first use."""
-        from src.watermark_removal.detection import DetectionOrchestrator
+        from watermark_removal.detection import DetectionOrchestrator
 
         orchestrator = DetectionOrchestrator(ensemble_detection_enabled=False)
         assert orchestrator._detector_loaded is False

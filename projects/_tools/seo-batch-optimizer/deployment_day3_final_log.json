@@ -1,0 +1,442 @@
+{
+  "deployment_date": "2026-03-31T01:39:07.111362",
+  "phase": "2_day_3",
+  "total_batches": 54,
+  "batches": [
+    {
+      "batch": 3,
+      "posts": 50,
+      "post_ids_min": 30101,
+      "post_ids_max": 30150,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 4,
+      "posts": 50,
+      "post_ids_min": 30151,
+      "post_ids_max": 30200,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 5,
+      "posts": 50,
+      "post_ids_min": 30201,
+      "post_ids_max": 30250,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 6,
+      "posts": 50,
+      "post_ids_min": 30251,
+      "post_ids_max": 30300,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 7,
+      "posts": 50,
+      "post_ids_min": 30301,
+      "post_ids_max": 30350,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 8,
+      "posts": 50,
+      "post_ids_min": 30351,
+      "post_ids_max": 30400,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 9,
+      "posts": 50,
+      "post_ids_min": 30401,
+      "post_ids_max": 30450,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 10,
+      "posts": 50,
+      "post_ids_min": 30451,
+      "post_ids_max": 30500,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 11,
+      "posts": 50,
+      "post_ids_min": 30501,
+      "post_ids_max": 30550,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 12,
+      "posts": 50,
+      "post_ids_min": 30551,
+      "post_ids_max": 30600,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 13,
+      "posts": 50,
+      "post_ids_min": 30601,
+      "post_ids_max": 30650,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 14,
+      "posts": 50,
+      "post_ids_min": 30651,
+      "post_ids_max": 30700,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 15,
+      "posts": 50,
+      "post_ids_min": 30701,
+      "post_ids_max": 30750,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 16,
+      "posts": 50,
+      "post_ids_min": 30751,
+      "post_ids_max": 30800,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 17,
+      "posts": 50,
+      "post_ids_min": 30801,
+      "post_ids_max": 30850,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 18,
+      "posts": 50,
+      "post_ids_min": 30851,
+      "post_ids_max": 30900,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 19,
+      "posts": 50,
+      "post_ids_min": 30901,
+      "post_ids_max": 30950,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 20,
+      "posts": 50,
+      "post_ids_min": 30951,
+      "post_ids_max": 31000,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 21,
+      "posts": 50,
+      "post_ids_min": 31001,
+      "post_ids_max": 31050,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 22,
+      "posts": 50,
+      "post_ids_min": 31051,
+      "post_ids_max": 31100,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 23,
+      "posts": 50,
+      "post_ids_min": 31101,
+      "post_ids_max": 31150,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 24,
+      "posts": 50,
+      "post_ids_min": 31151,
+      "post_ids_max": 31200,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 25,
+      "posts": 50,
+      "post_ids_min": 31201,
+      "post_ids_max": 31250,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 26,
+      "posts": 50,
+      "post_ids_min": 31251,
+      "post_ids_max": 31300,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 27,
+      "posts": 50,
+      "post_ids_min": 31301,
+      "post_ids_max": 31350,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 28,
+      "posts": 50,
+      "post_ids_min": 31351,
+      "post_ids_max": 31400,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 29,
+      "posts": 50,
+      "post_ids_min": 31401,
+      "post_ids_max": 31450,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 30,
+      "posts": 50,
+      "post_ids_min": 31451,
+      "post_ids_max": 31500,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 31,
+      "posts": 50,
+      "post_ids_min": 31501,
+      "post_ids_max": 31550,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 32,
+      "posts": 50,
+      "post_ids_min": 31551,
+      "post_ids_max": 31600,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 33,
+      "posts": 50,
+      "post_ids_min": 31601,
+      "post_ids_max": 31650,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 34,
+      "posts": 50,
+      "post_ids_min": 31651,
+      "post_ids_max": 31700,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 35,
+      "posts": 50,
+      "post_ids_min": 31701,
+      "post_ids_max": 31750,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 36,
+      "posts": 50,
+      "post_ids_min": 31751,
+      "post_ids_max": 31800,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 37,
+      "posts": 50,
+      "post_ids_min": 31801,
+      "post_ids_max": 31850,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 38,
+      "posts": 50,
+      "post_ids_min": 31851,
+      "post_ids_max": 31900,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 39,
+      "posts": 50,
+      "post_ids_min": 31901,
+      "post_ids_max": 31950,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 40,
+      "posts": 50,
+      "post_ids_min": 31951,
+      "post_ids_max": 32000,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 41,
+      "posts": 50,
+      "post_ids_min": 32001,
+      "post_ids_max": 32050,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 42,
+      "posts": 50,
+      "post_ids_min": 32051,
+      "post_ids_max": 32100,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 43,
+      "posts": 50,
+      "post_ids_min": 32101,
+      "post_ids_max": 32150,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 44,
+      "posts": 50,
+      "post_ids_min": 32151,
+      "post_ids_max": 32200,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 45,
+      "posts": 50,
+      "post_ids_min": 32201,
+      "post_ids_max": 32250,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 46,
+      "posts": 50,
+      "post_ids_min": 32251,
+      "post_ids_max": 32300,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 47,
+      "posts": 50,
+      "post_ids_min": 32301,
+      "post_ids_max": 32350,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 48,
+      "posts": 50,
+      "post_ids_min": 32351,
+      "post_ids_max": 32400,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 49,
+      "posts": 50,
+      "post_ids_min": 32401,
+      "post_ids_max": 32450,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 50,
+      "posts": 50,
+      "post_ids_min": 32451,
+      "post_ids_max": 32500,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 51,
+      "posts": 50,
+      "post_ids_min": 32501,
+      "post_ids_max": 32550,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 52,
+      "posts": 50,
+      "post_ids_min": 32551,
+      "post_ids_max": 32600,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 53,
+      "posts": 50,
+      "post_ids_min": 32601,
+      "post_ids_max": 32650,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 54,
+      "posts": 50,
+      "post_ids_min": 32651,
+      "post_ids_max": 32700,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 55,
+      "posts": 50,
+      "post_ids_min": 32701,
+      "post_ids_max": 32750,
+      "success": 50,
+      "failed": 0
+    },
+    {
+      "batch": 56,
+      "posts": 50,
+      "post_ids_min": 32751,
+      "post_ids_max": 32800,
+      "success": 50,
+      "failed": 0
+    }
+  ],
+  "total_posts": 2700,
+  "total_success": 2700,
+  "total_failed": 0
+}

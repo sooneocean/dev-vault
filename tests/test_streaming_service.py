@@ -8,14 +8,14 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from src.watermark_removal.streaming.server import create_app
-from src.watermark_removal.streaming.queue_processor import BackgroundTaskRunner
-from src.watermark_removal.streaming.session_manager import (
+from watermark_removal.streaming.server import create_app
+from watermark_removal.streaming.queue_processor import BackgroundTaskRunner
+from watermark_removal.streaming.session_manager import (
     StreamingSession,
     SessionManager,
     ProcessingResult,
 )
-from src.watermark_removal.core.types import ProcessConfig
+from watermark_removal.core.types import ProcessConfig
 
 logger = logging.getLogger(__name__)
 

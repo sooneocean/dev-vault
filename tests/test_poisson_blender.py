@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 import cv2
 
-from src.watermark_removal.blending.poisson_blender import PoissonBlender, ColorMatcher
+from watermark_removal.blending.poisson_blender import PoissonBlender, ColorMatcher
 
 
 class TestPoissonBlenderInitialization:

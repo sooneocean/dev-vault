@@ -9,8 +9,8 @@ import cv2
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import ProcessConfig
-from src.watermark_removal.postprocessing.video_encoder import VideoEncoder
+from watermark_removal.core.types import ProcessConfig
+from watermark_removal.postprocessing.video_encoder import VideoEncoder
 
 
 def create_test_frame(path: str, width: int = 1920, height: int = 1080) -> None:

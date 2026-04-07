@@ -7,8 +7,8 @@ import cv2
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import CropRegion, Frame, Mask, MaskType
-from src.watermark_removal.preprocessing.crop_handler import CropHandler
+from watermark_removal.core.types import CropRegion, Frame, Mask, MaskType
+from watermark_removal.preprocessing.crop_handler import CropHandler
 
 
 def create_test_frame(width: int = 1920, height: int = 1080) -> Frame:

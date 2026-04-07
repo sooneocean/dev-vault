@@ -1,31 +1,38 @@
 # Watermark Removal Pipeline - Base Configuration
-# Copy this file and customize for your project
+# Minimal starter config with the most commonly adjusted fields.
+# For ALL available parameters see: config/full_reference.yaml
 
-# Input/Output paths
-video_path: "input/video.mp4"           # Path to input video (absolute or relative)
-mask_path: "input/mask.png"             # Path to mask: JPEG for static, JSON for dynamic bbox
+# --- I/O Paths (required) ---
+video_path: "input/video.mp4"           # Input video file (absolute or relative)
+mask_path: "input/mask.png"             # Mask: PNG/JPEG for static, JSON for dynamic bbox
 output_dir: "output"                    # Directory for frames, crops, and final MP4
 
-# Inpainting configuration
+# --- Inpainting Model ---
 inpaint:
-  model_name: "flux-dev.safetensors"   # Flux model checkpoint (default recommended)
-  prompt: "remove watermark, clean background"  # Positive prompt
-  negative_prompt: "watermark, text, artifacts, blurry"  # Negative prompt
-  steps: 20                             # Diffusion steps (20-50 recommended)
+  model_name: "flux-dev.safetensors"    # Checkpoint filename (flux-dev recommended)
+  prompt: "remove watermark, clean background"
+  negative_prompt: "watermark, text, artifacts, blurry"
+  steps: 20                             # Diffusion steps (20-50 typical)
   cfg_scale: 7.5                        # Classifier-free guidance strength
   seed: 42                              # Random seed for reproducibility
-  sampler: "euler"                      # Diffusion sampler
+  sampler: "euler"                      # Sampler: euler, dpmpp, etc.
 
-# Pipeline parameters
+# --- Pipeline ---
 context_padding: 50                     # Extra pixels around watermark bbox
-target_inpaint_size: 1024               # Inpaint resolution (1024x1024)
-batch_size: 4                           # Concurrent crops to inpaint
-timeout: 300.0                          # Inpaint execution timeout (seconds)
+target_inpaint_size: 1024               # Inpaint canvas size (1024x1024)
+batch_size: 4                           # Concurrent crops per inpaint batch
+timeout: 300.0                          # Inpaint timeout in seconds
 
-# Output encoding
-output_codec: "h264"                    # Video codec (h264, vp9, etc)
-output_crf: 23                          # Quality (0=best, 51=worst)
+# --- Output Encoding ---
+output_codec: "h264"                    # Video codec (h264, vp9)
+output_crf: 23                          # Quality: 0 = lossless, 51 = worst (18-23 recommended)
+output_fps: 30.0                        # Output frames per second
 
-# Debug options
-keep_intermediate: false                # Keep temporary frames/crops after encoding
-verbose: true                           # Verbose logging
+# --- ComfyUI Server ---
+comfyui_host: "127.0.0.1"              # ComfyUI hostname
+comfyui_port: 8188                      # ComfyUI port
+blend_feather_width: 32                 # Feather blend width at stitch boundaries (px)
+
+# --- Debug ---
+keep_intermediate: false                # Keep temporary frame/crop files after encoding
+verbose: true                           # Enable verbose logging

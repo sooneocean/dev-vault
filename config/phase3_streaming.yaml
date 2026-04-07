@@ -1,0 +1,58 @@
+# Phase 3 Streaming + Ensemble Example
+# Enables ensemble detection with multiple YOLO models and
+# streaming queue settings for real-time processing.
+
+video_path: "samples/live_stream.mp4"
+mask_path: "samples/initial_mask.png"
+output_dir: "output/phase3_streaming"
+
+inpaint:
+  model_name: "flux-dev.safetensors"
+  prompt: "remove watermark, clean background"
+  negative_prompt: "watermark, text, artifacts, blurry"
+  steps: 15
+  cfg_scale: 7.0
+  seed: -1
+  sampler: "euler"
+
+context_padding: 60
+target_inpaint_size: 1024
+batch_size: 8
+timeout: 120.0
+output_codec: "h264"
+output_crf: 20
+output_fps: 30.0
+
+# Ensemble detection (multi-model for higher accuracy)
+ensemble_detection_enabled: true
+ensemble_models:
+  - "yolov5s"
+  - "yolov5m"
+  - "yolov5l"
+ensemble_voting_mode: "confidence_weighted"
+ensemble_iou_threshold: 0.35
+ensemble_nms_threshold: 0.5
+ensemble_model_accuracies:
+  yolov5s: 0.85
+  yolov5m: 0.90
+  yolov5l: 0.92
+
+# Optical flow (temporal alignment)
+optical_flow_enabled: true
+optical_flow_weight: 0.6
+optical_flow_resolution: "480"
+
+# Streaming queue
+streaming_queue_size: 200
+streaming_result_ttl_sec: 120
+
+# Temporal smoothing (still useful for streaming)
+temporal_smooth_enabled: true
+temporal_smooth_alpha: 0.25
+
+# Error resilience for live processing
+skip_errors_in_preprocessing: true
+skip_errors_in_postprocessing: true
+
+keep_intermediate: false
+verbose: false

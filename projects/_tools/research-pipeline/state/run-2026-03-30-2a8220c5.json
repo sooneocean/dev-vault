@@ -1,0 +1,12 @@
+{
+  "run_id": "2026-03-30-2a8220c5",
+  "mode": "quick-scan",
+  "started_at": "2026-03-30T22:18:38.155127",
+  "phase": "scanning",
+  "scan_results": [],
+  "evaluation_results": [],
+  "poc_results": [],
+  "errors": [
+    "Command failed with exit code 1 (exit code: 1)\nError output: Check stderr output for details"
+  ]
+}

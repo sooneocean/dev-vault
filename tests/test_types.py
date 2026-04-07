@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import (
+from watermark_removal.core.types import (
     CropRegion,
     Frame,
     InpaintConfig,
@@ -289,7 +289,7 @@ class TestTypeImportability:
 
     def test_all_types_importable(self):
         """Verify all types can be imported."""
-        from src.watermark_removal.core.types import (
+        from watermark_removal.core.types import (
             CropRegion,
             Frame,
             InpaintConfig,

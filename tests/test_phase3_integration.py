@@ -18,9 +18,9 @@ from typing import Dict, Optional
 import numpy as np
 import pytest
 
-from watermark_removal.core.types import ProcessConfig, CropRegion, FrameExtractedData
+from watermark_removal.core.types import ProcessConfig, CropRegion
 from watermark_removal.core.pipeline import Pipeline
-from watermark_removal.streaming.session_manager import SessionManager, FrameResult
+from watermark_removal.streaming.session_manager import SessionManager, ProcessingResult
 from watermark_removal.streaming.queue_processor import BackgroundTaskRunner
 
 
@@ -279,8 +279,9 @@ class TestStreamingSessionIntegration:
 
         # Simulate frame processing with metrics
         for frame_id in range(3):
-            result = FrameResult(
+            result = ProcessingResult(
                 frame_id=frame_id,
+                session_id=session_id,
                 status="completed",
                 metrics={
                     "total_time_ms": 100.0 + frame_id * 10,

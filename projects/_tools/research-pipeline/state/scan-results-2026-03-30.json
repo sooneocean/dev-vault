@@ -1,0 +1,389 @@
+[
+  {
+    "source": "github",
+    "name": "ruvnet/ruflo",
+    "url": "https://github.com/ruvnet/ruflo",
+    "description": "Agent orchestration platform for Claude enabling deployment of intelligent multi-agent swarms, autonomous workflows, and conversational AI systems. Features enterprise-grade architecture with distributed swarm intelligence, RAG integration, and native Claude Code integration.",
+    "stars": 8500,
+    "tags": ["agent-orchestration", "multi-agent", "claude", "rag-integration"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "crewAIInc/crewAI",
+    "url": "https://github.com/crewAIInc/crewAI",
+    "description": "Lightweight Python framework for orchestrating role-playing autonomous AI agents. Version 1.10.1 with 45,900+ stars, featuring native MCP support, agent-to-agent communication, memory management, and 100+ built-in tools.",
+    "stars": 45900,
+    "tags": ["agent-framework", "multi-agent", "orchestration", "mcp-protocol"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "HKUDS/LightRAG",
+    "url": "https://github.com/HKUDS/LightRAG",
+    "description": "EMNLP 2025 paper implementation combining graph structures with vector representations for fast RAG. Supports multiple vector databases and graph databases with dual-level retrieval strategies.",
+    "stars": 3200,
+    "tags": ["rag", "vector-database", "knowledge-graph", "retrieval"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "getzep/graphiti",
+    "url": "https://github.com/getzep/graphiti",
+    "description": "Framework for building real-time knowledge graphs for AI agents. Continuously integrates user interactions into temporally-aware graphs tracking what's true now and historically. Includes experimental MCP server.",
+    "stars": 2800,
+    "tags": ["knowledge-graph", "rag", "temporal-graphs", "mcp-server"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "infiniflow/ragflow",
+    "url": "https://github.com/infiniflow/ragflow",
+    "description": "Open-source RAG engine fusing cutting-edge retrieval with agent capabilities. Version 0.24.0 with specialized document parsing for complex PDFs, pre-built agent templates, and fused re-ranking.",
+    "stars": 12400,
+    "tags": ["rag", "agent-framework", "document-processing", "retrieval"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "juspay/neurolink",
+    "url": "https://github.com/juspay/neurolink",
+    "description": "Universal AI development platform unifying 12+ providers with intelligent routing, cost-aware decision-making, and 5 production-ready MCP servers included.",
+    "stars": 2200,
+    "tags": ["multi-agent", "orchestration", "mcp-protocol", "multi-provider"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "langgenius/dify",
+    "url": "https://github.com/langgenius/dify",
+    "description": "Production-ready platform for agentic workflow development with 134K+ stars. No-code platform combining agentic AI workflows, RAG pipelines, and model management. Secured $30M Series Pre-A in March 2026.",
+    "stars": 134000,
+    "tags": ["workflow-builder", "agent-framework", "rag", "no-code"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "ComposioHQ/agent-orchestrator",
+    "url": "https://github.com/ComposioHQ/agent-orchestrator",
+    "description": "Agentic orchestrator for parallel coding agents with isolated git worktrees, automatic CI fixes, merge conflict resolution, and code review handling.",
+    "stars": 1850,
+    "tags": ["agent-orchestration", "coding-agents", "parallel-execution", "ci-cd"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "awslabs/agent-squad",
+    "url": "https://github.com/awslabs/agent-squad",
+    "description": "Flexible lightweight framework for managing multiple AI agents with intelligent classifier for agent selection and context management. Available in Python and TypeScript.",
+    "stars": 980,
+    "tags": ["multi-agent", "orchestration", "classifier", "aws"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "Pimzino/agentic-tools-mcp",
+    "url": "https://github.com/Pimzino/agentic-tools-mcp",
+    "description": "MCP server providing AI assistants with advanced task management and agent memory capabilities. Project-specific storage with persistent memory and semantic search.",
+    "stars": 420,
+    "tags": ["mcp-server", "agent-memory", "task-management", "semantic-search"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "lastmile-ai/mcp-agent",
+    "url": "https://github.com/lastmile-ai/mcp-agent",
+    "description": "Framework for building effective agents using MCP with composable workflows (Parallel, Router, Intent-Classifier, Evaluator-Optimizer), Temporal-backed durability, and Deep Orchestrator.",
+    "stars": 680,
+    "tags": ["mcp-protocol", "agent-framework", "workflow-patterns"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "langflow-ai/langflow",
+    "url": "https://github.com/langflow-ai/langflow",
+    "description": "Low-code platform for building AI-powered agents and RAG workflows with drag-and-drop visual interface. Built on LangChain, supports all major LLMs and vector databases.",
+    "stars": 18500,
+    "tags": ["rag", "workflow-builder", "low-code", "visual-ide"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "openagents-org/openagents",
+    "url": "https://github.com/openagents-org/openagents",
+    "description": "AI Agent Networks platform enabling open collaboration where agents discover, communicate, and collaborate. Protocol-agnostic with native MCP and A2A support.",
+    "stars": 2100,
+    "tags": ["agent-networks", "multi-agent", "mcp-protocol", "collaboration"],
+    "is_paper": false
+  },
+  {
+    "source": "github",
+    "name": "fkesheh/mcp-agent-server",
+    "url": "https://github.com/fkesheh/mcp-agent-server",
+    "description": "MCP hub connecting clients with intelligent agents enabling cross-platform communication across multiple MCP ecosystems. Supports multiple agent types with preconfigured servers.",
+    "stars": 550,
+    "tags": ["mcp-protocol", "agent-hub", "cross-platform"],
+    "is_paper": false
+  },
+  {
+    "source": "arxiv",
+    "name": "GoAgent: Group-of-Agents Communication Topology Generation for LLM-based Multi-Agent Systems",
+    "url": "https://arxiv.org/abs/2603.19677",
+    "description": "Presents a method for automatically generating communication topologies in multi-agent systems by treating collaborative groups as atomic units, improving coordination efficiency in large-scale LLM-based multi-agent systems.",
+    "stars": null,
+    "tags": ["multi-agent-systems", "agent-communication", "topology-generation"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "Brain-Inspired Graph Multi-Agent Systems for LLM Reasoning (BIGMAS)",
+    "url": "https://arxiv.org/abs/2603.15371",
+    "description": "Introduces BIGMAS, a framework organizing LLM agents as nodes in dynamically constructed directed graphs coordinating through a centralized shared workspace with a problem-adaptive GraphDesigner.",
+    "stars": null,
+    "tags": ["multi-agent-systems", "reasoning", "graph-architecture"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "The Evolution of Tool Use in LLM Agents: From Single-Tool Call to Multi-Tool Orchestration",
+    "url": "https://arxiv.org/abs/2603.22862",
+    "description": "Comprehensive survey organizing literature on tool use in LLM agents around six dimensions: inference-time execution, training, safety, efficiency, capability completeness, and evaluation.",
+    "stars": null,
+    "tags": ["tool-use", "function-calling", "multi-tool-orchestration", "survey"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "Before the Tool Call: Deterministic Pre-Action Authorization for Autonomous AI Agents",
+    "url": "https://arxiv.org/abs/2603.20953",
+    "description": "Introduces the Open Agent Passport (OAP), an open specification that intercepts tool calls synchronously before execution to enable deterministic pre-action authorization in autonomous agents.",
+    "stars": null,
+    "tags": ["agent-safety", "authorization", "tool-use", "security"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "RAG-X: Systematic Diagnosis of RAG for Medical Question Answering",
+    "url": "https://arxiv.org/abs/2603.03541",
+    "description": "Provides systematic diagnosis of RAG systems for medical QA, proposing better evaluation approaches that distinguish retrieval failures from generation failures.",
+    "stars": null,
+    "tags": ["rag", "medical-qa", "evaluation", "benchmarks"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "GAM-RAG: Gain-Adaptive Memory for Evolving Retrieval in RAG",
+    "url": "https://arxiv.org/abs/2603.01783",
+    "description": "Training-free framework that accumulates retrieval experience from recurring queries and updates retrieval memory over time via a lightweight hierarchical index capturing co-occurrence patterns.",
+    "stars": null,
+    "tags": ["rag", "adaptive-memory", "evolving-retrieval"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "S-Path-RAG: Semantic-Aware Shortest-Path RAG for Multi-Hop KGQA",
+    "url": "https://arxiv.org/abs/2603.23512",
+    "description": "Semantic-aware shortest-path RAG framework for multi-hop question answering over large knowledge graphs, leveraging semantic understanding to identify optimal retrieval paths.",
+    "stars": null,
+    "tags": ["rag", "knowledge-graphs", "multi-hop-reasoning", "question-answering"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "Towards Robust KG-Based RAG: A Comparative Analysis",
+    "url": "https://arxiv.org/abs/2603.05698",
+    "description": "Comparative analysis of robustness in knowledge graph-based RAG systems, examining how KGs reduce hallucinations and enable factual grounding in LLM applications.",
+    "stars": null,
+    "tags": ["rag", "knowledge-graphs", "robustness", "hallucination"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "GraphER: Graph-Based Enrichment and Reranking for RAG",
+    "url": "https://arxiv.org/abs/2603.24925",
+    "description": "Graph-based enrichment and reranking method for RAG that captures multiple forms of proximity beyond semantic similarity, working with standard vector stores without requiring an explicit knowledge graph.",
+    "stars": null,
+    "tags": ["rag", "reranking", "graph-methods", "retrieval"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "Utility-Guided Agent Orchestration for Efficient LLM Tool Use",
+    "url": "https://arxiv.org/abs/2603.19896",
+    "description": "Proposes utility-guided orchestration policy balancing estimated gain, step cost, uncertainty, and redundancy to improve efficiency and effectiveness of multi-step agent behaviors.",
+    "stars": null,
+    "tags": ["agent-orchestration", "tool-use", "efficiency"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "SimpleTool: Parallel Decoding for Real-Time LLM Function Calling",
+    "url": "https://arxiv.org/abs/2603.00030",
+    "description": "Parallel decoding techniques for LLM function calling using special tokens that compress low-entropy tokens, achieving 3-6x end-to-end speedup for tool invocation.",
+    "stars": null,
+    "tags": ["function-calling", "parallel-decoding", "inference-optimization"],
+    "is_paper": true
+  },
+  {
+    "source": "arxiv",
+    "name": "AIP: Agent Identity Protocol for Verifiable Delegation Across MCP and A2A",
+    "url": "https://arxiv.org/abs/2603.24775",
+    "description": "Addresses identity verification in agent systems using MCP for tool calling and A2A for delegation. Proposes a protocol for verifying agent identity to enable secure delegation and access control.",
+    "stars": null,
+    "tags": ["agent-identity", "mcp", "a2a", "security", "delegation"],
+    "is_paper": true
+  },
+  {
+    "source": "huggingface",
+    "name": "Qwen/Qwen3-8B",
+    "url": "https://huggingface.co/Qwen/Qwen3-8B",
+    "description": "Dense 8B parameter language model optimized for agentic applications with advanced tool calling capabilities. Excels in tool use, reasoning, and autonomous decision-making.",
+    "stars": null,
+    "tags": ["agent-tuned", "tool-use", "instruction-following", "LLM"],
+    "is_paper": false
+  },
+  {
+    "source": "huggingface",
+    "name": "Qwen/Qwen3-Embedding-8B",
+    "url": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+    "description": "Multilingual embedding model supporting 119+ languages with top-tier MTEB performance (70.58). Designed for text retrieval, code retrieval, classification, clustering, and bitext mining.",
+    "stars": null,
+    "tags": ["embedding", "multilingual", "retrieval", "MTEB"],
+    "is_paper": false
+  },
+  {
+    "source": "huggingface",
+    "name": "jinaai/jina-embeddings-v5-text-nano",
+    "url": "https://huggingface.co/jinaai/jina-embeddings-v5-text-nano",
+    "description": "Lightweight 239M parameter multilingual embedding model scoring 71.0 on MTEB English. Built on Qwen3-0.6B with embedding distillation, supporting 119+ languages and 32K tokens.",
+    "stars": null,
+    "tags": ["embedding", "lightweight", "multilingual", "RAG"],
+    "is_paper": false
+  },
+  {
+    "source": "huggingface",
+    "name": "google/embeddinggemma-300m",
+    "url": "https://huggingface.co/google/embeddinggemma-300m",
+    "description": "Google's 308M parameter multilingual embedding model optimized for on-device and mobile RAG. Highest-ranking text-only multilingual model under 500M on MTEB. Under 200MB RAM when quantized.",
+    "stars": null,
+    "tags": ["embedding", "on-device", "mobile", "lightweight"],
+    "is_paper": false
+  },
+  {
+    "source": "huggingface",
+    "name": "mistralai/Leanstral-2603",
+    "url": "https://huggingface.co/mistralai/Leanstral-2603",
+    "description": "First open-source code agent for Lean 4 formal proof verification (119B params, 6.5B active). Interacts with Lean 4 compiler via MCP to mathematically prove code correctness. Released March 2026.",
+    "stars": null,
+    "tags": ["code-generation", "agent", "formal-verification", "Lean-4"],
+    "is_paper": false
+  },
+  {
+    "source": "huggingface",
+    "name": "AI45Research/AgentDoG-Qwen3-4B",
+    "url": "https://huggingface.co/AI45Research/AgentDoG-Qwen3-4B",
+    "description": "Safety-focused agent model fine-tuned for diagnosing unsafe agent trajectories. Performs trajectory-level safety evaluation and fine-grained risk diagnosis including risk source and failure mode identification.",
+    "stars": null,
+    "tags": ["agent-tuned", "safety", "tool-use", "trajectory-analysis"],
+    "is_paper": false
+  },
+  {
+    "source": "huggingface",
+    "name": "nomic-ai/modernbert-embed-base",
+    "url": "https://huggingface.co/nomic-ai/modernbert-embed-base",
+    "description": "149M parameter embedding model with ModernBERT architecture, 8192 token context, and Matryoshka Representation Learning for 3x memory reduction at 256-dim.",
+    "stars": null,
+    "tags": ["embedding", "efficient", "long-context", "MTEB"],
+    "is_paper": false
+  },
+  {
+    "source": "huggingface",
+    "name": "A-RAG: Agentic Retrieval-Augmented Generation",
+    "url": "https://huggingface.co/papers/2602.03442",
+    "description": "Framework exposing hierarchical retrieval interfaces directly to LLM agents for adaptive multi-hop retrieval. Achieves 94.5% on HotpotQA and 89.7% on 2WikiMultiHop with GPT-5-mini.",
+    "stars": null,
+    "tags": ["RAG", "agent", "retrieval", "hierarchical"],
+    "is_paper": true
+  },
+  {
+    "source": "huggingface",
+    "name": "Qwen/Qwen3-Embedding-4B",
+    "url": "https://huggingface.co/Qwen/Qwen3-Embedding-4B",
+    "description": "Balanced 4B parameter multilingual embedding model supporting 119+ languages for text retrieval, code retrieval, classification, and clustering with instruction-based customization.",
+    "stars": null,
+    "tags": ["embedding", "multilingual", "retrieval", "code-aware"],
+    "is_paper": false
+  },
+  {
+    "source": "web",
+    "name": "Agentplace",
+    "url": "https://www.agentplace.io/",
+    "description": "Workspace platform for building, testing, and deploying Claude Code-style AI agents for real tasks. Teams create specialized agents for lead routing, research, document analysis, and internal support.",
+    "stars": null,
+    "tags": ["agent-platform", "agent-workspace", "AI-productivity"],
+    "is_paper": false
+  },
+  {
+    "source": "web",
+    "name": "Maritime",
+    "url": "https://maritime.sh/",
+    "description": "Production deployment platform for AI agents at $1/month base. Supports any agent framework in Docker (CrewAI, LangGraph, AutoGen, custom). Features automated sleep/wake, public endpoints, one-click GitHub deploy.",
+    "stars": null,
+    "tags": ["agent-hosting", "infrastructure", "deployment"],
+    "is_paper": false
+  },
+  {
+    "source": "web",
+    "name": "Domscribe",
+    "url": "https://www.domscribe.com/",
+    "description": "Pixel-to-code tool giving AI coding agents live frontend context. Maps JSX/Vue templates to exact file locations. Agents can click DOM elements to trigger edits. Supports React, Vue, Next.js, Nuxt. MIT license.",
+    "stars": null,
+    "tags": ["AI-coding-agent", "frontend-tool", "developer-tools"],
+    "is_paper": false
+  },
+  {
+    "source": "web",
+    "name": "Query Memory",
+    "url": "https://www.querymemory.com/",
+    "description": "API platform providing document management and retrieval for AI agents without complex RAG pipeline engineering. Handles parsing, chunking, embeddings, and retrieval automatically.",
+    "stars": null,
+    "tags": ["RAG", "agent-memory", "knowledge-management", "API"],
+    "is_paper": false
+  },
+  {
+    "source": "web",
+    "name": "Viktor",
+    "url": "https://getviktor.com/",
+    "description": "AI coworker living in Slack/Teams with persistent memory and autonomous task execution. Connects 3,000+ tools (Salesforce, HubSpot, Linear, Stripe, GitHub). Writes code in cloud compute to generate PDFs, spreadsheets, web apps.",
+    "stars": null,
+    "tags": ["agent-automation", "Slack-integration", "workflow-automation"],
+    "is_paper": false
+  },
+  {
+    "source": "web",
+    "name": "MCPCore",
+    "url": "https://mcpcore.io/",
+    "description": "Platform for building and deploying MCP servers with browser IDE, one-click deployment, auto-generated testing, and security modes for mixing public demo and production servers.",
+    "stars": null,
+    "tags": ["MCP-infrastructure", "developer-tools", "deployment"],
+    "is_paper": false
+  },
+  {
+    "source": "web",
+    "name": "Pensieve",
+    "url": "https://www.producthunt.com/products/pensieve-5",
+    "description": "Knowledge graph platform providing full company context for AI agents. Builds unified organizational knowledge graphs for better agent reasoning and informed decisions across workflows.",
+    "stars": null,
+    "tags": ["knowledge-graph", "RAG", "agent-context", "enterprise-AI"],
+    "is_paper": false
+  },
+  {
+    "source": "web",
+    "name": "Bracketmadness.ai",
+    "url": "https://www.bracketmadness.ai",
+    "description": "Competition platform for AI agents to autonomously participate in NCAA bracket predictions. Agents read API docs, self-register, analyze game data, and submit predictions. Built with Next.js via Claude Code.",
+    "stars": null,
+    "tags": ["agent-api", "autonomous-agents", "show-hn"],
+    "is_paper": false
+  }
+]

@@ -18,6 +18,7 @@ from ..postprocessing.video_encoder import VideoEncoder
 from ..temporal.temporal_smoother import TemporalSmoother
 from ..persistence.crop_serializer import CropRegionSerializer
 from ..optical_flow import OpticalFlowProcessor, align_inpaint_region, compute_flow_confidence
+from ..metrics.quality_monitor import QualityMonitor
 
 logger = logging.getLogger(__name__)
 
@@ -89,6 +90,11 @@ class Pipeline:
             stitched = await self._stitch_frames(frames, inpainted)
             logger.info(f"Stitched {len(stitched)} frames")
 
+            # Phase 6.5: Quality metrics (optional)
+            quality_metrics = await self._compute_quality_metrics(
+                frames, stitched, inpainted
+            )
+
             # Phase 7: Encoding
             logger.info("Phase 7: Encoding to MP4")
             encode_start = time.time()
@@ -106,6 +112,7 @@ class Pipeline:
                 "output_path": str(output_path),
                 "inpaint_duration_seconds": inpaint_duration,
                 "encode_duration_seconds": encode_duration,
+                "quality_metrics": quality_metrics,
             }
 
             logger.info(f"Pipeline complete in {total_duration:.2f}s: {summary}")
@@ -579,6 +586,95 @@ class Pipeline:
 
         logger.info(f"Stitched {len(stitched)} frames")
         return stitched
+
+    async def _compute_quality_metrics(
+        self,
+        original_frames: List[Path],
+        stitched_frames: List[Path],
+        inpainted: Dict[int, Path],
+    ) -> Dict[str, Any] | None:
+        """Compute per-frame quality metrics on stitched output.
+
+        Runs QualityMonitor over stitched frames and writes a quality_report/
+        directory with metrics.csv and summary.json.
+
+        This phase is best-effort: failures are logged as warnings and never
+        crash the pipeline.
+
+        Args:
+            original_frames: List of original extracted frame paths.
+            stitched_frames: List of stitched frame paths (output of _stitch_frames).
+            inpainted: Dict mapping frame index to inpainted crop path.
+
+        Returns:
+            Summary statistics dict, or None if metrics are disabled or failed.
+        """
+        if not self.config.quality_metrics_enabled:
+            logger.info("Quality metrics disabled, skipping phase")
+            return None
+
+        logger.info("Phase 6.5: Computing quality metrics")
+
+        try:
+            import cv2
+
+            report_dir = Path(self.config.output_dir) / "quality_report"
+            report_dir.mkdir(parents=True, exist_ok=True)
+
+            monitor = QualityMonitor(
+                output_dir=str(report_dir),
+                enable_logging=True,
+            )
+
+            for idx, stitched_path in enumerate(stitched_frames):
+                try:
+                    stitched_img = cv2.imread(str(stitched_path))
+                    if stitched_img is None:
+                        logger.warning(f"Failed to read stitched frame {idx}")
+                        continue
+
+                    # Load corresponding original frame if available
+                    original_img = None
+                    if idx < len(original_frames):
+                        original_img = cv2.imread(str(original_frames[idx]))
+
+                    # Load inpainted crop if available
+                    inpainted_crop = None
+                    if idx in inpainted:
+                        inpainted_crop = cv2.imread(str(inpainted[idx]))
+
+                    # Derive region bbox from crop_region metadata
+                    region_bbox = None
+                    if idx in self.crop_regions:
+                        cr = self.crop_regions[idx]
+                        region_bbox = (cr.x, cr.y, cr.w, cr.h)
+
+                    monitor.compute_frame_metrics(
+                        frame_id=idx,
+                        current_frame=stitched_img,
+                        inpainted_crop=inpainted_crop,
+                        region_bbox=region_bbox,
+                        original_frame=original_img,
+                    )
+
+                except Exception as e:
+                    logger.warning(f"Quality metrics failed for frame {idx}: {e}")
+                    continue
+
+            # Persist results
+            monitor.save_metrics_csv()
+            monitor.save_metrics_json(filename="summary.json")
+
+            summary = monitor.get_summary_statistics()
+            logger.info(
+                f"Quality metrics complete: {summary.get('frame_count', 0)} frames, "
+                f"mean boundary_smoothness={summary.get('boundary_smoothness', {}).get('mean', 'N/A')}"
+            )
+            return summary
+
+        except Exception as e:
+            logger.warning(f"Quality metrics phase failed (non-fatal): {e}")
+            return None
 
     async def _encode_video(self, frames: List[Path]) -> Path:
         """Encode stitched frames to MP4.

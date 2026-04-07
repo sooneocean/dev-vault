@@ -1,13 +1,13 @@
 ---
-title: Steps
+title: Show local LLM infrastructure status
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
-domain: knowledge-management
-summary: ""
+domain: dev-environment
+summary: "Shows Ollama models, VRAM usage, and GPU health for local LLM setup."
 ---
 
 Show local LLM infrastructure status — Ollama models, VRAM usage, GPU health.

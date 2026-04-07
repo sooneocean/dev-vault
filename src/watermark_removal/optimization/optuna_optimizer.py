@@ -3,13 +3,17 @@
 import logging
 from typing import Any, Callable, Optional
 
-import optuna
-from optuna.pruners import HyperbandPruner
-from optuna.samplers import TPESampler
-from optuna.study import Study
-from optuna.trial import Trial
+try:
+    import optuna
+    from optuna.pruners import HyperbandPruner
+    from optuna.samplers import TPESampler
+    from optuna.study import Study
+    from optuna.trial import Trial
+    OPTUNA_AVAILABLE = True
+except ImportError:
+    OPTUNA_AVAILABLE = False
 
-from src.watermark_removal.core.types import ProcessConfig
+from watermark_removal.core.types import ProcessConfig
 
 logger = logging.getLogger(__name__)
 
@@ -226,7 +230,7 @@ class OptunaOptimizer:
         objective_func: Callable[[Trial], float],
         n_jobs: int = 1,
         show_progress_bar: bool = True,
-        gc_each_trial: bool = False,
+        gc_after_trial: bool = False,
     ) -> Optional[Trial]:
         """Run optimization using the study.
 
@@ -234,7 +238,7 @@ class OptunaOptimizer:
             objective_func: Function that takes a trial and returns a metric value.
             n_jobs: Number of parallel jobs (1 = sequential).
             show_progress_bar: Show progress bar during optimization.
-            gc_each_trial: Garbage collect after each trial.
+            gc_after_trial: Garbage collect after each trial.
 
         Returns:
             Best trial found, or None if optimization failed.
@@ -259,7 +263,7 @@ class OptunaOptimizer:
                 n_trials=self.n_trials,
                 n_jobs=n_jobs,
                 show_progress_bar=show_progress_bar,
-                gc_each_trial=gc_each_trial,
+                gc_after_trial=gc_after_trial,
             )
 
             best_trial = self._study.best_trial

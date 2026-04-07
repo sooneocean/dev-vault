@@ -1,0 +1,121 @@
+
+================================================================================
+MONITORING CHECKLIST: 14d Checkpoint
+================================================================================
+
+Target Date: 2026-04-25
+Purpose: Primary measurement window for business impact
+
+TRAFFIC IMPACT MEASUREMENT
+─────────────────────────────────────────────────────────────────────────────
+[ ] Google Analytics: Total Traffic Delta
+    • Date range: 2026-04-11 to 2026-04-25 (14 days post-deployment)
+    • Metric: Sessions / Users from organic search
+    • Baseline (pre-deployment 14d avg): [___] sessions
+    • Actual (2026-04-11 to 2026-04-25): [___] sessions
+    • Delta: [___]% (target: +5-10%)
+    • Confidence: [Low / Medium / High]
+
+[ ] By-Post Traffic Analysis
+    • Batch 1 (posts 1-50) avg traffic change: [___]%
+    • Batch 2 (posts 51-100) avg traffic change: [___]%
+    • Day 12 (posts 101-2800) avg traffic change: [___]%
+    • Variance: [___] (are some posts performing better?)
+
+CTR MEASUREMENT (Primary)
+─────────────────────────────────────────────────────────────────────────────
+[ ] GSC Performance: CTR Delta
+    • Date range: 2026-04-11 to 2026-04-25
+    • Baseline CTR (7d pre-deployment): [___]%
+    • Current CTR (2026-04-11 to 2026-04-25): [___]%
+    • Delta: [___]% (target: +8-15%)
+    • Status: [Meeting target / Below target / Exceeding target]
+
+RANKING POSITIONS (14d Update)
+─────────────────────────────────────────────────────────────────────────────
+[ ] Top 100 Keyword Positions
+    • Baseline (pre-deployment): [snapshot file]
+    • Current (14d): [snapshot file]
+    • Avg improvement: [___] positions (target: -2 to -5, i.e., moving up)
+    • Keywords with +1 position: [___]
+    • Keywords with -1 position: [___]
+    • Stability: [Stable / Volatile]
+
+ENGAGEMENT METRICS
+─────────────────────────────────────────────────────────────────────────────
+[ ] Bounce Rate Change
+    • Baseline avg bounce rate (pre-deploy): [__]%
+    • Current bounce rate (2026-04-11 to 2026-04-25): [__]%
+    • Delta: [___]% (target: -3 to -5%, i.e., less bouncing)
+    • Interpretation: [Improved / Neutral / Degraded]
+
+[ ] Avg Session Duration
+    • Baseline (pre-deploy): [___] minutes
+    • Current (14d): [___] minutes
+    • Delta: [___]% (target: +5-10%)
+
+[ ] Pages per Session
+    • Baseline: [_._]
+    • Current: [_._]
+    • Delta: [___]%
+
+CONVERSION TRACKING (If applicable)
+─────────────────────────────────────────────────────────────────────────────
+[ ] Goal Conversions (if e-commerce or form submissions tracked)
+    • Baseline conversion rate: [___]%
+    • Current conversion rate: [___]%
+    • Delta: [___]%
+
+CONTENT PERFORMANCE WINNERS/LOSERS
+─────────────────────────────────────────────────────────────────────────────
+[ ] Top 20 Posts (by traffic gain)
+    List posts with >15% traffic improvement:
+    1. Post [ID]: [___]% gain
+    2. Post [ID]: [___]% gain
+    ... (top 20)
+
+[ ] Underperforming Posts
+    List posts with <0% traffic change (need attention):
+    1. Post [ID]: [___]% loss
+    2. Post [ID]: [___]% loss
+    ... (if any)
+
+TECHNICAL HEALTH (14d Check)
+─────────────────────────────────────────────────────────────────────────────
+[ ] GSC Errors (should still be 0)
+    • 404 errors: [___]
+    • Crawl errors: [___]
+    • Mobile usability issues: [___]
+
+[ ] Core Web Vitals (Stability check)
+    • LCP: [Good / Needs improvement]
+    • FID: [Good / Needs improvement]
+    • CLS: [Good / Needs improvement]
+    • Overall: [Passed / Failed]
+
+================================================================================
+SUMMARY & BUSINESS DECISION
+================================================================================
+
+14d Overall Status: [GREEN / YELLOW / RED]
+
+Primary Metrics vs Targets:
+  ✓ CTR: [___]% delta (target: +8-15%) → [Met / Not met]
+  ✓ Traffic: [___]% delta (target: +5-10%) → [Met / Not met]
+  ✓ Avg ranking: [___] positions (target: -2 to -5) → [Met / Not met]
+  ✓ Bounce rate: [___]% delta (target: -3-5%) → [Met / Not met]
+
+Business Impact: [Positive / Neutral / Negative]
+
+Recommendation: [Continue monitoring / Adjust optimization / Halt/Rollback]
+
+Phase 3 Readiness: [Yes, proceed / Wait for 30d data / Not ready]
+
+Next Checkpoint: 30d (2026-05-11)
+
+To record observations:
+  python monitor_performance.py --record-observation traffic_delta_pct 7.5 --date 2026-04-25
+  python monitor_performance.py --record-observation ctr_delta_pct 10.2 --date 2026-04-25
+  python monitor_performance.py --record-observation avg_ranking_improvement 3 --date 2026-04-25
+
+================================================================================

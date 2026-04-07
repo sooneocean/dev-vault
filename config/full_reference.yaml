@@ -1,0 +1,124 @@
+# ===========================================================================
+# Watermark Removal Pipeline - Full Reference Configuration
+# ===========================================================================
+# Every ProcessConfig parameter with its default value and documentation.
+# Copy only the fields you need into your working config.
+# Required fields: video_path, mask_path, output_dir
+# ===========================================================================
+
+
+# === Phase 1: Core Pipeline ================================================
+
+# --- I/O Paths (required) ---
+video_path: "input/video.mp4"           # Input video file path (absolute or relative)
+mask_path: "input/mask.png"             # Mask file: PNG/JPEG for static, JSON for dynamic bbox
+output_dir: "output"                    # Output directory for frames, crops, and final MP4
+
+# --- Inpainting Model ---
+inpaint:
+  model_name: "flux-dev.safetensors"    # Checkpoint filename (e.g. flux-dev.safetensors, sdxl-1.0)
+  prompt: "remove watermark, clean background"           # Positive prompt for inpainting
+  negative_prompt: "watermark, text, artifacts, blurry"  # Negative prompt to avoid
+  steps: 20                             # Number of diffusion steps (20-50 typical)
+  cfg_scale: 7.5                        # Classifier-free guidance scale
+  seed: 42                              # Random seed for reproducibility (-1 for random)
+  sampler: "euler"                      # Diffusion sampler: euler, dpmpp, etc.
+
+# --- Pipeline Parameters ---
+context_padding: 50                     # Extra pixels around watermark bbox for context
+target_inpaint_size: 1024               # Target resize dimension for inpaint (1024x1024)
+batch_size: 4                           # Number of crops to inpaint concurrently
+timeout: 300.0                          # Inpaint execution timeout in seconds
+
+# --- Output Encoding ---
+output_codec: "h264"                    # Video codec: h264, vp9
+output_crf: 23                          # Quality: 0 = lossless, 51 = worst (18-23 recommended)
+output_fps: 30.0                        # Output video frames per second
+
+# --- ComfyUI Server ---
+comfyui_host: "127.0.0.1"              # ComfyUI server hostname
+comfyui_port: 8188                      # ComfyUI server port
+blend_feather_width: 32                 # Feather blend width at stitch boundaries (pixels)
+
+# --- Error Handling ---
+skip_errors_in_preprocessing: false     # Skip frames that fail preprocessing (instead of stopping)
+skip_errors_in_postprocessing: false    # Skip frames that fail postprocessing (instead of stopping)
+
+# --- Debug ---
+keep_intermediate: false                # Keep temporary frame/crop files after encoding
+verbose: true                           # Enable verbose logging
+
+# --- Checkpointing ---
+use_checkpoints: false                  # Enable checkpoint save/resume for long videos
+
+
+# === Phase 2: Advanced =====================================================
+
+# --- Temporal Smoothing ---
+temporal_smooth_enabled: true           # Enable temporal smoothing to reduce inter-frame flicker
+temporal_smooth_alpha: 0.3              # Alpha blending factor (0.0 = no smoothing, 1.0 = full)
+use_adaptive_temporal_smoothing: false  # Enable motion-aware adaptive alpha
+adaptive_motion_threshold: 0.05         # Motion threshold for adaptive smoothing (0.0-1.0)
+
+# --- Poisson Blending ---
+use_poisson_blending: false             # Enable Poisson blending for seamless stitch boundaries
+poisson_max_iterations: 100             # Max iterations for Poisson solver convergence
+poisson_tolerance: 0.01                 # Convergence tolerance for Poisson solver
+
+# --- YOLO Watermark Tracking ---
+use_watermark_tracker: false            # Enable YOLO-based tracking for moving watermarks
+yolo_model_path: null                   # Path to YOLO weights (null = disabled / auto-download)
+yolo_confidence_threshold: 0.5          # Detection confidence threshold (0.0-1.0)
+tracker_smoothing_factor: 0.3           # BBox trajectory smoothing factor (0.0-1.0)
+
+
+# === Phase 3: Streaming & Ensemble =========================================
+
+# --- Optical Flow ---
+optical_flow_enabled: false             # Enable optical flow-based temporal alignment (RAFT)
+optical_flow_weight: 0.5                # Blending weight for flow alignment (0.0-1.0)
+optical_flow_resolution: "480"          # Flow computation resolution: "480" (fast) or "1080" (accurate)
+
+# --- Ensemble Detection ---
+ensemble_detection_enabled: false       # Enable multi-model ensemble detection
+ensemble_models:                        # YOLO model variants for ensemble
+  - "yolov5s"
+  - "yolov5m"
+ensemble_voting_mode: "confidence_weighted"  # Voting: "confidence_weighted" (average by model accuracy)
+ensemble_iou_threshold: 0.3             # Min IoU to match detections across models (0.0-1.0)
+ensemble_nms_threshold: 0.45            # NMS threshold for post-processing (0.0-1.0)
+ensemble_model_accuracies:              # Baseline accuracy per model (for confidence weighting)
+  yolov5s: 0.85
+  yolov5m: 0.90
+  yolov5l: 0.92
+
+# --- Streaming ---
+streaming_queue_size: 100               # Max frame queue size (frames dropped if exceeded)
+streaming_result_ttl_sec: 300           # TTL for cached streaming results in seconds
+
+# --- Quality Metrics ---
+quality_metrics_enabled: true           # Enable per-frame quality metrics after stitching
+
+
+# === Phase 3B: Label Studio & Optuna =======================================
+
+# --- Label Studio Annotation ---
+label_studio_enabled: false             # Enable Label Studio annotation workflow
+label_studio_url: "http://localhost:8080"  # Label Studio server URL
+label_studio_api_key: null              # API key for Label Studio auth (required when enabled)
+label_studio_project_id: null           # Project ID (created on first annotation if null)
+label_studio_wait_timeout_sec: 3600.0   # Timeout for annotation completion (seconds)
+
+# --- Optuna Hyperparameter Tuning ---
+optuna_enabled: false                   # Enable Optuna tuning for ensemble detection
+optuna_study_name: "watermark_ensemble_tuning"  # Study name for experiment tracking
+optuna_storage: "sqlite:///optuna.db"   # Storage backend: SQLite path or database URI
+optuna_n_trials: 150                    # Number of Optuna trials to run
+optuna_search_bounds:                   # Hyperparameter search space bounds {param: [low, high]}
+  weight_yolov5s: [0.1, 1.0]
+  weight_yolov5m: [0.1, 1.0]
+  weight_yolov5l: [0.1, 1.0]
+  confidence_threshold: [0.05, 0.95]
+  iou_threshold: [0.3, 0.7]
+  nms_threshold: [0.3, 0.7]
+  augmentation_intensity: [0.0, 1.0]

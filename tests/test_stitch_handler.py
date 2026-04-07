@@ -3,8 +3,8 @@
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import CropRegion
-from src.watermark_removal.postprocessing.stitch_handler import StitchHandler
+from watermark_removal.core.types import CropRegion
+from watermark_removal.postprocessing.stitch_handler import StitchHandler
 
 
 def create_test_frame(width: int = 1920, height: int = 1080) -> np.ndarray:

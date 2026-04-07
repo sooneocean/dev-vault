@@ -1,0 +1,8 @@
+{
+  "pages": 2,
+  "total_per_page": 100,
+  "posts_count": 200,
+  "total_posts": 2716,
+  "note": "Actual posts from pages 1-2 via wpcom-mcp API. Represents sample for statistical projection.",
+  "sampled": true
+}

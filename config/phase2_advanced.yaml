@@ -1,0 +1,47 @@
+# Phase 2 Advanced Example
+# Enables temporal smoothing, Poisson blending, and YOLO tracking.
+# For moving watermarks on complex backgrounds.
+
+video_path: "samples/moving_watermark.mp4"
+mask_path: "samples/dynamic_bbox.json"
+output_dir: "output/phase2_advanced"
+
+inpaint:
+  model_name: "flux-dev.safetensors"
+  prompt: "remove watermark logo, restore clean background seamlessly"
+  negative_prompt: "watermark, logo, text, artifacts, seams, blurry"
+  steps: 30
+  cfg_scale: 8.0
+  seed: 42
+  sampler: "dpmpp"
+
+context_padding: 80
+target_inpaint_size: 1024
+batch_size: 2
+timeout: 600.0
+output_codec: "h264"
+output_crf: 18
+output_fps: 30.0
+
+# Temporal smoothing (reduces inter-frame flicker)
+temporal_smooth_enabled: true
+temporal_smooth_alpha: 0.4
+use_adaptive_temporal_smoothing: true
+adaptive_motion_threshold: 0.08
+
+# Poisson blending (seamless stitch boundaries)
+use_poisson_blending: true
+poisson_max_iterations: 200
+poisson_tolerance: 0.005
+
+# YOLO tracking (moving watermarks)
+use_watermark_tracker: true
+yolo_model_path: "models/yolov5s.pt"
+yolo_confidence_threshold: 0.6
+tracker_smoothing_factor: 0.25
+
+# Checkpoint for long videos
+use_checkpoints: true
+
+keep_intermediate: false
+verbose: true

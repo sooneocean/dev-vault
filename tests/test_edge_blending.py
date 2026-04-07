@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 import cv2
 
-from src.watermark_removal.postprocessing.edge_blending import EdgeBlender
+from watermark_removal.postprocessing.edge_blending import EdgeBlender
 
 
 class TestEdgeBlenderInitialization:

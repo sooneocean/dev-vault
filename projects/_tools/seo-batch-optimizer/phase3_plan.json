@@ -1,0 +1,53 @@
+{
+  "phase": "Phase 3: Low-Traffic Post Optimization",
+  "status": "Planning",
+  "created_at": "2026-03-31T01:23:36.747852",
+  "scope": {
+    "total_posts_estimated": 336,
+    "tier_3_sample": 36,
+    "failed_posts": 0,
+    "tier_3_pct_of_population": "12.0%",
+    "note": "Scope based on Phase 1 baseline sample. Actual implementation should be preceded by full-site re-scan to confirm current traffic patterns."
+  },
+  "timeline": {
+    "phase2_complete": "2026-04-11",
+    "phase3_start_scheduled": "2026-04-14",
+    "phase3_end_estimated": "2026-04-21",
+    "duration_days": 7
+  },
+  "deployment": {
+    "batch_size": 50,
+    "estimated_batches": 7,
+    "posts_per_day": 50,
+    "days_needed": 7
+  },
+  "cost": {
+    "post_count": 336,
+    "cost_per_post": "$0.10",
+    "total_cost": "$33.60",
+    "model": "Claude Sonnet",
+    "currency": "USD"
+  },
+  "optimization_specs": {
+    "dimensions": 6,
+    "title_variants": "3 per post",
+    "meta_description": "<157 characters",
+    "schema_markup": "Yes",
+    "internal_links": "Yes",
+    "image_alt_text": "Yes",
+    "faq_expansion": "Yes"
+  },
+  "success_criteria": {
+    "seo_score_improvement": "+15-20 points",
+    "traffic_improvement": "+10-20%",
+    "featured_snippet_capture": "+50% of Phase 3 posts",
+    "zero_failed_deployments": true
+  },
+  "go_no_go_decision_date": "2026-04-25",
+  "decision_criteria": [
+    "Phase 2 traffic improvement: +5% (minimum)",
+    "Phase 2 zero critical errors",
+    "Phase 2 CTR improvement: +8% (minimum)",
+    "No ongoing rollback or remediation needed"
+  ]
+}
