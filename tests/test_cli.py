@@ -9,8 +9,8 @@ import cv2
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.config_manager import ConfigManager
-from src.watermark_removal.core.types import ProcessConfig
+from watermark_removal.core.config_manager import ConfigManager
+from watermark_removal.core.types import ProcessConfig
 
 
 def create_test_yaml_config(path: str) -> None:

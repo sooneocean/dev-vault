@@ -8,11 +8,11 @@ from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock, AsyncMock
 import sqlite3
 
-from src.watermark_removal.optimization.tuning_config import (
+from watermark_removal.optimization.tuning_config import (
     TuningSearchSpace,
     TuningParameters,
 )
-from src.watermark_removal.optimization.optuna_tuner import (
+from watermark_removal.optimization.optuna_tuner import (
     OptunaTuner,
     TuningConfig,
     OPTUNA_AVAILABLE,

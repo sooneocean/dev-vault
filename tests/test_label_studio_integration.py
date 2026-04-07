@@ -12,9 +12,9 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from src.watermark_removal.annotation.label_studio_client import LabelStudioClient
-from src.watermark_removal.annotation.dataset_exporter import DatasetExporter
-from src.watermark_removal.detection.watermark_detector import BBox
+from watermark_removal.annotation.label_studio_client import LabelStudioClient
+from watermark_removal.annotation.dataset_exporter import DatasetExporter
+from watermark_removal.detection.watermark_detector import BBox
 
 logger = logging.getLogger(__name__)
 
@@ -287,7 +287,7 @@ class TestStreamingServerIntegration:
     def test_streaming_server_imports(self):
         """Test that streaming server can be imported."""
         try:
-            from src.watermark_removal.streaming.server import create_app
+            from watermark_removal.streaming.server import create_app
             assert create_app is not None
         except ImportError as e:
             pytest.skip(f"Streaming server not fully available: {e}")

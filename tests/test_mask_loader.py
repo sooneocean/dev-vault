@@ -8,8 +8,8 @@ import cv2
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import Frame, Mask, MaskType
-from src.watermark_removal.preprocessing.mask_loader import MaskLoader
+from watermark_removal.core.types import Frame, Mask, MaskType
+from watermark_removal.preprocessing.mask_loader import MaskLoader
 
 
 @pytest.fixture

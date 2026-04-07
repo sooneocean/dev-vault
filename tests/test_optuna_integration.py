@@ -8,9 +8,9 @@ import numpy as np
 import pytest
 from optuna.trial import Trial
 
-from src.watermark_removal.core.types import ProcessConfig
-from src.watermark_removal.optimization.optuna_optimizer import OptunaOptimizer
-from src.watermark_removal.optimization.trial_runner import TrialResult, TrialRunner
+from watermark_removal.core.types import ProcessConfig
+from watermark_removal.optimization.optuna_optimizer import OptunaOptimizer
+from watermark_removal.optimization.trial_runner import TrialResult, TrialRunner
 
 
 class TestOptunaOptimizer:

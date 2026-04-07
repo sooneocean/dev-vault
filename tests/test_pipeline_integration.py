@@ -9,8 +9,8 @@ import cv2
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import CropRegion, InpaintConfig, ProcessConfig
-from src.watermark_removal.core.pipeline import Pipeline
+from watermark_removal.core.types import CropRegion, InpaintConfig, ProcessConfig
+from watermark_removal.core.pipeline import Pipeline
 
 
 def create_test_image(path: str, width: int = 1920, height: int = 1080) -> None:

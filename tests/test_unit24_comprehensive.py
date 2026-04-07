@@ -6,18 +6,18 @@ import tempfile
 from pathlib import Path
 from unittest.mock import Mock, AsyncMock, patch, MagicMock
 
-from src.watermark_removal.annotation.label_studio_client import (
+from watermark_removal.annotation.label_studio_client import (
     LabelStudioSessionClient as LabelStudioClient,
     PredictionBBox,
 )
-from src.watermark_removal.annotation.dataset_exporter import (
+from watermark_removal.annotation.dataset_exporter import (
     CoordinateConverter,
     BBoxPixel,
     BBoxPercentage,
     CocoExporter,
     YoloExporter,
 )
-from src.watermark_removal.annotation.label_studio_setup import (
+from watermark_removal.annotation.label_studio_setup import (
     DockerComposeGenerator,
     ProjectInitializer,
     APIKeyManager,

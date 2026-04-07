@@ -1,0 +1,303 @@
+# Phase 2 Advanced Configuration Example
+# Full feature showcase: temporal smoothing, tracking, Poisson blending, checkpointing
+#
+# This configuration demonstrates all Phase 2 capabilities for optimal watermark removal.
+# Customize the parameters below for your specific use case.
+#
+# Start with this as a template and adjust:
+# 1. Input/output paths
+# 2. Inpaint parameters (prompt, steps, cfg_scale)
+# 3. Phase 2 features based on your scenario (see docs/phase2_tuning_scenarios.md)
+
+---
+
+# ============================================================================
+# INPUT/OUTPUT CONFIGURATION
+# ============================================================================
+
+# Path to input video file (supports MP4, MOV, MKV, AVI)
+video_path: ./input/video.mp4
+
+# Path to watermark mask
+# - For static watermarks: PNG image file (e.g., logo.png)
+# - For moving watermarks: JSON file with per-frame bboxes (see format below)
+mask_path: ./input/watermark_mask.png
+
+# Output directory for final video
+output_dir: ./output
+
+# Directory for checkpoint files (only used if use_checkpoints=true)
+checkpoint_dir: ./checkpoints
+
+# ============================================================================
+# INPAINT MODEL CONFIGURATION
+# ============================================================================
+
+# These parameters control the ComfyUI inpainting backend
+inpaint:
+  # Model selection
+  # - flux-dev: Higher quality, slower (~50ms per inpaint)
+  # - flux-schnell: Faster, acceptable quality (~25ms per inpaint)
+  model_name: flux-dev
+
+  # Positive prompt: Guide the inpainting model toward desired output
+  # Include details about the background to maintain continuity
+  prompt: "remove watermark seamlessly, maintain background texture and color, preserve lighting"
+
+  # Negative prompt: Guide model away from undesired artifacts
+  # Include common removal artifacts to avoid
+  negative_prompt: "watermark, text, logo, artifact, distortion, blur, doubled objects, unnatural, fake"
+
+  # Diffusion steps: More = better quality, slower
+  # Range: 1-50, default 20
+  # Tuning: 15-20 for fast, 25-35 for quality, 40-50 for premium
+  steps: 25
+
+  # Guidance scale (CFG): How strongly to follow the prompt
+  # Range: 1.0-20.0, default 7.5
+  # Tuning: 5-7 for creative, 7.5 for balanced, 8-12 for strict
+  cfg_scale: 8.0
+
+  # Sampler: Diffusion sampling method
+  # Options: dpmpp_2m (fast), dpmpp_sde (detailed), euler, lcm
+  sampler: dpmpp_2m
+
+  # Scheduler: Step size scheduling
+  # Options: karras (smooth), exponential, linear
+  scheduler: karras
+
+  # Random seed for reproducibility
+  # -1 = random seed each frame
+  # 0+ = fixed seed (reproducible across runs)
+  seed: -1
+
+# ============================================================================
+# PREPROCESSING CONFIGURATION (Phase 1)
+# ============================================================================
+
+# Padding around watermark bbox for inpainting context
+# More context = better background reconstruction, slower processing
+# Range: 0-256 pixels, default 64
+# Tuning: 32 for tight crops, 64 for normal, 96+ for complex backgrounds
+context_padding: 64
+
+# Target size for inpainting crop
+# Crops resized to this size, then stitched back to original dimensions
+# Range: 512-2048 pixels, default 1024
+# Tuning: 512 for speed, 1024 for balance, 1536+ for detail
+target_inpaint_size: 1024
+
+# ============================================================================
+# POSTPROCESSING CONFIGURATION (Phase 1)
+# ============================================================================
+
+# Feather mask width for edge blending in feather mode
+# Creates soft transition between inpainted and original regions
+# Range: 0-128 pixels, default 32
+# Used when use_poisson_blending=false
+blend_feather_width: 32
+
+# ============================================================================
+# PHASE 2: TEMPORAL SMOOTHING (Flicker Reduction)
+# ============================================================================
+
+# Alpha blending factor for temporal smoothing
+# Blends current frame with previous frame to reduce flicker
+# Range: 0.0-1.0, default 0.0 (disabled)
+# 0.0 = no smoothing (Phase 1 baseline)
+# 0.1-0.3 = conservative (recommended for most videos)
+# 0.3-0.5 = moderate
+# 0.5+ = aggressive (may cause motion blur)
+temporal_smooth_alpha: 0.3
+
+# Enable motion-aware adaptive temporal smoothing
+# Automatically adjusts alpha based on frame motion:
+# - High motion: Reduces alpha (preserves detail)
+# - Low motion: Increases alpha (reduces flicker)
+# Recommended: true (adds only ~1% overhead)
+use_adaptive_temporal_smoothing: true
+
+# Motion detection threshold for adaptive smoothing
+# Percentage of frame that must change to trigger motion
+# Range: 0.0-1.0, default 0.05
+# 0.02 = very sensitive (pans, zoom detected)
+# 0.05 = balanced (default)
+# 0.1+ = insensitive (only large motion detected)
+adaptive_motion_threshold: 0.05
+
+# ============================================================================
+# PHASE 2: POISSON BLENDING (Seamless Edge Integration)
+# ============================================================================
+
+# Enable Poisson blending to replace feather blending
+# Solves Laplace equation for seamless boundary integration
+# Recommended: true for high-quality output
+# Note: Adds ~95ms overhead per frame (significantly slower)
+use_poisson_blending: true
+
+# Maximum Jacobi solver iterations for Poisson blending
+# More iterations = better convergence, slower processing
+# Range: 1-500, default 100
+# Tuning:
+#   50 = fast (~48ms), acceptable quality
+#   100 = balanced (~95ms), recommended default
+#   150 = better (~142ms), minimal improvement
+#   200+ = premium (~190ms+), marginal gains
+poisson_max_iterations: 100
+
+# Convergence tolerance for Poisson solver
+# Stops iterations when residual < tolerance
+# Range: 0.001-0.1, default 0.01
+# 0.001 = strict (slow convergence, best quality)
+# 0.01 = balanced (recommended default)
+# 0.05+ = lenient (faster, acceptable for most cases)
+poisson_tolerance: 0.01
+
+# ============================================================================
+# PHASE 2: WATERMARK TRACKING (Dynamic Watermarks)
+# ============================================================================
+
+# Enable YOLO-based watermark tracking for moving watermarks
+# Detects watermark location per frame, handles moving/scaling
+# Recommended: true for moving watermarks, false for static
+# Note: Requires YOLO model setup (see docs/phase2_yolo_setup.md)
+use_watermark_tracker: false
+
+# Path to YOLO model weights
+# null = disable tracking (graceful degradation)
+# Valid models:
+#   ~/.local/share/ultralytics/yolov8n.pt (nano, 6MB, fast)
+#   ~/.local/share/ultralytics/yolov8s.pt (small, 22MB, balanced)
+#   ~/.local/share/ultralytics/yolov8m.pt (medium, 49MB, accurate)
+# Setup: See docs/phase2_yolo_setup.md
+yolo_model_path: null
+
+# Detection confidence threshold
+# Only detections with confidence > threshold are used
+# Range: 0.0-1.0, default 0.5
+# 0.3 = permissive (many detections, some false positives)
+# 0.5 = balanced (recommended)
+# 0.7+ = strict (few detections, high confidence)
+yolo_confidence_threshold: 0.5
+
+# Sparse detection interval for YOLO tracking
+# Detect watermark every Nth frame, interpolate others
+# Range: 1-30, default 1
+# 1 = detect every frame (accurate, slow)
+# 5 = detect every 5th frame (5x speedup, ~95% accurate)
+# 10+ = detect infrequently (very fast, requires smooth motion)
+tracker_sparse_interval: 5
+
+# BBox trajectory smoothing factor
+# Blend detected bbox toward previous frame to reduce jitter
+# Range: 0.0-1.0, default 0.3
+# 0.0 = no smoothing (use raw detections)
+# 0.1-0.3 = light smoothing (recommended)
+# 0.5+ = heavy smoothing (may miss motion)
+tracker_smoothing_factor: 0.3
+
+# ============================================================================
+# PHASE 2: CHECKPOINTING (Resumable Execution)
+# ============================================================================
+
+# Enable checkpoint saving for fault tolerance
+# Saves pipeline state after each stage, enables resumption
+# Recommended: true for videos > 5 minutes
+# Note: Adds minimal overhead (<1%), huge speedup on resume
+use_checkpoints: true
+
+# Resume from existing checkpoint
+# true = resume from last checkpoint, false = start fresh
+# Automatically detects latest checkpoint in checkpoint_dir
+resume_from_checkpoint: false
+
+# ============================================================================
+# EXECUTION CONFIGURATION
+# ============================================================================
+
+# Batch size for parallel crop processing
+# Number of crops to inpaint simultaneously via ComfyUI
+# Range: 1-16, default 4
+# 1 = sequential (slow, minimum memory)
+# 4 = parallel (good balance)
+# 8+ = aggressive (requires more VRAM)
+batch_size: 4
+
+# ComfyUI request timeout (seconds)
+# Maximum time to wait for ComfyUI inpainting response
+# Range: 10-3600, default 300
+# Increase if ComfyUI slow or running on limited hardware
+inpaint_timeout_sec: 300.0
+
+# ComfyUI server hostname
+# Change if running ComfyUI on different machine
+comfyui_host: "127.0.0.1"
+
+# ComfyUI server port
+# Default: 8188 (standard ComfyUI port)
+comfyui_port: 8188
+
+# Keep intermediate PNG files after completion
+# Useful for debugging, significantly increases disk usage
+# Range: true/false, default false
+keep_intermediate: false
+
+# ============================================================================
+# USAGE EXAMPLES
+# ============================================================================
+#
+# Static watermark with flicker reduction (Phase 2 Light):
+#   - temporal_smooth_alpha: 0.3
+#   - use_adaptive_temporal_smoothing: true
+#   - use_poisson_blending: false
+#   - use_watermark_tracker: false
+#   Result: Better quality than Phase 1, 55ms per frame
+#
+# Moving watermark (Phase 2 Full):
+#   - All Phase 2 features enabled
+#   - use_watermark_tracker: true
+#   - yolo_model_path: ~/.local/share/ultralytics/yolov8n.pt
+#   Result: Handles dynamic watermarks, 150ms per frame
+#
+# High-quality batch processing:
+#   - inpaint.steps: 30-35
+#   - cfg_scale: 8.5-9.0
+#   - use_poisson_blending: true
+#   - poisson_max_iterations: 150-200
+#   Result: Premium output, 200-300ms per frame
+#
+# Real-time performance (30fps target):
+#   - temporal_smooth_alpha: 0.0
+#   - use_poisson_blending: false
+#   - use_watermark_tracker: false (or yolo_model_path: null)
+#   - inpaint.steps: 10-15
+#   Result: Fast pipeline, 30-40ms per frame
+#
+# ============================================================================
+# DYNAMIC WATERMARK MASK FORMAT (JSON)
+# ============================================================================
+#
+# For moving watermarks, mask_path can point to JSON file with per-frame bboxes:
+#
+# {
+#   "frames": [
+#     {
+#       "frame_id": 0,
+#       "bbox": [x1, y1, x2, y2],  # Bounding box coordinates (pixels)
+#       "confidence": 0.95          # Optional detection confidence
+#     },
+#     {
+#       "frame_id": 1,
+#       "bbox": [x1+dx, y1+dy, x2+dx, y2+dy],
+#       "confidence": 0.92
+#     }
+#     # ... one entry per frame with watermark
+#   ]
+# }
+#
+# Bounding box format: [x1, y1, x2, y2] where:
+#   x1, y1 = top-left corner
+#   x2, y2 = bottom-right corner
+#   Coordinates in pixels, relative to video frame size
+#
+# ============================================================================

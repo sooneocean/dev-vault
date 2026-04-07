@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from src.watermark_removal.metrics import FrameMetrics, QualityMonitor
+from watermark_removal.metrics import FrameMetrics, QualityMonitor
 
 
 class TestFrameMetrics:

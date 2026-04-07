@@ -7,7 +7,7 @@ comparing simple alpha-blend and adaptive motion-aware modes.
 import numpy as np
 import pytest
 
-from src.watermark_removal.temporal.temporal_smoother import TemporalSmoother
+from watermark_removal.temporal.temporal_smoother import TemporalSmoother
 
 
 class TestTemporalFlickerMetric:

@@ -8,9 +8,9 @@ from unittest.mock import MagicMock, patch
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.checkpoint import Checkpoint, CHECKPOINT_VERSION
-from src.watermark_removal.core.types import CropRegion
-from src.watermark_removal.persistence.crop_serializer import CropRegionSerializer
+from watermark_removal.core.checkpoint import Checkpoint, CHECKPOINT_VERSION
+from watermark_removal.core.types import CropRegion
+from watermark_removal.persistence.crop_serializer import CropRegionSerializer
 
 
 class TestCheckpointPreprocessingStage:

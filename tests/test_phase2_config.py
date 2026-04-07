@@ -6,8 +6,8 @@ from pathlib import Path
 import pytest
 import yaml
 
-from src.watermark_removal.core.config_manager import ConfigManager
-from src.watermark_removal.core.types import ProcessConfig
+from watermark_removal.core.config_manager import ConfigManager
+from watermark_removal.core.types import ProcessConfig
 
 
 class TestPhase2ConfigBasics:

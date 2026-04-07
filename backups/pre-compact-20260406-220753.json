@@ -1,0 +1,390 @@
+[
+  {
+    "file": "mcp-server-研發計畫",
+    "dir": "projects",
+    "title": "MCP Server 研發計畫",
+    "type": "project",
+    "tags": [
+      "mcp",
+      "ai",
+      "server",
+      "typescript",
+      "content-plan",
+      "r-and-d"
+    ],
+    "status": "completed",
+    "summary": "MCP Server 系列內容研發：從協議理解到實戰開發的 10 篇系列文章計畫",
+    "related": [
+      "mcp-server-開發指南",
+      "w1-1-mcp-協議全景",
+      "w1-2-mcp-三大核心",
+      "w1-3-mcp-傳輸層",
+      "w2-3-mcp-resources-實戰",
+      "w2-1-從零建-mcp-server",
+      "w2-2-mcp-tools-進階",
+      "w3-1-mcp-prompts-實戰",
+      "w3-2-mcp-claude-code-整合",
+      "w4-1-mcp-server-部署",
+      "w4-2-mcp-設計模式與最佳實踐"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# MCP Server 研發計畫\n\n## Goal\n\n從 [[mcp-server-開發指南]] 拆解為 **10 篇系列內容**，完整覆蓋 MCP Server 從原理到實戰。\n\n- 節奏：每週 2-3 篇，預計 4 週完成（deadline: 2026-05-01）\n- 比例：概念篇 30% / 實戰篇 50% / 進階篇 20%\n\n## Progress\n\n| Date | Update |\n|------|--------|\n| 2026-04-03 | 建立 [[mcp-server-開發指南]] 資源筆記，完成內容拆解為 10 篇系列計畫 |\n| 2026-04-03 | W1 三篇概念篇完成：[[w1-1-mcp-協議全景]] [[w1-2-mcp-三大核心]] [[w1-3-mcp-傳輸層]] |\n| 2026-04-03 | W2 三篇實戰篇完成：[[w2-1-從零建-mcp-server]] [[w2-2-mcp-tools-進階]] [[w2-3-mcp-resources-實戰]] |\n| 2026-04-03 | W3 兩篇整合篇完成：[[w3-1-mcp-prompts-實戰]] [[w3-2-mcp-claude-code-整合]] |\n| 2026-04-03 | W4 兩篇進階篇完成：[[w4-1-mcp-server-部署]] [[w4-2-mcp-設計模式與最佳實踐]] |\n| 2026-04-03 | **全系列 10/10 篇完成** 🎉 |\n\n## TODO\n\n- [x] **W1-1** 📘 MCP 協議全景：為什麼 AI Agent 需要標準化通訊 ✅\n- [x] **W1-2** 📘 MCP 三大核心：Tools / Resources / Prompts 完整解析 ✅\n- [x] **W1-3** 📘 MCP 傳輸層深入：stdio vs Streamable HTTP+SSE ✅\n- [x] **W2-1** 🔧 從零建一個 MCP Server（TypeScript 實戰）✅\n- [x] **W2-2** 🔧 MCP Tools 進階：參數驗證、錯誤處理、冪等設計 ✅\n- [x] **W2-3** 🔧 MCP Resources 實戰：讓 AI 讀取你的資料 ✅\n- [x] **W3-1** 🔧 MCP Prompts 實戰：打造可重用的 AI 工作流模板 ✅\n- [x] **W3-2** 🔧 把 MCP Server 接入 Claude Code：完整整合指南 ✅\n- [x] **W4-1** 🚀 MCP Server 部署：從本地 stdio 到雲端 HTTP ✅\n- [x] **W4-2** 🚀 MCP Server 設計模式與最佳實踐 ✅\n\n## Notes\n\n### 內容策略\n\n| 類型 | 篇數 | 標記 | 目標 |\n|------|------|------|------|\n| 概念篇 | 3 | 📘 | 建立認知：什麼是 MCP、為何需要 |\n| 實戰篇 | 5 | 🔧 | 動手做：從零到整合 Claude Code |\n| 進階篇 | 2 | 🚀 | 進階：部署、設計模式、最佳實踐 |\n\n### 內容來源\n\n- [[mcp-server-開發指南]] — 技術參考基底\n- [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) — 官方 SDK\n- [MCP Specification](https://spec.modelcontextprotocol.io) — 協議規範\n- [MCP Inspector](https://github.com/modelcontextprotocol/inspector) — 測試工具\n\n### 每篇結構模板\n\n1. 問題導入（為什麼需要這個？）\n2. 核心概念（是什麼？）\n3. 實戰程式碼（怎麼做？）\n4. 常見坑與最佳實踐\n5. 下篇預告"
+  },
+  {
+    "file": "obsidian-agent",
+    "dir": "projects",
+    "title": "Obsidian Agent",
+    "type": "project",
+    "tags": [
+      "obsidian",
+      "mcp",
+      "cli",
+      "tool",
+      "vault"
+    ],
+    "status": "archived",
+    "summary": "Obsidian vault MCP agent CLI — 已完成階段性使命，歸檔",
+    "related": [
+      "w1-1-mcp-協議全景",
+      "w1-2-mcp-三大核心",
+      "w1-3-mcp-傳輸層",
+      "w2-3-mcp-resources-實戰",
+      "w2-1-從零建-mcp-server",
+      "w2-2-mcp-tools-進階",
+      "w3-1-mcp-prompts-實戰",
+      "w3-2-mcp-claude-code-整合",
+      "w4-1-mcp-server-部署",
+      "w4-2-mcp-設計模式與最佳實踐"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# Obsidian Agent\n\n## Goal\n\nObsidian vault 的 CLI MCP agent，透過命令列管理知識庫（journal / note / search / patch 等）。\n\n**已完成階段性使命** — 工具穩定可用，轉為維護模式。\n\n## Progress\n\n| Date | Update |\n|------|--------|\n\n## TODO\n\n- [ ]\n\n## Notes\n\n### 功能清單\n\n| 命令 | 用途 |\n|------|------|\n| `journal` | 建立每日日誌 |\n| `note` | 建立筆記（area/project/resource/idea） |\n| `read` | 讀取筆記內容 |\n| `search` | 全文搜索 |\n| `patch` | 編輯特定段落（append/prepend/replace） |\n| `update` | 更新 metadata |\n| `list` | 列出筆記 |\n| `recent` | 最近更新 |\n| `archive` | 歸檔筆記 |\n| `sync` | 重建索引 |\n| `review` | 周/月回顧 |\n| `stale` | 過期笔記 |\n| `cluster` | 主題聚類 |\n| `suggest` | 今日建議 |\n\n### 技術棧\n\n- Node.js CLI + MCP Server\n- PARA 結構 vault\n- 路徑：`$OA_VAULT` 環境變數指定\n\n### 歸檔原因\n\n工具功能穩定，日常操作已形成固定流程，無需持續開發。後續如有需求再啟動。"
+  },
+  {
+    "file": "mcp-server-開發指南",
+    "dir": "resources",
+    "title": "MCP Server 開發指南",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "ai",
+      "server",
+      "typescript",
+      "protocol"
+    ],
+    "status": "active",
+    "summary": "Model Context Protocol Server 開發架構、核心概念、TypeScript SDK 實作指南",
+    "related": [
+      "mcp-server-研發計畫",
+      "w1-1-mcp-協議全景",
+      "w1-2-mcp-三大核心",
+      "w1-3-mcp-傳輸層",
+      "w2-3-mcp-resources-實戰",
+      "w2-1-從零建-mcp-server",
+      "w2-2-mcp-tools-進階",
+      "w3-1-mcp-prompts-實戰",
+      "w3-2-mcp-claude-code-整合",
+      "w4-1-mcp-server-部署",
+      "w4-2-mcp-設計模式與最佳實踐"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# MCP Server 開發指南\n\n## Key Points\n\n- MCP 是 AI agent 與外部系統溝通的標準協議（JSON-RPC 2.0）\n- Server 提供三大能力：**Tools**（函數呼叫）、**Resources**（資料讀取）、**Prompts**（模板）\n- 傳輸層支援 **stdio**（本地）和 **Streamable HTTP/SSE**（遠端）\n- 官方 TypeScript SDK：`@modelcontextprotocol/sdk`\n- Protocol version: `2025-06-18`\n\n## Notes\n\n## 架構概覽\n\n```\nClient (Claude/IDE) ←→ Transport (stdio | HTTP+SSE) ←→ MCP Server\n                                                         ├── Tools     (函數呼叫)\n                                                         ├── Resources (資料讀取)\n                                                         └── Prompts   (模板)\n```\n\n### 生命週期\n\n1. **Initialize** — Client 發送 `initialize`，交換 `protocolVersion` + `capabilities`\n2. **Handshake** — Client 回應 `initialized` 通知\n3. **Operation** — Client 呼叫 `tools/call`、`resources/read` 等\n4. **Shutdown** — 斷開連線\n\n## 三大核心能力\n\n### Tools（工具）\n\nLLM 可呼叫的函數，需使用者授權。適合：API 呼叫、資料寫入、計算。\n\n```typescript\nserver.tool(\"get-weather\", { city: z.string() }, async ({ city }) => ({\n  content: [{ type: \"text\", text: `${city}: 25°C 晴` }]\n}));\n```\n\n### Resources（資源）\n\n類似檔案的唯讀資料來源。適合：設定檔、API 回應、資料庫查詢結果。\n\n```typescript\nserver.resource(\"config\", \"config://app\", async (uri) => ({\n  contents: [{ uri: uri.href, mimeType: \"application/json\", text: \"{...}\" }]\n}));\n```\n\n### Prompts（提示模板）\n\n預製模板，幫助使用者完成特定任務。\n\n```typescript\nserver.prompt(\"summarize\", { topic: z.string() }, ({ topic }) => ({\n  messages: [{ role: \"user\", content: { type: \"text\", text: `Summarize: ${topic}` } }]\n}));\n```\n\n## 傳輸方式\n\n| 傳輸 | 適用場景 | 特點 |\n|------|---------|------|\n| **stdio** | 本地 CLI、IDE 插件 | 簡單、低延遲、process 級隔離 |\n| **Streamable HTTP** | 遠端服務、多用戶 | 支援 SSE 串流、可擴展 |\n\n### stdio 範例\n\n```typescript\nimport { McpServer } from \"@modelcontextprotocol/sdk/server/mcp.js\";\nimport { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\";\n\nconst server = new McpServer({ name: \"my-server\", version: \"1.0.0\" });\nconst transport = new StdioServerTransport();\nawait server.connect(transport);\n```\n\n### HTTP + SSE 範例\n\n```\nGET  /sse                        → 建立 SSE 連線，取得 session endpoint\nPOST /messages/?session_id=xxx   → 發送 JSON-RPC 請求（回應 202）\nSSE  event: message              → 非同步接收結果\n```\n\n## JSON-RPC 2.0 通訊格式\n\n### 請求\n\n```json\n{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"tools/call\",\n  \"params\": { \"name\": \"get-weather\", \"arguments\": { \"city\": \"台北\" } }\n}\n```\n\n### 回應\n\n```json\n{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"result\": {\n    \"content\": [{ \"type\": \"text\", \"text\": \"台北: 28°C 多雲\" }]\n  }\n}\n```\n\n## 快速開始步驟\n\n1. `npm init -y && npm install @modelcontextprotocol/sdk zod`\n2. 建立 server 檔案，註冊 tools/resources/prompts\n3. 設定 `package.json` 的 `bin` 欄位\n4. 在 Claude Code `settings.json` 加入 MCP server 設定\n5. 測試：`npx @modelcontextprotocol/inspector`\n\n## 設定範例（Claude Code）\n\n```json\n{\n  \"mcpServers\": {\n    \"my-server\": {\n      \"command\": \"node\",\n      \"args\": [\"path/to/server.js\"],\n      \"env\": {}\n    }\n  }\n}\n```\n\n## 最佳實踐\n\n- **Input validation** — 用 Zod schema 驗證所有 tool 參數\n- **Error handling** — 回傳結構化錯誤，包含 `isError: true`\n- **Idempotency** — Tool 應盡量設計為冪等操作\n- **Granularity** — 一個 tool 做一件事，避免萬用 tool\n- **Security** — 敏感操作需確認，不暴露 secrets 到 tool 輸出\n- **Logging** — 善用 `server.sendLoggingMessage()` 追蹤除錯\n\n## Related\n\n- [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)\n- [MCP Specification](https://spec.modelcontextprotocol.io)\n- [MCP Inspector](https://github.com/modelcontextprotocol/inspector)\n- [[2026-04-03]] — 決定投入 MCP Server 開發"
+  },
+  {
+    "file": "w1-1-mcp-協議全景",
+    "dir": "resources",
+    "title": "W1-1 MCP 協議全景",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "ai-agent",
+      "protocol",
+      "json-rpc",
+      "series-mcp-server"
+    ],
+    "status": "active",
+    "summary": "系列第 1 篇：MCP 解決 N×M 整合困境、vs REST/GraphQL 定位、JSON-RPC 2.0 基礎、核心架構",
+    "related": [
+      "mcp-server-研發計畫",
+      "obsidian-agent",
+      "mcp-server-開發指南",
+      "w1-2-mcp-三大核心",
+      "w1-3-mcp-傳輸層",
+      "w2-3-mcp-resources-實戰",
+      "w2-1-從零建-mcp-server",
+      "w2-2-mcp-tools-進階",
+      "w3-1-mcp-prompts-實戰",
+      "w3-2-mcp-claude-code-整合",
+      "w4-2-mcp-設計模式與最佳實踐"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# W1-1 MCP 協議全景\n\n## Key Points\n\n- MCP = AI agent 世界的 USB，解決 N×M 整合困境 → N+M\n- Anthropic 2024 底發起的開放標準，建立在 JSON-RPC 2.0 之上\n- 不取代 REST/GraphQL，而是在上層加一層 AI 友善介面\n- 核心架構：Client ↔ Transport (stdio/HTTP+SSE) ↔ Server (Tools/Resources/Prompts)\n- 生態已活躍：Claude Code、Cursor、VS Code 等均支援\n- 完整發布版：[[mcp-server-研發計畫]] W1-1\n\n## Notes\n\n### 核心論點\n\n1. **N×M 問題** — N 個 agent × M 個工具 = 乘法級整合成本，MCP 將其降為 N+M\n2. **層級定位** — REST 是水管（底層 API），MCP 是水龍頭（AI 友善介面）\n3. **JSON-RPC 2.0** — 三種訊息：Request（帶 id）、Response（配對 id）、Notification（無 id）\n4. **三層架構** — Client (AI 模型側) / Transport (stdio|HTTP+SSE) / Server (Tools|Resources|Prompts)\n5. **Tool 發現** — `tools/list` 回傳結構化的 name + description + inputSchema，AI 自主判斷何時呼叫\n\n### 常見迷思\n\n- MCP ≠ API Gateway（不做路由限流）\n- MCP ≠ Webhook（是請求/回應，不是事件推送）\n- 不需重寫現有 API（MCP Server 是包裝層）\n- 不難寫（核心 < 30 行，花時間的是業務邏輯）\n\n### 實務建議\n\n- Tool description 品質決定 AI 是否正確呼叫\n- 按領域拆分 Server，避免單一 Server 暴露 50+ tools\n- 注意安全邊界：Server 端做好權限控管\n\n## Related"
+  },
+  {
+    "file": "w1-2-mcp-三大核心",
+    "dir": "resources",
+    "title": "W1-2 MCP 三大核心",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "tools",
+      "resources",
+      "prompts",
+      "typescript",
+      "zod",
+      "series-mcp-server"
+    ],
+    "status": "active",
+    "summary": "系列第 2 篇：Tools(手)/Resources(眼)/Prompts(腦) 三大能力深入解析、Schema 設計、決策矩陣",
+    "related": [
+      "mcp-server-研發計畫",
+      "obsidian-agent",
+      "mcp-server-開發指南",
+      "w1-1-mcp-協議全景",
+      "w1-3-mcp-傳輸層",
+      "w2-3-mcp-resources-實戰",
+      "w2-1-從零建-mcp-server",
+      "w2-2-mcp-tools-進階",
+      "w3-1-mcp-prompts-實戰",
+      "w4-2-mcp-設計模式與最佳實踐"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# W1-2 MCP 三大核心\n\n## Key Points\n\n- Tools = AI 的手（執行動作）、Resources = AI 的眼（讀取資料）、Prompts = AI 的腦（思考模板）\n- SDK 使用 registerTool / registerResource / registerPrompt 明確註冊方法\n- Zod v4 做參數驗證，支援 enum、optional、union 等型別\n- 決策流程：需要執行動作？→ Tool / 需要讀取資料？→ Resource / 需要結構化指令？→ Prompt\n- 組合使用：一個 Server 同時提供三種能力是常態\n- 完整發布版：[[mcp-server-研發計畫]] W1-2\n\n## Notes\n\n### 三者比較\n\n| 維度 | Tools | Resources | Prompts |\n|------|-------|-----------|---------|\n| 隱喻 | 手 | 眼 | 腦 |\n| 方向 | 執行動作（寫） | 讀取資料（讀） | 提供模板（思考） |\n| 授權 | 需使用者確認 | 通常自動 | 使用者選擇 |\n| 適合 | API 呼叫、計算、寫入 | 設定檔、DB 查詢、檔案 | 工作流模板、結構化指令 |\n\n### Schema 設計原則\n\n1. 所有參數加 `.describe()` — AI 靠描述理解用途\n2. 必填用 required，可選用 `.optional()` + 預設值\n3. enum 限定有效值範圍，減少 AI 猜測\n4. 錯誤回傳用 `isError: true` + 結構化 content\n\n### 常見坑\n\n- Tool 太大（拆小、單一職責）\n- Resource 沒分頁（大量資料要支援 cursor）\n- Prompt 硬編碼（用動態參數 + completable）\n- 忘記 description（AI 不知道何時用）\n- 沒做錯誤處理（至少回傳 isError + 訊息）\n\n## Related"
+  },
+  {
+    "file": "w1-3-mcp-傳輸層",
+    "dir": "resources",
+    "title": "W1-3 MCP 傳輸層",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "transport",
+      "stdio",
+      "http",
+      "sse",
+      "architecture",
+      "series-mcp-server"
+    ],
+    "status": "active",
+    "summary": "系列第 3 篇：stdio vs Streamable HTTP+SSE 比較、生命週期四階段、Session 管理、安全考量、決策樹",
+    "related": [
+      "mcp-server-研發計畫",
+      "obsidian-agent",
+      "mcp-server-開發指南",
+      "w1-1-mcp-協議全景",
+      "w1-2-mcp-三大核心"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# W1-3 MCP 傳輸層\n\n## Key Points\n\n- Transport 是協議語意與部署環境之間的橋樑\n- **stdio**：process 級隔離、零網路開銷、適合本地 CLI/IDE\n- **Streamable HTTP+SSE**：POST 送請求、GET 建 SSE 串流、適合雲端多用戶\n- 生命週期四階段：Initialize → Handshake → Operation → Shutdown\n- Session 管理：`Mcp-Session-Id` header、多用戶隔離、session resumability\n- 決策樹：本地 → stdio / 遠端 → HTTP+SSE / 混合 → 環境變數切換\n- 完整發布版：[[mcp-server-研發計畫]] W1-3\n\n## Notes\n\n### 兩種傳輸比較\n\n| 面向 | stdio | Streamable HTTP+SSE |\n|------|-------|-------------------|\n| 延遲 | 極低（process 內） | 網路延遲 |\n| 安全性 | process 隔離 | 需 TLS + Auth + CORS |\n| 擴展性 | 單用戶 | 多用戶 |\n| 部署複雜度 | 低（本地） | 高（需 HTTP server） |\n| 適用場景 | CLI、IDE 插件 | 雲端服務、團隊共用 |\n\n### 生命週期\n\n1. **Initialize** — Client 發送 `initialize`，交換 protocolVersion + capabilities\n2. **Handshake** — Client 回應 `notifications/initialized`\n3. **Operation** — `tools/call`、`resources/read` 等正常操作\n4. **Shutdown** — 斷開連線（stdio: kill process / HTTP: DELETE session）\n\n### 常見坑\n\n- SSE 連線斷開要實作重連 + session resumability\n- stdout 不能混入 debug log（會破壞 JSON-RPC）\n- 跨平台路徑問題（Windows backslash vs Unix forward slash）\n- HTTP 模式記得處理 DELETE 端點（session 清理）\n- Mcp-Session-Id 要用 cryptographic random 生成\n\n## Related"
+  },
+  {
+    "file": "w2-1-從零建-mcp-server",
+    "dir": "resources",
+    "title": "W2-1 從零建 MCP Server",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "typescript",
+      "tutorial",
+      "hands-on",
+      "inspector",
+      "series-mcp-server"
+    ],
+    "status": "active",
+    "summary": "系列第 4 篇：環境準備、最小 Server、第一個 Tool/Resource/Prompt、Inspector 測試、Claude Code 整合",
+    "related": [
+      "mcp-server-研發計畫",
+      "mcp-server-開發指南",
+      "obsidian-agent",
+      "w1-1-mcp-協議全景",
+      "w1-2-mcp-三大核心",
+      "w3-2-mcp-claude-code-整合",
+      "w4-1-mcp-server-部署"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# W2-1 從零建 MCP Server\n\n## Key Points\n\n- 30 分鐘從零建出可用 MCP Server\n- 環境：Node.js v24+、@modelcontextprotocol/sdk、zod/v4\n- 最小 Server：McpServer + StdioServerTransport 不到 10 行\n- registerTool / registerResource / registerPrompt 三大註冊方法\n- Inspector 測試：npx @modelcontextprotocol/inspector\n- Claude Code 整合：settings.json mcpServers 設定\n- 專案結構：src/tools/ + src/resources/ + src/prompts/ 分目錄\n- 完整發布版：[[mcp-server-研發計畫]] W2-1\n\n## Notes\n\n### Step-by-Step\n\n1. `npm init -y` + 安裝 SDK + 設定 package.json (type: module, bin)\n2. 建立最小 McpServer + StdioServerTransport\n3. 加 Tool（JSON 格式化）+ Zod schema\n4. 加 Resource（讀取 package.json）\n5. 加 Prompt（code-review template）\n6. 合併完整程式碼\n7. Inspector 測試\n8. Claude Code settings.json 設定\n9. 專案結構建議（按能力分目錄）\n\n### 常見坑\n\n- stdout 汙染（console.log 會破壞 JSON-RPC → 用 console.error 或 sendLoggingMessage）\n- shebang 設定（#!/usr/bin/env node）\n- npm link 問題（用絕對路徑更穩定）\n- Windows 路徑反斜線（用 path.resolve）\n- Zod v4 import 語法（import * as z from \"zod/v4\"）\n\n## Related"
+  },
+  {
+    "file": "w2-2-mcp-tools-進階",
+    "dir": "resources",
+    "title": "W2-2 MCP Tools 進階",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "tools",
+      "zod",
+      "error-handling",
+      "idempotency",
+      "typescript",
+      "series-mcp-server"
+    ],
+    "status": "active",
+    "summary": "系列第 5 篇：Zod 進階 schema、三層錯誤處理、isError 模式、冪等設計、Logging、Tool 描述藝術",
+    "related": [
+      "w1-2-mcp-三大核心",
+      "mcp-server-研發計畫",
+      "obsidian-agent",
+      "mcp-server-開發指南",
+      "w1-1-mcp-協議全景"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# W2-2 MCP Tools 進階\n\n## Key Points\n\n- 三層錯誤處理：參數驗證（Zod 自動）→ 業務邏輯（isError: true）→ 系統錯誤（try-catch+log）\n- Zod 進階：enum / discriminatedUnion / strict / coerce / transform / refine / superRefine\n- isError: true 讓 AI 知道失敗了，可以重試或調整策略；忘記設會讓 AI 誤判成功\n- 冪等三模式：idempotency key / upsert 取代 insert / check-then-act\n- Logging：ctx.mcpReq.log() 不汙染 stdout，分 level 輸出\n- Tool 描述四要素：做什麼 + 何時用 + 參數說明 + 回傳格式\n- Retry：區分可重試（網路/限流）vs 不可重試（驗證/權限）錯誤\n- 完整發布版：[[mcp-server-研發計畫]] W2-2\n\n## Notes\n\n### 錯誤處理策略\n\n| 層級 | 觸發 | 處理方式 |\n|------|------|---------|\n| 參數驗證 | Zod schema 不匹配 | SDK 自動回傳錯誤 |\n| 業務邏輯 | 查無資料、權限不足 | isError: true + 人類可讀訊息 |\n| 系統錯誤 | 網路斷、DB crash | try-catch + logging + 通用錯誤回傳 |\n\n### 冪等設計\n\n- **Idempotency key** — Client 帶唯一 key，Server 記錄已處理的 key 避免重複\n- **Upsert** — 用 upsert 取代 insert，重複呼叫不會建重複資料\n- **Check-then-act** — 先檢查目標狀態再執行，已完成則跳過\n\n### Tool 描述 Bad vs Good\n\n- Bad: \"管理用戶\" → AI 不知道何時呼叫\n- Good: \"根據 email 查詢用戶資料，回傳 name/role/lastLogin。用於需要確認用戶身分時。\" → AI 精準呼叫\n\n### 常見坑\n\n- 忘記 isError → AI 誤判成功\n- description 太簡短 → AI 呼叫不準\n- 沒處理 timeout → 請求永遠掛住\n- 非冪等 tool 被重複呼叫 → 資料重複\n\n## Related"
+  },
+  {
+    "file": "w2-3-mcp-resources-實戰",
+    "dir": "resources",
+    "title": "W2-3 MCP Resources 實戰",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "resources",
+      "uri-template",
+      "mime-type",
+      "database",
+      "typescript",
+      "series-mcp-server"
+    ],
+    "status": "active",
+    "summary": "系列第 6 篇：靜態/動態 Resource、MIME types、分頁、訂閱、檔案系統/資料庫實戰、Resource+Tool 組合",
+    "related": [
+      "w1-2-mcp-三大核心",
+      "mcp-server-研發計畫",
+      "obsidian-agent",
+      "mcp-server-開發指南",
+      "w1-1-mcp-協議全景"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# W2-3 MCP Resources 實戰\n\n## Key Points\n\n- Resource = AI 的眼睛，唯讀資料存取，不需使用者授權確認\n- 靜態 Resource：固定 URI（設定檔、README、API spec）\n- 動態 Resource：URI template `{param}` 參數化（db://users/{id}）\n- MIME types：text vs blob，json/markdown/image 各有適用場景\n- 分頁策略：URI 參數分頁、摘要+詳情分離、硬性大小限制\n- 訂閱：sendResourceUpdated() + chokidar 監聽檔案變化\n- 組合 Resource+Tool：讀取→分析→操作完整 workflow\n- 完整發布版：[[mcp-server-研發計畫]] W2-3\n\n## Notes\n\n### 核心模式\n\n| 類型 | 用法 | 適合 |\n|------|------|------|\n| 靜態 Resource | registerResource() 固定 URI | 設定檔、文件、API spec |\n| 動態 Resource | ResourceTemplate + URI 參數 | DB 記錄、用戶資料、動態查詢 |\n\n### 大量資料處理\n\n1. URI 參數分頁（?page=2&limit=50）\n2. 摘要+詳情分離（list → detail URI）\n3. 硬性大小限制（截斷 + 提示用 Tool 查詢更多）\n\n### 安全注意\n\n- 檔案系統 Resource 要防路徑穿越（resolve + startsWith 檢查）\n- DB Resource 避免暴露 connection string\n- 大檔案加大小限制，避免塞爆 context window\n\n### 常見坑\n\n- URI 命名不一致（統一 scheme://path 格式）\n- 忘記設定 MIME type（AI 不知道怎麼解讀）\n- Resource 太大無分頁\n- 沒做 error handling（檔案不存在、DB 查詢失敗）\n\n## Related"
+  },
+  {
+    "file": "w3-1-mcp-prompts-實戰",
+    "dir": "resources",
+    "title": "W3-1 MCP Prompts 實戰",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "prompts",
+      "workflow",
+      "template",
+      "typescript",
+      "series-mcp-server"
+    ],
+    "status": "active",
+    "summary": "系列第 7 篇：Prompt 註冊、動態參數、Multi-step、Resource/Tool 組合、Completable、專案健康檢查實戰",
+    "related": [
+      "w1-2-mcp-三大核心",
+      "mcp-server-研發計畫",
+      "obsidian-agent",
+      "mcp-server-開發指南",
+      "w1-1-mcp-協議全景"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# W3-1 MCP Prompts 實戰\n\n## Key Points\n\n- Prompt = 預打包的思考模板，使用者主動觸發（vs Tool 是 AI 自主呼叫）\n- registerPrompt()：name + description + callback → messages 陣列\n- 動態參數：Zod schema 定義 language/focus/severity 等\n- Multi-step：user/assistant 交替 messages 建立思維鏈\n- Prompt + Resource：embedded resource 嵌入資料上下文\n- Prompt + Tool：自然語言引導 AI 依序呼叫工具\n- Completable：completable() 包裝提供參數自動補全\n- 完整發布版：[[mcp-server-研發計畫]] W3-1\n\n## Notes\n\n### Prompt vs System Prompt vs Tool\n\n| 面向 | Prompt | System Prompt | Tool |\n|------|--------|--------------|------|\n| 來源 | MCP Server 提供 | Client 端設定 | MCP Server 提供 |\n| 觸發 | 使用者主動選擇 | 自動套用 | AI 自主決定 |\n| 用途 | 工作流模板 | 角色/規則設定 | 執行動作 |\n\n### 進階模式\n\n- **Multi-step**：多個 messages 建立對話脈絡（收集→分析→修復）\n- **Embedded Resource**：prompt 中嵌入 resource URI，AI 在資料上下文中工作\n- **Tool 聯動**：prompt 文字引導 AI 按順序使用特定 tools\n- **Completable**：completable() 提供參數選項的自動補全\n\n### 常見坑\n\n- Prompt 太長塞爆 context（用 resource 引用取代內嵌大文件）\n- 硬編碼 tool name（tool 改名就壞）\n- 忘記 .describe()（AI 不知道參數用途）\n- messages 順序錯（user/assistant 必須交替）\n\n## Related"
+  },
+  {
+    "file": "w3-2-mcp-claude-code-整合",
+    "dir": "resources",
+    "title": "W3-2 MCP Claude Code 整合",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "claude-code",
+      "settings",
+      "integration",
+      "permissions",
+      "debugging",
+      "series-mcp-server"
+    ],
+    "status": "active",
+    "summary": "系列第 8 篇：settings.json 設定、stdio/HTTP 接入、權限管理、除錯技巧、多 Server 協作、CLAUDE.md 整合",
+    "related": [
+      "w2-1-從零建-mcp-server",
+      "mcp-server-研發計畫",
+      "obsidian-agent",
+      "mcp-server-開發指南",
+      "w1-1-mcp-協議全景",
+      "w4-1-mcp-server-部署"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# W3-2 MCP Claude Code 整合\n\n## Key Points\n\n- 設定層級：全域 ~/.claude/settings.json vs 專案級 .claude/settings.json\n- stdio 接入：command + args（node / npx / python 三種）\n- HTTP 接入：url 欄位指向 SSE / Streamable HTTP endpoint\n- 環境變數：env 欄位傳遞 API keys，不要寫死 secrets\n- 權限模型：mcp__<server>__<tool> 格式 + wildcard 支援\n- 除錯四步：debug mode → Inspector → 錯誤訊息表 → stderr\n- 多 Server：命名衝突處理、隔離機制\n- CLAUDE.md：記錄 Server 用途讓 AI 知道何時用哪個工具\n- 完整發布版：[[mcp-server-研發計畫]] W3-2\n\n## Notes\n\n### 設定結構\n\n```json\n{\n  \"mcpServers\": {\n    \"server-name\": {\n      \"command\": \"node\",        // stdio\n      \"args\": [\"path/to/server.js\"],\n      \"env\": { \"API_KEY\": \"...\" },\n      \"cwd\": \"/project/root\"\n    }\n  }\n}\n```\n\n### 除錯流程\n\n1. `claude --mcp-debug` 啟動 debug mode\n2. `npx @modelcontextprotocol/inspector` 獨立測試\n3. 查錯誤訊息表（spawn ENOENT / timeout / schema error）\n4. stderr 輸出追蹤\n\n### 多 Server 協作\n\n- 每個 Server 獨立 process，互不干擾\n- Tool 名稱自動加 server prefix（mcp__github__create_issue）\n- CLAUDE.md 寫使用指南讓 AI 選對 Server\n\n### 常見坑\n\n- 相對路徑 vs 絕對路徑（用絕對路徑更穩定）\n- Node.js 版本不匹配\n- Server 啟動超時（設定 timeout）\n- env 變數未載入\n- 多 Server tool 命名衝突\n\n## Related"
+  },
+  {
+    "file": "w4-1-mcp-server-部署",
+    "dir": "resources",
+    "title": "W4-1 MCP Server 部署",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "deployment",
+      "docker",
+      "auth",
+      "monitoring",
+      "cloud",
+      "series-mcp-server"
+    ],
+    "status": "active",
+    "summary": "系列第 9 篇：Docker 化、HTTP+SSE 生產部署、認證鑒權、CORS/TLS、Session 管理、監控、雲端選項、Scaling",
+    "related": [
+      "mcp-server-研發計畫",
+      "mcp-server-開發指南",
+      "w2-1-從零建-mcp-server",
+      "w3-2-mcp-claude-code-整合",
+      "obsidian-agent"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# W4-1 MCP Server 部署\n\n## Key Points\n\n- 三種部署模式：本地 stdio / 單機 HTTP+SSE / 雲端容器化\n- Docker：multi-stage build + .dockerignore + docker-compose\n- 生產 Server：graceful shutdown + health check + session cleanup\n- 認證：Bearer token middleware / OAuth 2.1 / API key 管理\n- 安全：CORS + HTTPS/TLS + rate limiting + request size limit\n- Session：Memory vs Redis、TTL、cleanup 策略\n- 監控：pino structured logging + Prometheus metrics + Grafana\n- 雲端：Cloudflare Workers / Vercel / AWS Lambda / Railway & Fly.io\n- Scaling：sticky session / Redis Pub/Sub / stateless mode\n- 完整發布版：[[mcp-server-研發計畫]] W4-1\n\n## Notes\n\n### 部署決策矩陣\n\n| 模式 | 適合 | 複雜度 | 擴展性 |\n|------|------|--------|--------|\n| stdio (npm) | 個人/本地開發 | 低 | 單用戶 |\n| 單機 HTTP+SSE | 小團隊/內部 | 中 | 數十用戶 |\n| 雲端容器化 | 生產/對外 | 高 | 水平擴展 |\n\n### 雲端平台 Trade-off\n\n| 平台 | 優勢 | 限制 |\n|------|------|------|\n| Cloudflare Workers | 邊緣低延遲 | SSE 支援有限 |\n| Vercel | Next.js 整合好 | Function timeout |\n| AWS Lambda + APIGW | 完全控制 | 冷啟動 + SSE 困難 |\n| Railway / Fly.io | 簡單 + 長連線友善 | 規模上限 |\n\n### Scaling 挑戰\n\nSSE 長連線 = stateful → 水平擴展困難\n- Sticky session（簡單但不優雅）\n- Redis Pub/Sub（session 跨節點）\n- Stateless mode（client reconnect）\n\n### 常見坑\n\n- SSE 被 proxy/LB 截斷（設定 proxy_read_timeout）\n- Container OOM（長連線佔記憶體，設 session TTL）\n- 忘記 health check（LB 不知道 Server 是否健康）\n- Secrets 洩漏到 log（structured logging 過濾敏感欄位）\n\n## Related"
+  },
+  {
+    "file": "w4-2-mcp-設計模式與最佳實踐",
+    "dir": "resources",
+    "title": "W4-2 MCP 設計模式與最佳實踐",
+    "type": "resource",
+    "tags": [
+      "mcp",
+      "design-patterns",
+      "security",
+      "performance",
+      "testing",
+      "architecture",
+      "series-mcp-server"
+    ],
+    "status": "active",
+    "summary": "系列第 10 篇（完結）：粒度設計、安全邊界、效能優化、四層測試、錯誤處理模式、組合模式、Anti-patterns、系列回顧與展望",
+    "related": [
+      "mcp-server-研發計畫",
+      "obsidian-agent",
+      "mcp-server-開發指南",
+      "w1-1-mcp-協議全景",
+      "w1-2-mcp-三大核心"
+    ],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# W4-2 MCP 設計模式與最佳實踐\n\n## Key Points\n\n- 粒度設計：一個 Server 一個領域、一個 Tool 一個動作\n- 安全三層：Transport（TLS/Auth）→ Server（validation）→ Tool（最小權限）\n- 效能：connection pooling / LRU cache / lazy loading / response 截斷\n- 四層測試：Unit → Integration（InMemoryTransport）→ E2E（Inspector）→ Contract\n- Error Handling：ErrorCategory 分類 + withErrorBoundary pattern\n- 組合模式：Gateway（namespace proxy）/ Sidecar（主+輔助）\n- 版本管理：向後相容規則 + 三步 deprecation 流程\n- Anti-patterns：God Server / Chatty Server / Leaky Server / Stateful Tool\n- 生態整合：LangChain / Vercel AI SDK\n- 完結篇：[[mcp-server-研發計畫]] W4-2\n\n## Notes\n\n### Anti-patterns\n\n| 模式 | 問題 | 修正 |\n|------|------|------|\n| God Server | 什麼都做，50+ tools | 按領域拆分 |\n| Chatty Server | 太多小 tool | 合併相關操作 |\n| Leaky Server | 暴露內部實作 | 抽象化介面 |\n| Stateful Tool | tool 之間隱含狀態依賴 | 每次呼叫自包含 |\n\n### 系列知識圖譜\n\n```\nW1 理解：協議全景 → 三大核心 → 傳輸層\nW2 建造：從零建 Server → Tools 進階 → Resources 實戰\nW3 整合：Prompts 實戰 → Claude Code 整合\nW4 昇華：部署 → 設計模式（完結）\n```\n\n### 展望\n\n- 更多 transport（WebSocket、gRPC）\n- Agent-to-agent 通訊（MCP Server 呼叫 MCP Server）\n- 標準化 Server registry / marketplace\n- OAuth 2.1 認證標準化\n\n## Related"
+  },
+  {
+    "file": "2026-04-03",
+    "dir": "journal",
+    "title": "2026-04-03",
+    "type": "journal",
+    "tags": [
+      "daily"
+    ],
+    "status": "active",
+    "summary": "",
+    "related": [],
+    "created": "2026-04-03",
+    "updated": "2026-04-03",
+    "body": "# 2026-04-03 Fri\n\n## Records\n\n-\n- 建立 [[mcp-server-開發指南]] 資源筆記，整理 MCP Server 架構、核心概念、TypeScript SDK 實作\n- 建立 [[mcp-server-研發計畫]] 項目，拆解 10 篇系列文章計畫（4 週 / 概念+實戰+進階）\n- 歸檔 [[obsidian-agent]] 項目 — 工具穩定，轉維護模式\n- W1 三篇概念篇全部完成：[[w1-1-mcp-協議全景]] [[w1-2-mcp-三大核心]] [[w1-3-mcp-傳輸層]]\n- W2 三篇實戰篇完成：[[w2-1-從零建-mcp-server]] [[w2-2-mcp-tools-進階]] [[w2-3-mcp-resources-實戰]]\n- W3+W4 四篇全部完成，全系列 10/10 篇完工\n- [[mcp-server-研發計畫]] 狀態設為 completed\n\n## Ideas\n\n-\n- MCP Server 開發勢在必行 — 自建 MCP server 是擴展 AI agent 能力的關鍵方向\n\n## Tomorrow\n\n- [ ]\n\n---\n< [[2026-04-02]] | [[2026-04-04]] >"
+  }
+]

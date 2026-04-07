@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from src.watermark_removal.core.types import InpaintConfig
-from src.watermark_removal.inpaint.workflow_builder import WorkflowBuilder
+from watermark_removal.core.types import InpaintConfig
+from watermark_removal.inpaint.workflow_builder import WorkflowBuilder
 
 
 @pytest.fixture

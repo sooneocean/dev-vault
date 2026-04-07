@@ -9,12 +9,12 @@ import cv2
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import CropRegion, ProcessConfig
-from src.watermark_removal.detection import WatermarkDetector, BBox
-from src.watermark_removal.temporal import TemporalSmoother
-from src.watermark_removal.blending import PoissonBlender, ColorMatcher
-from src.watermark_removal.persistence import CropRegionSerializer
-from src.watermark_removal.metrics import QualityMonitor
+from watermark_removal.core.types import CropRegion, ProcessConfig
+from watermark_removal.detection import WatermarkDetector, BBox
+from watermark_removal.temporal import TemporalSmoother
+from watermark_removal.blending import PoissonBlender, ColorMatcher
+from watermark_removal.persistence import CropRegionSerializer
+from watermark_removal.metrics import QualityMonitor
 
 
 def create_test_frame(height: int = 480, width: int = 640, value: int = 128) -> np.ndarray:

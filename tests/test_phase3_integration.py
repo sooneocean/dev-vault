@@ -18,10 +18,10 @@ from typing import Dict, Optional
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import ProcessConfig, CropRegion
-from src.watermark_removal.core.pipeline import Pipeline
-from src.watermark_removal.streaming.session_manager import SessionManager, ProcessingResult
-from src.watermark_removal.streaming.queue_processor import BackgroundTaskRunner
+from watermark_removal.core.types import ProcessConfig, CropRegion
+from watermark_removal.core.pipeline import Pipeline
+from watermark_removal.streaming.session_manager import SessionManager, ProcessingResult
+from watermark_removal.streaming.queue_processor import BackgroundTaskRunner
 
 
 # ============================================================================
@@ -192,7 +192,7 @@ class TestBackwardCompatibility:
         checkpoint_path.write_text(json.dumps(old_checkpoint))
 
         # Phase 3 checkpoint loader should handle v1.0 format
-        from src.watermark_removal.persistence.crop_serializer import CropRegionSerializer
+        from watermark_removal.persistence.crop_serializer import CropRegionSerializer
 
         result = CropRegionSerializer.load_checkpoint(temp_workspace)
         assert result is not None
@@ -384,7 +384,7 @@ class TestCheckpointResumption:
 
     def test_checkpoint_resumption_basic(self, temp_workspace):
         """Test basic checkpoint save and resumption."""
-        from src.watermark_removal.persistence.crop_serializer import CropRegionSerializer
+        from watermark_removal.persistence.crop_serializer import CropRegionSerializer
 
         # Create crop region
         crop = CropRegion(
@@ -408,7 +408,7 @@ class TestCheckpointResumption:
 
     def test_checkpoint_with_flow_data(self, temp_workspace):
         """Test checkpoint saves and restores flow data."""
-        from src.watermark_removal.persistence.crop_serializer import CropRegionSerializer
+        from watermark_removal.persistence.crop_serializer import CropRegionSerializer
 
         crop = CropRegion(
             x=100, y=100, w=200, h=200, scale_factor=2.0,

@@ -23,7 +23,7 @@ try:
 except ImportError:
     HAS_UVLOOP = False
 
-from src.watermark_removal.streaming.server import create_app
+from watermark_removal.streaming.server import create_app
 
 logger = logging.getLogger(__name__)
 

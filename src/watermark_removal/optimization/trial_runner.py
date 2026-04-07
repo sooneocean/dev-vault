@@ -13,8 +13,8 @@ except ImportError:
     OPTUNA_AVAILABLE = False
     Trial = None  # type: ignore[assignment, misc]
 
-from src.watermark_removal.core.types import ProcessConfig
-from src.watermark_removal.metrics.quality_monitor import QualityMonitor
+from watermark_removal.core.types import ProcessConfig
+from watermark_removal.metrics.quality_monitor import QualityMonitor
 
 logger = logging.getLogger(__name__)
 

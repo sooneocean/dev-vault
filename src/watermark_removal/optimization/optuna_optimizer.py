@@ -13,7 +13,7 @@ try:
 except ImportError:
     OPTUNA_AVAILABLE = False
 
-from src.watermark_removal.core.types import ProcessConfig
+from watermark_removal.core.types import ProcessConfig
 
 logger = logging.getLogger(__name__)
 

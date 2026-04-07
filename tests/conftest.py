@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from src.watermark_removal.core.types import ProcessConfig
+from watermark_removal.core.types import ProcessConfig
 
 
 @pytest.fixture

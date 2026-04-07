@@ -10,8 +10,8 @@ import cv2
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import InpaintConfig
-from src.watermark_removal.inpaint.inpaint_executor import InpaintExecutor
+from watermark_removal.core.types import InpaintConfig
+from watermark_removal.inpaint.inpaint_executor import InpaintExecutor
 
 
 def create_dummy_image(path: str, width: int = 1024, height: int = 1024) -> None:

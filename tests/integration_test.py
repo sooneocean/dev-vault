@@ -9,8 +9,8 @@ import cv2
 import numpy as np
 import pytest
 
-from src.watermark_removal.core.types import InpaintConfig, ProcessConfig
-from src.watermark_removal.core.pipeline import Pipeline
+from watermark_removal.core.types import InpaintConfig, ProcessConfig
+from watermark_removal.core.pipeline import Pipeline
 
 
 def create_test_image(path: str, width: int = 1920, height: int = 1080) -> None:
@@ -109,7 +109,7 @@ class TestEndToEndPipeline:
     @pytest.mark.asyncio
     async def test_pipeline_crop_regions_structure(self, integration_config):
         """Test that pipeline correctly manages CropRegion structures."""
-        from src.watermark_removal.core.types import CropRegion
+        from watermark_removal.core.types import CropRegion
 
         pipeline = Pipeline(integration_config)
 
@@ -181,7 +181,7 @@ class TestDataFlowIntegration:
         pipeline = Pipeline(integration_config)
 
         # Manually set crop regions to simulate what preprocessing would do
-        from src.watermark_removal.core.types import CropRegion
+        from watermark_removal.core.types import CropRegion
 
         for i in range(3):
             region = CropRegion(
