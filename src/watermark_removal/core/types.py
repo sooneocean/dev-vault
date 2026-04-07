@@ -278,6 +278,9 @@ class ProcessConfig:
     streaming_result_ttl_sec: int = 300
     """Time-to-live for cached streaming results in seconds (default 5 min)."""
 
+    quality_metrics_enabled: bool = True
+    """Enable per-frame quality metrics computation after stitching."""
+
     # Phase 3B: Label Studio annotation integration
     label_studio_enabled: bool = False
     """Enable Label Studio annotation workflow integration."""
