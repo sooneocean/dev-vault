@@ -1,7 +1,7 @@
 ---
 title: "refactor: Watermark Removal System — Production Readiness Consolidation"
 type: refactor
-status: active
+status: completed
 date: 2026-04-07
 ---
 
