@@ -1,0 +1,255 @@
+{
+  "metadata": {
+    "created_date": "2026-04-08",
+    "version": "1.0",
+    "purpose": "SEO metadata and schema markup for 5 super-tag clusters",
+    "platform": "WordPress.com with Jetpack SEO",
+    "total_tags": 5
+  },
+  "tags": [
+    {
+      "id": "music",
+      "name": "Music",
+      "slug": "music",
+      "seo": {
+        "title": "Hip-Hop & Music News | Deep Analysis | YOLO LAB",
+        "title_length": 54,
+        "description": "Hip-hop and music industry coverage with artist profiles, new releases, events, and cultural analysis. Deep dives into music's intersection with society.",
+        "description_length": 157,
+        "canonical": "https://yololab.net/tag/music/",
+        "robots": "index, follow",
+        "focus_keywords": ["music news", "hip-hop analysis", "artist profiles"]
+      },
+      "open_graph": {
+        "title": "Music & Hip-Hop Stories | YOLO LAB",
+        "description": "Explore hip-hop culture, artist analysis, music industry trends, and how music shapes society. Deep journalism on music's impact.",
+        "image": "https://yololab.net/images/og/music-cluster.png",
+        "image_alt": "YOLO LAB Music & Hip-Hop Cluster",
+        "url": "https://yololab.net/tag/music/",
+        "type": "website"
+      },
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Collection",
+        "name": "Music & Hip-Hop News",
+        "url": "https://yololab.net/tag/music/",
+        "description": "Hip-hop and music industry coverage with artist profiles, new releases, events, and cultural analysis. Deep dives into music's intersection with society.",
+        "keywords": ["hip-hop", "music news", "artist profiles", "music industry", "cultural analysis"],
+        "creator": {
+          "@type": "Organization",
+          "name": "YOLO LAB",
+          "url": "https://yololab.net"
+        },
+        "mainEntity": {
+          "@type": "Topic",
+          "name": "Music & Hip-Hop"
+        },
+        "potentialAction": {
+          "@type": "ReadAction",
+          "target": "https://yololab.net/tag/music/"
+        }
+      }
+    },
+    {
+      "id": "entertainment",
+      "name": "Entertainment",
+      "slug": "entertainment",
+      "seo": {
+        "title": "Film | TV | Anime | Gaming News & Analysis | YOLO LAB",
+        "title_length": 56,
+        "description": "Entertainment industry coverage spanning film, television, anime, and gaming. Critical analysis of storytelling, industry trends, and cultural impact.",
+        "description_length": 159,
+        "canonical": "https://yololab.net/tag/entertainment/",
+        "robots": "index, follow",
+        "focus_keywords": ["entertainment news", "film analysis", "TV analysis", "anime", "gaming"]
+      },
+      "open_graph": {
+        "title": "Entertainment Stories | YOLO LAB",
+        "description": "Film, TV, anime, and gaming analysis. Explore storytelling, industry trends, and how entertainment shapes culture.",
+        "image": "https://yololab.net/images/og/entertainment-cluster.png",
+        "image_alt": "YOLO LAB Entertainment Cluster",
+        "url": "https://yololab.net/tag/entertainment/",
+        "type": "website"
+      },
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Collection",
+        "name": "Entertainment News & Analysis",
+        "url": "https://yololab.net/tag/entertainment/",
+        "description": "Entertainment industry coverage spanning film, television, anime, and gaming. Critical analysis of storytelling, industry trends, and cultural impact.",
+        "keywords": ["entertainment", "film", "television", "anime", "gaming", "streaming", "media analysis"],
+        "creator": {
+          "@type": "Organization",
+          "name": "YOLO LAB",
+          "url": "https://yololab.net"
+        },
+        "mainEntity": {
+          "@type": "Topic",
+          "name": "Entertainment"
+        }
+      }
+    },
+    {
+      "id": "culture",
+      "name": "Culture",
+      "slug": "culture",
+      "seo": {
+        "title": "Culture | People | Lifestyle | Events | YOLO LAB",
+        "title_length": 51,
+        "description": "Cultural figures, events, classics, and lifestyle trends. Profiles of influential personalities across business, arts, and society.",
+        "description_length": 151,
+        "canonical": "https://yololab.net/tag/culture/",
+        "robots": "index, follow",
+        "focus_keywords": ["culture news", "cultural figures", "lifestyle", "business leaders"]
+      },
+      "open_graph": {
+        "title": "Culture & Lifestyle Stories | YOLO LAB",
+        "description": "Explore cultural figures, business leaders, lifestyle trends, and cultural events shaping society.",
+        "image": "https://yololab.net/images/og/culture-cluster.png",
+        "image_alt": "YOLO LAB Culture Cluster",
+        "url": "https://yololab.net/tag/culture/",
+        "type": "website"
+      },
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Collection",
+        "name": "Culture & Lifestyle",
+        "url": "https://yololab.net/tag/culture/",
+        "description": "Cultural figures, events, classics, and lifestyle trends. Profiles of influential personalities across business, arts, and society.",
+        "keywords": ["culture", "cultural figures", "lifestyle", "business leaders", "cultural events", "classics"],
+        "creator": {
+          "@type": "Organization",
+          "name": "YOLO LAB",
+          "url": "https://yololab.net"
+        },
+        "mainEntity": {
+          "@type": "Topic",
+          "name": "Culture & Society"
+        }
+      }
+    },
+    {
+      "id": "tech",
+      "name": "Technology",
+      "slug": "tech",
+      "seo": {
+        "title": "Tech News | Innovation | Industry Analysis | YOLO LAB",
+        "title_length": 55,
+        "description": "Technology industry news, innovation trends, startup disruption, and digital transformation. Analysis of tech's societal impact.",
+        "description_length": 158,
+        "canonical": "https://yololab.net/tag/tech/",
+        "robots": "index, follow",
+        "focus_keywords": ["tech news", "technology trends", "startup news", "innovation"]
+      },
+      "open_graph": {
+        "title": "Technology News & Analysis | YOLO LAB",
+        "description": "Tech industry trends, startup innovation, digital transformation, and how technology reshapes society.",
+        "image": "https://yololab.net/images/og/tech-cluster.png",
+        "image_alt": "YOLO LAB Technology Cluster",
+        "url": "https://yololab.net/tag/tech/",
+        "type": "website"
+      },
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Collection",
+        "name": "Technology News & Innovation",
+        "url": "https://yololab.net/tag/tech/",
+        "description": "Technology industry news, innovation trends, startup disruption, and digital transformation. Analysis of tech's societal impact.",
+        "keywords": ["technology", "tech news", "innovation", "startups", "digital transformation", "AI"],
+        "creator": {
+          "@type": "Organization",
+          "name": "YOLO LAB",
+          "url": "https://yololab.net"
+        },
+        "mainEntity": {
+          "@type": "Topic",
+          "name": "Technology"
+        }
+      }
+    },
+    {
+      "id": "sports",
+      "name": "Sports",
+      "slug": "sports",
+      "seo": {
+        "title": "Sports News | Athlete Profiles | Industry Analysis | YOLO LAB",
+        "title_length": 63,
+        "description": "Sports news, athlete profiles, and industry analysis. Coverage of professional sports, athletics, and sports culture.",
+        "description_length": 153,
+        "canonical": "https://yololab.net/tag/sports/",
+        "robots": "index, follow",
+        "focus_keywords": ["sports news", "athlete profiles", "professional sports"]
+      },
+      "open_graph": {
+        "title": "Sports Stories | YOLO LAB",
+        "description": "Sports news, athlete profiles, professional sports coverage, and analysis of sports' cultural impact.",
+        "image": "https://yololab.net/images/og/sports-cluster.png",
+        "image_alt": "YOLO LAB Sports Cluster",
+        "url": "https://yololab.net/tag/sports/",
+        "type": "website"
+      },
+      "schema": {
+        "@context": "https://schema.org",
+        "@type": "Collection",
+        "name": "Sports News & Analysis",
+        "url": "https://yololab.net/tag/sports/",
+        "description": "Sports news, athlete profiles, and industry analysis. Coverage of professional sports, athletics, and sports culture.",
+        "keywords": ["sports", "sports news", "athletes", "professional sports", "sports industry"],
+        "creator": {
+          "@type": "Organization",
+          "name": "YOLO LAB",
+          "url": "https://yololab.net"
+        },
+        "mainEntity": {
+          "@type": "Topic",
+          "name": "Sports"
+        }
+      }
+    }
+  ],
+  "implementation": {
+    "seo_fields": [
+      "title",
+      "description",
+      "canonical",
+      "robots"
+    ],
+    "wordpress_fields": [
+      "yoast_meta[title]",
+      "yoast_meta[metadesc]",
+      "yoast_meta[robots]",
+      "yoast_meta[canonical]"
+    ],
+    "og_fields": [
+      "og:title",
+      "og:description",
+      "og:image",
+      "og:url"
+    ],
+    "validation": {
+      "seo_title_length": "55-60 characters",
+      "meta_description_length": "155-160 characters",
+      "schema_type": "Collection",
+      "schema_validation": "https://validator.schema.org/"
+    },
+    "deployment_steps": [
+      "1. Validate all SEO titles (55-60 chars)",
+      "2. Validate all meta descriptions (155-160 chars)",
+      "3. Generate schema JSON-LD blocks",
+      "4. Test schema with Schema.org validator",
+      "5. Update tag pages in WordPress.com",
+      "6. Verify OG tags render in social preview",
+      "7. Submit to Google Search Console"
+    ]
+  },
+  "notes": {
+    "og_images": "OG images should be cluster-specific graphics (designed separately). Fall back to YOLO LAB logo if unavailable.",
+    "schema_validation": "Test each schema block at https://validator.schema.org/ before deploying.",
+    "robots_meta": "All tags set to 'index, follow'. May change to 'noindex, follow' for low-traffic clusters post-launch (defer decision).",
+    "future_enhancements": [
+      "Add breadcrumb schema for tag hierarchy",
+      "Add NewsArticle schema for articles within tag pages",
+      "Add BreadcrumbList schema for navigation context"
+    ]
+  }
+}
