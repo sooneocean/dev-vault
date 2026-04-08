@@ -1,0 +1,68 @@
+{
+  "primary_categories": {
+    "film": {
+      "id": 96990390,
+      "slug": "film",
+      "name": "Film (電影)",
+      "parent": 0
+    },
+    "music": {
+      "id": 96990386,
+      "slug": "music",
+      "name": "Music (音樂)",
+      "parent": 0
+    },
+    "tech": {
+      "id": 96990096,
+      "slug": "tech",
+      "name": "Tech (科技)",
+      "parent": 0
+    },
+    "sports": {
+      "id": 96990517,
+      "slug": "sports",
+      "name": "Sports (運動)",
+      "parent": 0
+    },
+    "entertainment": {
+      "id": null,
+      "slug": "entertainment",
+      "name": "Entertainment (娛樂)",
+      "parent": 0,
+      "note": "Multi-category aggregation; no single category ID in WordPress"
+    }
+  },
+  "all_categories": [
+    {
+      "id": 96990390,
+      "slug": "film",
+      "name": "Film (電影)",
+      "parent": 0
+    },
+    {
+      "id": 96990386,
+      "slug": "music",
+      "name": "Music (音樂)",
+      "parent": 0
+    },
+    {
+      "id": 96990096,
+      "slug": "tech",
+      "name": "Tech (科技)",
+      "parent": 0
+    },
+    {
+      "id": 96990517,
+      "slug": "sports",
+      "name": "Sports (運動)",
+      "parent": 0
+    },
+    {
+      "id": 96987489,
+      "slug": "games",
+      "name": "Games (遊戲)",
+      "parent": 0,
+      "note": "Supplementary category; Entertainment has more Tier 1 articles"
+    }
+  ]
+}
