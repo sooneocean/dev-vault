@@ -1,13 +1,13 @@
 ---
-title: Untitled
+title: Bridge plan document to vault as project note
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
-domain: knowledge-management
-summary: ""
+domain: planning
+summary: "Bridges a Compound Engineering plan document into the vault as a project note."
 ---
 
 Bridge a Compound Engineering plan document into the vault as a project note.

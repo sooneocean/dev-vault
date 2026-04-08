@@ -1,13 +1,13 @@
 ---
-title: Steps
+title: Estimate local LLM cost savings
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
-domain: knowledge-management
-summary: ""
+domain: dev-environment
+summary: "Estimates cost savings from local LLM usage versus Claude API."
 ---
 
 Estimate cost savings from local LLM usage vs Claude API.

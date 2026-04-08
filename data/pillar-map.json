@@ -1,0 +1,40 @@
+{
+  "pillar_pages": {
+    "film": {
+      "article_id": 24748,
+      "title": "《小偷家族》是枝裕和",
+      "priority": "primary",
+      "category": "film"
+    },
+    "music": {
+      "article_id": 26646,
+      "title": "2025 年度嘻哈專輯盤點",
+      "priority": "primary",
+      "category": "music"
+    },
+    "tech": {
+      "article_id": 26777,
+      "title": "【2025 AI 大事記】DeepSeek 震撼發布",
+      "priority": "primary",
+      "category": "tech"
+    },
+    "sports": {
+      "article_id": 26292,
+      "title": "[Sports Article]",
+      "priority": "primary",
+      "category": "sports"
+    },
+    "entertainment": {
+      "article_id": 34686,
+      "title": "[Entertainment Article]",
+      "priority": "primary",
+      "category": "entertainment"
+    }
+  },
+  "notes": {
+    "source": "docs/YOLOLAB_PHASE1_EXECUTION.md Tier 1 list",
+    "total_pillars": 5,
+    "status": "ready_for_linking",
+    "created": "2026-04-08"
+  }
+}

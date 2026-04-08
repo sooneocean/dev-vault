@@ -1,9 +1,9 @@
 ---
 status: archived
 title: README
-type: project
+type: resource
 created: 2026-04-06
-updated: 2026-04-06
+updated: "2026-04-06"
 ---
 
 # YOLO LAB 網站優化專案

@@ -1,0 +1,204 @@
+{
+  "primary_menu": {
+    "name": "Main Navigation",
+    "location": "primary",
+    "items": [
+      {
+        "id": "menu-home",
+        "title": "Home",
+        "url": "/",
+        "type": "custom",
+        "position": 1
+      },
+      {
+        "id": "menu-film",
+        "title": "Film",
+        "url": "/category/film/",
+        "type": "category",
+        "category_id": 96990390,
+        "position": 2
+      },
+      {
+        "id": "menu-music",
+        "title": "Music",
+        "url": "/category/music/",
+        "type": "category",
+        "category_id": 96990386,
+        "position": 3
+      },
+      {
+        "id": "menu-tech",
+        "title": "Tech",
+        "url": "/category/tech/",
+        "type": "category",
+        "category_id": 96990096,
+        "position": 4
+      },
+      {
+        "id": "menu-sports",
+        "title": "Sports",
+        "url": "/category/sports/",
+        "type": "category",
+        "category_id": 96990517,
+        "position": 5
+      },
+      {
+        "id": "menu-entertainment",
+        "title": "Entertainment",
+        "url": "/search/",
+        "type": "custom",
+        "description": "Multi-category aggregation",
+        "position": 6
+      },
+      {
+        "id": "menu-search",
+        "title": "🔍 Search",
+        "url": "/?s=",
+        "type": "custom",
+        "position": 7
+      }
+    ]
+  },
+  "footer_widget_area": {
+    "name": "Footer Navigation",
+    "location": "footer",
+    "sections": [
+      {
+        "title": "About",
+        "items": [
+          {
+            "text": "About YOLO LAB",
+            "url": "/about/"
+          },
+          {
+            "text": "Contact",
+            "url": "/contact/"
+          },
+          {
+            "text": "Privacy Policy",
+            "url": "/privacy/"
+          }
+        ]
+      },
+      {
+        "title": "Categories",
+        "items": [
+          {
+            "text": "Film",
+            "url": "/category/film/",
+            "category_id": 96990390
+          },
+          {
+            "text": "Music",
+            "url": "/category/music/",
+            "category_id": 96990386
+          },
+          {
+            "text": "Tech",
+            "url": "/category/tech/",
+            "category_id": 96990096
+          },
+          {
+            "text": "Sports",
+            "url": "/category/sports/",
+            "category_id": 96990517
+          }
+        ]
+      },
+      {
+        "title": "Popular Tags",
+        "items": [
+          {
+            "text": "AI",
+            "url": "/tag/ai/"
+          },
+          {
+            "text": "Entertainment",
+            "url": "/tag/entertainment/"
+          },
+          {
+            "text": "Music News",
+            "url": "/tag/music-news/"
+          },
+          {
+            "text": "Movie Reviews",
+            "url": "/tag/movie-reviews/"
+          }
+        ]
+      }
+    ]
+  },
+  "accessibility": {
+    "skip_link": {
+      "text": "Skip to content",
+      "url": "#main-content"
+    },
+    "mobile_hamburger": {
+      "breakpoint": "768px",
+      "label": "Toggle Menu",
+      "aria_label": "Open navigation menu"
+    },
+    "keyboard_nav": {
+      "enabled": true,
+      "focus_visible": true,
+      "tab_order": "logical"
+    }
+  },
+  "seo_optimization": {
+    "link_structure": {
+      "home_click_distance": 1,
+      "category_click_distance": 1,
+      "tag_click_distance": 2,
+      "description": "Homepage → any category ≤1 click (R7 requirement)"
+    },
+    "breadcrumb_integration": {
+      "nav_breadcrumb_parity": true,
+      "footer_breadcrumb": true,
+      "description": "Footer category links align with breadcrumb trail"
+    },
+    "internal_link_equity": {
+      "nav_link_weight": "high",
+      "footer_link_weight": "medium",
+      "description": "Category links in both nav and footer maximize link equity distribution"
+    }
+  },
+  "implementation_notes": {
+    "method": "WordPress Appearance > Menus + Widget Areas (Manual)",
+    "alternative": "wpcom-mcp site-editor-context + navigation block updates (API)",
+    "steps": [
+      "1. Log in to WordPress admin dashboard",
+      "2. Go to Appearance > Menus",
+      "3. Create new menu 'Main Navigation' with 7 items (Home, 5 categories, Search)",
+      "4. Assign menu to 'Primary Menu' location",
+      "5. Go to Appearance > Widgets",
+      "6. Add custom menu/HTML widgets to Footer area",
+      "7. Test mobile responsiveness (hamburger at 768px)",
+      "8. Verify all links return 200 (no broken links)",
+      "9. Test keyboard navigation (tab through menu items)"
+    ]
+  },
+  "verification": {
+    "desktop_nav": {
+      "visible_items": 7,
+      "categories_present": ["Film", "Music", "Tech", "Sports"],
+      "search_present": true
+    },
+    "mobile_nav": {
+      "breakpoint": "375px",
+      "hamburger_visible": true,
+      "categories_in_hamburger": true,
+      "all_links_clickable": true
+    },
+    "footer_links": {
+      "categories_visible": 4,
+      "footer_sections": 3,
+      "broken_links": 0
+    },
+    "accessibility": {
+      "skip_link_present": true,
+      "aria_labels": "all menu items labeled",
+      "keyboard_navigation_working": true,
+      "focus_visible": true
+    }
+  }
+}

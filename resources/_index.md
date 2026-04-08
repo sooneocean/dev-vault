@@ -1,13 +1,14 @@
 ---
 title: resources index
 type: index
-updated: 2026-03-30
+updated: 2026-04-06
 ---
 
 # Resources
 
 | File | Summary |
 |------|---------|
+| [[agent-safe-partial-note-rewrite]] | agent-safe-partial-note-rewrite |
 | [[claude-agent-sdk-api]] | Claude Agent SDK API |
 | [[toolchain-reference]] | Toolchain Reference |
 | [[benchmark-first-rule]] | Benchmark First Rule |

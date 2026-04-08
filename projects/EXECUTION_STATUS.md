@@ -1,9 +1,9 @@
 ---
-status: archived
+status: "archived"
 title: EXECUTION_STATUS
 type: project
 created: 2026-04-06
-updated: 2026-04-06
+updated: "2026-04-06"
 ---
 
 # 🚀 YOLOLAB SEO 批量优化 - 实时执行状态

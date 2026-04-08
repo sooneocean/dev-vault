@@ -1,9 +1,9 @@
 ---
 status: archived
 title: seo-batch-3-4-quick-reference
-type: project
+type: resource
 created: 2026-04-06
-updated: 2026-04-06
+updated: "2026-04-06"
 ---
 
 # SEO Batch 3 & 4 快速參考卡
