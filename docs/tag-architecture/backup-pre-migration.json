@@ -1,0 +1,8729 @@
+{
+  "timestamp": "2026-04-08T20:34:09.105769",
+  "site_id": 133512998,
+  "summary": {
+    "total_tags": 1244,
+    "categorized_tags": 4,
+    "uncategorized_tags": 1240,
+    "total_categories": 1
+  },
+  "tags_by_category": {
+    "MUSIC": {
+      "count": 4,
+      "tags": [
+        {
+          "id": 96990596,
+          "name": "現場推薦",
+          "slug": "live-picks",
+          "post_count": 42,
+          "description": ""
+        },
+        {
+          "id": 96990597,
+          "name": "藝人動態",
+          "slug": "artist-updates",
+          "post_count": 42,
+          "description": ""
+        },
+        {
+          "id": 96990595,
+          "name": "音樂話題",
+          "slug": "music-topics",
+          "post_count": 42,
+          "description": ""
+        },
+        {
+          "id": 96990598,
+          "name": "新歌上新",
+          "slug": "new-releases",
+          "post_count": 42,
+          "description": ""
+        }
+      ],
+      "total_posts": 168
+    }
+  },
+  "uncategorized_tags": [
+    {
+      "id": 96990550,
+      "count": 1,
+      "description": "",
+      "name": "\"French Montana\"",
+      "slug": "french-montana"
+    },
+    {
+      "id": 96990549,
+      "count": 1,
+      "description": "",
+      "name": "\"Hip Hop History\"",
+      "slug": "hip-hop-history"
+    },
+    {
+      "id": 96990552,
+      "count": 1,
+      "description": "",
+      "name": "\"Legal Case\"",
+      "slug": "legal-case"
+    },
+    {
+      "id": 96990551,
+      "count": 1,
+      "description": "",
+      "name": "\"Max B\"",
+      "slug": "max-b"
+    },
+    {
+      "id": 96990553,
+      "count": 1,
+      "description": "",
+      "name": "\"Melodic Rap\"",
+      "slug": "melodic-rap"
+    },
+    {
+      "id": 96989730,
+      "count": 1,
+      "description": "",
+      "name": "#CCU",
+      "slug": "ccu"
+    },
+    {
+      "id": 96989729,
+      "count": 1,
+      "description": "",
+      "name": "#ccuhiphop",
+      "slug": "ccuhiphop"
+    },
+    {
+      "id": 96987745,
+      "count": 1,
+      "description": "",
+      "name": "#金音獎",
+      "slug": "jin-yin-jiang"
+    },
+    {
+      "id": 96989731,
+      "count": 1,
+      "description": "",
+      "name": "#HIPHOP",
+      "slug": "hiphop-2"
+    },
+    {
+      "id": 96987689,
+      "count": 0,
+      "description": "",
+      "name": "#lillard",
+      "slug": "lillard"
+    },
+    {
+      "id": 96987560,
+      "count": 0,
+      "description": "",
+      "name": "#Organizer",
+      "slug": "organizer"
+    },
+    {
+      "id": 96987561,
+      "count": 0,
+      "description": "",
+      "name": "#PIPE",
+      "slug": "pipe"
+    },
+    {
+      "id": 96987690,
+      "count": 0,
+      "description": "",
+      "name": "#shaq",
+      "slug": "shaq"
+    },
+    {
+      "id": 96989770,
+      "count": 1,
+      "description": "",
+      "name": "#Swift16",
+      "slug": "swift16"
+    },
+    {
+      "id": 96987562,
+      "count": 0,
+      "description": "",
+      "name": "#YELLOW",
+      "slug": "yellow"
+    },
+    {
+      "id": 96987563,
+      "count": 1,
+      "description": "",
+      "name": "#參劈",
+      "slug": "can-pi"
+    },
+    {
+      "id": 96989733,
+      "count": 1,
+      "description": "",
+      "name": "#嘻研社",
+      "slug": "hiphop-research-club"
+    },
+    {
+      "id": 96989732,
+      "count": 3,
+      "description": "",
+      "name": "#嘻哈",
+      "slug": "hiphop-tag"
+    },
+    {
+      "id": 96987746,
+      "count": 1,
+      "description": "",
+      "name": "#夢想成真",
+      "slug": "dream-come-true-tag"
+    },
+    {
+      "id": 96987696,
+      "count": 2,
+      "description": "",
+      "name": "#大嘻地",
+      "slug": "da-hiphop-di"
+    },
+    {
+      "id": 96989735,
+      "count": 1,
+      "description": "",
+      "name": "#孤島梨幫",
+      "slug": "lone-island-pear-gang"
+    },
+    {
+      "id": 96989737,
+      "count": 1,
+      "description": "",
+      "name": "#欸你過來一SHOT",
+      "slug": "hey-come-here-one-shot"
+    },
+    {
+      "id": 96989736,
+      "count": 1,
+      "description": "",
+      "name": "#歹蘋果",
+      "slug": "bad-apple-tw"
+    },
+    {
+      "id": 96989734,
+      "count": 1,
+      "description": "",
+      "name": "#中正嘻研社",
+      "slug": "zhongzheng-hiphop-club"
+    },
+    {
+      "id": 96989821,
+      "count": 1,
+      "description": "",
+      "name": "#你的主場優勢",
+      "slug": "your-home-advantage"
+    },
+    {
+      "id": 96989795,
+      "count": 1,
+      "description": "",
+      "name": "%C",
+      "slug": "c"
+    },
+    {
+      "id": 96989681,
+      "count": 1,
+      "description": "",
+      "name": "((( O )))",
+      "slug": "o"
+    },
+    {
+      "id": 96989641,
+      "count": 1,
+      "description": "",
+      "name": "17",
+      "slug": "17"
+    },
+    {
+      "id": 96987792,
+      "count": 1,
+      "description": "",
+      "name": "1ll",
+      "slug": "1ll"
+    },
+    {
+      "id": 96987791,
+      "count": 1,
+      "description": "",
+      "name": "1llionaire",
+      "slug": "1llionaire"
+    },
+    {
+      "id": 96990265,
+      "count": 0,
+      "description": "",
+      "name": "2 chainz",
+      "slug": "2-chainz"
+    },
+    {
+      "id": 96989941,
+      "count": 0,
+      "description": "",
+      "name": "2021",
+      "slug": "2021"
+    },
+    {
+      "id": 96990700,
+      "count": 3,
+      "description": "2026年度新發行音樂",
+      "name": "2026新碟",
+      "slug": "2026-new-releases"
+    },
+    {
+      "id": 96988265,
+      "count": 1,
+      "description": "",
+      "name": "21",
+      "slug": "21"
+    },
+    {
+      "id": 96988999,
+      "count": 0,
+      "description": "",
+      "name": "21 S",
+      "slug": "21-s"
+    },
+    {
+      "id": 96987515,
+      "count": 6,
+      "description": "",
+      "name": "21 savage",
+      "slug": "21-savage"
+    },
+    {
+      "id": 96987801,
+      "count": 1,
+      "description": "",
+      "name": "21Savage",
+      "slug": "21savage"
+    },
+    {
+      "id": 96990144,
+      "count": 1,
+      "description": "",
+      "name": "247音樂日",
+      "slug": "247-music-day"
+    },
+    {
+      "id": 96989762,
+      "count": 1,
+      "description": "",
+      "name": "24kGoldn",
+      "slug": "24kgoldn"
+    },
+    {
+      "id": 96989804,
+      "count": 1,
+      "description": "",
+      "name": "2Cars",
+      "slug": "2cars"
+    },
+    {
+      "id": 96989745,
+      "count": 3,
+      "description": "",
+      "name": "2Pac",
+      "slug": "2pac"
+    },
+    {
+      "id": 96989565,
+      "count": 0,
+      "description": "",
+      "name": "404",
+      "slug": "404"
+    },
+    {
+      "id": 96989584,
+      "count": 2,
+      "description": "",
+      "name": "50 cent",
+      "slug": "50-cent"
+    },
+    {
+      "id": 96987768,
+      "count": 2,
+      "description": "",
+      "name": "5am",
+      "slug": "5am"
+    },
+    {
+      "id": 96989607,
+      "count": 2,
+      "description": "",
+      "name": "69",
+      "slug": "69"
+    },
+    {
+      "id": 96987653,
+      "count": 6,
+      "description": "",
+      "name": "6ix9ine",
+      "slug": "6ix9ine"
+    },
+    {
+      "id": 96987730,
+      "count": 0,
+      "description": "",
+      "name": "7LING",
+      "slug": "7ling"
+    },
+    {
+      "id": 96987614,
+      "count": 6,
+      "description": "",
+      "name": "88rising",
+      "slug": "88rising"
+    },
+    {
+      "id": 96987542,
+      "count": 3,
+      "description": "",
+      "name": "8Ball",
+      "slug": "8ball"
+    },
+    {
+      "id": 96987597,
+      "count": 4,
+      "description": "",
+      "name": "9m88",
+      "slug": "9m88"
+    },
+    {
+      "id": 96987598,
+      "count": 1,
+      "description": "",
+      "name": "9m88演唱會",
+      "slug": "9m88-concert"
+    },
+    {
+      "id": 96990324,
+      "count": 0,
+      "description": "",
+      "name": "9reenSoul",
+      "slug": "9reensoul"
+    },
+    {
+      "id": 96989640,
+      "count": 1,
+      "description": "",
+      "name": "?",
+      "slug": "96989640"
+    },
+    {
+      "id": 96987528,
+      "count": 0,
+      "description": "",
+      "name": "A$AP Rocky",
+      "slug": "aap-rocky"
+    },
+    {
+      "id": 96989071,
+      "count": 1,
+      "description": "",
+      "name": "above&amp;beyond",
+      "slug": "abovebeyond"
+    },
+    {
+      "id": 96987672,
+      "count": 2,
+      "description": "",
+      "name": "Adam bayer",
+      "slug": "adam-bayer"
+    },
+    {
+      "id": 96990187,
+      "count": 1,
+      "description": "",
+      "name": "adobe",
+      "slug": "adobe"
+    },
+    {
+      "id": 96990195,
+      "count": 1,
+      "description": "",
+      "name": "Against The Current",
+      "slug": "against-the-current"
+    },
+    {
+      "id": 96987620,
+      "count": 4,
+      "description": "",
+      "name": "AI",
+      "slug": "ai"
+    },
+    {
+      "id": 96990567,
+      "count": 0,
+      "description": "",
+      "name": "AI IDE",
+      "slug": "ai-ide"
+    },
+    {
+      "id": 96990419,
+      "count": 1,
+      "description": "",
+      "name": "Ai Kakihira",
+      "slug": "ai-kakihira"
+    },
+    {
+      "id": 96990141,
+      "count": 0,
+      "description": "",
+      "name": "ak",
+      "slug": "ak"
+    },
+    {
+      "id": 96990142,
+      "count": 1,
+      "description": "",
+      "name": "akira",
+      "slug": "akira"
+    },
+    {
+      "id": 96989938,
+      "count": 1,
+      "description": "",
+      "name": "akmu",
+      "slug": "akmu"
+    },
+    {
+      "id": 96990208,
+      "count": 1,
+      "description": "",
+      "name": "akon",
+      "slug": "akon"
+    },
+    {
+      "id": 96989773,
+      "count": 1,
+      "description": "",
+      "name": "al rocco",
+      "slug": "al-rocco"
+    },
+    {
+      "id": 96990362,
+      "count": 0,
+      "description": "",
+      "name": "Alec Benjamin",
+      "slug": "alec-benjamin"
+    },
+    {
+      "id": 96990319,
+      "count": 1,
+      "description": "",
+      "name": "Alexander 23",
+      "slug": "alexander-23"
+    },
+    {
+      "id": 96990219,
+      "count": 1,
+      "description": "",
+      "name": "Alison Goldfrapp",
+      "slug": "alison-goldfrapp"
+    },
+    {
+      "id": 96987668,
+      "count": 1,
+      "description": "",
+      "name": "alison wonderland",
+      "slug": "alison-wonderland"
+    },
+    {
+      "id": 96989914,
+      "count": 1,
+      "description": "",
+      "name": "All Star Game",
+      "slug": "all-star-game"
+    },
+    {
+      "id": 96989408,
+      "count": 0,
+      "description": "",
+      "name": "AllinChallenge",
+      "slug": "allinchallenge"
+    },
+    {
+      "id": 96990229,
+      "count": 1,
+      "description": "",
+      "name": "Alternative HipHop",
+      "slug": "alternative-hiphop"
+    },
+    {
+      "id": 96987715,
+      "count": 1,
+      "description": "",
+      "name": "alva noto",
+      "slug": "alva-noto"
+    },
+    {
+      "id": 96987754,
+      "count": 1,
+      "description": "",
+      "name": "aly",
+      "slug": "aly"
+    },
+    {
+      "id": 96987752,
+      "count": 1,
+      "description": "",
+      "name": "aly&amp;fila",
+      "slug": "alyfila"
+    },
+    {
+      "id": 96990345,
+      "count": 1,
+      "description": "",
+      "name": "Alynda Segarra",
+      "slug": "alynda-segarra"
+    },
+    {
+      "id": 96987520,
+      "count": 0,
+      "description": "",
+      "name": "amazon",
+      "slug": "amazon"
+    },
+    {
+      "id": 96990349,
+      "count": 0,
+      "description": "",
+      "name": "Ambient Trap",
+      "slug": "ambient-trap"
+    },
+    {
+      "id": 96990493,
+      "count": 1,
+      "description": "",
+      "name": "amtrac",
+      "slug": "amtrac"
+    },
+    {
+      "id": 96990215,
+      "count": 1,
+      "description": "",
+      "name": "Amy Winehouse",
+      "slug": "amy-winehouse"
+    },
+    {
+      "id": 96987645,
+      "count": 2,
+      "description": "",
+      "name": "Anba",
+      "slug": "anba"
+    },
+    {
+      "id": 96990439,
+      "count": 1,
+      "description": "",
+      "name": "andr",
+      "slug": "andr"
+    },
+    {
+      "id": 96988818,
+      "count": 1,
+      "description": "",
+      "name": "Andrew Watt",
+      "slug": "andrew-watt"
+    },
+    {
+      "id": 96989689,
+      "count": 1,
+      "description": "",
+      "name": "Anjunadeep",
+      "slug": "anjunadeep"
+    },
+    {
+      "id": 96990495,
+      "count": 1,
+      "description": "",
+      "name": "Antigravity",
+      "slug": "antigravity"
+    },
+    {
+      "id": 96988533,
+      "count": 1,
+      "description": "",
+      "name": "Aoife McArdle",
+      "slug": "aoife-mcardle"
+    },
+    {
+      "id": 96990213,
+      "count": 1,
+      "description": "",
+      "name": "Apollo Brown",
+      "slug": "apollo-brown"
+    },
+    {
+      "id": 96989892,
+      "count": 0,
+      "description": "",
+      "name": "apple msuic",
+      "slug": "apple-msuic"
+    },
+    {
+      "id": 96987505,
+      "count": 1,
+      "description": "",
+      "name": "apple music",
+      "slug": "apple-music"
+    },
+    {
+      "id": 96989658,
+      "count": 2,
+      "description": "",
+      "name": "asiaboy",
+      "slug": "asiaboy"
+    },
+    {
+      "id": 96989907,
+      "count": 1,
+      "description": "",
+      "name": "Asiaboy禁藥王",
+      "slug": "asiaboy-jin-yao-wang"
+    },
+    {
+      "id": 96987615,
+      "count": 2,
+      "description": "",
+      "name": "august 08",
+      "slug": "august-08"
+    },
+    {
+      "id": 96987502,
+      "count": 1,
+      "description": "",
+      "name": "avicii",
+      "slug": "avicii"
+    },
+    {
+      "id": 96987606,
+      "count": 0,
+      "description": "",
+      "name": "AW",
+      "slug": "aw"
+    },
+    {
+      "id": 96987767,
+      "count": 1,
+      "description": "",
+      "name": "ØZI",
+      "slug": "ozi-2"
+    },
+    {
+      "id": 96990444,
+      "count": 0,
+      "description": "",
+      "name": "BA YoungBoy",
+      "slug": "ba-youngboy"
+    },
+    {
+      "id": 96987807,
+      "count": 1,
+      "description": "",
+      "name": "Backstreet Boys",
+      "slug": "backstreet-boys"
+    },
+    {
+      "id": 96989964,
+      "count": 1,
+      "description": "",
+      "name": "BAD HOP",
+      "slug": "bad-hop"
+    },
+    {
+      "id": 96989642,
+      "count": 1,
+      "description": "",
+      "name": "Bad Vibes Forever",
+      "slug": "bad-vibes-forever"
+    },
+    {
+      "id": 96989810,
+      "count": 1,
+      "description": "",
+      "name": "BADBOYRACOG",
+      "slug": "badboyracog"
+    },
+    {
+      "id": 96990005,
+      "count": 0,
+      "description": "",
+      "name": "BALLZ OUT",
+      "slug": "ballz-out"
+    },
+    {
+      "id": 96988346,
+      "count": 1,
+      "description": "",
+      "name": "barong family",
+      "slug": "barong-family"
+    },
+    {
+      "id": 96987778,
+      "count": 3,
+      "description": "",
+      "name": "Barry Chen",
+      "slug": "barry-chen"
+    },
+    {
+      "id": 96989927,
+      "count": 1,
+      "description": "",
+      "name": "basick",
+      "slug": "basick"
+    },
+    {
+      "id": 96987636,
+      "count": 1,
+      "description": "",
+      "name": "basketball",
+      "slug": "basketball"
+    },
+    {
+      "id": 96990330,
+      "count": 0,
+      "description": "",
+      "name": "Bay Area",
+      "slug": "bay-area"
+    },
+    {
+      "id": 96987654,
+      "count": 2,
+      "description": "",
+      "name": "bazzi",
+      "slug": "bazzi"
+    },
+    {
+      "id": 96990145,
+      "count": 1,
+      "description": "",
+      "name": "BCW",
+      "slug": "bcw"
+    },
+    {
+      "id": 96990169,
+      "count": 1,
+      "description": "",
+      "name": "beatday",
+      "slug": "beatday"
+    },
+    {
+      "id": 96989965,
+      "count": 1,
+      "description": "",
+      "name": "BEEF",
+      "slug": "beef"
+    },
+    {
+      "id": 96990174,
+      "count": 1,
+      "description": "",
+      "name": "bellavita",
+      "slug": "bellavita"
+    },
+    {
+      "id": 96989688,
+      "count": 1,
+      "description": "",
+      "name": "Ben Böhmer",
+      "slug": "ben-bohmer"
+    },
+    {
+      "id": 96987558,
+      "count": 1,
+      "description": "",
+      "name": "ben nicky",
+      "slug": "ben-nicky"
+    },
+    {
+      "id": 96987664,
+      "count": 0,
+      "description": "",
+      "name": "benny blanco",
+      "slug": "benny-blanco"
+    },
+    {
+      "id": 96990454,
+      "count": 1,
+      "description": "",
+      "name": "Benson Boone",
+      "slug": "benson-boone"
+    },
+    {
+      "id": 96987596,
+      "count": 2,
+      "description": "",
+      "name": "BG8LOCC",
+      "slug": "bg8locc"
+    },
+    {
+      "id": 96987616,
+      "count": 1,
+      "description": "",
+      "name": "BIG D.O.L.L.A.",
+      "slug": "big-d-o-l-l-a"
+    },
+    {
+      "id": 96989883,
+      "count": 1,
+      "description": "",
+      "name": "biggie",
+      "slug": "biggie"
+    },
+    {
+      "id": 96987531,
+      "count": 3,
+      "description": "",
+      "name": "billboard",
+      "slug": "billboard"
+    },
+    {
+      "id": 96987574,
+      "count": 3,
+      "description": "",
+      "name": "Billie Eilish",
+      "slug": "billie-eilish"
+    },
+    {
+      "id": 96990205,
+      "count": 1,
+      "description": "",
+      "name": "Blac Youngsta",
+      "slug": "blac-youngsta"
+    },
+    {
+      "id": 96990397,
+      "count": 1,
+      "description": "",
+      "name": "Black Forest Labs",
+      "slug": "black-forest-labs"
+    },
+    {
+      "id": 96989354,
+      "count": 1,
+      "description": "",
+      "name": "Blame It On Baby",
+      "slug": "blame-it-on-baby"
+    },
+    {
+      "id": 96989791,
+      "count": 1,
+      "description": "",
+      "name": "BLOO",
+      "slug": "bloo"
+    },
+    {
+      "id": 96989815,
+      "count": 1,
+      "description": "",
+      "name": "Blossom",
+      "slug": "blossom"
+    },
+    {
+      "id": 96988488,
+      "count": 0,
+      "description": "",
+      "name": "blueface",
+      "slug": "blueface"
+    },
+    {
+      "id": 96990278,
+      "count": 1,
+      "description": "",
+      "name": "Boom Bap",
+      "slug": "boom-bap"
+    },
+    {
+      "id": 96990374,
+      "count": 0,
+      "description": "",
+      "name": "BoomBap",
+      "slug": "boombap"
+    },
+    {
+      "id": 96988489,
+      "count": 0,
+      "description": "",
+      "name": "Boss Man",
+      "slug": "boss-man"
+    },
+    {
+      "id": 96989597,
+      "count": 1,
+      "description": "",
+      "name": "BR",
+      "slug": "br"
+    },
+    {
+      "id": 96987541,
+      "count": 2,
+      "description": "",
+      "name": "Brain Zapp",
+      "slug": "brain-zapp"
+    },
+    {
+      "id": 96988941,
+      "count": 1,
+      "description": "",
+      "name": "brian eno",
+      "slug": "brian-eno"
+    },
+    {
+      "id": 96988600,
+      "count": 1,
+      "description": "",
+      "name": "Brian Ortega",
+      "slug": "brian-ortega"
+    },
+    {
+      "id": 96987540,
+      "count": 0,
+      "description": "",
+      "name": "brian zapp",
+      "slug": "brian-zapp"
+    },
+    {
+      "id": 96990431,
+      "count": 1,
+      "description": "",
+      "name": "Bronny James",
+      "slug": "bronny-james"
+    },
+    {
+      "id": 96990577,
+      "count": 0,
+      "description": "",
+      "name": "BROOKS",
+      "slug": "brooks"
+    },
+    {
+      "id": 96987644,
+      "count": 4,
+      "description": "",
+      "name": "Broya Icebox",
+      "slug": "broya-icebox"
+    },
+    {
+      "id": 96990149,
+      "count": 1,
+      "description": "",
+      "name": "burna boy",
+      "slug": "burna-boy"
+    },
+    {
+      "id": 96990267,
+      "count": 1,
+      "description": "",
+      "name": "Busta Rhymes",
+      "slug": "busta-rhymes"
+    },
+    {
+      "id": 96989684,
+      "count": 1,
+      "description": "",
+      "name": "butter",
+      "slug": "butter"
+    },
+    {
+      "id": 96989944,
+      "count": 1,
+      "description": "",
+      "name": "ButterflyRay",
+      "slug": "butterflyray"
+    },
+    {
+      "id": 96987867,
+      "count": 3,
+      "description": "",
+      "name": "C-BLOCK",
+      "slug": "c-block"
+    },
+    {
+      "id": 96990294,
+      "count": 2,
+      "description": "",
+      "name": "C.Hao$",
+      "slug": "c-hao"
+    },
+    {
+      "id": 96987795,
+      "count": 1,
+      "description": "",
+      "name": "calvin harris",
+      "slug": "calvin-harris"
+    },
+    {
+      "id": 96990092,
+      "count": 1,
+      "description": "",
+      "name": "Can I",
+      "slug": "can-i"
+    },
+    {
+      "id": 96987683,
+      "count": 4,
+      "description": "",
+      "name": "cardi b",
+      "slug": "cardi-b"
+    },
+    {
+      "id": 96987728,
+      "count": 0,
+      "description": "",
+      "name": "CAVE",
+      "slug": "cave"
+    },
+    {
+      "id": 96987738,
+      "count": 1,
+      "description": "",
+      "name": "CÉ LA VI",
+      "slug": "ce-la-vi"
+    },
+    {
+      "id": 96989569,
+      "count": 1,
+      "description": "",
+      "name": "cdc",
+      "slug": "cdc"
+    },
+    {
+      "id": 96987611,
+      "count": 0,
+      "description": "",
+      "name": "cee",
+      "slug": "cee"
+    },
+    {
+      "id": 96990125,
+      "count": 1,
+      "description": "",
+      "name": "Central Cee",
+      "slug": "central-cee"
+    },
+    {
+      "id": 96987670,
+      "count": 0,
+      "description": "",
+      "name": "CERCEL",
+      "slug": "cercel"
+    },
+    {
+      "id": 96987671,
+      "count": 4,
+      "description": "",
+      "name": "CERCLE",
+      "slug": "cercle"
+    },
+    {
+      "id": 96987685,
+      "count": 3,
+      "description": "",
+      "name": "chance the rapper",
+      "slug": "chance-the-rapper"
+    },
+    {
+      "id": 96990227,
+      "count": 1,
+      "description": "",
+      "name": "Chaos",
+      "slug": "chaos"
+    },
+    {
+      "id": 96990410,
+      "count": 1,
+      "description": "",
+      "name": "Charlie Puth",
+      "slug": "charlie-puth"
+    },
+    {
+      "id": 96989835,
+      "count": 0,
+      "description": "",
+      "name": "charlie stacey",
+      "slug": "charlie-stacey"
+    },
+    {
+      "id": 96987702,
+      "count": 1,
+      "description": "",
+      "name": "Charlotte de Witte",
+      "slug": "charlotte-de-witte"
+    },
+    {
+      "id": 96990496,
+      "count": 1,
+      "description": "",
+      "name": "chatgpt",
+      "slug": "chatgpt"
+    },
+    {
+      "id": 96990382,
+      "count": 1,
+      "description": "",
+      "name": "Childish Gambino",
+      "slug": "childish-gambino"
+    },
+    {
+      "id": 96987628,
+      "count": 1,
+      "description": "",
+      "name": "chill",
+      "slug": "chill"
+    },
+    {
+      "id": 96987736,
+      "count": 1,
+      "description": "",
+      "name": "ChillChillAllGood",
+      "slug": "chillchillallgood"
+    },
+    {
+      "id": 96987705,
+      "count": 1,
+      "description": "",
+      "name": "chillwave",
+      "slug": "chillwave"
+    },
+    {
+      "id": 96987607,
+      "count": 0,
+      "description": "",
+      "name": "chris brown",
+      "slug": "chris-brown"
+    },
+    {
+      "id": 96990505,
+      "count": 1,
+      "description": "",
+      "name": "CHUCK D",
+      "slug": "chuck-d"
+    },
+    {
+      "id": 96989574,
+      "count": 1,
+      "description": "",
+      "name": "City Boy The Rapper",
+      "slug": "city-boy-the-rapper"
+    },
+    {
+      "id": 96987717,
+      "count": 1,
+      "description": "",
+      "name": "city pop",
+      "slug": "city-pop"
+    },
+    {
+      "id": 96990268,
+      "count": 1,
+      "description": "",
+      "name": "CJ FLY",
+      "slug": "cj-fly"
+    },
+    {
+      "id": 96989728,
+      "count": 1,
+      "description": "",
+      "name": "clean bandit",
+      "slug": "clean-bandit"
+    },
+    {
+      "id": 96989719,
+      "count": 2,
+      "description": "",
+      "name": "Cocco &amp; Co.",
+      "slug": "cocco-co"
+    },
+    {
+      "id": 96989822,
+      "count": 1,
+      "description": "",
+      "name": "Cocco &amp; Co. Taipei",
+      "slug": "cocco-co-taipei"
+    },
+    {
+      "id": 96989820,
+      "count": 1,
+      "description": "",
+      "name": "Cocco Vibe",
+      "slug": "cocco-vibe"
+    },
+    {
+      "id": 96990292,
+      "count": 1,
+      "description": "",
+      "name": "CoCo都可",
+      "slug": "coco-dou-ke"
+    },
+    {
+      "id": 96990332,
+      "count": 0,
+      "description": "",
+      "name": "Coffee Wit Da Joint",
+      "slug": "coffee-wit-da-joint"
+    },
+    {
+      "id": 96987797,
+      "count": 2,
+      "description": "",
+      "name": "coldplay",
+      "slug": "coldplay"
+    },
+    {
+      "id": 96989831,
+      "count": 1,
+      "description": "",
+      "name": "conectd",
+      "slug": "conectd"
+    },
+    {
+      "id": 96989741,
+      "count": 1,
+      "description": "",
+      "name": "CopyCat",
+      "slug": "copycat"
+    },
+    {
+      "id": 96990210,
+      "count": 1,
+      "description": "",
+      "name": "Corinne Bailey Rae",
+      "slug": "corinne-bailey-rae"
+    },
+    {
+      "id": 96990507,
+      "count": 1,
+      "description": "",
+      "name": "cortis",
+      "slug": "cortis"
+    },
+    {
+      "id": 96988540,
+      "count": 2,
+      "description": "",
+      "name": "COVID",
+      "slug": "covid"
+    },
+    {
+      "id": 96989258,
+      "count": 0,
+      "description": "",
+      "name": "covid-19",
+      "slug": "covid-19"
+    },
+    {
+      "id": 96990225,
+      "count": 1,
+      "description": "",
+      "name": "Cozmoz",
+      "slug": "cozmoz"
+    },
+    {
+      "id": 96987639,
+      "count": 1,
+      "description": "",
+      "name": "cream d",
+      "slug": "cream-d"
+    },
+    {
+      "id": 96987557,
+      "count": 2,
+      "description": "",
+      "name": "creamfields",
+      "slug": "creamfields"
+    },
+    {
+      "id": 96987539,
+      "count": 0,
+      "description": "",
+      "name": "creation",
+      "slug": "creation"
+    },
+    {
+      "id": 96990357,
+      "count": 1,
+      "description": "",
+      "name": "Crunk",
+      "slug": "crunk"
+    },
+    {
+      "id": 96989966,
+      "count": 1,
+      "description": "",
+      "name": "CRY NOW SMILE LATER",
+      "slug": "cry-now-smile-later"
+    },
+    {
+      "id": 96989841,
+      "count": 1,
+      "description": "",
+      "name": "cyberpunk",
+      "slug": "cyberpunk"
+    },
+    {
+      "id": 96989570,
+      "count": 1,
+      "description": "",
+      "name": "cypher",
+      "slug": "cypher"
+    },
+    {
+      "id": 96990243,
+      "count": 1,
+      "description": "",
+      "name": "CY堂炒",
+      "slug": "cy-tang-chao"
+    },
+    {
+      "id": 96990513,
+      "count": 1,
+      "description": "",
+      "name": "瀬戸康史",
+      "slug": "seto-koji"
+    },
+    {
+      "id": 96990042,
+      "count": 1,
+      "description": "",
+      "name": "無間道",
+      "slug": "infernal-affairs"
+    },
+    {
+      "id": 96987491,
+      "count": 7,
+      "description": "",
+      "name": "熊仔",
+      "slug": "xiong-zi"
+    },
+    {
+      "id": 96989720,
+      "count": 1,
+      "description": "",
+      "name": "熱高城",
+      "slug": "re-gao-cheng"
+    },
+    {
+      "id": 96987774,
+      "count": 1,
+      "description": "",
+      "name": "燃燒の饒舌魂",
+      "slug": "moeru-rap-damashii"
+    },
+    {
+      "id": 96990282,
+      "count": 1,
+      "description": "",
+      "name": "牽猴子",
+      "slug": "qian-hou-zi"
+    },
+    {
+      "id": 96989879,
+      "count": 1,
+      "description": "",
+      "name": "犀牛盾",
+      "slug": "rhinoshield"
+    },
+    {
+      "id": 96989581,
+      "count": 1,
+      "description": "",
+      "name": "狀態",
+      "slug": "zhuang-tai"
+    },
+    {
+      "id": 96990408,
+      "count": 1,
+      "description": "",
+      "name": "王陽明",
+      "slug": "wang-yang-ming"
+    },
+    {
+      "id": 96987707,
+      "count": 1,
+      "description": "",
+      "name": "王嘉爾",
+      "slug": "jackson-wang-tw"
+    },
+    {
+      "id": 96990370,
+      "count": 1,
+      "description": "",
+      "name": "王師",
+      "slug": "wang-shi"
+    },
+    {
+      "id": 96990166,
+      "count": 5,
+      "description": "",
+      "name": "王柏傑",
+      "slug": "wang-bo-jie"
+    },
+    {
+      "id": 96990163,
+      "count": 2,
+      "description": "",
+      "name": "王淨",
+      "slug": "wang-jing"
+    },
+    {
+      "id": 96990455,
+      "count": 1,
+      "description": "",
+      "name": "王一博",
+      "slug": "wang-yi-bo"
+    },
+    {
+      "id": 96990073,
+      "count": 1,
+      "description": "",
+      "name": "環球音樂",
+      "slug": "universal-music-tw"
+    },
+    {
+      "id": 96990070,
+      "count": 2,
+      "description": "",
+      "name": "甲上娛樂",
+      "slug": "jia-shang-entertainment"
+    },
+    {
+      "id": 96987673,
+      "count": 1,
+      "description": "",
+      "name": "畢書盡",
+      "slug": "bi-shu-jin"
+    },
+    {
+      "id": 96989869,
+      "count": 1,
+      "description": "",
+      "name": "異鄉人",
+      "slug": "stranger-tw"
+    },
+    {
+      "id": 96989592,
+      "count": 2,
+      "description": "",
+      "name": "瘦子",
+      "slug": "shou-zi"
+    },
+    {
+      "id": 96989984,
+      "count": 1,
+      "description": "",
+      "name": "登台之路",
+      "slug": "path-to-stage"
+    },
+    {
+      "id": 96990158,
+      "count": 1,
+      "description": "",
+      "name": "百味小廚神",
+      "slug": "bai-wei-kitchen"
+    },
+    {
+      "id": 96987760,
+      "count": 1,
+      "description": "",
+      "name": "百憂不解少年",
+      "slug": "troubled-youth-tw"
+    },
+    {
+      "id": 96990235,
+      "count": 1,
+      "description": "",
+      "name": "盧瀚霆",
+      "slug": "anson-lo"
+    },
+    {
+      "id": 96990406,
+      "count": 1,
+      "description": "",
+      "name": "盧貝松",
+      "slug": "luc-besson"
+    },
+    {
+      "id": 96990053,
+      "count": 2,
+      "description": "",
+      "name": "盧廣仲",
+      "slug": "crowd-lu"
+    },
+    {
+      "id": 96989980,
+      "count": 1,
+      "description": "",
+      "name": "直到我 until I",
+      "slug": "until-i"
+    },
+    {
+      "id": 96987735,
+      "count": 1,
+      "description": "",
+      "name": "真的",
+      "slug": "zhen-de"
+    },
+    {
+      "id": 96990052,
+      "count": 1,
+      "description": "",
+      "name": "瞿友寧",
+      "slug": "qu-you-ning"
+    },
+    {
+      "id": 96989958,
+      "count": 1,
+      "description": "",
+      "name": "硬派",
+      "slug": "hard-core-tw"
+    },
+    {
+      "id": 96988159,
+      "count": 1,
+      "description": "",
+      "name": "社會GAI",
+      "slug": "shehui-gai"
+    },
+    {
+      "id": 96989895,
+      "count": 1,
+      "description": "",
+      "name": "祝你好命",
+      "slug": "wish-you-luck"
+    },
+    {
+      "id": 96987699,
+      "count": 7,
+      "description": "",
+      "name": "禁藥王",
+      "slug": "jin-yao-wang"
+    },
+    {
+      "id": 96990126,
+      "count": 1,
+      "description": "",
+      "name": "禁藥王&amp;栗子",
+      "slug": "jin-yao-wang-lizi"
+    },
+    {
+      "id": 96987552,
+      "count": 1,
+      "description": "",
+      "name": "福克斯",
+      "slug": "fox-tw"
+    },
+    {
+      "id": 96989615,
+      "count": 1,
+      "description": "",
+      "name": "禮韋",
+      "slug": "li-wei"
+    },
+    {
+      "id": 96989739,
+      "count": 1,
+      "description": "",
+      "name": "範例三",
+      "slug": "sample-three"
+    },
+    {
+      "id": 96990221,
+      "count": 2,
+      "description": "",
+      "name": "簡嫚書",
+      "slug": "jian-man-shu"
+    },
+    {
+      "id": 96989915,
+      "count": 1,
+      "description": "",
+      "name": "籃球賽",
+      "slug": "basketball-game-tw"
+    },
+    {
+      "id": 96989874,
+      "count": 1,
+      "description": "",
+      "name": "米其林",
+      "slug": "michelin-tw"
+    },
+    {
+      "id": 96987633,
+      "count": 1,
+      "description": "",
+      "name": "紅花會",
+      "slug": "hong-hua-hui"
+    },
+    {
+      "id": 96989662,
+      "count": 1,
+      "description": "",
+      "name": "紐約之王",
+      "slug": "king-of-new-york-tw"
+    },
+    {
+      "id": 96987725,
+      "count": 2,
+      "description": "",
+      "name": "絕情少年",
+      "slug": "heartless-youth"
+    },
+    {
+      "id": 96989589,
+      "count": 1,
+      "description": "",
+      "name": "經典回顧",
+      "slug": "classic-review"
+    },
+    {
+      "id": 96990009,
+      "count": 1,
+      "description": "",
+      "name": "總統級DJ",
+      "slug": "president-level-dj"
+    },
+    {
+      "id": 96989575,
+      "count": 1,
+      "description": "",
+      "name": "羅百吉",
+      "slug": "luo-bai-ji"
+    },
+    {
+      "id": 96989829,
+      "count": 1,
+      "description": "",
+      "name": "羅莎莎",
+      "slug": "luo-sha-sha"
+    },
+    {
+      "id": 96990308,
+      "count": 1,
+      "description": "",
+      "name": "美秀集團",
+      "slug": "mei-xiu-group"
+    },
+    {
+      "id": 96989771,
+      "count": 3,
+      "description": "",
+      "name": "美麗本人",
+      "slug": "mei-li-ben-ren"
+    },
+    {
+      "id": 96987896,
+      "count": 4,
+      "description": "",
+      "name": "美國動",
+      "slug": "mei-guo-dong"
+    },
+    {
+      "id": 96990209,
+      "count": 1,
+      "description": "",
+      "name": "d4vd",
+      "slug": "d4vd"
+    },
+    {
+      "id": 96987895,
+      "count": 4,
+      "description": "",
+      "name": "Dababy",
+      "slug": "dababy"
+    },
+    {
+      "id": 96988390,
+      "count": 1,
+      "description": "",
+      "name": "dabbing granny",
+      "slug": "dabbing-granny"
+    },
+    {
+      "id": 96990067,
+      "count": 0,
+      "description": "",
+      "name": "dailyprompt",
+      "slug": "dailyprompt"
+    },
+    {
+      "id": 96990175,
+      "count": 1,
+      "description": "",
+      "name": "dalmore",
+      "slug": "dalmore"
+    },
+    {
+      "id": 96987617,
+      "count": 4,
+      "description": "",
+      "name": "Damian Lillard",
+      "slug": "damian-lillard"
+    },
+    {
+      "id": 96989635,
+      "count": 1,
+      "description": "",
+      "name": "Damn",
+      "slug": "damn"
+    },
+    {
+      "id": 96988648,
+      "count": 1,
+      "description": "",
+      "name": "Dancer",
+      "slug": "dancer"
+    },
+    {
+      "id": 96990194,
+      "count": 1,
+      "description": "",
+      "name": "Daniel Caesar",
+      "slug": "daniel-caesar"
+    },
+    {
+      "id": 96990269,
+      "count": 1,
+      "description": "",
+      "name": "Danny Brown",
+      "slug": "danny-brown"
+    },
+    {
+      "id": 96988735,
+      "count": 1,
+      "description": "",
+      "name": "DATS DA SHIT",
+      "slug": "dats-da-shit"
+    },
+    {
+      "id": 96989888,
+      "count": 3,
+      "description": "",
+      "name": "dave",
+      "slug": "dave"
+    },
+    {
+      "id": 96989752,
+      "count": 1,
+      "description": "",
+      "name": "David guetta",
+      "slug": "david-guetta"
+    },
+    {
+      "id": 96990159,
+      "count": 1,
+      "description": "",
+      "name": "Dean Lewis",
+      "slug": "dean-lewis"
+    },
+    {
+      "id": 96987686,
+      "count": 1,
+      "description": "",
+      "name": "deb never",
+      "slug": "deb-never"
+    },
+    {
+      "id": 96990271,
+      "count": 1,
+      "description": "",
+      "name": "deca joins",
+      "slug": "deca-joins"
+    },
+    {
+      "id": 96989636,
+      "count": 1,
+      "description": "",
+      "name": "Demar Derozan",
+      "slug": "demar-derozan"
+    },
+    {
+      "id": 96990690,
+      "count": 0,
+      "description": "",
+      "name": "Denis Villeneuve",
+      "slug": "denis-villeneuve"
+    },
+    {
+      "id": 96990109,
+      "count": 3,
+      "description": "",
+      "name": "denzel curry",
+      "slug": "denzel-curry"
+    },
+    {
+      "id": 96987538,
+      "count": 0,
+      "description": "",
+      "name": "dickies",
+      "slug": "dickies"
+    },
+    {
+      "id": 96990502,
+      "count": 1,
+      "description": "",
+      "name": "diddy",
+      "slug": "diddy"
+    },
+    {
+      "id": 96989616,
+      "count": 1,
+      "description": "",
+      "name": "Dindu Nuffin",
+      "slug": "dindu-nuffin"
+    },
+    {
+      "id": 96990695,
+      "count": 0,
+      "description": "",
+      "name": "Disney+",
+      "slug": "disney"
+    },
+    {
+      "id": 96989928,
+      "count": 1,
+      "description": "",
+      "name": "diss battle",
+      "slug": "diss-battle"
+    },
+    {
+      "id": 96987665,
+      "count": 1,
+      "description": "",
+      "name": "dizparity",
+      "slug": "dizparity"
+    },
+    {
+      "id": 96989647,
+      "count": 1,
+      "description": "",
+      "name": "dj",
+      "slug": "dj"
+    },
+    {
+      "id": 96989848,
+      "count": 1,
+      "description": "",
+      "name": "DJ Afro",
+      "slug": "dj-afro"
+    },
+    {
+      "id": 96990199,
+      "count": 1,
+      "description": "",
+      "name": "dj drama",
+      "slug": "dj-drama"
+    },
+    {
+      "id": 96989717,
+      "count": 1,
+      "description": "",
+      "name": "DJ 賴皮",
+      "slug": "dj-lai-pi"
+    },
+    {
+      "id": 96989576,
+      "count": 1,
+      "description": "",
+      "name": "dj jerry",
+      "slug": "dj-jerry"
+    },
+    {
+      "id": 96987506,
+      "count": 0,
+      "description": "",
+      "name": "dj khaled",
+      "slug": "dj-khaled"
+    },
+    {
+      "id": 96989718,
+      "count": 2,
+      "description": "",
+      "name": "DJ Mr.Skin",
+      "slug": "dj-mr-skin"
+    },
+    {
+      "id": 96987610,
+      "count": 2,
+      "description": "",
+      "name": "dj rayray",
+      "slug": "dj-rayray"
+    },
+    {
+      "id": 96989127,
+      "count": 1,
+      "description": "",
+      "name": "dj shaun",
+      "slug": "dj-shaun"
+    },
+    {
+      "id": 96989126,
+      "count": 0,
+      "description": "",
+      "name": "dj shuan",
+      "slug": "dj-shuan"
+    },
+    {
+      "id": 96990006,
+      "count": 0,
+      "description": "",
+      "name": "DJ T-TIME",
+      "slug": "dj-t-time"
+    },
+    {
+      "id": 96989999,
+      "count": 1,
+      "description": "",
+      "name": "DJ Tukutz",
+      "slug": "dj-tukutz"
+    },
+    {
+      "id": 96989571,
+      "count": 2,
+      "description": "",
+      "name": "Doja Cat",
+      "slug": "doja-cat"
+    },
+    {
+      "id": 96987790,
+      "count": 2,
+      "description": "",
+      "name": "dok2",
+      "slug": "dok2"
+    },
+    {
+      "id": 96989824,
+      "count": 1,
+      "description": "",
+      "name": "don toliver",
+      "slug": "don-toliver"
+    },
+    {
+      "id": 96989088,
+      "count": 0,
+      "description": "",
+      "name": "Donald Trump",
+      "slug": "donald-trump"
+    },
+    {
+      "id": 96989904,
+      "count": 0,
+      "description": "",
+      "name": "Don’t Wanna Lie",
+      "slug": "dont-wanna-lie"
+    },
+    {
+      "id": 96990043,
+      "count": 1,
+      "description": "",
+      "name": "DPGTaiwan",
+      "slug": "dpgtaiwan"
+    },
+    {
+      "id": 96988031,
+      "count": 1,
+      "description": "",
+      "name": "Dr. Dre",
+      "slug": "dr-dre"
+    },
+    {
+      "id": 96987626,
+      "count": 9,
+      "description": "",
+      "name": "drake",
+      "slug": "drake"
+    },
+    {
+      "id": 96989564,
+      "count": 0,
+      "description": "",
+      "name": "drew",
+      "slug": "drew"
+    },
+    {
+      "id": 96990422,
+      "count": 1,
+      "description": "",
+      "name": "Drill",
+      "slug": "drill"
+    },
+    {
+      "id": 96987706,
+      "count": 1,
+      "description": "",
+      "name": "drumcode",
+      "slug": "drumcode"
+    },
+    {
+      "id": 96989582,
+      "count": 1,
+      "description": "",
+      "name": "Drunk Tired",
+      "slug": "drunk-tired"
+    },
+    {
+      "id": 96989625,
+      "count": 1,
+      "description": "",
+      "name": "Du Wei",
+      "slug": "du-wei"
+    },
+    {
+      "id": 96989830,
+      "count": 3,
+      "description": "",
+      "name": "dua lipa",
+      "slug": "dua-lipa"
+    },
+    {
+      "id": 96989617,
+      "count": 1,
+      "description": "",
+      "name": "dudu",
+      "slug": "dudu"
+    },
+    {
+      "id": 96987660,
+      "count": 1,
+      "description": "",
+      "name": "DUF",
+      "slug": "duf"
+    },
+    {
+      "id": 96990685,
+      "count": 0,
+      "description": "",
+      "name": "Dune3",
+      "slug": "dune3"
+    },
+    {
+      "id": 96990341,
+      "count": 1,
+      "description": "",
+      "name": "DURDN",
+      "slug": "durdn"
+    },
+    {
+      "id": 96988028,
+      "count": 0,
+      "description": "",
+      "name": "E",
+      "slug": "e"
+    },
+    {
+      "id": 96989765,
+      "count": 1,
+      "description": "",
+      "name": "E.SO",
+      "slug": "e-so"
+    },
+    {
+      "id": 96990178,
+      "count": 1,
+      "description": "",
+      "name": "Earl Sweatshirt",
+      "slug": "earl-sweatshirt"
+    },
+    {
+      "id": 96987503,
+      "count": 4,
+      "description": "",
+      "name": "edm",
+      "slug": "edm"
+    },
+    {
+      "id": 96989800,
+      "count": 1,
+      "description": "",
+      "name": "elijah james",
+      "slug": "elijah-james"
+    },
+    {
+      "id": 96989709,
+      "count": 2,
+      "description": "",
+      "name": "Elon Musk",
+      "slug": "elon-musk"
+    },
+    {
+      "id": 96988029,
+      "count": 3,
+      "description": "",
+      "name": "Eminem",
+      "slug": "eminem"
+    },
+    {
+      "id": 96989996,
+      "count": 1,
+      "description": "",
+      "name": "epik high",
+      "slug": "epik-high"
+    },
+    {
+      "id": 96989997,
+      "count": 1,
+      "description": "",
+      "name": "epik high is here",
+      "slug": "epik-high-is-here"
+    },
+    {
+      "id": 96989591,
+      "count": 2,
+      "description": "",
+      "name": "ESO",
+      "slug": "eso"
+    },
+    {
+      "id": 96988491,
+      "count": 1,
+      "description": "",
+      "name": "eternal atake",
+      "slug": "eternal-atake"
+    },
+    {
+      "id": 96989943,
+      "count": 1,
+      "description": "",
+      "name": "EyeBallray",
+      "slug": "eyeballray"
+    },
+    {
+      "id": 96987742,
+      "count": 3,
+      "description": "",
+      "name": "老莫",
+      "slug": "lao-mo"
+    },
+    {
+      "id": 96989779,
+      "count": 1,
+      "description": "",
+      "name": "逮捕",
+      "slug": "arrest-tw"
+    },
+    {
+      "id": 96989749,
+      "count": 1,
+      "description": "",
+      "name": "違法 SmashRegz",
+      "slug": "illegal-smashregz"
+    },
+    {
+      "id": 96989949,
+      "count": 1,
+      "description": "",
+      "name": "違法SmashRegz",
+      "slug": "illegal-smashregz-2"
+    },
+    {
+      "id": 96988702,
+      "count": 1,
+      "description": "",
+      "name": "聽媽媽的話",
+      "slug": "listen-to-mama"
+    },
+    {
+      "id": 96990296,
+      "count": 2,
+      "description": "",
+      "name": "還錢",
+      "slug": "pay-back"
+    },
+    {
+      "id": 96990134,
+      "count": 2,
+      "description": "",
+      "name": "邱禮濤",
+      "slug": "ricky-lau"
+    },
+    {
+      "id": 96990477,
+      "count": 1,
+      "description": "",
+      "name": "邱澤",
+      "slug": "qiu-ze"
+    },
+    {
+      "id": 96990041,
+      "count": 1,
+      "description": "",
+      "name": "胡凱兒",
+      "slug": "hu-kai-er"
+    },
+    {
+      "id": 96990249,
+      "count": 1,
+      "description": "",
+      "name": "胡恂舞",
+      "slug": "hu-xun-wu"
+    },
+    {
+      "id": 96990367,
+      "count": 1,
+      "description": "",
+      "name": "郭富城",
+      "slug": "aaron-kwok"
+    },
+    {
+      "id": 96990489,
+      "count": 1,
+      "description": "",
+      "name": "郭書瑤",
+      "slug": "guo-shu-yao"
+    },
+    {
+      "id": 96990050,
+      "count": 1,
+      "description": "",
+      "name": "都市女聲",
+      "slug": "urban-female-voice"
+    },
+    {
+      "id": 96990461,
+      "count": 1,
+      "description": "",
+      "name": "鄒序",
+      "slug": "zou-xu"
+    },
+    {
+      "id": 96990140,
+      "count": 1,
+      "description": "",
+      "name": "脫拉庫",
+      "slug": "tuo-la-ku"
+    },
+    {
+      "id": 96990394,
+      "count": 1,
+      "description": "",
+      "name": "鄭秀文",
+      "slug": "sammi-cheng"
+    },
+    {
+      "id": 96989866,
+      "count": 1,
+      "description": "",
+      "name": "酷炫",
+      "slug": "ku-xuan"
+    },
+    {
+      "id": 96990270,
+      "count": 1,
+      "description": "",
+      "name": "金馬獎",
+      "slug": "golden-horse-awards"
+    },
+    {
+      "id": 96989628,
+      "count": 1,
+      "description": "",
+      "name": "金其禾",
+      "slug": "jin-qi-he"
+    },
+    {
+      "id": 96990417,
+      "count": 2,
+      "description": "",
+      "name": "金曲獎",
+      "slug": "golden-melody-awards"
+    },
+    {
+      "id": 96989948,
+      "count": 1,
+      "description": "",
+      "name": "金曲歌后",
+      "slug": "golden-melody-queen"
+    },
+    {
+      "id": 96990414,
+      "count": 1,
+      "description": "",
+      "name": "金俊秀",
+      "slug": "kim-junsu"
+    },
+    {
+      "id": 96989845,
+      "count": 1,
+      "description": "",
+      "name": "自由之地",
+      "slug": "land-of-freedom"
+    },
+    {
+      "id": 96990380,
+      "count": 1,
+      "description": "",
+      "name": "臺北流行音樂中心",
+      "slug": "taipei-pop-music-center"
+    },
+    {
+      "id": 96987731,
+      "count": 1,
+      "description": "",
+      "name": "芮德",
+      "slug": "rui-de"
+    },
+    {
+      "id": 96990353,
+      "count": 2,
+      "description": "",
+      "name": "范少勳",
+      "slug": "fan-shao-xun"
+    },
+    {
+      "id": 96989711,
+      "count": 1,
+      "description": "",
+      "name": "莫宰羊",
+      "slug": "mo-zai-yang"
+    },
+    {
+      "id": 96990100,
+      "count": 1,
+      "description": "",
+      "name": "莫文蔚",
+      "slug": "karen-mok"
+    },
+    {
+      "id": 96989899,
+      "count": 1,
+      "description": "",
+      "name": "華納音樂",
+      "slug": "warner-music-tw"
+    },
+    {
+      "id": 96989700,
+      "count": 2,
+      "description": "",
+      "name": "華興",
+      "slug": "hua-xing"
+    },
+    {
+      "id": 96989701,
+      "count": 2,
+      "description": "",
+      "name": "華語音樂文化復興",
+      "slug": "chinese-music-revival"
+    },
+    {
+      "id": 96990072,
+      "count": 8,
+      "description": "",
+      "name": "華映娛樂",
+      "slug": "huaying-entertainment"
+    },
+    {
+      "id": 96989698,
+      "count": 1,
+      "description": "",
+      "name": "萬花筒",
+      "slug": "wan-hua-tong"
+    },
+    {
+      "id": 96989855,
+      "count": 2,
+      "description": "",
+      "name": "鐵漢柔情",
+      "slug": "tie-han-rou-qing"
+    },
+    {
+      "id": 96989837,
+      "count": 1,
+      "description": "",
+      "name": "葛大為",
+      "slug": "ke-da-wei"
+    },
+    {
+      "id": 96990250,
+      "count": 2,
+      "description": "",
+      "name": "蒼鷺與少年",
+      "slug": "the-boy-and-the-heron"
+    },
+    {
+      "id": 96990031,
+      "count": 1,
+      "description": "",
+      "name": "蔡詩芸",
+      "slug": "cai-shi-yun"
+    },
+    {
+      "id": 96990368,
+      "count": 3,
+      "description": "",
+      "name": "蔡凡熙",
+      "slug": "cai-fan-xi"
+    },
+    {
+      "id": 96990232,
+      "count": 1,
+      "description": "",
+      "name": "蔣萬安",
+      "slug": "chiang-wan-an"
+    },
+    {
+      "id": 96989880,
+      "count": 1,
+      "description": "",
+      "name": "蕭煌奇",
+      "slug": "xiao-huang-qi"
+    },
+    {
+      "id": 96990165,
+      "count": 1,
+      "description": "",
+      "name": "蕭雅全",
+      "slug": "xiao-ya-quan"
+    },
+    {
+      "id": 96987759,
+      "count": 1,
+      "description": "",
+      "name": "開水小姐",
+      "slug": "kai-shui-miss"
+    },
+    {
+      "id": 96990182,
+      "count": 1,
+      "description": "",
+      "name": "薛仕凌",
+      "slug": "xue-shi-ling"
+    },
+    {
+      "id": 96990237,
+      "count": 3,
+      "description": "",
+      "name": "蘇打綠",
+      "slug": "sodagreen"
+    },
+    {
+      "id": 96987716,
+      "count": 1,
+      "description": "",
+      "name": "阪本龍一",
+      "slug": "sakamoto-ryuichi-tw"
+    },
+    {
+      "id": 96990139,
+      "count": 8,
+      "description": "",
+      "name": "阮經天",
+      "slug": "ethan-juan"
+    },
+    {
+      "id": 96989947,
+      "count": 1,
+      "description": "",
+      "name": "阿爆",
+      "slug": "abao"
+    },
+    {
+      "id": 96990048,
+      "count": 1,
+      "description": "",
+      "name": "阿達",
+      "slug": "a-da"
+    },
+    {
+      "id": 96989694,
+      "count": 1,
+      "description": "",
+      "name": "阿膽",
+      "slug": "a-dan"
+    },
+    {
+      "id": 96990248,
+      "count": 2,
+      "description": "",
+      "name": "阿跨面",
+      "slug": "a-kua-mian"
+    },
+    {
+      "id": 96987761,
+      "count": 1,
+      "description": "",
+      "name": "阿夜",
+      "slug": "a-ye"
+    },
+    {
+      "id": 96989778,
+      "count": 1,
+      "description": "",
+      "name": "阿拉善音樂節",
+      "slug": "alxa-music-festival"
+    },
+    {
+      "id": 96987623,
+      "count": 1,
+      "description": "",
+      "name": "陳瑾緗",
+      "slug": "chen-jin-xiang"
+    },
+    {
+      "id": 96990510,
+      "count": 1,
+      "description": "",
+      "name": "陳妍希",
+      "slug": "michelle-chen"
+    },
+    {
+      "id": 96990467,
+      "count": 1,
+      "description": "",
+      "name": "陳姸霏",
+      "slug": "chen-yan-fei"
+    },
+    {
+      "id": 96989801,
+      "count": 1,
+      "description": "",
+      "name": "陳嫺靜",
+      "slug": "chen-xian-jing"
+    },
+    {
+      "id": 96987675,
+      "count": 1,
+      "description": "",
+      "name": "陳彥允",
+      "slug": "chen-yan-yun"
+    },
+    {
+      "id": 96990274,
+      "count": 1,
+      "description": "",
+      "name": "陳昊森",
+      "slug": "chen-hao-sen"
+    },
+    {
+      "id": 96990193,
+      "count": 3,
+      "description": "",
+      "name": "陳明章",
+      "slug": "chen-ming-zhang"
+    },
+    {
+      "id": 96990034,
+      "count": 1,
+      "description": "",
+      "name": "陳星翰",
+      "slug": "chen-xing-han"
+    },
+    {
+      "id": 96990509,
+      "count": 1,
+      "description": "",
+      "name": "陳曉",
+      "slug": "chen-xiao"
+    },
+    {
+      "id": 96990299,
+      "count": 1,
+      "description": "",
+      "name": "陳柏霖",
+      "slug": "chen-bo-lin"
+    },
+    {
+      "id": 96990164,
+      "count": 1,
+      "description": "",
+      "name": "陳以文",
+      "slug": "chen-yi-wen"
+    },
+    {
+      "id": 96990305,
+      "count": 1,
+      "description": "",
+      "name": "陶喆",
+      "slug": "david-tao"
+    },
+    {
+      "id": 96990482,
+      "count": 1,
+      "description": "",
+      "name": "陶喆 David Tao",
+      "slug": "david-tao-tw"
+    },
+    {
+      "id": 96990306,
+      "count": 1,
+      "description": "",
+      "name": "陶大偉",
+      "slug": "tao-da-wei"
+    },
+    {
+      "id": 96990173,
+      "count": 1,
+      "description": "",
+      "name": "陶晶瑩",
+      "slug": "tao-jing-ying"
+    },
+    {
+      "id": 96990307,
+      "count": 1,
+      "description": "",
+      "name": "陶朱引援",
+      "slug": "tao-zhu-yin-yuan"
+    },
+    {
+      "id": 96990279,
+      "count": 1,
+      "description": "",
+      "name": "隋棠",
+      "slug": "sui-tang"
+    },
+    {
+      "id": 96989969,
+      "count": 1,
+      "description": "",
+      "name": "蛋頭 BG8LOCC",
+      "slug": "dan-tou-bg8locc"
+    },
+    {
+      "id": 96990018,
+      "count": 1,
+      "description": "",
+      "name": "蛋頭BG8LOCC",
+      "slug": "dantou-bg8locc"
+    },
+    {
+      "id": 96987642,
+      "count": 3,
+      "description": "",
+      "name": "蛋堡",
+      "slug": "dan-bao"
+    },
+    {
+      "id": 96989814,
+      "count": 1,
+      "description": "",
+      "name": "雞腿飯",
+      "slug": "chicken-leg-rice"
+    },
+    {
+      "id": 96990698,
+      "count": 7,
+      "description": "電影評論、影評分析",
+      "name": "電影",
+      "slug": "film"
+    },
+    {
+      "id": 96990702,
+      "count": 7,
+      "description": "電影影評與分析",
+      "name": "電影評論",
+      "slug": "film-review"
+    },
+    {
+      "id": 96987579,
+      "count": 1,
+      "description": "",
+      "name": "露營",
+      "slug": "camping-tw"
+    },
+    {
+      "id": 96989768,
+      "count": 1,
+      "description": "",
+      "name": "靈魂出竅",
+      "slug": "soul-out-of-body"
+    },
+    {
+      "id": 96990701,
+      "count": 2,
+      "description": "靈魂樂、R&amp;B音樂",
+      "name": "靈魂樂",
+      "slug": "soul-music-tw"
+    },
+    {
+      "id": 96989995,
+      "count": 1,
+      "description": "",
+      "name": "靈丹dàn",
+      "slug": "ling-dan"
+    },
+    {
+      "id": 96990411,
+      "count": 1,
+      "description": "",
+      "name": "青峰",
+      "slug": "qing-feng"
+    },
+    {
+      "id": 96989979,
+      "count": 1,
+      "description": "",
+      "name": "青井",
+      "slug": "aoi"
+    },
+    {
+      "id": 96989863,
+      "count": 1,
+      "description": "",
+      "name": "蝴蝶夢",
+      "slug": "butterfly-dream"
+    },
+    {
+      "id": 96990697,
+      "count": 8,
+      "description": "音樂、樂評、新磟解析",
+      "name": "音樂",
+      "slug": "music"
+    },
+    {
+      "id": 96987487,
+      "count": 1,
+      "description": "",
+      "name": "音樂祭",
+      "slug": "yinyue-ji"
+    },
+    {
+      "id": 96987578,
+      "count": 1,
+      "description": "",
+      "name": "音樂節",
+      "slug": "yinyue-jie"
+    },
+    {
+      "id": 96987486,
+      "count": 1,
+      "description": "",
+      "name": "音樂新聞",
+      "slug": "music-news-tw"
+    },
+    {
+      "id": 96989593,
+      "count": 2,
+      "description": "",
+      "name": "頑童",
+      "slug": "wan-tong"
+    },
+    {
+      "id": 96987576,
+      "count": 2,
+      "description": "",
+      "name": "顏社",
+      "slug": "yan-she"
+    },
+    {
+      "id": 96990013,
+      "count": 1,
+      "description": "",
+      "name": "街聲 StreetVoice",
+      "slug": "streetvoice-tw"
+    },
+    {
+      "id": 96989981,
+      "count": 1,
+      "description": "",
+      "name": "街聲霸榜單曲",
+      "slug": "streetvoice-chart-hits"
+    },
+    {
+      "id": 96989816,
+      "count": 1,
+      "description": "",
+      "name": "街角的薔薇",
+      "slug": "rose-at-corner"
+    },
+    {
+      "id": 96987545,
+      "count": 7,
+      "description": "",
+      "name": "西屯純愛組",
+      "slug": "xitun-pure-love"
+    },
+    {
+      "id": 96989959,
+      "count": 2,
+      "description": "",
+      "name": "西岸",
+      "slug": "xi-an-tw"
+    },
+    {
+      "id": 96989707,
+      "count": 5,
+      "description": "",
+      "name": "西岸嘻哈",
+      "slug": "west-coast-hiphop-tw"
+    },
+    {
+      "id": 96989921,
+      "count": 1,
+      "description": "",
+      "name": "西岸曲風",
+      "slug": "west-coast-style"
+    },
+    {
+      "id": 96989861,
+      "count": 1,
+      "description": "",
+      "name": "香衣水",
+      "slug": "xiang-yi-shui"
+    },
+    {
+      "id": 96987510,
+      "count": 2,
+      "description": "",
+      "name": "馬思唯",
+      "slug": "ma-si-wei"
+    },
+    {
+      "id": 96990403,
+      "count": 1,
+      "description": "",
+      "name": "騰訊視頻",
+      "slug": "tencent-video"
+    },
+    {
+      "id": 96990183,
+      "count": 2,
+      "description": "",
+      "name": "許瑋甯",
+      "slug": "puff-kuo"
+    },
+    {
+      "id": 96990185,
+      "count": 3,
+      "description": "",
+      "name": "許光漢",
+      "slug": "greg-han"
+    },
+    {
+      "id": 96987733,
+      "count": 2,
+      "description": "",
+      "name": "許時",
+      "slug": "xu-shi"
+    },
+    {
+      "id": 96987750,
+      "count": 1,
+      "description": "",
+      "name": "詹士賢",
+      "slug": "zhan-shi-xian"
+    },
+    {
+      "id": 96989884,
+      "count": 1,
+      "description": "",
+      "name": "說唱聽我的2",
+      "slug": "say-rap-listen-2"
+    },
+    {
+      "id": 96987765,
+      "count": 1,
+      "description": "",
+      "name": "高爾宣",
+      "slug": "oscar-gao"
+    },
+    {
+      "id": 96990399,
+      "count": 1,
+      "description": "",
+      "name": "高雄電影節",
+      "slug": "kaohsiung-film-festival"
+    },
+    {
+      "id": 96990488,
+      "count": 1,
+      "description": "",
+      "name": "高國豪",
+      "slug": "gao-guo-hao"
+    },
+    {
+      "id": 96987593,
+      "count": 2,
+      "description": "",
+      "name": "高浩哲",
+      "slug": "gao-hao-zhe"
+    },
+    {
+      "id": 96990469,
+      "count": 1,
+      "description": "",
+      "name": "謝章穎",
+      "slug": "xie-zhang-ying"
+    },
+    {
+      "id": 96989567,
+      "count": 1,
+      "description": "",
+      "name": "謝和弦",
+      "slug": "xie-he-xian"
+    },
+    {
+      "id": 96990366,
+      "count": 2,
+      "description": "",
+      "name": "謝欣穎",
+      "slug": "xie-xin-ying"
+    },
+    {
+      "id": 96990133,
+      "count": 1,
+      "description": "",
+      "name": "魏德聖",
+      "slug": "wei-de-sheng"
+    },
+    {
+      "id": 96990236,
+      "count": 1,
+      "description": "",
+      "name": "魚丁糸",
+      "slug": "yu-ding-si"
+    },
+    {
+      "id": 96987635,
+      "count": 1,
+      "description": "",
+      "name": "貝貝",
+      "slug": "bei-bei"
+    },
+    {
+      "id": 96990044,
+      "count": 1,
+      "description": "",
+      "name": "質感哥",
+      "slug": "zhi-gan-ge"
+    },
+    {
+      "id": 96990078,
+      "count": 1,
+      "description": "",
+      "name": "鳳小岳",
+      "slug": "feng-xiao-yue"
+    },
+    {
+      "id": 96989847,
+      "count": 3,
+      "description": "",
+      "name": "賴皮",
+      "slug": "lai-pi"
+    },
+    {
+      "id": 96990500,
+      "count": 1,
+      "description": "",
+      "name": "趙雨凡",
+      "slug": "zhao-yu-fan"
+    },
+    {
+      "id": 96989950,
+      "count": 1,
+      "description": "",
+      "name": "趙廣一",
+      "slug": "zhao-guang-yi"
+    },
+    {
+      "id": 96990230,
+      "count": 1,
+      "description": "",
+      "name": "趙德胤",
+      "slug": "zhao-de-yin"
+    },
+    {
+      "id": 96990170,
+      "count": 1,
+      "description": "",
+      "name": "麋先生",
+      "slug": "mi-xian-sheng"
+    },
+    {
+      "id": 96989687,
+      "count": 1,
+      "description": "",
+      "name": "麥當勞",
+      "slug": "mcdonalds-tw"
+    },
+    {
+      "id": 96990363,
+      "count": 1,
+      "description": "",
+      "name": "麥語彤",
+      "slug": "mai-yu-tong"
+    },
+    {
+      "id": 96989680,
+      "count": 1,
+      "description": "",
+      "name": "麻吉",
+      "slug": "ma-ji"
+    },
+    {
+      "id": 96990283,
+      "count": 1,
+      "description": "",
+      "name": "黃聖球",
+      "slug": "huang-sheng-qiu"
+    },
+    {
+      "id": 96990456,
+      "count": 1,
+      "description": "",
+      "name": "黃勃",
+      "slug": "huang-bo"
+    },
+    {
+      "id": 96990407,
+      "count": 1,
+      "description": "",
+      "name": "黃嘉智",
+      "slug": "huang-jia-zhi"
+    },
+    {
+      "id": 96990055,
+      "count": 1,
+      "description": "",
+      "name": "黃宣",
+      "slug": "huang-xuan-tw"
+    },
+    {
+      "id": 96987643,
+      "count": 1,
+      "description": "",
+      "name": "黃明志",
+      "slug": "namewee"
+    },
+    {
+      "id": 96990284,
+      "count": 1,
+      "description": "",
+      "name": "黃湘婷",
+      "slug": "huang-xiang-ting"
+    },
+    {
+      "id": 96987577,
+      "count": 1,
+      "description": "",
+      "name": "黑熊部落",
+      "slug": "black-bear-tribe"
+    },
+    {
+      "id": 96987734,
+      "count": 1,
+      "description": "",
+      "name": "輕鬆帥",
+      "slug": "qing-song-shuai"
+    },
+    {
+      "id": 96989881,
+      "count": 2,
+      "description": "",
+      "name": "龍虎門",
+      "slug": "long-hu-men"
+    },
+    {
+      "id": 96989875,
+      "count": 2,
+      "description": "",
+      "name": "迪拉胖",
+      "slug": "di-la-pang"
+    },
+    {
+      "id": 96989605,
+      "count": 0,
+      "description": "",
+      "name": "far east movement",
+      "slug": "far-east-movement"
+    },
+    {
+      "id": 96987490,
+      "count": 14,
+      "description": "",
+      "name": "featured",
+      "slug": "featured"
+    },
+    {
+      "id": 96987499,
+      "count": 1,
+      "description": "",
+      "name": "festival",
+      "slug": "festival"
+    },
+    {
+      "id": 96987755,
+      "count": 1,
+      "description": "",
+      "name": "fila",
+      "slug": "fila"
+    },
+    {
+      "id": 96989812,
+      "count": 1,
+      "description": "",
+      "name": "FINAL",
+      "slug": "final"
+    },
+    {
+      "id": 96988490,
+      "count": 0,
+      "description": "",
+      "name": "Find the beat",
+      "slug": "find-the-beat"
+    },
+    {
+      "id": 96989809,
+      "count": 1,
+      "description": "",
+      "name": "Finesse’Boy",
+      "slug": "finesseboy"
+    },
+    {
+      "id": 96990188,
+      "count": 1,
+      "description": "",
+      "name": "firefly",
+      "slug": "firefly"
+    },
+    {
+      "id": 96987721,
+      "count": 1,
+      "description": "",
+      "name": "fisher",
+      "slug": "fisher"
+    },
+    {
+      "id": 96987669,
+      "count": 4,
+      "description": "",
+      "name": "FKJ",
+      "slug": "fkj"
+    },
+    {
+      "id": 96990241,
+      "count": 1,
+      "description": "",
+      "name": "Flowdan",
+      "slug": "flowdan"
+    },
+    {
+      "id": 96987676,
+      "count": 1,
+      "description": "",
+      "name": "Flume",
+      "slug": "flume"
+    },
+    {
+      "id": 96990224,
+      "count": 1,
+      "description": "",
+      "name": "Fly By Midnight",
+      "slug": "fly-by-midnight"
+    },
+    {
+      "id": 96990343,
+      "count": 1,
+      "description": "",
+      "name": "Four Tet",
+      "slug": "four-tet"
+    },
+    {
+      "id": 96989882,
+      "count": 1,
+      "description": "",
+      "name": "frankie阿法",
+      "slug": "frankie-a-fa"
+    },
+    {
+      "id": 96990240,
+      "count": 1,
+      "description": "",
+      "name": "Fred Again",
+      "slug": "fred-again"
+    },
+    {
+      "id": 96990440,
+      "count": 2,
+      "description": "",
+      "name": "Fred again..",
+      "slug": "fred-again-2"
+    },
+    {
+      "id": 96989891,
+      "count": 2,
+      "description": "",
+      "name": "fredo",
+      "slug": "fredo"
+    },
+    {
+      "id": 96987522,
+      "count": 0,
+      "description": "",
+      "name": "free meek",
+      "slug": "free-meek"
+    },
+    {
+      "id": 96989620,
+      "count": 0,
+      "description": "",
+      "name": "freedom",
+      "slug": "freedom"
+    },
+    {
+      "id": 96988733,
+      "count": 1,
+      "description": "",
+      "name": "FRαNKIE阿法",
+      "slug": "frnkie-alpha-a-fa"
+    },
+    {
+      "id": 96987527,
+      "count": 3,
+      "description": "",
+      "name": "future",
+      "slug": "future"
+    },
+    {
+      "id": 96987718,
+      "count": 1,
+      "description": "",
+      "name": "future funk",
+      "slug": "future-funk"
+    },
+    {
+      "id": 96989850,
+      "count": 1,
+      "description": "",
+      "name": "g herbo",
+      "slug": "g-herbo"
+    },
+    {
+      "id": 96989705,
+      "count": 3,
+      "description": "",
+      "name": "G-Funk",
+      "slug": "g-funk"
+    },
+    {
+      "id": 96988157,
+      "count": 2,
+      "description": "",
+      "name": "Gai",
+      "slug": "gai"
+    },
+    {
+      "id": 96987803,
+      "count": 1,
+      "description": "",
+      "name": "Galantis",
+      "slug": "galantis"
+    },
+    {
+      "id": 96989713,
+      "count": 1,
+      "description": "",
+      "name": "Gambler",
+      "slug": "gambler"
+    },
+    {
+      "id": 96989586,
+      "count": 2,
+      "description": "",
+      "name": "gang",
+      "slug": "gang"
+    },
+    {
+      "id": 96989666,
+      "count": 1,
+      "description": "",
+      "name": "Gang Up",
+      "slug": "gang-up"
+    },
+    {
+      "id": 96990151,
+      "count": 1,
+      "description": "",
+      "name": "geffen records",
+      "slug": "geffen-records"
+    },
+    {
+      "id": 96990464,
+      "count": 2,
+      "description": "",
+      "name": "gemini",
+      "slug": "gemini"
+    },
+    {
+      "id": 96990405,
+      "count": 1,
+      "description": "",
+      "name": "Gena Rowlands",
+      "slug": "gena-rowlands"
+    },
+    {
+      "id": 96989634,
+      "count": 3,
+      "description": "",
+      "name": "George Floyd",
+      "slug": "george-floyd"
+    },
+    {
+      "id": 96988532,
+      "count": 1,
+      "description": "",
+      "name": "george orwell",
+      "slug": "george-orwell"
+    },
+    {
+      "id": 96989940,
+      "count": 1,
+      "description": "",
+      "name": "GGGG",
+      "slug": "gggg"
+    },
+    {
+      "id": 96989649,
+      "count": 1,
+      "description": "",
+      "name": "ghost mode",
+      "slug": "ghost-mode"
+    },
+    {
+      "id": 96990503,
+      "count": 1,
+      "description": "",
+      "name": "Ghostface Killah",
+      "slug": "ghostface-killah"
+    },
+    {
+      "id": 96989973,
+      "count": 1,
+      "description": "",
+      "name": "GhostModeEnt",
+      "slug": "ghostmodeent"
+    },
+    {
+      "id": 96990329,
+      "count": 0,
+      "description": "",
+      "name": "GiantbaBy",
+      "slug": "giantbaby"
+    },
+    {
+      "id": 96989890,
+      "count": 2,
+      "description": "",
+      "name": "giggs",
+      "slug": "giggs"
+    },
+    {
+      "id": 96987630,
+      "count": 1,
+      "description": "",
+      "name": "Gil Scott-Heron",
+      "slug": "gil-scott-heron"
+    },
+    {
+      "id": 96989818,
+      "count": 1,
+      "description": "",
+      "name": "GJ94",
+      "slug": "gj94"
+    },
+    {
+      "id": 96990331,
+      "count": 0,
+      "description": "",
+      "name": "Glacier Studio",
+      "slug": "glacier-studio"
+    },
+    {
+      "id": 96989601,
+      "count": 1,
+      "description": "",
+      "name": "Goat",
+      "slug": "goat"
+    },
+    {
+      "id": 96989693,
+      "count": 1,
+      "description": "",
+      "name": "Goatak",
+      "slug": "goatak"
+    },
+    {
+      "id": 96988030,
+      "count": 1,
+      "description": "",
+      "name": "Godzilla",
+      "slug": "godzilla"
+    },
+    {
+      "id": 96990065,
+      "count": 1,
+      "description": "",
+      "name": "gold chain",
+      "slug": "gold-chain"
+    },
+    {
+      "id": 96987708,
+      "count": 1,
+      "description": "",
+      "name": "goldlink",
+      "slug": "goldlink"
+    },
+    {
+      "id": 96989578,
+      "count": 1,
+      "description": "",
+      "name": "GOOBA",
+      "slug": "gooba"
+    },
+    {
+      "id": 96989708,
+      "count": 1,
+      "description": "",
+      "name": "GOOD MUSIC",
+      "slug": "good-music"
+    },
+    {
+      "id": 96987512,
+      "count": 2,
+      "description": "",
+      "name": "gosh",
+      "slug": "gosh"
+    },
+    {
+      "id": 96990288,
+      "count": 1,
+      "description": "",
+      "name": "grentperez",
+      "slug": "grentperez"
+    },
+    {
+      "id": 96990360,
+      "count": 1,
+      "description": "",
+      "name": "Gryffin",
+      "slug": "gryffin"
+    },
+    {
+      "id": 96990111,
+      "count": 2,
+      "description": "",
+      "name": "gunna",
+      "slug": "gunna"
+    },
+    {
+      "id": 96989990,
+      "count": 1,
+      "description": "",
+      "name": "H1GHR MUSIC",
+      "slug": "h1ghr-music"
+    },
+    {
+      "id": 96989702,
+      "count": 1,
+      "description": "",
+      "name": "HAHA",
+      "slug": "haha"
+    },
+    {
+      "id": 96987679,
+      "count": 0,
+      "description": "",
+      "name": "HAON",
+      "slug": "haon"
+    },
+    {
+      "id": 96987682,
+      "count": 0,
+      "description": "",
+      "name": "Happy Killer",
+      "slug": "happy-killer"
+    },
+    {
+      "id": 96989670,
+      "count": 1,
+      "description": "",
+      "name": "HAPPYJA",
+      "slug": "happyja"
+    },
+    {
+      "id": 96989683,
+      "count": 1,
+      "description": "",
+      "name": "HARPYJA",
+      "slug": "harpyja"
+    },
+    {
+      "id": 96990320,
+      "count": 1,
+      "description": "",
+      "name": "HBL",
+      "slug": "hbl"
+    },
+    {
+      "id": 96987701,
+      "count": 0,
+      "description": "",
+      "name": "Headhunterz",
+      "slug": "headhunterz"
+    },
+    {
+      "id": 96987594,
+      "count": 1,
+      "description": "",
+      "name": "HELICREW",
+      "slug": "helicrew"
+    },
+    {
+      "id": 96989663,
+      "count": 1,
+      "description": "",
+      "name": "HELIVISION",
+      "slug": "helivision"
+    },
+    {
+      "id": 96990483,
+      "count": 1,
+      "description": "",
+      "name": "HenrV",
+      "slug": "henrv"
+    },
+    {
+      "id": 96989704,
+      "count": 1,
+      "description": "",
+      "name": "Henry",
+      "slug": "henry"
+    },
+    {
+      "id": 96989776,
+      "count": 0,
+      "description": "",
+      "name": "Hey KONG",
+      "slug": "hey-kong"
+    },
+    {
+      "id": 96989703,
+      "count": 1,
+      "description": "",
+      "name": "High Loc",
+      "slug": "high-loc"
+    },
+    {
+      "id": 96989595,
+      "count": 1,
+      "description": "",
+      "name": "High Off Life",
+      "slug": "high-off-life"
+    },
+    {
+      "id": 96987507,
+      "count": 6,
+      "description": "",
+      "name": "higher brothers",
+      "slug": "higher-brothers"
+    },
+    {
+      "id": 96987655,
+      "count": 0,
+      "description": "",
+      "name": "hip",
+      "slug": "hip"
+    },
+    {
+      "id": 96989674,
+      "count": 1,
+      "description": "",
+      "name": "Hip-Hop x Life",
+      "slug": "hip-hop-x-life"
+    },
+    {
+      "id": 96987494,
+      "count": 18,
+      "description": "",
+      "name": "Hiphop",
+      "slug": "hiphop"
+    },
+    {
+      "id": 96989672,
+      "count": 0,
+      "description": "",
+      "name": "hiphop life",
+      "slug": "hiphop-life"
+    },
+    {
+      "id": 96990217,
+      "count": 1,
+      "description": "",
+      "name": "hit-boy",
+      "slug": "hit-boy"
+    },
+    {
+      "id": 96988703,
+      "count": 1,
+      "description": "",
+      "name": "hold on be strong",
+      "slug": "hold-on-be-strong"
+    },
+    {
+      "id": 96989619,
+      "count": 0,
+      "description": "",
+      "name": "hongkong",
+      "slug": "hongkong"
+    },
+    {
+      "id": 96989648,
+      "count": 1,
+      "description": "",
+      "name": "honne",
+      "slug": "honne"
+    },
+    {
+      "id": 96989916,
+      "count": 2,
+      "description": "",
+      "name": "Horny Doggy",
+      "slug": "horny-doggy"
+    },
+    {
+      "id": 96989917,
+      "count": 1,
+      "description": "",
+      "name": "Horny Doggy 春犬",
+      "slug": "horny-doggy-chun-quan"
+    },
+    {
+      "id": 96989918,
+      "count": 0,
+      "description": "",
+      "name": "Horny Doggy\\",
+      "slug": "horny-doggy-2"
+    },
+    {
+      "id": 96990086,
+      "count": 1,
+      "description": "",
+      "name": "HornyDoggy",
+      "slug": "hornydoggy"
+    },
+    {
+      "id": 96989898,
+      "count": 1,
+      "description": "",
+      "name": "Hosea",
+      "slug": "hosea"
+    },
+    {
+      "id": 96990311,
+      "count": 0,
+      "description": "",
+      "name": "howanband",
+      "slug": "howanband"
+    },
+    {
+      "id": 96989692,
+      "count": 1,
+      "description": "",
+      "name": "Howard Lee",
+      "slug": "howard-lee"
+    },
+    {
+      "id": 96987747,
+      "count": 6,
+      "description": "",
+      "name": "Howz",
+      "slug": "howz"
+    },
+    {
+      "id": 96990207,
+      "count": 1,
+      "description": "",
+      "name": "Hozier",
+      "slug": "hozier"
+    },
+    {
+      "id": 96990168,
+      "count": 1,
+      "description": "",
+      "name": "htc",
+      "slug": "htc"
+    },
+    {
+      "id": 96987714,
+      "count": 1,
+      "description": "",
+      "name": "HVOB",
+      "slug": "hvob"
+    },
+    {
+      "id": 96990150,
+      "count": 1,
+      "description": "",
+      "name": "hybe",
+      "slug": "hybe"
+    },
+    {
+      "id": 96990434,
+      "count": 1,
+      "description": "",
+      "name": "HYSTORY",
+      "slug": "hystory"
+    },
+    {
+      "id": 96987497,
+      "count": 0,
+      "description": "",
+      "name": "I GO",
+      "slug": "i-go"
+    },
+    {
+      "id": 96987809,
+      "count": 1,
+      "description": "",
+      "name": "I Want It That Way",
+      "slug": "i-want-it-that-way"
+    },
+    {
+      "id": 96989754,
+      "count": 1,
+      "description": "",
+      "name": "I.N.U.I.M",
+      "slug": "i-n-u-i-m"
+    },
+    {
+      "id": 96989763,
+      "count": 1,
+      "description": "",
+      "name": "Iann Dior",
+      "slug": "iann-dior"
+    },
+    {
+      "id": 96989764,
+      "count": 0,
+      "description": "",
+      "name": "Iann Diro",
+      "slug": "iann-diro"
+    },
+    {
+      "id": 96987772,
+      "count": 1,
+      "description": "",
+      "name": "IGO",
+      "slug": "igo"
+    },
+    {
+      "id": 96990132,
+      "count": 1,
+      "description": "",
+      "name": "Il Divo",
+      "slug": "il-divo"
+    },
+    {
+      "id": 96987741,
+      "count": 1,
+      "description": "",
+      "name": "ill-mo",
+      "slug": "ill-mo"
+    },
+    {
+      "id": 96990580,
+      "count": 0,
+      "description": "",
+      "name": "IMAX",
+      "slug": "imax"
+    },
+    {
+      "id": 96990303,
+      "count": 1,
+      "description": "",
+      "name": "iri",
+      "slug": "iri"
+    },
+    {
+      "id": 96989799,
+      "count": 1,
+      "description": "",
+      "name": "Iyla",
+      "slug": "iyla"
+    },
+    {
+      "id": 96990152,
+      "count": 1,
+      "description": "",
+      "name": "J hus",
+      "slug": "j-hus"
+    },
+    {
+      "id": 96989603,
+      "count": 1,
+      "description": "",
+      "name": "J. Cole",
+      "slug": "j-cole-2"
+    },
+    {
+      "id": 96990275,
+      "count": 1,
+      "description": "",
+      "name": "J. WALK",
+      "slug": "j-walk"
+    },
+    {
+      "id": 96987667,
+      "count": 2,
+      "description": "",
+      "name": "j.cole",
+      "slug": "j-cole"
+    },
+    {
+      "id": 96989724,
+      "count": 1,
+      "description": "",
+      "name": "J.Sheon",
+      "slug": "j-sheon"
+    },
+    {
+      "id": 96989887,
+      "count": 1,
+      "description": "",
+      "name": "Jack Antonoff",
+      "slug": "jack-antonoff"
+    },
+    {
+      "id": 96987693,
+      "count": 2,
+      "description": "",
+      "name": "jackson wang",
+      "slug": "jackson-wang"
+    },
+    {
+      "id": 96990264,
+      "count": 1,
+      "description": "",
+      "name": "Jacob Collier",
+      "slug": "jacob-collier"
+    },
+    {
+      "id": 96989933,
+      "count": 1,
+      "description": "",
+      "name": "Jam",
+      "slug": "jam"
+    },
+    {
+      "id": 96990212,
+      "count": 1,
+      "description": "",
+      "name": "James Blake",
+      "slug": "james-blake"
+    },
+    {
+      "id": 96987678,
+      "count": 1,
+      "description": "",
+      "name": "Jay Park",
+      "slug": "jay-park"
+    },
+    {
+      "id": 96987521,
+      "count": 2,
+      "description": "",
+      "name": "jay-z",
+      "slug": "jay-z"
+    },
+    {
+      "id": 96989952,
+      "count": 0,
+      "description": "",
+      "name": "jaypark",
+      "slug": "jaypark"
+    },
+    {
+      "id": 96987543,
+      "count": 1,
+      "description": "",
+      "name": "Jayroll",
+      "slug": "jayroll"
+    },
+    {
+      "id": 96989668,
+      "count": 1,
+      "description": "",
+      "name": "JD",
+      "slug": "jd"
+    },
+    {
+      "id": 96990285,
+      "count": 0,
+      "description": "",
+      "name": "Jeff Bernat",
+      "slug": "jeff-bernat"
+    },
+    {
+      "id": 96989851,
+      "count": 2,
+      "description": "",
+      "name": "jid",
+      "slug": "jid"
+    },
+    {
+      "id": 96990498,
+      "count": 1,
+      "description": "",
+      "name": "Jimmy Sax",
+      "slug": "jimmy-sax"
+    },
+    {
+      "id": 96990058,
+      "count": 1,
+      "description": "",
+      "name": "jo ann ruff",
+      "slug": "jo-ann-ruff"
+    },
+    {
+      "id": 96990346,
+      "count": 1,
+      "description": "",
+      "name": "Joe Henderson",
+      "slug": "joe-henderson"
+    },
+    {
+      "id": 96987796,
+      "count": 1,
+      "description": "",
+      "name": "john legend",
+      "slug": "john-legend"
+    },
+    {
+      "id": 96990494,
+      "count": 1,
+      "description": "",
+      "name": "john summit",
+      "slug": "john-summit"
+    },
+    {
+      "id": 96990263,
+      "count": 1,
+      "description": "",
+      "name": "Johnny Orlando",
+      "slug": "johnny-orlando"
+    },
+    {
+      "id": 96987692,
+      "count": 2,
+      "description": "",
+      "name": "joji",
+      "slug": "joji"
+    },
+    {
+      "id": 96987511,
+      "count": 0,
+      "description": "",
+      "name": "jony j",
+      "slug": "jony-j"
+    },
+    {
+      "id": 96987498,
+      "count": 0,
+      "description": "",
+      "name": "jonyj",
+      "slug": "jonyj"
+    },
+    {
+      "id": 96989827,
+      "count": 1,
+      "description": "",
+      "name": "jordan rakei",
+      "slug": "jordan-rakei"
+    },
+    {
+      "id": 96989828,
+      "count": 1,
+      "description": "",
+      "name": "jorja smith",
+      "slug": "jorja-smith"
+    },
+    {
+      "id": 96988534,
+      "count": 1,
+      "description": "",
+      "name": "Joseph Stalin",
+      "slug": "joseph-stalin"
+    },
+    {
+      "id": 96989859,
+      "count": 1,
+      "description": "",
+      "name": "josh beat$",
+      "slug": "josh-beat"
+    },
+    {
+      "id": 96989858,
+      "count": 1,
+      "description": "",
+      "name": "josh beats",
+      "slug": "josh-beats"
+    },
+    {
+      "id": 96990460,
+      "count": 0,
+      "description": "",
+      "name": "Joy Crookes",
+      "slug": "joy-crookes"
+    },
+    {
+      "id": 96988541,
+      "count": 4,
+      "description": "",
+      "name": "Joyner Lucas",
+      "slug": "joyner-lucas"
+    },
+    {
+      "id": 96987780,
+      "count": 1,
+      "description": "",
+      "name": "JPTHEWAVY",
+      "slug": "jpthewavy"
+    },
+    {
+      "id": 96990432,
+      "count": 1,
+      "description": "",
+      "name": "Juan Soto",
+      "slug": "juan-soto"
+    },
+    {
+      "id": 96990465,
+      "count": 0,
+      "description": "",
+      "name": "Juice Boy",
+      "slug": "juice-boy"
+    },
+    {
+      "id": 96987649,
+      "count": 5,
+      "description": "",
+      "name": "juice WRLD",
+      "slug": "juice-wrld"
+    },
+    {
+      "id": 96987719,
+      "count": 0,
+      "description": "",
+      "name": "juilia wu",
+      "slug": "juilia-wu"
+    },
+    {
+      "id": 96987609,
+      "count": 4,
+      "description": "",
+      "name": "julia wu",
+      "slug": "julia-wu"
+    },
+    {
+      "id": 96989924,
+      "count": 1,
+      "description": "",
+      "name": "Julia吳卓源",
+      "slug": "julia-wu-zhuo-yuan"
+    },
+    {
+      "id": 96990157,
+      "count": 1,
+      "description": "",
+      "name": "junkook",
+      "slug": "junkook"
+    },
+    {
+      "id": 96990447,
+      "count": 1,
+      "description": "",
+      "name": "k camp",
+      "slug": "k-camp"
+    },
+    {
+      "id": 96990081,
+      "count": 2,
+      "description": "",
+      "name": "K!ddingboi",
+      "slug": "kddingboi"
+    },
+    {
+      "id": 96987592,
+      "count": 2,
+      "description": "",
+      "name": "K-HOW",
+      "slug": "k-how"
+    },
+    {
+      "id": 96989721,
+      "count": 1,
+      "description": "",
+      "name": "K-Town",
+      "slug": "k-town"
+    },
+    {
+      "id": 96990479,
+      "count": 1,
+      "description": "",
+      "name": "kano",
+      "slug": "kano"
+    },
+    {
+      "id": 96989782,
+      "count": 0,
+      "description": "",
+      "name": "kanye",
+      "slug": "kanye"
+    },
+    {
+      "id": 96989087,
+      "count": 5,
+      "description": "",
+      "name": "Kanye West",
+      "slug": "kanye-west"
+    },
+    {
+      "id": 96987580,
+      "count": 1,
+      "description": "",
+      "name": "KAO!INC.",
+      "slug": "kaoinc"
+    },
+    {
+      "id": 96987766,
+      "count": 2,
+      "description": "",
+      "name": "karencici",
+      "slug": "karencici"
+    },
+    {
+      "id": 96989561,
+      "count": 0,
+      "description": "",
+      "name": "Kaws",
+      "slug": "kaws"
+    },
+    {
+      "id": 96990450,
+      "count": 0,
+      "description": "",
+      "name": "KAYTRANADA",
+      "slug": "kaytranada"
+    },
+    {
+      "id": 96988371,
+      "count": 1,
+      "description": "",
+      "name": "KD",
+      "slug": "kd"
+    },
+    {
+      "id": 96987501,
+      "count": 3,
+      "description": "",
+      "name": "kendrick lamar",
+      "slug": "kendrick-lamar"
+    },
+    {
+      "id": 96988646,
+      "count": 1,
+      "description": "",
+      "name": "Kevin Durant",
+      "slug": "kevin-durant"
+    },
+    {
+      "id": 96988447,
+      "count": 1,
+      "description": "",
+      "name": "KEY. L",
+      "slug": "key-l"
+    },
+    {
+      "id": 96989774,
+      "count": 0,
+      "description": "",
+      "name": "Key.L",
+      "slug": "key-l-2"
+    },
+    {
+      "id": 96989562,
+      "count": 0,
+      "description": "",
+      "name": "kid Cudi",
+      "slug": "kid-cudi"
+    },
+    {
+      "id": 96989811,
+      "count": 1,
+      "description": "",
+      "name": "KIKIWAWA",
+      "slug": "kikiwawa"
+    },
+    {
+      "id": 96987575,
+      "count": 1,
+      "description": "",
+      "name": "Kindergarten killer",
+      "slug": "kindergarten-killer"
+    },
+    {
+      "id": 96989807,
+      "count": 2,
+      "description": "",
+      "name": "king von",
+      "slug": "king-von"
+    },
+    {
+      "id": 96990266,
+      "count": 2,
+      "description": "",
+      "name": "knowknow",
+      "slug": "knowknow"
+    },
+    {
+      "id": 96987800,
+      "count": 3,
+      "description": "",
+      "name": "Kobe Bryant",
+      "slug": "kobe-bryant"
+    },
+    {
+      "id": 96990261,
+      "count": 1,
+      "description": "",
+      "name": "Kodak Black",
+      "slug": "kodak-black"
+    },
+    {
+      "id": 96990575,
+      "count": 0,
+      "description": "",
+      "name": "Kodaline",
+      "slug": "kodaline"
+    },
+    {
+      "id": 96989802,
+      "count": 1,
+      "description": "",
+      "name": "KOHH",
+      "slug": "kohh"
+    },
+    {
+      "id": 96990106,
+      "count": 0,
+      "description": "",
+      "name": "kota the friend",
+      "slug": "kota-the-friend"
+    },
+    {
+      "id": 96990226,
+      "count": 1,
+      "description": "",
+      "name": "Kr",
+      "slug": "kr"
+    },
+    {
+      "id": 96988432,
+      "count": 1,
+      "description": "",
+      "name": "kshmr",
+      "slug": "kshmr"
+    },
+    {
+      "id": 96989033,
+      "count": 1,
+      "description": "",
+      "name": "Kush",
+      "slug": "kush"
+    },
+    {
+      "id": 96989598,
+      "count": 1,
+      "description": "",
+      "name": "Kyrie J",
+      "slug": "kyrie-j"
+    },
+    {
+      "id": 96989676,
+      "count": 1,
+      "description": "",
+      "name": "L.C 小光",
+      "slug": "lc-xiao-guang"
+    },
+    {
+      "id": 96987637,
+      "count": 1,
+      "description": "",
+      "name": "l4wudu",
+      "slug": "l4wudu"
+    },
+    {
+      "id": 96987981,
+      "count": 1,
+      "description": "",
+      "name": "lane 8",
+      "slug": "lane-8"
+    },
+    {
+      "id": 96990099,
+      "count": 2,
+      "description": "",
+      "name": "langchain",
+      "slug": "langchain"
+    },
+    {
+      "id": 96990336,
+      "count": 0,
+      "description": "",
+      "name": "LANY",
+      "slug": "lany"
+    },
+    {
+      "id": 96990328,
+      "count": 0,
+      "description": "",
+      "name": "Larry June",
+      "slug": "larry-june"
+    },
+    {
+      "id": 96989633,
+      "count": 1,
+      "description": "",
+      "name": "Larsa",
+      "slug": "larsa"
+    },
+    {
+      "id": 96990276,
+      "count": 1,
+      "description": "",
+      "name": "LATE BLOOMER",
+      "slug": "late-bloomer"
+    },
+    {
+      "id": 96990156,
+      "count": 2,
+      "description": "",
+      "name": "latto",
+      "slug": "latto"
+    },
+    {
+      "id": 96990197,
+      "count": 1,
+      "description": "",
+      "name": "laura misch",
+      "slug": "laura-misch"
+    },
+    {
+      "id": 96990117,
+      "count": 2,
+      "description": "",
+      "name": "lauv",
+      "slug": "lauv"
+    },
+    {
+      "id": 96987972,
+      "count": 1,
+      "description": "",
+      "name": "le youth",
+      "slug": "le-youth"
+    },
+    {
+      "id": 96990526,
+      "count": 1,
+      "description": "",
+      "name": "LeBron James",
+      "slug": "lebron-james"
+    },
+    {
+      "id": 96989937,
+      "count": 1,
+      "description": "",
+      "name": "leehi",
+      "slug": "leehi"
+    },
+    {
+      "id": 96989974,
+      "count": 1,
+      "description": "",
+      "name": "Leepa",
+      "slug": "leepa"
+    },
+    {
+      "id": 96987629,
+      "count": 10,
+      "description": "",
+      "name": "legacy",
+      "slug": "legacy"
+    },
+    {
+      "id": 96989750,
+      "count": 1,
+      "description": "",
+      "name": "Legacy Max",
+      "slug": "legacy-max"
+    },
+    {
+      "id": 96989650,
+      "count": 1,
+      "description": "",
+      "name": "Legends Never Die",
+      "slug": "legends-never-die"
+    },
+    {
+      "id": 96989856,
+      "count": 1,
+      "description": "",
+      "name": "lenz",
+      "slug": "lenz"
+    },
+    {
+      "id": 96987650,
+      "count": 4,
+      "description": "",
+      "name": "leo王",
+      "slug": "leo-wang"
+    },
+    {
+      "id": 96990497,
+      "count": 1,
+      "description": "",
+      "name": "Leonardo DiCaprio",
+      "slug": "leonardo-dicaprio"
+    },
+    {
+      "id": 96989912,
+      "count": 1,
+      "description": "",
+      "name": "Life Is a Bitch",
+      "slug": "life-is-a-bitch"
+    },
+    {
+      "id": 96989596,
+      "count": 2,
+      "description": "",
+      "name": "Life is Good",
+      "slug": "life-is-good"
+    },
+    {
+      "id": 96989909,
+      "count": 0,
+      "description": "",
+      "name": "LifeIsaBitch",
+      "slug": "lifeisabitch"
+    },
+    {
+      "id": 96989644,
+      "count": 2,
+      "description": "",
+      "name": "Lil Baby",
+      "slug": "lil-baby"
+    },
+    {
+      "id": 96989614,
+      "count": 1,
+      "description": "",
+      "name": "lil Bitch",
+      "slug": "lil-bitch"
+    },
+    {
+      "id": 96989808,
+      "count": 3,
+      "description": "",
+      "name": "lil durk",
+      "slug": "lil-durk"
+    },
+    {
+      "id": 96990295,
+      "count": 1,
+      "description": "",
+      "name": "lil Jayre c 瑪龍",
+      "slug": "lil-jayre-c-ma-long"
+    },
+    {
+      "id": 96987529,
+      "count": 0,
+      "description": "",
+      "name": "lil nas x",
+      "slug": "lil-nas-x"
+    },
+    {
+      "id": 96987793,
+      "count": 0,
+      "description": "",
+      "name": "lil pump",
+      "slug": "lil-pump"
+    },
+    {
+      "id": 96987662,
+      "count": 1,
+      "description": "",
+      "name": "lil tecca",
+      "slug": "lil-tecca"
+    },
+    {
+      "id": 96988487,
+      "count": 0,
+      "description": "",
+      "name": "Lil Uzi Ver",
+      "slug": "lil-uzi-ver"
+    },
+    {
+      "id": 96987806,
+      "count": 3,
+      "description": "",
+      "name": "Lil Uzi Vert",
+      "slug": "lil-uzi-vert"
+    },
+    {
+      "id": 96988313,
+      "count": 3,
+      "description": "",
+      "name": "Lil Wayne",
+      "slug": "lil-wayne"
+    },
+    {
+      "id": 96988851,
+      "count": 0,
+      "description": "",
+      "name": "Lil Yachty",
+      "slug": "lil-yachty"
+    },
+    {
+      "id": 96990211,
+      "count": 1,
+      "description": "",
+      "name": "Lil Yachy",
+      "slug": "lil-yachy"
+    },
+    {
+      "id": 96989953,
+      "count": 0,
+      "description": "",
+      "name": "lilcherry",
+      "slug": "lilcherry"
+    },
+    {
+      "id": 96990409,
+      "count": 1,
+      "description": "",
+      "name": "LINE TODAY",
+      "slug": "line-today"
+    },
+    {
+      "id": 96990038,
+      "count": 1,
+      "description": "",
+      "name": "linion",
+      "slug": "linion"
+    },
+    {
+      "id": 96989659,
+      "count": 2,
+      "description": "",
+      "name": "lizi",
+      "slug": "lizi"
+    },
+    {
+      "id": 96989908,
+      "count": 1,
+      "description": "",
+      "name": "Lizi栗子",
+      "slug": "lizi-lizhi"
+    },
+    {
+      "id": 96990413,
+      "count": 1,
+      "description": "",
+      "name": "Logic",
+      "slug": "logic"
+    },
+    {
+      "id": 96989789,
+      "count": 2,
+      "description": "",
+      "name": "Loopy",
+      "slug": "loopy"
+    },
+    {
+      "id": 96988543,
+      "count": 1,
+      "description": "",
+      "name": "Lotto",
+      "slug": "lotto"
+    },
+    {
+      "id": 96989934,
+      "count": 1,
+      "description": "",
+      "name": "Lotus",
+      "slug": "lotus"
+    },
+    {
+      "id": 96989669,
+      "count": 3,
+      "description": "",
+      "name": "Loui Da 6",
+      "slug": "loui-da-6"
+    },
+    {
+      "id": 96989577,
+      "count": 1,
+      "description": "",
+      "name": "Low Life",
+      "slug": "low-life"
+    },
+    {
+      "id": 96989825,
+      "count": 3,
+      "description": "",
+      "name": "loyle carner",
+      "slug": "loyle-carner"
+    },
+    {
+      "id": 96990167,
+      "count": 1,
+      "description": "",
+      "name": "Lukas Graham",
+      "slug": "lukas-graham"
+    },
+    {
+      "id": 96987709,
+      "count": 0,
+      "description": "",
+      "name": "Lune Rouge",
+      "slug": "lune-rouge"
+    },
+    {
+      "id": 96990504,
+      "count": 1,
+      "description": "",
+      "name": "Lupe Fiasco",
+      "slug": "lupe-fiasco"
+    },
+    {
+      "id": 96989838,
+      "count": 1,
+      "description": "",
+      "name": "Mac Chew",
+      "slug": "mac-chew"
+    },
+    {
+      "id": 96987526,
+      "count": 1,
+      "description": "",
+      "name": "mac miller",
+      "slug": "mac-miller"
+    },
+    {
+      "id": 96989566,
+      "count": 2,
+      "description": "",
+      "name": "macdella",
+      "slug": "macdella"
+    },
+    {
+      "id": 96987612,
+      "count": 1,
+      "description": "",
+      "name": "machi didi",
+      "slug": "machi-didi"
+    },
+    {
+      "id": 96989629,
+      "count": 1,
+      "description": "",
+      "name": "machine gun kelly",
+      "slug": "machine-gun-kelly"
+    },
+    {
+      "id": 96989583,
+      "count": 1,
+      "description": "",
+      "name": "Madonna",
+      "slug": "madonna"
+    },
+    {
+      "id": 96990057,
+      "count": 3,
+      "description": "",
+      "name": "majin",
+      "slug": "majin"
+    },
+    {
+      "id": 96990436,
+      "count": 1,
+      "description": "",
+      "name": "Malone",
+      "slug": "malone"
+    },
+    {
+      "id": 96990180,
+      "count": 1,
+      "description": "",
+      "name": "malz monday",
+      "slug": "malz-monday"
+    },
+    {
+      "id": 96990478,
+      "count": 1,
+      "description": "",
+      "name": "MAMA Awards",
+      "slug": "mama-awards"
+    },
+    {
+      "id": 96990246,
+      "count": 1,
+      "description": "",
+      "name": "MANDARK",
+      "slug": "mandark"
+    },
+    {
+      "id": 96990122,
+      "count": 1,
+      "description": "",
+      "name": "manic street",
+      "slug": "manic-street"
+    },
+    {
+      "id": 96990416,
+      "count": 0,
+      "description": "",
+      "name": "Maroon 5",
+      "slug": "maroon-5"
+    },
+    {
+      "id": 96990516,
+      "count": 1,
+      "description": "",
+      "name": "Martin Scorsese",
+      "slug": "martin-scorsese"
+    },
+    {
+      "id": 96990404,
+      "count": 1,
+      "description": "",
+      "name": "Marz 23",
+      "slug": "marz-23"
+    },
+    {
+      "id": 96987762,
+      "count": 1,
+      "description": "",
+      "name": "Marz23",
+      "slug": "marz23"
+    },
+    {
+      "id": 96989823,
+      "count": 2,
+      "description": "",
+      "name": "masego",
+      "slug": "masego"
+    },
+    {
+      "id": 96989849,
+      "count": 2,
+      "description": "",
+      "name": "masiwei",
+      "slug": "masiwei"
+    },
+    {
+      "id": 96987638,
+      "count": 1,
+      "description": "",
+      "name": "mc hotdog",
+      "slug": "mc-hotdog"
+    },
+    {
+      "id": 96989956,
+      "count": 1,
+      "description": "",
+      "name": "MC TYSON",
+      "slug": "mc-tyson"
+    },
+    {
+      "id": 96989685,
+      "count": 1,
+      "description": "",
+      "name": "mcdonald&#039;s",
+      "slug": "mcdonalds"
+    },
+    {
+      "id": 96989686,
+      "count": 0,
+      "description": "",
+      "name": "mcdonalds",
+      "slug": "mcdonalds-2"
+    },
+    {
+      "id": 96987519,
+      "count": 0,
+      "description": "",
+      "name": "meek mill",
+      "slug": "meek-mill"
+    },
+    {
+      "id": 96989714,
+      "count": 0,
+      "description": "",
+      "name": "Megan Thee Staillon",
+      "slug": "megan-thee-staillon"
+    },
+    {
+      "id": 96989716,
+      "count": 1,
+      "description": "",
+      "name": "megan thee Stallion",
+      "slug": "megan-thee-stallion"
+    },
+    {
+      "id": 96990017,
+      "count": 1,
+      "description": "",
+      "name": "MENACE II SOCIETY",
+      "slug": "menace-ii-society"
+    },
+    {
+      "id": 96990097,
+      "count": 1,
+      "description": "",
+      "name": "meta",
+      "slug": "meta"
+    },
+    {
+      "id": 96990259,
+      "count": 3,
+      "description": "",
+      "name": "Metro Boomin",
+      "slug": "metro-boomin"
+    },
+    {
+      "id": 96987608,
+      "count": 0,
+      "description": "",
+      "name": "metta world peace",
+      "slug": "metta-world-peace"
+    },
+    {
+      "id": 96990446,
+      "count": 1,
+      "description": "",
+      "name": "MGK",
+      "slug": "mgk"
+    },
+    {
+      "id": 96990520,
+      "count": 1,
+      "description": "",
+      "name": "Michael Kiwanuka",
+      "slug": "michael-kiwanuka"
+    },
+    {
+      "id": 96990095,
+      "count": 2,
+      "description": "",
+      "name": "mick jenkins",
+      "slug": "mick-jenkins"
+    },
+    {
+      "id": 96990253,
+      "count": 1,
+      "description": "",
+      "name": "Midnight Blue",
+      "slug": "midnight-blue"
+    },
+    {
+      "id": 96987794,
+      "count": 3,
+      "description": "",
+      "name": "migos",
+      "slug": "migos"
+    },
+    {
+      "id": 96989843,
+      "count": 1,
+      "description": "",
+      "name": "mike posner",
+      "slug": "mike-posner"
+    },
+    {
+      "id": 96989926,
+      "count": 1,
+      "description": "",
+      "name": "mino",
+      "slug": "mino"
+    },
+    {
+      "id": 96990000,
+      "count": 1,
+      "description": "",
+      "name": "Mithra Jin",
+      "slug": "mithra-jin"
+    },
+    {
+      "id": 96987658,
+      "count": 2,
+      "description": "",
+      "name": "Mizu98",
+      "slug": "mizu98"
+    },
+    {
+      "id": 96987619,
+      "count": 1,
+      "description": "",
+      "name": "mj116",
+      "slug": "mj116"
+    },
+    {
+      "id": 96989787,
+      "count": 2,
+      "description": "",
+      "name": "MKIT RAIN",
+      "slug": "mkit-rain"
+    },
+    {
+      "id": 96990289,
+      "count": 1,
+      "description": "",
+      "name": "moby",
+      "slug": "moby"
+    },
+    {
+      "id": 96989491,
+      "count": 0,
+      "description": "",
+      "name": "Mom&#039;s Spaghetti",
+      "slug": "moms-spaghetti"
+    },
+    {
+      "id": 96990571,
+      "count": 0,
+      "description": "",
+      "name": "MotoGP",
+      "slug": "motogp"
+    },
+    {
+      "id": 96989871,
+      "count": 3,
+      "description": "",
+      "name": "MTV",
+      "slug": "mtv"
+    },
+    {
+      "id": 96989942,
+      "count": 2,
+      "description": "",
+      "name": "Multiverse",
+      "slug": "multiverse"
+    },
+    {
+      "id": 96988468,
+      "count": 0,
+      "description": "",
+      "name": "Murder on my mind",
+      "slug": "murder-on-my-mind"
+    },
+    {
+      "id": 96987921,
+      "count": 2,
+      "description": "",
+      "name": "mustard",
+      "slug": "mustard"
+    },
+    {
+      "id": 96990421,
+      "count": 0,
+      "description": "",
+      "name": "MyVideo",
+      "slug": "myvideo"
+    },
+    {
+      "id": 96989788,
+      "count": 2,
+      "description": "",
+      "name": "Nafla",
+      "slug": "nafla"
+    },
+    {
+      "id": 96989852,
+      "count": 3,
+      "description": "",
+      "name": "nas",
+      "slug": "nas"
+    },
+    {
+      "id": 96987618,
+      "count": 3,
+      "description": "",
+      "name": "NBA",
+      "slug": "nba"
+    },
+    {
+      "id": 96990445,
+      "count": 1,
+      "description": "",
+      "name": "NBA YoungBoy",
+      "slug": "nba-youngboy"
+    },
+    {
+      "id": 96987691,
+      "count": 0,
+      "description": "",
+      "name": "nbadiss",
+      "slug": "nbadiss"
+    },
+    {
+      "id": 96990090,
+      "count": 1,
+      "description": "",
+      "name": "Neo Soul",
+      "slug": "neo-soul"
+    },
+    {
+      "id": 96987509,
+      "count": 3,
+      "description": "",
+      "name": "netflix",
+      "slug": "netflix"
+    },
+    {
+      "id": 96990309,
+      "count": 1,
+      "description": "",
+      "name": "neuralink",
+      "slug": "neuralink"
+    },
+    {
+      "id": 96987582,
+      "count": 0,
+      "description": "",
+      "name": "new album",
+      "slug": "new-album"
+    },
+    {
+      "id": 96987641,
+      "count": 2,
+      "description": "",
+      "name": "nf",
+      "slug": "nf"
+    },
+    {
+      "id": 96990014,
+      "count": 1,
+      "description": "",
+      "name": "NFT",
+      "slug": "nft"
+    },
+    {
+      "id": 96989572,
+      "count": 5,
+      "description": "",
+      "name": "Nicki Minaj",
+      "slug": "nicki-minaj"
+    },
+    {
+      "id": 96987495,
+      "count": 8,
+      "description": "",
+      "name": "Nickthereal",
+      "slug": "nickthereal"
+    },
+    {
+      "id": 96987694,
+      "count": 1,
+      "description": "",
+      "name": "niki",
+      "slug": "niki"
+    },
+    {
+      "id": 96987722,
+      "count": 1,
+      "description": "",
+      "name": "nina kraviz",
+      "slug": "nina-kraviz"
+    },
+    {
+      "id": 96989853,
+      "count": 1,
+      "description": "",
+      "name": "nipsey hussle",
+      "slug": "nipsey-hussle"
+    },
+    {
+      "id": 96987657,
+      "count": 2,
+      "description": "",
+      "name": "noname",
+      "slug": "noname"
+    },
+    {
+      "id": 96990326,
+      "count": 0,
+      "description": "",
+      "name": "Nosemad",
+      "slug": "nosemad"
+    },
+    {
+      "id": 96987640,
+      "count": 1,
+      "description": "",
+      "name": "nous",
+      "slug": "nous"
+    },
+    {
+      "id": 96989819,
+      "count": 1,
+      "description": "",
+      "name": "NXWV",
+      "slug": "nxwv"
+    },
+    {
+      "id": 96987799,
+      "count": 0,
+      "description": "",
+      "name": "O&#039;NEAL",
+      "slug": "oneal"
+    },
+    {
+      "id": 96990415,
+      "count": 1,
+      "description": "",
+      "name": "Oasis",
+      "slug": "oasis"
+    },
+    {
+      "id": 96988370,
+      "count": 6,
+      "description": "",
+      "name": "Offset",
+      "slug": "offset"
+    },
+    {
+      "id": 96987530,
+      "count": 0,
+      "description": "",
+      "name": "old town road",
+      "slug": "old-town-road"
+    },
+    {
+      "id": 96990124,
+      "count": 1,
+      "description": "",
+      "name": "Olivia Rodrigo",
+      "slug": "olivia-rodrigo"
+    },
+    {
+      "id": 96990004,
+      "count": 0,
+      "description": "",
+      "name": "OMNI",
+      "slug": "omni"
+    },
+    {
+      "id": 96989652,
+      "count": 1,
+      "description": "",
+      "name": "Omnitrix",
+      "slug": "omnitrix"
+    },
+    {
+      "id": 96990010,
+      "count": 1,
+      "description": "",
+      "name": "On Ride",
+      "slug": "on-ride"
+    },
+    {
+      "id": 96989878,
+      "count": 1,
+      "description": "",
+      "name": "ONE BOY",
+      "slug": "one-boy"
+    },
+    {
+      "id": 96990298,
+      "count": 1,
+      "description": "",
+      "name": "One Republic",
+      "slug": "one-republic"
+    },
+    {
+      "id": 96989761,
+      "count": 1,
+      "description": "",
+      "name": "One Step",
+      "slug": "one-step"
+    },
+    {
+      "id": 96990297,
+      "count": 0,
+      "description": "",
+      "name": "OneRepublic",
+      "slug": "onerepublic"
+    },
+    {
+      "id": 96990398,
+      "count": 1,
+      "description": "",
+      "name": "Open Source",
+      "slug": "open-source"
+    },
+    {
+      "id": 96990098,
+      "count": 4,
+      "description": "",
+      "name": "openai",
+      "slug": "openai"
+    },
+    {
+      "id": 96987572,
+      "count": 0,
+      "description": "",
+      "name": "Organizer",
+      "slug": "organizer-2"
+    },
+    {
+      "id": 96990334,
+      "count": 1,
+      "description": "",
+      "name": "osie &amp; The Uni Boys",
+      "slug": "osie-the-uni-boys"
+    },
+    {
+      "id": 96987798,
+      "count": 2,
+      "description": "",
+      "name": "osn",
+      "slug": "osn"
+    },
+    {
+      "id": 96990691,
+      "count": 0,
+      "description": "",
+      "name": "OTT",
+      "slug": "ott"
+    },
+    {
+      "id": 96989870,
+      "count": 1,
+      "description": "",
+      "name": "Outlander",
+      "slug": "outlander"
+    },
+    {
+      "id": 96990087,
+      "count": 1,
+      "description": "",
+      "name": "Outside G",
+      "slug": "outside-g"
+    },
+    {
+      "id": 96989769,
+      "count": 1,
+      "description": "",
+      "name": "Outta Body",
+      "slug": "outta-body"
+    },
+    {
+      "id": 96987775,
+      "count": 1,
+      "description": "",
+      "name": "ovds",
+      "slug": "ovds"
+    },
+    {
+      "id": 96987771,
+      "count": 0,
+      "description": "",
+      "name": "Over Litt",
+      "slug": "over-litt"
+    },
+    {
+      "id": 96989790,
+      "count": 2,
+      "description": "",
+      "name": "Owen Ovadoz",
+      "slug": "owen-ovadoz"
+    },
+    {
+      "id": 96987712,
+      "count": 2,
+      "description": "",
+      "name": "ozi",
+      "slug": "ozi"
+    },
+    {
+      "id": 96989257,
+      "count": 0,
+      "description": "",
+      "name": "P!nk",
+      "slug": "pnk"
+    },
+    {
+      "id": 96989070,
+      "count": 1,
+      "description": "",
+      "name": "Paavo Siljamäki",
+      "slug": "paavo-siljamaki"
+    },
+    {
+      "id": 96989656,
+      "count": 1,
+      "description": "",
+      "name": "Pain",
+      "slug": "pain"
+    },
+    {
+      "id": 96990155,
+      "count": 1,
+      "description": "",
+      "name": "painkiller",
+      "slug": "painkiller"
+    },
+    {
+      "id": 96990112,
+      "count": 1,
+      "description": "",
+      "name": "paris texas",
+      "slug": "paris-texas"
+    },
+    {
+      "id": 96990686,
+      "count": 0,
+      "description": "",
+      "name": "Paul Atreides",
+      "slug": "paul-atreides"
+    },
+    {
+      "id": 96990412,
+      "count": 1,
+      "description": "",
+      "name": "Pavel Durov",
+      "slug": "pavel-durov"
+    },
+    {
+      "id": 96987546,
+      "count": 1,
+      "description": "",
+      "name": "Peatle",
+      "slug": "peatle"
+    },
+    {
+      "id": 96990574,
+      "count": 0,
+      "description": "",
+      "name": "PEDRO",
+      "slug": "pedro"
+    },
+    {
+      "id": 96987504,
+      "count": 1,
+      "description": "",
+      "name": "peggy gou",
+      "slug": "peggy-gou"
+    },
+    {
+      "id": 96990437,
+      "count": 1,
+      "description": "",
+      "name": "Perplexity",
+      "slug": "perplexity"
+    },
+    {
+      "id": 96987634,
+      "count": 2,
+      "description": "",
+      "name": "pgone",
+      "slug": "pgone"
+    },
+    {
+      "id": 96990451,
+      "count": 1,
+      "description": "",
+      "name": "pH-1",
+      "slug": "ph-1"
+    },
+    {
+      "id": 96989972,
+      "count": 1,
+      "description": "",
+      "name": "PiNkChAiN",
+      "slug": "pinkchain"
+    },
+    {
+      "id": 96987573,
+      "count": 0,
+      "description": "",
+      "name": "PIPE",
+      "slug": "pipe-2"
+    },
+    {
+      "id": 96990045,
+      "count": 1,
+      "description": "",
+      "name": "PIZZALI",
+      "slug": "pizzali"
+    },
+    {
+      "id": 96990214,
+      "count": 1,
+      "description": "",
+      "name": "Planet Asia",
+      "slug": "planet-asia"
+    },
+    {
+      "id": 96990012,
+      "count": 1,
+      "description": "",
+      "name": "Pluto Lab",
+      "slug": "pluto-lab"
+    },
+    {
+      "id": 96987698,
+      "count": 1,
+      "description": "",
+      "name": "PNC陳老師",
+      "slug": "pnc-chen-laoshi"
+    },
+    {
+      "id": 96989844,
+      "count": 2,
+      "description": "",
+      "name": "polo g",
+      "slug": "polo-g"
+    },
+    {
+      "id": 96987785,
+      "count": 4,
+      "description": "",
+      "name": "PONY5IBE",
+      "slug": "pony5ibe"
+    },
+    {
+      "id": 96989738,
+      "count": 2,
+      "description": "",
+      "name": "POPO J",
+      "slug": "popo-j"
+    },
+    {
+      "id": 96989742,
+      "count": 1,
+      "description": "",
+      "name": "POPORTFOLIO",
+      "slug": "poportfolio"
+    },
+    {
+      "id": 96987500,
+      "count": 4,
+      "description": "",
+      "name": "post malone",
+      "slug": "post-malone"
+    },
+    {
+      "id": 96989682,
+      "count": 1,
+      "description": "",
+      "name": "PRODUCED IN LAB",
+      "slug": "produced-in-lab"
+    },
+    {
+      "id": 96987737,
+      "count": 3,
+      "description": "",
+      "name": "PRODUCEDINLAB",
+      "slug": "producedinlab"
+    },
+    {
+      "id": 96987554,
+      "count": 0,
+      "description": "",
+      "name": "Project W",
+      "slug": "project-w"
+    },
+    {
+      "id": 96987622,
+      "count": 1,
+      "description": "",
+      "name": "psytrance",
+      "slug": "psytrance"
+    },
+    {
+      "id": 96990316,
+      "count": 0,
+      "description": "",
+      "name": "Puma Blue",
+      "slug": "puma-blue"
+    },
+    {
+      "id": 96989661,
+      "count": 1,
+      "description": "",
+      "name": "PUNANI",
+      "slug": "punani"
+    },
+    {
+      "id": 96988601,
+      "count": 1,
+      "description": "",
+      "name": "Punch",
+      "slug": "punch"
+    },
+    {
+      "id": 96987656,
+      "count": 1,
+      "description": "",
+      "name": "pusha t",
+      "slug": "pusha-t"
+    },
+    {
+      "id": 96989955,
+      "count": 0,
+      "description": "",
+      "name": "pyechallenge",
+      "slug": "pyechallenge"
+    },
+    {
+      "id": 96989954,
+      "count": 0,
+      "description": "",
+      "name": "pyelife",
+      "slug": "pyelife"
+    },
+    {
+      "id": 96990347,
+      "count": 0,
+      "description": "",
+      "name": "Quanzo",
+      "slug": "quanzo"
+    },
+    {
+      "id": 96989252,
+      "count": 1,
+      "description": "",
+      "name": "quavo",
+      "slug": "quavo"
+    },
+    {
+      "id": 96989986,
+      "count": 2,
+      "description": "",
+      "name": "R&amp;B",
+      "slug": "rb"
+    },
+    {
+      "id": 96987595,
+      "count": 1,
+      "description": "",
+      "name": "RACOG",
+      "slug": "racog"
+    },
+    {
+      "id": 96990433,
+      "count": 1,
+      "description": "",
+      "name": "Rage",
+      "slug": "rage"
+    },
+    {
+      "id": 96989631,
+      "count": 1,
+      "description": "",
+      "name": "rage against the machine",
+      "slug": "rage-against-the-machine"
+    },
+    {
+      "id": 96987583,
+      "count": 1,
+      "description": "",
+      "name": "rap machine",
+      "slug": "rap-machine"
+    },
+    {
+      "id": 96987581,
+      "count": 1,
+      "description": "",
+      "name": "rapper",
+      "slug": "rapper"
+    },
+    {
+      "id": 96989568,
+      "count": 1,
+      "description": "",
+      "name": "rchord",
+      "slug": "rchord"
+    },
+    {
+      "id": 96990103,
+      "count": 1,
+      "description": "",
+      "name": "RE:",
+      "slug": "re"
+    },
+    {
+      "id": 96989977,
+      "count": 1,
+      "description": "",
+      "name": "real life",
+      "slug": "real-life"
+    },
+    {
+      "id": 96987687,
+      "count": 2,
+      "description": "",
+      "name": "red",
+      "slug": "red"
+    },
+    {
+      "id": 96987756,
+      "count": 2,
+      "description": "",
+      "name": "red bull",
+      "slug": "red-bull"
+    },
+    {
+      "id": 96987811,
+      "count": 0,
+      "description": "",
+      "name": "RED LEE",
+      "slug": "red-lee"
+    },
+    {
+      "id": 96987711,
+      "count": 2,
+      "description": "",
+      "name": "redbull",
+      "slug": "redbull"
+    },
+    {
+      "id": 96987688,
+      "count": 5,
+      "description": "",
+      "name": "redlee",
+      "slug": "redlee"
+    },
+    {
+      "id": 96988542,
+      "count": 1,
+      "description": "",
+      "name": "Revenge",
+      "slug": "revenge"
+    },
+    {
+      "id": 96987523,
+      "count": 4,
+      "description": "",
+      "name": "rich brian",
+      "slug": "rich-brian"
+    },
+    {
+      "id": 96987516,
+      "count": 2,
+      "description": "",
+      "name": "rich the kid",
+      "slug": "rich-the-kid"
+    },
+    {
+      "id": 96989842,
+      "count": 1,
+      "description": "",
+      "name": "richboi",
+      "slug": "richboi"
+    },
+    {
+      "id": 96987627,
+      "count": 2,
+      "description": "",
+      "name": "rick ross",
+      "slug": "rick-ross"
+    },
+    {
+      "id": 96989532,
+      "count": 0,
+      "description": "",
+      "name": "Righteous",
+      "slug": "righteous"
+    },
+    {
+      "id": 96987666,
+      "count": 1,
+      "description": "",
+      "name": "riin",
+      "slug": "riin"
+    },
+    {
+      "id": 96989992,
+      "count": 1,
+      "description": "",
+      "name": "RING RING",
+      "slug": "ring-ring"
+    },
+    {
+      "id": 96989643,
+      "count": 1,
+      "description": "",
+      "name": "RIP",
+      "slug": "rip"
+    },
+    {
+      "id": 96990202,
+      "count": 0,
+      "description": "",
+      "name": "Rob 49",
+      "slug": "rob-49"
+    },
+    {
+      "id": 96990203,
+      "count": 1,
+      "description": "",
+      "name": "rob49",
+      "slug": "rob49"
+    },
+    {
+      "id": 96989834,
+      "count": 1,
+      "description": "",
+      "name": "rocco palladino",
+      "slug": "rocco-palladino"
+    },
+    {
+      "id": 96987727,
+      "count": 0,
+      "description": "",
+      "name": "ROCKS",
+      "slug": "rocks"
+    },
+    {
+      "id": 96990231,
+      "count": 1,
+      "description": "",
+      "name": "Rod Stewart",
+      "slug": "rod-stewart"
+    },
+    {
+      "id": 96988625,
+      "count": 2,
+      "description": "",
+      "name": "Roddy Ricch",
+      "slug": "roddy-ricch"
+    },
+    {
+      "id": 96988942,
+      "count": 1,
+      "description": "",
+      "name": "roger eno",
+      "slug": "roger-eno"
+    },
+    {
+      "id": 96987513,
+      "count": 0,
+      "description": "",
+      "name": "rolling loud",
+      "slug": "rolling-loud"
+    },
+    {
+      "id": 96987743,
+      "count": 2,
+      "description": "",
+      "name": "rooftop mob",
+      "slug": "rooftop-mob"
+    },
+    {
+      "id": 96987544,
+      "count": 0,
+      "description": "",
+      "name": "Rosa",
+      "slug": "rosa"
+    },
+    {
+      "id": 96990206,
+      "count": 1,
+      "description": "",
+      "name": "royal blood",
+      "slug": "royal-blood"
+    },
+    {
+      "id": 96987677,
+      "count": 5,
+      "description": "",
+      "name": "rpg",
+      "slug": "rpg"
+    },
+    {
+      "id": 96988187,
+      "count": 1,
+      "description": "",
+      "name": "rudy gobert",
+      "slug": "rudy-gobert"
+    },
+    {
+      "id": 96988637,
+      "count": 2,
+      "description": "",
+      "name": "russ",
+      "slug": "russ"
+    },
+    {
+      "id": 96989962,
+      "count": 1,
+      "description": "",
+      "name": "RYKEY",
+      "slug": "rykey"
+    },
+    {
+      "id": 96989963,
+      "count": 1,
+      "description": "",
+      "name": "RYKEYDADDYDIRTY",
+      "slug": "rykeydaddydirty"
+    },
+    {
+      "id": 96989660,
+      "count": 3,
+      "description": "",
+      "name": "s2o",
+      "slug": "s2o"
+    },
+    {
+      "id": 96990262,
+      "count": 1,
+      "description": "",
+      "name": "Sam Altman",
+      "slug": "sam-altman"
+    },
+    {
+      "id": 96989876,
+      "count": 1,
+      "description": "",
+      "name": "SAMSUNG",
+      "slug": "samsung"
+    },
+    {
+      "id": 96989756,
+      "count": 1,
+      "description": "",
+      "name": "Savage mode II",
+      "slug": "savage-mode-ii"
+    },
+    {
+      "id": 96989573,
+      "count": 1,
+      "description": "",
+      "name": "Say So",
+      "slug": "say-so"
+    },
+    {
+      "id": 96990344,
+      "count": 1,
+      "description": "",
+      "name": "Schoolboy Q",
+      "slug": "schoolboy-q"
+    },
+    {
+      "id": 96989632,
+      "count": 1,
+      "description": "",
+      "name": "Scottie Pippen",
+      "slug": "scottie-pippen"
+    },
+    {
+      "id": 96987525,
+      "count": 0,
+      "description": "",
+      "name": "see you again",
+      "slug": "see-you-again"
+    },
+    {
+      "id": 96989936,
+      "count": 1,
+      "description": "",
+      "name": "semi final",
+      "slug": "semi-final"
+    },
+    {
+      "id": 96987770,
+      "count": 0,
+      "description": "",
+      "name": "Shadow Project",
+      "slug": "shadow-project"
+    },
+    {
+      "id": 96989860,
+      "count": 1,
+      "description": "",
+      "name": "shareco",
+      "slug": "shareco"
+    },
+    {
+      "id": 96988431,
+      "count": 1,
+      "description": "",
+      "name": "shaun",
+      "slug": "shaun"
+    },
+    {
+      "id": 96989945,
+      "count": 1,
+      "description": "",
+      "name": "SheATH",
+      "slug": "sheath"
+    },
+    {
+      "id": 96989611,
+      "count": 0,
+      "description": "",
+      "name": "sheck wes",
+      "slug": "sheck-wes"
+    },
+    {
+      "id": 96989715,
+      "count": 1,
+      "description": "",
+      "name": "shot",
+      "slug": "shot"
+    },
+    {
+      "id": 96989743,
+      "count": 1,
+      "description": "",
+      "name": "Shou",
+      "slug": "shou"
+    },
+    {
+      "id": 96989792,
+      "count": 5,
+      "description": "",
+      "name": "Show Me The Money",
+      "slug": "show-me-the-money"
+    },
+    {
+      "id": 96989753,
+      "count": 1,
+      "description": "",
+      "name": "sia",
+      "slug": "sia"
+    },
+    {
+      "id": 96987781,
+      "count": 3,
+      "description": "",
+      "name": "SIK-K",
+      "slug": "sik-k"
+    },
+    {
+      "id": 96989951,
+      "count": 1,
+      "description": "",
+      "name": "since",
+      "slug": "since"
+    },
+    {
+      "id": 96990589,
+      "count": 0,
+      "description": "",
+      "name": "SKECHERS",
+      "slug": "skechers"
+    },
+    {
+      "id": 96990441,
+      "count": 1,
+      "description": "",
+      "name": "Skepta",
+      "slug": "skepta"
+    },
+    {
+      "id": 96990457,
+      "count": 1,
+      "description": "",
+      "name": "sketpa",
+      "slug": "sketpa"
+    },
+    {
+      "id": 96990442,
+      "count": 1,
+      "description": "",
+      "name": "Ski Mask The Slump God",
+      "slug": "ski-mask-the-slump-god"
+    },
+    {
+      "id": 96990251,
+      "count": 1,
+      "description": "",
+      "name": "Skrillex",
+      "slug": "skrillex"
+    },
+    {
+      "id": 96990172,
+      "count": 1,
+      "description": "",
+      "name": "slchld",
+      "slug": "slchld"
+    },
+    {
+      "id": 96989897,
+      "count": 1,
+      "description": "",
+      "name": "slice",
+      "slug": "slice"
+    },
+    {
+      "id": 96989726,
+      "count": 0,
+      "description": "",
+      "name": "SmashRegz",
+      "slug": "smashregz"
+    },
+    {
+      "id": 96989690,
+      "count": 1,
+      "description": "",
+      "name": "SmoothAF R&amp;B Party",
+      "slug": "smoothaf-rb-party"
+    },
+    {
+      "id": 96989929,
+      "count": 3,
+      "description": "",
+      "name": "smtm10",
+      "slug": "smtm10"
+    },
+    {
+      "id": 96989691,
+      "count": 1,
+      "description": "",
+      "name": "SMY",
+      "slug": "smy"
+    },
+    {
+      "id": 96987508,
+      "count": 4,
+      "description": "",
+      "name": "snoop dogg",
+      "slug": "snoop-dogg"
+    },
+    {
+      "id": 96989667,
+      "count": 1,
+      "description": "",
+      "name": "SO BAD",
+      "slug": "so-bad"
+    },
+    {
+      "id": 96990066,
+      "count": 2,
+      "description": "",
+      "name": "so wonderful festival",
+      "slug": "so-wonderful-festival"
+    },
+    {
+      "id": 96989783,
+      "count": 0,
+      "description": "",
+      "name": "Soft Lipa",
+      "slug": "soft-lipa"
+    },
+    {
+      "id": 96987788,
+      "count": 1,
+      "description": "",
+      "name": "softlipa",
+      "slug": "softlipa"
+    },
+    {
+      "id": 96987625,
+      "count": 0,
+      "description": "",
+      "name": "sony",
+      "slug": "sony"
+    },
+    {
+      "id": 96990220,
+      "count": 1,
+      "description": "",
+      "name": "Sophie Ellis-Bextor",
+      "slug": "sophie-ellis-bextor"
+    },
+    {
+      "id": 96987700,
+      "count": 1,
+      "description": "",
+      "name": "sowut",
+      "slug": "sowut"
+    },
+    {
+      "id": 96989755,
+      "count": 1,
+      "description": "",
+      "name": "SPACE A_INTRO: TERRA INCOGNITA",
+      "slug": "space-a_intro-terra-incognita"
+    },
+    {
+      "id": 96988585,
+      "count": 1,
+      "description": "",
+      "name": "Spites",
+      "slug": "spites"
+    },
+    {
+      "id": 96990161,
+      "count": 1,
+      "description": "",
+      "name": "Starr Chen",
+      "slug": "starr-chen"
+    },
+    {
+      "id": 96989796,
+      "count": 1,
+      "description": "",
+      "name": "Stay A While",
+      "slug": "stay-a-while"
+    },
+    {
+      "id": 96989911,
+      "count": 1,
+      "description": "",
+      "name": "StayHighCrew",
+      "slug": "stayhighcrew"
+    },
+    {
+      "id": 96987695,
+      "count": 2,
+      "description": "",
+      "name": "stephanie poetri",
+      "slug": "stephanie-poetri"
+    },
+    {
+      "id": 96990110,
+      "count": 1,
+      "description": "",
+      "name": "stormzy",
+      "slug": "stormzy"
+    },
+    {
+      "id": 96990400,
+      "count": 2,
+      "description": "",
+      "name": "Stray Kids",
+      "slug": "stray-kids"
+    },
+    {
+      "id": 96990015,
+      "count": 1,
+      "description": "",
+      "name": "Street Poet NFT嘻哈音樂徵選",
+      "slug": "street-poet-nft-hiphop"
+    },
+    {
+      "id": 96990121,
+      "count": 1,
+      "description": "",
+      "name": "suede",
+      "slug": "suede"
+    },
+    {
+      "id": 96988469,
+      "count": 1,
+      "description": "",
+      "name": "Suicidal",
+      "slug": "suicidal"
+    },
+    {
+      "id": 96990102,
+      "count": 1,
+      "description": "",
+      "name": "Sunflower",
+      "slug": "sunflower"
+    },
+    {
+      "id": 96989621,
+      "count": 1,
+      "description": "",
+      "name": "supportHK",
+      "slug": "supporthk"
+    },
+    {
+      "id": 96990216,
+      "count": 1,
+      "description": "",
+      "name": "Sy Smith",
+      "slug": "sy-smith"
+    },
+    {
+      "id": 96989797,
+      "count": 1,
+      "description": "",
+      "name": "Synchronizing",
+      "slug": "synchronizing"
+    },
+    {
+      "id": 96990176,
+      "count": 2,
+      "description": "",
+      "name": "Sōryo",
+      "slug": "soryo"
+    },
+    {
+      "id": 96989998,
+      "count": 1,
+      "description": "",
+      "name": "tablo",
+      "slug": "tablo"
+    },
+    {
+      "id": 96989930,
+      "count": 1,
+      "description": "",
+      "name": "Taichill City G’z",
+      "slug": "taichill-city-gz"
+    },
+    {
+      "id": 96989722,
+      "count": 1,
+      "description": "",
+      "name": "Taipei City",
+      "slug": "taipei-city"
+    },
+    {
+      "id": 96990123,
+      "count": 1,
+      "description": "",
+      "name": "Taiwan Plus",
+      "slug": "taiwan-plus"
+    },
+    {
+      "id": 96989983,
+      "count": 1,
+      "description": "",
+      "name": "taiwanplus",
+      "slug": "taiwanplus"
+    },
+    {
+      "id": 96988345,
+      "count": 1,
+      "description": "",
+      "name": "TAKEMEBACK",
+      "slug": "takemeback"
+    },
+    {
+      "id": 96990143,
+      "count": 1,
+      "description": "",
+      "name": "takeoff",
+      "slug": "takeoff"
+    },
+    {
+      "id": 96990506,
+      "count": 1,
+      "description": "",
+      "name": "Talib Kweli",
+      "slug": "talib-kweli"
+    },
+    {
+      "id": 96989637,
+      "count": 1,
+      "description": "",
+      "name": "talk shit",
+      "slug": "talk-shit"
+    },
+    {
+      "id": 96990011,
+      "count": 1,
+      "description": "",
+      "name": "Talkbox",
+      "slug": "talkbox"
+    },
+    {
+      "id": 96990466,
+      "count": 1,
+      "description": "",
+      "name": "Tate McRae",
+      "slug": "tate-mcrae"
+    },
+    {
+      "id": 96987514,
+      "count": 1,
+      "description": "",
+      "name": "tay k",
+      "slug": "tay-k"
+    },
+    {
+      "id": 96987518,
+      "count": 0,
+      "description": "",
+      "name": "tay-k",
+      "slug": "tay-k-2"
+    },
+    {
+      "id": 96987802,
+      "count": 1,
+      "description": "",
+      "name": "Taylor Swift",
+      "slug": "taylor-swift"
+    },
+    {
+      "id": 96987704,
+      "count": 2,
+      "description": "",
+      "name": "tech house",
+      "slug": "tech-house"
+    },
+    {
+      "id": 96990104,
+      "count": 1,
+      "description": "",
+      "name": "tech n9ne",
+      "slug": "tech-n9ne"
+    },
+    {
+      "id": 96987703,
+      "count": 3,
+      "description": "",
+      "name": "techno",
+      "slug": "techno"
+    },
+    {
+      "id": 96987661,
+      "count": 1,
+      "description": "",
+      "name": "tee grizzley",
+      "slug": "tee-grizzley"
+    },
+    {
+      "id": 96989606,
+      "count": 0,
+      "description": "",
+      "name": "tekashi",
+      "slug": "tekashi"
+    },
+    {
+      "id": 96990310,
+      "count": 1,
+      "description": "",
+      "name": "telepathy",
+      "slug": "telepathy"
+    },
+    {
+      "id": 96989846,
+      "count": 1,
+      "description": "",
+      "name": "TERRA INCOGNITA",
+      "slug": "terra-incognita"
+    },
+    {
+      "id": 96987808,
+      "count": 1,
+      "description": "",
+      "name": "That Way",
+      "slug": "that-way"
+    },
+    {
+      "id": 96990153,
+      "count": 1,
+      "description": "",
+      "name": "the 1975",
+      "slug": "the-1975"
+    },
+    {
+      "id": 96990179,
+      "count": 1,
+      "description": "",
+      "name": "The Alchemist",
+      "slug": "the-alchemist"
+    },
+    {
+      "id": 96989645,
+      "count": 0,
+      "description": "",
+      "name": "The Big Picture",
+      "slug": "the-big-picture"
+    },
+    {
+      "id": 96989646,
+      "count": 1,
+      "description": "",
+      "name": "the bigger picture",
+      "slug": "the-bigger-picture"
+    },
+    {
+      "id": 96988626,
+      "count": 2,
+      "description": "",
+      "name": "The Box",
+      "slug": "the-box"
+    },
+    {
+      "id": 96987621,
+      "count": 1,
+      "description": "",
+      "name": "the chainsmokers",
+      "slug": "the-chainsmokers"
+    },
+    {
+      "id": 96989798,
+      "count": 1,
+      "description": "",
+      "name": "the game",
+      "slug": "the-game"
+    },
+    {
+      "id": 96988789,
+      "count": 1,
+      "description": "",
+      "name": "the killers",
+      "slug": "the-killers"
+    },
+    {
+      "id": 96987739,
+      "count": 1,
+      "description": "",
+      "name": "The Martinez Brothers",
+      "slug": "the-martinez-brothers"
+    },
+    {
+      "id": 96989960,
+      "count": 1,
+      "description": "",
+      "name": "THE MESSAGE 4",
+      "slug": "the-message-4"
+    },
+    {
+      "id": 96989832,
+      "count": 1,
+      "description": "",
+      "name": "the nod",
+      "slug": "the-nod"
+    },
+    {
+      "id": 96987517,
+      "count": 1,
+      "description": "",
+      "name": "the race",
+      "slug": "the-race"
+    },
+    {
+      "id": 96988740,
+      "count": 1,
+      "description": "",
+      "name": "The Rap Pack",
+      "slug": "the-rap-pack"
+    },
+    {
+      "id": 96989967,
+      "count": 1,
+      "description": "",
+      "name": "THE RAPPERS",
+      "slug": "the-rappers"
+    },
+    {
+      "id": 96989450,
+      "count": 1,
+      "description": "",
+      "name": "The Sage Of Wiz Khalifa",
+      "slug": "the-sage-of-wiz-khalifa"
+    },
+    {
+      "id": 96989563,
+      "count": 0,
+      "description": "",
+      "name": "THE SCOTTS",
+      "slug": "the-scotts"
+    },
+    {
+      "id": 96987777,
+      "count": 1,
+      "description": "",
+      "name": "THE WALL",
+      "slug": "the-wall"
+    },
+    {
+      "id": 96990260,
+      "count": 1,
+      "description": "",
+      "name": "The Weeknd",
+      "slug": "the-weeknd"
+    },
+    {
+      "id": 96989612,
+      "count": 1,
+      "description": "",
+      "name": "Thehopend",
+      "slug": "thehopend"
+    },
+    {
+      "id": 96987684,
+      "count": 1,
+      "description": "",
+      "name": "ti",
+      "slug": "ti"
+    },
+    {
+      "id": 96987532,
+      "count": 0,
+      "description": "",
+      "name": "tim",
+      "slug": "tim"
+    },
+    {
+      "id": 96990687,
+      "count": 0,
+      "description": "",
+      "name": "Timothée Chalamet",
+      "slug": "timothee-chalamet"
+    },
+    {
+      "id": 96989896,
+      "count": 0,
+      "description": "",
+      "name": "tion wayne",
+      "slug": "tion-wayne"
+    },
+    {
+      "id": 96989772,
+      "count": 1,
+      "description": "",
+      "name": "Tipsy",
+      "slug": "tipsy"
+    },
+    {
+      "id": 96990091,
+      "count": 1,
+      "description": "",
+      "name": "TΔΞ泰泫",
+      "slug": "tdx-tai-xuan"
+    },
+    {
+      "id": 96987710,
+      "count": 1,
+      "description": "",
+      "name": "TOKiMONSTA",
+      "slug": "tokimonsta"
+    },
+    {
+      "id": 96989579,
+      "count": 1,
+      "description": "",
+      "name": "Tokyo Drift",
+      "slug": "tokyo-drift"
+    },
+    {
+      "id": 96987547,
+      "count": 0,
+      "description": "",
+      "name": "Tokyo Vitamin",
+      "slug": "tokyo-vitamin"
+    },
+    {
+      "id": 96989407,
+      "count": 0,
+      "description": "",
+      "name": "Tom Brady",
+      "slug": "tom-brady"
+    },
+    {
+      "id": 96990255,
+      "count": 1,
+      "description": "",
+      "name": "Tom Jones",
+      "slug": "tom-jones"
+    },
+    {
+      "id": 96989826,
+      "count": 1,
+      "description": "",
+      "name": "tom misch",
+      "slug": "tom-misch"
+    },
+    {
+      "id": 96989602,
+      "count": 1,
+      "description": "",
+      "name": "TOP 5",
+      "slug": "top-5"
+    },
+    {
+      "id": 96989585,
+      "count": 3,
+      "description": "",
+      "name": "tory lanez",
+      "slug": "tory-lanez"
+    },
+    {
+      "id": 96989794,
+      "count": 1,
+      "description": "",
+      "name": "TOSHIKI HAYASHI",
+      "slug": "toshiki-hayashi"
+    },
+    {
+      "id": 96987753,
+      "count": 1,
+      "description": "",
+      "name": "trance",
+      "slug": "trance"
+    },
+    {
+      "id": 96990277,
+      "count": 1,
+      "description": "",
+      "name": "Trap",
+      "slug": "trap"
+    },
+    {
+      "id": 96990040,
+      "count": 1,
+      "description": "",
+      "name": "trash",
+      "slug": "trash"
+    },
+    {
+      "id": 96989630,
+      "count": 1,
+      "description": "",
+      "name": "travis barker",
+      "slug": "travis-barker"
+    },
+    {
+      "id": 96987987,
+      "count": 1,
+      "description": "",
+      "name": "Travis Bott",
+      "slug": "travis-bott"
+    },
+    {
+      "id": 96987663,
+      "count": 15,
+      "description": "",
+      "name": "travis scott",
+      "slug": "travis-scott"
+    },
+    {
+      "id": 96989624,
+      "count": 1,
+      "description": "",
+      "name": "Triple T",
+      "slug": "triple-t"
+    },
+    {
+      "id": 96987758,
+      "count": 1,
+      "description": "",
+      "name": "tripoet",
+      "slug": "tripoet"
+    },
+    {
+      "id": 96990204,
+      "count": 1,
+      "description": "",
+      "name": "Trippie Redd",
+      "slug": "trippie-redd"
+    },
+    {
+      "id": 96989638,
+      "count": 2,
+      "description": "",
+      "name": "Trollz",
+      "slug": "trollz"
+    },
+    {
+      "id": 96989746,
+      "count": 1,
+      "description": "",
+      "name": "Trout Fresh",
+      "slug": "trout-fresh"
+    },
+    {
+      "id": 96988700,
+      "count": 3,
+      "description": "",
+      "name": "Tupac",
+      "slug": "tupac"
+    },
+    {
+      "id": 96990501,
+      "count": 1,
+      "description": "",
+      "name": "Tupac Shakur",
+      "slug": "tupac-shakur"
+    },
+    {
+      "id": 96990105,
+      "count": 0,
+      "description": "",
+      "name": "tvbs",
+      "slug": "tvbs"
+    },
+    {
+      "id": 96990462,
+      "count": 1,
+      "description": "",
+      "name": "Ty Dolla $ign",
+      "slug": "ty-dolla-ign"
+    },
+    {
+      "id": 96990396,
+      "count": 1,
+      "description": "",
+      "name": "Ty Dolla Sign",
+      "slug": "ty-dolla-sign"
+    },
+    {
+      "id": 96990200,
+      "count": 1,
+      "description": "",
+      "name": "tyga",
+      "slug": "tyga"
+    },
+    {
+      "id": 96990036,
+      "count": 2,
+      "description": "",
+      "name": "UK Drill",
+      "slug": "uk-drill"
+    },
+    {
+      "id": 96990080,
+      "count": 1,
+      "description": "",
+      "name": "ultra",
+      "slug": "ultra"
+    },
+    {
+      "id": 96990075,
+      "count": 3,
+      "description": "",
+      "name": "ultra taiwan",
+      "slug": "ultra-taiwan"
+    },
+    {
+      "id": 96989970,
+      "count": 1,
+      "description": "",
+      "name": "UNITY",
+      "slug": "unity"
+    },
+    {
+      "id": 96990107,
+      "count": 2,
+      "description": "",
+      "name": "unknown T",
+      "slug": "unknown-t"
+    },
+    {
+      "id": 96989877,
+      "count": 1,
+      "description": "",
+      "name": "UP直播",
+      "slug": "up-zhibo"
+    },
+    {
+      "id": 96989971,
+      "count": 1,
+      "description": "",
+      "name": "uuncutpoint",
+      "slug": "uuncutpoint"
+    },
+    {
+      "id": 96987605,
+      "count": 0,
+      "description": "",
+      "name": "Vigoz",
+      "slug": "vigoz"
+    },
+    {
+      "id": 96987646,
+      "count": 1,
+      "description": "",
+      "name": "Vincent",
+      "slug": "vincent"
+    },
+    {
+      "id": 96990418,
+      "count": 2,
+      "description": "",
+      "name": "Vuize王鍾惟",
+      "slug": "vuize-wang-zhong-wei"
+    },
+    {
+      "id": 96990323,
+      "count": 1,
+      "description": "",
+      "name": "W.LIN",
+      "slug": "w-lin"
+    },
+    {
+      "id": 96989864,
+      "count": 1,
+      "description": "",
+      "name": "WACKYBOYS",
+      "slug": "wackyboys"
+    },
+    {
+      "id": 96987804,
+      "count": 0,
+      "description": "",
+      "name": "Warner",
+      "slug": "warner"
+    },
+    {
+      "id": 96987805,
+      "count": 0,
+      "description": "",
+      "name": "Warner Music Taiwan",
+      "slug": "warner-music-taiwan"
+    },
+    {
+      "id": 96989978,
+      "count": 0,
+      "description": "",
+      "name": "We&#039;re All Alone in This Toget",
+      "slug": "were-all-alone-in-this-toget"
+    },
+    {
+      "id": 96989889,
+      "count": 0,
+      "description": "",
+      "name": "We&#039;re All Alone In This Together",
+      "slug": "were-all-alone-in-this-together"
+    },
+    {
+      "id": 96990515,
+      "count": 1,
+      "description": "",
+      "name": "Wes Anderson",
+      "slug": "wes-anderson"
+    },
+    {
+      "id": 96989706,
+      "count": 1,
+      "description": "",
+      "name": "West My Time",
+      "slug": "west-my-time"
+    },
+    {
+      "id": 96990196,
+      "count": 1,
+      "description": "",
+      "name": "Westside Gunn",
+      "slug": "westside-gunn"
+    },
+    {
+      "id": 96987776,
+      "count": 1,
+      "description": "",
+      "name": "WhAT A PARTY",
+      "slug": "what-a-party"
+    },
+    {
+      "id": 96988647,
+      "count": 1,
+      "description": "",
+      "name": "Whitney Houston",
+      "slug": "whitney-houston"
+    },
+    {
+      "id": 96989757,
+      "count": 0,
+      "description": "",
+      "name": "Why Not",
+      "slug": "why-not"
+    },
+    {
+      "id": 96989653,
+      "count": 1,
+      "description": "",
+      "name": "Whynot?",
+      "slug": "whynot"
+    },
+    {
+      "id": 96987548,
+      "count": 0,
+      "description": "",
+      "name": "Wild Style",
+      "slug": "wild-style"
+    },
+    {
+      "id": 96989599,
+      "count": 1,
+      "description": "",
+      "name": "will smith",
+      "slug": "will-smith"
+    },
+    {
+      "id": 96989655,
+      "count": 1,
+      "description": "",
+      "name": "William",
+      "slug": "william"
+    },
+    {
+      "id": 96987524,
+      "count": 4,
+      "description": "",
+      "name": "wiz khalifa",
+      "slug": "wiz-khalifa"
+    },
+    {
+      "id": 96987680,
+      "count": 0,
+      "description": "",
+      "name": "Woo",
+      "slug": "woo"
+    },
+    {
+      "id": 96989803,
+      "count": 1,
+      "description": "",
+      "name": "Worst",
+      "slug": "worst"
+    },
+    {
+      "id": 96989388,
+      "count": 0,
+      "description": "",
+      "name": "XBOX",
+      "slug": "xbox"
+    },
+    {
+      "id": 96989639,
+      "count": 2,
+      "description": "",
+      "name": "XXXTentacion",
+      "slug": "xxxtentacion"
+    },
+    {
+      "id": 96989600,
+      "count": 1,
+      "description": "",
+      "name": "y2k",
+      "slug": "y2k"
+    },
+    {
+      "id": 96989587,
+      "count": 0,
+      "description": "",
+      "name": "yakuza",
+      "slug": "yakuza"
+    },
+    {
+      "id": 96987604,
+      "count": 0,
+      "description": "",
+      "name": "Yappy",
+      "slug": "yappy"
+    },
+    {
+      "id": 96987534,
+      "count": 1,
+      "description": "",
+      "name": "YBN Cordae",
+      "slug": "ybn-cordae"
+    },
+    {
+      "id": 96987568,
+      "count": 0,
+      "description": "",
+      "name": "YELLOW",
+      "slug": "yellow-2"
+    },
+    {
+      "id": 96988344,
+      "count": 1,
+      "description": "",
+      "name": "YELLOWCLAW",
+      "slug": "yellowclaw"
+    },
+    {
+      "id": 96989991,
+      "count": 1,
+      "description": "",
+      "name": "YELLOWS MOB",
+      "slug": "yellows-mob"
+    },
+    {
+      "id": 96990201,
+      "count": 1,
+      "description": "",
+      "name": "yg",
+      "slug": "yg"
+    },
+    {
+      "id": 96987740,
+      "count": 1,
+      "description": "",
+      "name": "Ylang Ylang",
+      "slug": "ylang-ylang"
+    },
+    {
+      "id": 96989759,
+      "count": 0,
+      "description": "",
+      "name": "YNW BSli",
+      "slug": "ynw-bsli"
+    },
+    {
+      "id": 96989760,
+      "count": 2,
+      "description": "",
+      "name": "YNW BSlime",
+      "slug": "ynw-bslime"
+    },
+    {
+      "id": 96988467,
+      "count": 3,
+      "description": "",
+      "name": "YNW Melly",
+      "slug": "ynw-melly"
+    },
+    {
+      "id": 96990198,
+      "count": 1,
+      "description": "",
+      "name": "yo gotti",
+      "slug": "yo-gotti"
+    },
+    {
+      "id": 96987723,
+      "count": 1,
+      "description": "",
+      "name": "yoanna sun",
+      "slug": "yoanna-sun"
+    },
+    {
+      "id": 96989695,
+      "count": 1,
+      "description": "",
+      "name": "Yoshua Tsai",
+      "slug": "yoshua-tsai"
+    },
+    {
+      "id": 96990512,
+      "count": 1,
+      "description": "",
+      "name": "Young Dolph",
+      "slug": "young-dolph"
+    },
+    {
+      "id": 96988315,
+      "count": 1,
+      "description": "",
+      "name": "Young Money",
+      "slug": "young-money"
+    },
+    {
+      "id": 96987549,
+      "count": 0,
+      "description": "",
+      "name": "Young Queenz",
+      "slug": "young-queenz"
+    },
+    {
+      "id": 96987648,
+      "count": 2,
+      "description": "",
+      "name": "young thug",
+      "slug": "young-thug"
+    },
+    {
+      "id": 96989793,
+      "count": 1,
+      "description": "",
+      "name": "Young West",
+      "slug": "young-west"
+    },
+    {
+      "id": 96990035,
+      "count": 1,
+      "description": "",
+      "name": "Young YoungLee",
+      "slug": "young-younglee"
+    },
+    {
+      "id": 96990511,
+      "count": 1,
+      "description": "",
+      "name": "YoungBoy Never Broke Again",
+      "slug": "youngboy-never-broke-again"
+    },
+    {
+      "id": 96989925,
+      "count": 5,
+      "description": "",
+      "name": "YoungLee",
+      "slug": "younglee"
+    },
+    {
+      "id": 96990130,
+      "count": 1,
+      "description": "",
+      "name": "youtube premium",
+      "slug": "youtube-premium"
+    },
+    {
+      "id": 96989833,
+      "count": 2,
+      "description": "",
+      "name": "yussef dayes",
+      "slug": "yussef-dayes"
+    },
+    {
+      "id": 96987603,
+      "count": 0,
+      "description": "",
+      "name": "YZ",
+      "slug": "yz"
+    },
+    {
+      "id": 96987748,
+      "count": 2,
+      "description": "",
+      "name": "ZENBØ",
+      "slug": "zenbo-2"
+    },
+    {
+      "id": 96987724,
+      "count": 1,
+      "description": "",
+      "name": "ZENBO",
+      "slug": "zenbo"
+    },
+    {
+      "id": 96989654,
+      "count": 1,
+      "description": "",
+      "name": "Zimo",
+      "slug": "zimo"
+    },
+    {
+      "id": 96989626,
+      "count": 1,
+      "description": "",
+      "name": "Zion P",
+      "slug": "zion-p"
+    },
+    {
+      "id": 96989939,
+      "count": 1,
+      "description": "",
+      "name": "假鬼假怪",
+      "slug": "jia-gui-jia-guai"
+    },
+    {
+      "id": 96989946,
+      "count": 1,
+      "description": "",
+      "name": "做七",
+      "slug": "zuo-qi"
+    },
+    {
+      "id": 96989900,
+      "count": 1,
+      "description": "",
+      "name": "傀儡搖籃曲",
+      "slug": "puppet-lullaby"
+    },
+    {
+      "id": 96990222,
+      "count": 3,
+      "description": "",
+      "name": "傅孟柏",
+      "slug": "fu-meng-bo"
+    },
+    {
+      "id": 96987769,
+      "count": 1,
+      "description": "",
+      "name": "全世界的朋友都讓我失望",
+      "slug": "all-my-friends-let-me-down"
+    },
+    {
+      "id": 96989873,
+      "count": 1,
+      "description": "",
+      "name": "剃刀蔣",
+      "slug": "ti-dao-jiang"
+    },
+    {
+      "id": 96988448,
+      "count": 2,
+      "description": "",
+      "name": "劉聰",
+      "slug": "liu-cong"
+    },
+    {
+      "id": 96990393,
+      "count": 1,
+      "description": "",
+      "name": "劉冠廷",
+      "slug": "liu-guan-ting"
+    },
+    {
+      "id": 96990257,
+      "count": 2,
+      "description": "",
+      "name": "劉德華",
+      "slug": "andy-lau"
+    },
+    {
+      "id": 96990375,
+      "count": 1,
+      "description": "",
+      "name": "劉慧伶",
+      "slug": "liu-hui-ling"
+    },
+    {
+      "id": 96990338,
+      "count": 1,
+      "description": "",
+      "name": "劉以豪",
+      "slug": "liu-yi-hao"
+    },
+    {
+      "id": 96987866,
+      "count": 1,
+      "description": "",
+      "name": "功夫胖",
+      "slug": "kung-fu-pangpang"
+    },
+    {
+      "id": 96990272,
+      "count": 1,
+      "description": "",
+      "name": "北流",
+      "slug": "bei-liu"
+    },
+    {
+      "id": 96989805,
+      "count": 1,
+      "description": "",
+      "name": "千葉喜雄",
+      "slug": "chiba-yoshio"
+    },
+    {
+      "id": 96990359,
+      "count": 1,
+      "description": "",
+      "name": "南岸",
+      "slug": "nan-an"
+    },
+    {
+      "id": 96989699,
+      "count": 1,
+      "description": "",
+      "name": "南方暴走",
+      "slug": "nanfang-baozou"
+    },
+    {
+      "id": 96990071,
+      "count": 1,
+      "description": "",
+      "name": "原創娛樂",
+      "slug": "yuan-chuang-ent"
+    },
+    {
+      "id": 96989865,
+      "count": 1,
+      "description": "",
+      "name": "反骨男孩",
+      "slug": "rebel-boy"
+    },
+    {
+      "id": 96990135,
+      "count": 2,
+      "description": "",
+      "name": "古天樂",
+      "slug": "louis-koo"
+    },
+    {
+      "id": 96990228,
+      "count": 1,
+      "description": "",
+      "name": "另類嘻哈",
+      "slug": "alt-hiphop-tw"
+    },
+    {
+      "id": 96987647,
+      "count": 4,
+      "description": "",
+      "name": "可可幫",
+      "slug": "koko-gang"
+    },
+    {
+      "id": 96989678,
+      "count": 1,
+      "description": "",
+      "name": "台灣製造",
+      "slug": "taiwan-made"
+    },
+    {
+      "id": 96989679,
+      "count": 1,
+      "description": "",
+      "name": "台灣SONG",
+      "slug": "taiwan-song"
+    },
+    {
+      "id": 96990395,
+      "count": 1,
+      "description": "",
+      "name": "台秋祭",
+      "slug": "taiwan-autumn-festival"
+    },
+    {
+      "id": 96989968,
+      "count": 1,
+      "description": "",
+      "name": "台饒崛起",
+      "slug": "taiwan-rap-rise"
+    },
+    {
+      "id": 96989923,
+      "count": 1,
+      "description": "",
+      "name": "台饒崛起演唱會",
+      "slug": "taiwan-rap-rise-concert"
+    },
+    {
+      "id": 96989920,
+      "count": 2,
+      "description": "",
+      "name": "台語饒舌",
+      "slug": "taigi-rap"
+    },
+    {
+      "id": 96990077,
+      "count": 7,
+      "description": "",
+      "name": "台北電影節",
+      "slug": "taipei-film-festival"
+    },
+    {
+      "id": 96990244,
+      "count": 1,
+      "description": "",
+      "name": "台客本命",
+      "slug": "taike-boming"
+    },
+    {
+      "id": 96989817,
+      "count": 1,
+      "description": "",
+      "name": "吉豐重工",
+      "slug": "ji-feng-heavy-industry"
+    },
+    {
+      "id": 96990361,
+      "count": 1,
+      "description": "",
+      "name": "吉卜力",
+      "slug": "studio-ghibli"
+    },
+    {
+      "id": 96989627,
+      "count": 1,
+      "description": "",
+      "name": "吟遊之子",
+      "slug": "yin-you-zhi-zi"
+    },
+    {
+      "id": 96990074,
+      "count": 1,
+      "description": "",
+      "name": "吳青峰",
+      "slug": "wu-qing-feng"
+    },
+    {
+      "id": 96987720,
+      "count": 2,
+      "description": "",
+      "name": "吳卓源",
+      "slug": "wu-zhuo-yuan"
+    },
+    {
+      "id": 96990186,
+      "count": 14,
+      "description": "",
+      "name": "吳慷仁",
+      "slug": "wu-kang-ren"
+    },
+    {
+      "id": 96987713,
+      "count": 4,
+      "description": "",
+      "name": "呂士軒",
+      "slug": "lu-shi-xuan"
+    },
+    {
+      "id": 96988701,
+      "count": 1,
+      "description": "",
+      "name": "周杰倫",
+      "slug": "jay-chou"
+    },
+    {
+      "id": 96990239,
+      "count": 1,
+      "description": "",
+      "name": "周渝民",
+      "slug": "vic-chou"
+    },
+    {
+      "id": 96987624,
+      "count": 13,
+      "description": "",
+      "name": "周湯豪",
+      "slug": "nick-chou"
+    },
+    {
+      "id": 96990703,
+      "count": 1,
+      "description": "喜劇電影",
+      "name": "喜劇片",
+      "slug": "comedy-film"
+    },
+    {
+      "id": 96990291,
+      "count": 1,
+      "description": "",
+      "name": "嗨！營業中",
+      "slug": "hi-in-business"
+    },
+    {
+      "id": 96990049,
+      "count": 1,
+      "description": "",
+      "name": "嗩吶",
+      "slug": "suona"
+    },
+    {
+      "id": 96989673,
+      "count": 1,
+      "description": "",
+      "name": "嘻哈生活",
+      "slug": "hiphop-life-tw"
+    },
+    {
+      "id": 96989604,
+      "count": 1,
+      "description": "",
+      "name": "嘻哈經典分享",
+      "slug": "hiphop-classic-share"
+    },
+    {
+      "id": 96990321,
+      "count": 1,
+      "description": "",
+      "name": "嘻哈龍虎門",
+      "slug": "hiphop-long-hu-men"
+    },
+    {
+      "id": 96989696,
+      "count": 1,
+      "description": "",
+      "name": "嘻哈新聲代",
+      "slug": "hiphop-new-generation"
+    },
+    {
+      "id": 96989710,
+      "count": 1,
+      "description": "",
+      "name": "國王",
+      "slug": "guo-wang"
+    },
+    {
+      "id": 96987651,
+      "count": 3,
+      "description": "",
+      "name": "國蛋",
+      "slug": "guo-dan"
+    },
+    {
+      "id": 96987751,
+      "count": 2,
+      "description": "",
+      "name": "坂本龍一",
+      "slug": "ryuichi-sakamoto"
+    },
+    {
+      "id": 96989665,
+      "count": 1,
+      "description": "",
+      "name": "報復性派對",
+      "slug": "revenge-party"
+    },
+    {
+      "id": 96990280,
+      "count": 1,
+      "description": "",
+      "name": "壞男孩",
+      "slug": "bad-boy-tw"
+    },
+    {
+      "id": 96989932,
+      "count": 1,
+      "description": "",
+      "name": "夏夕夏景",
+      "slug": "xia-xi-xia-jing"
+    },
+    {
+      "id": 96990392,
+      "count": 1,
+      "description": "",
+      "name": "夏日的檸檬草",
+      "slug": "summer-lemongrass"
+    },
+    {
+      "id": 96989931,
+      "count": 1,
+      "description": "",
+      "name": "夏沐 Melo Moon",
+      "slug": "xia-mu-melo-moon"
+    },
+    {
+      "id": 96989872,
+      "count": 28,
+      "description": "",
+      "name": "大嘻哈時代",
+      "slug": "big-hiphop-era"
+    },
+    {
+      "id": 96990028,
+      "count": 4,
+      "description": "",
+      "name": "大嘻哈時代2",
+      "slug": "big-hiphop-era-2"
+    },
+    {
+      "id": 96987773,
+      "count": 2,
+      "description": "",
+      "name": "大支",
+      "slug": "da-zhi"
+    },
+    {
+      "id": 96989913,
+      "count": 1,
+      "description": "",
+      "name": "大放槍時代",
+      "slug": "big-gun-era"
+    },
+    {
+      "id": 96990068,
+      "count": 1,
+      "description": "",
+      "name": "大武門",
+      "slug": "da-wu-men"
+    },
+    {
+      "id": 96987868,
+      "count": 1,
+      "description": "",
+      "name": "太陽照常會升起",
+      "slug": "the-sun-will-rise"
+    },
+    {
+      "id": 96990059,
+      "count": 1,
+      "description": "",
+      "name": "奇洱",
+      "slug": "qi-er"
+    },
+    {
+      "id": 96990060,
+      "count": 4,
+      "description": "",
+      "name": "奇洱文創",
+      "slug": "qi-er-creative"
+    },
+    {
+      "id": 96990247,
+      "count": 1,
+      "description": "",
+      "name": "奚岳隆",
+      "slug": "xi-yue-long"
+    },
+    {
+      "id": 96987659,
+      "count": 2,
+      "description": "",
+      "name": "她Gucciㄉ時候眼淚總是PradaPradaㄉDior",
+      "slug": "gucci-prada-dior"
+    },
+    {
+      "id": 96989594,
+      "count": 1,
+      "description": "",
+      "name": "她沒在看我",
+      "slug": "she-is-not-looking-at-me"
+    },
+    {
+      "id": 96990286,
+      "count": 1,
+      "description": "",
+      "name": "妖怪森林",
+      "slug": "monster-forest"
+    },
+    {
+      "id": 96990492,
+      "count": 1,
+      "description": "",
+      "name": "姚淳耀",
+      "slug": "yao-chun-yao"
+    },
+    {
+      "id": 96989744,
+      "count": 1,
+      "description": "",
+      "name": "婁峻碩",
+      "slug": "lou-jun-shuo"
+    },
+    {
+      "id": 96990047,
+      "count": 1,
+      "description": "",
+      "name": "孩子怕什麼",
+      "slug": "what-are-kids-afraid-of"
+    },
+    {
+      "id": 96990318,
+      "count": 3,
+      "description": "",
+      "name": "孫王力",
+      "slug": "sun-wang-li"
+    },
+    {
+      "id": 96989868,
+      "count": 1,
+      "description": "",
+      "name": "孫生",
+      "slug": "sun-sheng"
+    },
+    {
+      "id": 96987613,
+      "count": 3,
+      "description": "",
+      "name": "孫盛希",
+      "slug": "sun-sheng-xi"
+    },
+    {
+      "id": 96990491,
+      "count": 1,
+      "description": "",
+      "name": "孫可芳",
+      "slug": "sun-ke-fang"
+    },
+    {
+      "id": 96990148,
+      "count": 1,
+      "description": "",
+      "name": "宋芸樺",
+      "slug": "song-yun-hua"
+    },
+    {
+      "id": 96990476,
+      "count": 2,
+      "description": "",
+      "name": "宋柏緯",
+      "slug": "song-bo-wei"
+    },
+    {
+      "id": 96990423,
+      "count": 1,
+      "description": "",
+      "name": "客語饒舌",
+      "slug": "hakka-rap"
+    },
+    {
+      "id": 96990131,
+      "count": 1,
+      "description": "",
+      "name": "宮崎駿",
+      "slug": "hayao-miyazaki"
+    },
+    {
+      "id": 96987789,
+      "count": 1,
+      "description": "",
+      "name": "家常音樂",
+      "slug": "everyday-music"
+    },
+    {
+      "id": 96990486,
+      "count": 1,
+      "description": "",
+      "name": "富樫勇樹",
+      "slug": "yuki-togashi"
+    },
+    {
+      "id": 96988266,
+      "count": 1,
+      "description": "",
+      "name": "寵粉系列",
+      "slug": "fan-service-series"
+    },
+    {
+      "id": 96989767,
+      "count": 1,
+      "description": "",
+      "name": "專輯發佈會",
+      "slug": "album-launch"
+    },
+    {
+      "id": 96989781,
+      "count": 1,
+      "description": "",
+      "name": "小烏茲",
+      "slug": "xiao-uzi"
+    },
+    {
+      "id": 96990101,
+      "count": 1,
+      "description": "",
+      "name": "小王子chw",
+      "slug": "xiao-wang-zi-chw"
+    },
+    {
+      "id": 96988314,
+      "count": 1,
+      "description": "",
+      "name": "小韋恩",
+      "slug": "xiao-wayne"
+    },
+    {
+      "id": 96989748,
+      "count": 1,
+      "description": "",
+      "name": "小明來ㄌ",
+      "slug": "xiao-ming-lai-la"
+    },
+    {
+      "id": 96990037,
+      "count": 1,
+      "description": "",
+      "name": "小李飛刀",
+      "slug": "little-li-flying-dagger"
+    },
+    {
+      "id": 96989613,
+      "count": 1,
+      "description": "",
+      "name": "小海灘",
+      "slug": "little-beach"
+    },
+    {
+      "id": 96989747,
+      "count": 1,
+      "description": "",
+      "name": "市井小明",
+      "slug": "shiching-xiaoming"
+    },
+    {
+      "id": 96989590,
+      "count": 1,
+      "description": "",
+      "name": "幫派",
+      "slug": "bang-pai"
+    },
+    {
+      "id": 96987599,
+      "count": 2,
+      "description": "",
+      "name": "平庸之上",
+      "slug": "ping-yong-zhi-shang"
+    },
+    {
+      "id": 96989987,
+      "count": 1,
+      "description": "",
+      "name": "年度最佳公關回應",
+      "slug": "best-pr-response"
+    },
+    {
+      "id": 96989777,
+      "count": 1,
+      "description": "",
+      "name": "幹架",
+      "slug": "gan-jia"
+    },
+    {
+      "id": 96989854,
+      "count": 1,
+      "description": "",
+      "name": "康士坦的變化球",
+      "slug": "constantine-changeup"
+    },
+    {
+      "id": 96990137,
+      "count": 1,
+      "description": "",
+      "name": "張鈞甯",
+      "slug": "zhang-jun-ning"
+    },
+    {
+      "id": 96990233,
+      "count": 1,
+      "description": "",
+      "name": "張震",
+      "slug": "zhang-zhen"
+    },
+    {
+      "id": 96990481,
+      "count": 1,
+      "description": "",
+      "name": "張震嶽",
+      "slug": "zhang-zhen-yue"
+    },
+    {
+      "id": 96990474,
+      "count": 1,
+      "description": "",
+      "name": "張韶涵",
+      "slug": "zhang-shao-han"
+    },
+    {
+      "id": 96990459,
+      "count": 1,
+      "description": "",
+      "name": "張軒睿",
+      "slug": "zhang-xuan-rui"
+    },
+    {
+      "id": 96990136,
+      "count": 1,
+      "description": "",
+      "name": "張智霖",
+      "slug": "chilam-cheung"
+    },
+    {
+      "id": 96990242,
+      "count": 1,
+      "description": "",
+      "name": "張三李四",
+      "slug": "zhang-san-li-si"
+    },
+    {
+      "id": 96989723,
+      "count": 1,
+      "description": "",
+      "name": "張伍",
+      "slug": "zhang-wu"
+    },
+    {
+      "id": 96989886,
+      "count": 2,
+      "description": "",
+      "name": "彈殼",
+      "slug": "dan-ke"
+    },
+    {
+      "id": 96990089,
+      "count": 1,
+      "description": "",
+      "name": "影子計劃",
+      "slug": "shadow-project-tw"
+    },
+    {
+      "id": 96990300,
+      "count": 1,
+      "description": "",
+      "name": "役所廣司",
+      "slug": "yakusho-koji"
+    },
+    {
+      "id": 96990342,
+      "count": 1,
+      "description": "",
+      "name": "後謠景像詩",
+      "slug": "post-folk-landscape-poem"
+    },
+    {
+      "id": 96989975,
+      "count": 1,
+      "description": "",
+      "name": "後情歌",
+      "slug": "post-love-song"
+    },
+    {
+      "id": 96989839,
+      "count": 1,
+      "description": "",
+      "name": "徐佳瑩",
+      "slug": "xu-jia-ying"
+    },
+    {
+      "id": 96990046,
+      "count": 1,
+      "description": "",
+      "name": "怕胖團",
+      "slug": "papa-band"
+    },
+    {
+      "id": 96989976,
+      "count": 1,
+      "description": "",
+      "name": "悲歡離合",
+      "slug": "bei-huan-li-he"
+    },
+    {
+      "id": 96989993,
+      "count": 1,
+      "description": "",
+      "name": "情綿綿",
+      "slug": "qing-mian-mian"
+    },
+    {
+      "id": 96990254,
+      "count": 1,
+      "description": "",
+      "name": "愛到宇宙爆開",
+      "slug": "ai-dao-yuzhou-bao-kai"
+    },
+    {
+      "id": 96989780,
+      "count": 1,
+      "description": "",
+      "name": "愛哭鬼饒舌歌手",
+      "slug": "crybaby-rapper"
+    },
+    {
+      "id": 96987600,
+      "count": 1,
+      "description": "",
+      "name": "愛情雨",
+      "slug": "love-rain"
+    },
+    {
+      "id": 96990245,
+      "count": 1,
+      "description": "",
+      "name": "我誰",
+      "slug": "wo-shui"
+    },
+    {
+      "id": 96990287,
+      "count": 2,
+      "description": "",
+      "name": "戴立忍",
+      "slug": "dai-li-ren"
+    },
+    {
+      "id": 96990108,
+      "count": 1,
+      "description": "",
+      "name": "打勾勾娛樂",
+      "slug": "daguogou-entertainment"
+    },
+    {
+      "id": 96989740,
+      "count": 1,
+      "description": "",
+      "name": "拷貝貓",
+      "slug": "copy-cat"
+    },
+    {
+      "id": 96990435,
+      "count": 1,
+      "description": "",
+      "name": "掃描",
+      "slug": "sao-miao"
+    },
+    {
+      "id": 96990094,
+      "count": 1,
+      "description": "",
+      "name": "掃毒",
+      "slug": "sao-du"
+    },
+    {
+      "id": 96988602,
+      "count": 1,
+      "description": "",
+      "name": "揍到你哭",
+      "slug": "beat-you-to-tears"
+    },
+    {
+      "id": 96990364,
+      "count": 2,
+      "description": "",
+      "name": "新說唱2024",
+      "slug": "new-rap-2024"
+    },
+    {
+      "id": 96990401,
+      "count": 1,
+      "description": "",
+      "name": "新北街頭學校",
+      "slug": "xinbei-street-school"
+    },
+    {
+      "id": 96989671,
+      "count": 1,
+      "description": "",
+      "name": "新嘻哈蝴蝶夢",
+      "slug": "new-hiphop-butterfly-dream"
+    },
+    {
+      "id": 96988194,
+      "count": 1,
+      "description": "",
+      "name": "新型冠狀病毒",
+      "slug": "coronavirus"
+    },
+    {
+      "id": 96990484,
+      "count": 1,
+      "description": "",
+      "name": "方郁婷",
+      "slug": "fang-yu-ting"
+    },
+    {
+      "id": 96990480,
+      "count": 1,
+      "description": "",
+      "name": "方大同",
+      "slug": "khalil-fong"
+    },
+    {
+      "id": 96989957,
+      "count": 1,
+      "description": "",
+      "name": "日本",
+      "slug": "japan"
+    },
+    {
+      "id": 96989806,
+      "count": 1,
+      "description": "",
+      "name": "日本饒舌",
+      "slug": "japan-rap"
+    },
+    {
+      "id": 96989919,
+      "count": 3,
+      "description": "",
+      "name": "春犬",
+      "slug": "chun-quan"
+    },
+    {
+      "id": 96989893,
+      "count": 1,
+      "description": "",
+      "name": "普普文化",
+      "slug": "pop-culture"
+    },
+    {
+      "id": 96989994,
+      "count": 1,
+      "description": "",
+      "name": "暈船情歌",
+      "slug": "love-sick-song"
+    },
+    {
+      "id": 96990273,
+      "count": 1,
+      "description": "",
+      "name": "暗流",
+      "slug": "dark-current"
+    },
+    {
+      "id": 96989697,
+      "count": 1,
+      "description": "",
+      "name": "暴走新人",
+      "slug": "baozou-newbie"
+    },
+    {
+      "id": 96990358,
+      "count": 1,
+      "description": "",
+      "name": "曠課",
+      "slug": "skip-class"
+    },
+    {
+      "id": 96990378,
+      "count": 2,
+      "description": "",
+      "name": "曹佑寧",
+      "slug": "cao-you-ning"
+    },
+    {
+      "id": 96990463,
+      "count": 2,
+      "description": "",
+      "name": "曾敬驊",
+      "slug": "zeng-jing-hua"
+    },
+    {
+      "id": 96988624,
+      "count": 1,
+      "description": "",
+      "name": "有錢的羅迪",
+      "slug": "rich-rody"
+    },
+    {
+      "id": 96989922,
+      "count": 1,
+      "description": "",
+      "name": "朱皮 Pig Skin",
+      "slug": "zhu-pi-pig-skin"
+    },
+    {
+      "id": 96990304,
+      "count": 1,
+      "description": "",
+      "name": "朱延平",
+      "slug": "zhu-yan-ping"
+    },
+    {
+      "id": 96990528,
+      "count": 1,
+      "description": "",
+      "name": "朴敘俊",
+      "slug": "park-seo-jun"
+    },
+    {
+      "id": 96990452,
+      "count": 1,
+      "description": "",
+      "name": "朴俊元",
+      "slug": "park-jun-won"
+    },
+    {
+      "id": 96990527,
+      "count": 1,
+      "description": "",
+      "name": "李炳憲",
+      "slug": "lee-byung-hun"
+    },
+    {
+      "id": 96987674,
+      "count": 2,
+      "description": "",
+      "name": "李玉璽",
+      "slug": "li-yu-xi"
+    },
+    {
+      "id": 96990470,
+      "count": 1,
+      "description": "",
+      "name": "李相日",
+      "slug": "lee-sang-il"
+    },
+    {
+      "id": 96987764,
+      "count": 2,
+      "description": "",
+      "name": "李紅",
+      "slug": "li-hong"
+    },
+    {
+      "id": 96987652,
+      "count": 2,
+      "description": "",
+      "name": "李英宏",
+      "slug": "li-ying-hong"
+    },
+    {
+      "id": 96990471,
+      "count": 1,
+      "description": "",
+      "name": "李雲山",
+      "slug": "li-yun-shan"
+    },
+    {
+      "id": 96990376,
+      "count": 4,
+      "description": "",
+      "name": "李沐",
+      "slug": "li-mu"
+    },
+    {
+      "id": 96989622,
+      "count": 1,
+      "description": "",
+      "name": "杜威",
+      "slug": "du-wei-tw"
+    },
+    {
+      "id": 96990381,
+      "count": 1,
+      "description": "",
+      "name": "杜汶澤",
+      "slug": "du-wen-ze"
+    },
+    {
+      "id": 96989813,
+      "count": 1,
+      "description": "",
+      "name": "東區俠盜獵車",
+      "slug": "east-district-gta"
+    },
+    {
+      "id": 96989910,
+      "count": 1,
+      "description": "",
+      "name": "東岸",
+      "slug": "dong-an"
+    },
+    {
+      "id": 96990234,
+      "count": 1,
+      "description": "",
+      "name": "林襄",
+      "slug": "lin-xiang"
+    },
+    {
+      "id": 96990129,
+      "count": 1,
+      "description": "",
+      "name": "林君陽",
+      "slug": "lin-jun-yang"
+    },
+    {
+      "id": 96990333,
+      "count": 1,
+      "description": "",
+      "name": "林品彤",
+      "slug": "lin-pin-tong"
+    },
+    {
+      "id": 96990146,
+      "count": 1,
+      "description": "",
+      "name": "林嘉欣",
+      "slug": "karena-lam"
+    },
+    {
+      "id": 96990365,
+      "count": 3,
+      "description": "",
+      "name": "林柏宏",
+      "slug": "lin-bo-hong"
+    },
+    {
+      "id": 96990468,
+      "count": 2,
+      "description": "",
+      "name": "林予晞",
+      "slug": "lin-yu-xi"
+    },
+    {
+      "id": 96990238,
+      "count": 2,
+      "description": "",
+      "name": "林依晨",
+      "slug": "ariel-lin"
+    },
+    {
+      "id": 96989531,
+      "count": 1,
+      "description": "",
+      "name": "果汁世界",
+      "slug": "juice-world"
+    },
+    {
+      "id": 96990529,
+      "count": 1,
+      "description": "",
+      "name": "柘植義春",
+      "slug": "tsuge-yoshiharu"
+    },
+    {
+      "id": 96990485,
+      "count": 1,
+      "description": "",
+      "name": "柯煒林",
+      "slug": "ke-wei-lin"
+    },
+    {
+      "id": 96990181,
+      "count": 1,
+      "description": "",
+      "name": "柯震東",
+      "slug": "kai-ko"
+    },
+    {
+      "id": 96990223,
+      "count": 1,
+      "description": "",
+      "name": "柯叔元",
+      "slug": "ke-shu-yuan"
+    },
+    {
+      "id": 96990508,
+      "count": 1,
+      "description": "",
+      "name": "柯佳嬿",
+      "slug": "ke-jia-yan"
+    },
+    {
+      "id": 96990402,
+      "count": 1,
+      "description": "",
+      "name": "柳舟記",
+      "slug": "liu-zhou-ji"
+    },
+    {
+      "id": 96990184,
+      "count": 1,
+      "description": "",
+      "name": "柳承龍",
+      "slug": "ryu-seung-ryong"
+    },
+    {
+      "id": 96989712,
+      "count": 2,
+      "description": "",
+      "name": "栗子",
+      "slug": "lizi-tw"
+    },
+    {
+      "id": 96990093,
+      "count": 4,
+      "description": "",
+      "name": "桃園電影節",
+      "slug": "taoyuan-film-festival"
+    },
+    {
+      "id": 96990076,
+      "count": 3,
+      "description": "",
+      "name": "梁文音",
+      "slug": "liang-wen-yin"
+    },
+    {
+      "id": 96990128,
+      "count": 4,
+      "description": "",
+      "name": "楊祐寧",
+      "slug": "yang-you-ning"
+    },
+    {
+      "id": 96990127,
+      "count": 1,
+      "description": "",
+      "name": "楊謹華",
+      "slug": "yang-jin-hua"
+    },
+    {
+      "id": 96987551,
+      "count": 1,
+      "description": "",
+      "name": "楊和蘇",
+      "slug": "yang-he-su"
+    },
+    {
+      "id": 96989862,
+      "count": 1,
+      "description": "",
+      "name": "楚留香",
+      "slug": "chu-liu-xiang"
+    },
+    {
+      "id": 96990699,
+      "count": 8,
+      "description": "音樂評論與分析",
+      "name": "樂評",
+      "slug": "music-review"
+    },
+    {
+      "id": 96989989,
+      "count": 2,
+      "description": "",
+      "name": "權民植",
+      "slug": "kwon-min-shik"
+    },
+    {
+      "id": 96990190,
+      "count": 1,
+      "description": "",
+      "name": "正義聯盟",
+      "slug": "justice-league-tw"
+    },
+    {
+      "id": 96990088,
+      "count": 1,
+      "description": "",
+      "name": "死屍死時四十四",
+      "slug": "dead-corpse-44"
+    },
+    {
+      "id": 96988840,
+      "count": 1,
+      "description": "",
+      "name": "比爾賈",
+      "slug": "bi-er-jia"
+    },
+    {
+      "id": 96990016,
+      "count": 1,
+      "description": "",
+      "name": "水牛精神",
+      "slug": "buffalo-spirit"
+    },
+    {
+      "id": 96989580,
+      "count": 1,
+      "description": "",
+      "name": "水水",
+      "slug": "shui-shui"
+    },
+    {
+      "id": 96987749,
+      "count": 1,
+      "description": "",
+      "name": "水源",
+      "slug": "shui-yuan"
+    },
+    {
+      "id": 96990335,
+      "count": 1,
+      "description": "",
+      "name": "泊人ANKR",
+      "slug": "bo-ren-ankr"
+    },
+    {
+      "id": 96989885,
+      "count": 1,
+      "description": "",
+      "name": "法老",
+      "slug": "pharaoh-tw"
+    },
+    {
+      "id": 96990039,
+      "count": 1,
+      "description": "",
+      "name": "法蘭",
+      "slug": "fa-lan"
+    },
+    {
+      "id": 96990356,
+      "count": 1,
+      "description": "",
+      "name": "洪金寶",
+      "slug": "sammo-hung"
+    },
+    {
+      "id": 96990171,
+      "count": 1,
+      "description": "",
+      "name": "洪昰顥",
+      "slug": "hong-shi-hao"
+    },
+    {
+      "id": 96987553,
+      "count": 1,
+      "description": "",
+      "name": "活死人",
+      "slug": "living-dead"
+    },
+    {
+      "id": 96989982,
+      "count": 1,
+      "description": "",
+      "name": "海大富",
+      "slug": "hai-da-fu"
+    },
+    {
+      "id": 96989664,
+      "count": 1,
+      "description": "",
+      "name": "海底隊",
+      "slug": "undersea-team"
+    },
+    {
+      "id": 96990029,
+      "count": 1,
+      "description": "",
+      "name": "三立",
+      "slug": "sanlih-media"
+    },
+    {
+      "id": 96988734,
+      "count": 1,
+      "description": "",
+      "name": "三鐵共構",
+      "slug": "san-tie-gong-gou"
+    },
+    {
+      "id": 96987763,
+      "count": 3,
+      "description": "",
+      "name": "三小湯",
+      "slug": "san-xiao-tang"
+    },
+    {
+      "id": 96989618,
+      "count": 1,
+      "description": "",
+      "name": "不自殺聲明",
+      "slug": "no-suicide-statement"
+    },
+    {
+      "id": 96989766,
+      "count": 1,
+      "description": "",
+      "name": "不干大家的事",
+      "slug": "none-of-your-business"
+    },
+    {
+      "id": 96989588,
+      "count": 1,
+      "description": "",
+      "name": "世界第一現場",
+      "slug": "worlds-first-scene"
+    },
+    {
+      "id": 96990487,
+      "count": 1,
+      "description": "",
+      "name": "渡邊雄太",
+      "slug": "watanabe-yuta"
+    },
+    {
+      "id": 96989894,
+      "count": 1,
+      "description": "",
+      "name": "中國嘻哈第一股",
+      "slug": "china-hiphop-first-stock"
+    },
+    {
+      "id": 96987550,
+      "count": 1,
+      "description": "",
+      "name": "中國新說唱",
+      "slug": "china-new-rap"
+    },
+    {
+      "id": 96988158,
+      "count": 1,
+      "description": "",
+      "name": "中國有嘻哈",
+      "slug": "china-has-hiphop"
+    },
+    {
+      "id": 96990281,
+      "count": 1,
+      "description": "",
+      "name": "游智涵",
+      "slug": "you-zhi-han"
+    },
+    {
+      "id": 96990061,
+      "count": 1,
+      "description": "",
+      "name": "于耀智",
+      "slug": "yu-yao-zhi"
+    },
+    {
+      "id": 96990051,
+      "count": 1,
+      "description": "",
+      "name": "五木",
+      "slug": "wu-mu"
+    },
+    {
+      "id": 96990252,
+      "count": 2,
+      "description": "",
+      "name": "溫蒂漫步",
+      "slug": "wendy-wandering"
+    },
+    {
+      "id": 96987536,
+      "count": 1,
+      "description": "",
+      "name": "人人有功練",
+      "slug": "everyone-can-practice"
+    },
+    {
+      "id": 96990054,
+      "count": 1,
+      "description": "",
+      "name": "他馬克老闆",
+      "slug": "ta-ma-ke-lao-ban"
+    },
+    {
+      "id": 96989751,
+      "count": 1,
+      "description": "",
+      "name": "仙人掌傑克",
+      "slug": "cactus-jack"
+    },
+    {
+      "id": 96990339,
+      "count": 1,
+      "description": "",
+      "name": "任達華",
+      "slug": "simon-yam"
+    },
+    {
+      "id": 96990160,
+      "count": 1,
+      "description": "",
+      "name": "任賢齊",
+      "slug": "richie-jen"
+    },
+    {
+      "id": 96987757,
+      "count": 1,
+      "description": "",
+      "name": "滿人",
+      "slug": "man-ren"
+    },
+    {
+      "id": 96990218,
+      "count": 1,
+      "description": "",
+      "name": "伊藤潤二",
+      "slug": "junji-ito"
+    },
+    {
+      "id": 96990177,
+      "count": 1,
+      "description": "",
+      "name": "伍悅",
+      "slug": "wu-yue"
+    },
+    {
+      "id": 96989677,
+      "count": 1,
+      "description": "",
+      "name": "伍佰",
+      "slug": "wu-bai"
+    },
+    {
+      "id": 96990490,
+      "count": 1,
+      "description": "",
+      "name": "何百芮",
+      "slug": "he-bai-rui"
+    },
+    {
+      "id": 96990322,
+      "count": 1,
+      "description": "",
+      "name": "潮州土狗",
+      "slug": "chaozhou-earth-dog"
+    },
+    {
+      "id": 96990258,
+      "count": 1,
+      "description": "",
+      "name": "侯孝賢",
+      "slug": "hou-hsiao-hsien"
+    },
+    {
+      "id": 96989985,
+      "count": 1,
+      "description": "",
+      "name": "侵略性的浪漫",
+      "slug": "aggressive-romance"
+    },
+    {
+      "id": 96987779,
+      "count": 1,
+      "description": "",
+      "name": "保持聯絡",
+      "slug": "stay-in-touch"
+    }
+  ],
+  "redundancy_analysis": {}
+}
