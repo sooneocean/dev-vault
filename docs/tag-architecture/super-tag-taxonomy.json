@@ -1,0 +1,270 @@
+{
+  "metadata": {
+    "created_date": "2026-04-08",
+    "version": "1.0",
+    "status": "ready_for_review",
+    "purpose": "Define 5-7 super-tag clusters consolidating 80+ managed tags",
+    "strategy": "Preserve tag IDs; update slugs/names to super-tag structure; implement 301 redirects for merged tags"
+  },
+  "super_tags": [
+    {
+      "id": "music",
+      "name": "Music",
+      "slug": "music",
+      "description": "Music news, updates, artists, events, and content. Focus on hip-hop and music industry coverage.",
+      "estimated_posts": 168,
+      "child_tags": [
+        {
+          "original_category": "MUSIC",
+          "tag_ids": [96990595, 96990596, 96990597, 96990598],
+          "status": "preserve",
+          "notes": "Core music tags - 42 posts each"
+        },
+        {
+          "original_category": "HIPHOP-NEWS",
+          "tag_ids": [96990599, 96990600, 96990601],
+          "status": "merge_into_parent",
+          "notes": "Hip-hop news; consolidate into Music cluster"
+        },
+        {
+          "original_category": "HIPHOP-INTRO",
+          "tag_ids": [96990602, 96990603, 96990604],
+          "status": "merge_into_parent",
+          "notes": "Hip-hop introductions; consolidate"
+        },
+        {
+          "original_category": "HIPHOP-NEW-SONGS",
+          "tag_ids": [96990605, 96990606, 96990607],
+          "status": "merge_into_parent",
+          "notes": "New hip-hop releases; consolidate"
+        },
+        {
+          "original_category": "HIPHOP-EVENT",
+          "tag_ids": [96990608, 96990609, 96990610],
+          "status": "merge_into_parent",
+          "notes": "Hip-hop events; merge into Music.Events"
+        },
+        {
+          "original_category": "MUSIC-EVENTS",
+          "tag_ids": [96990611, 96990612],
+          "status": "merge_into_parent",
+          "notes": "Music events; consolidate"
+        },
+        {
+          "original_category": "MUSIC-PERSONA",
+          "tag_ids": [96990613, 96990614, 96990615],
+          "status": "merge_into_parent",
+          "notes": "Music personalities; consolidate into Music.Personas"
+        },
+        {
+          "original_category": "YOLO-LYRICS",
+          "tag_ids": [96990616, 96990617, 96990618],
+          "status": "merge_or_defer",
+          "notes": "YOLO-specific lyrics content; consider as niche sub-cluster or merge"
+        }
+      ],
+      "total_child_tags": 29,
+      "merge_strategy": "Preserve Music tags (96990595-598). Merge Hip-Hop and other music tags as 301 redirects to main Music cluster."
+    },
+    {
+      "id": "entertainment",
+      "name": "Entertainment",
+      "slug": "entertainment",
+      "description": "Film, TV, anime, games, and entertainment industry news and personalities.",
+      "estimated_posts": 150,
+      "child_tags": [
+        {
+          "original_category": "ENTERTAINMENT",
+          "tag_ids": [96990642, 96990643, 96990644],
+          "status": "preserve",
+          "notes": "Core entertainment tags"
+        },
+        {
+          "original_category": "FILM-INTRO",
+          "tag_ids": [96990619, 96990620, 96990621],
+          "status": "merge_into_parent",
+          "notes": "Film introductions; consolidate into Entertainment"
+        },
+        {
+          "original_category": "TV-SERIES",
+          "tag_ids": [96990622, 96990623, 96990624],
+          "status": "merge_into_parent",
+          "notes": "TV series content; consolidate"
+        },
+        {
+          "original_category": "ANIME",
+          "tag_ids": [96990625, 96990626, 96990627],
+          "status": "merge_into_parent",
+          "notes": "Anime content; consolidate into Entertainment.Anime"
+        },
+        {
+          "original_category": "CLASSIC-FILMS",
+          "tag_ids": [96990628, 96990629, 96990630],
+          "status": "merge_into_parent",
+          "notes": "Classic films; consolidate into Entertainment"
+        },
+        {
+          "original_category": "FILM-PERSONA",
+          "tag_ids": [96990631, 96990632, 96990633],
+          "status": "merge_into_parent",
+          "notes": "Film personalities; consolidate into Entertainment.Personas"
+        },
+        {
+          "original_category": "FILM-EVENTS",
+          "tag_ids": [96990634, 96990635, 96990636],
+          "status": "merge_into_parent",
+          "notes": "Film events; consolidate into Entertainment.Events"
+        },
+        {
+          "original_category": "GAMES",
+          "tag_ids": [96990637, 96990638, 96990639],
+          "status": "merge_into_parent",
+          "notes": "Gaming content; consolidate into Entertainment.Games"
+        },
+        {
+          "original_category": "GAMES-NEWS",
+          "tag_ids": [96990640, 96990641],
+          "status": "merge_into_parent",
+          "notes": "Games news; consolidate into Entertainment"
+        }
+      ],
+      "total_child_tags": 24,
+      "merge_strategy": "Preserve Entertainment tags. Merge all sub-categories (Film, TV, Anime, Games) as 301 redirects to main Entertainment cluster."
+    },
+    {
+      "id": "culture",
+      "name": "Culture",
+      "slug": "culture",
+      "description": "Cultural events, personalities, classics, lifestyle, and business figures.",
+      "estimated_posts": 120,
+      "child_tags": [
+        {
+          "original_category": "PERSONA",
+          "tag_ids": [96990660, 96990661, 96990662],
+          "status": "preserve_as_core",
+          "notes": "Generic personalities; core of Culture cluster"
+        },
+        {
+          "original_category": "EVENTS",
+          "tag_ids": [96990657, 96990658, 96990659],
+          "status": "merge_into_parent",
+          "notes": "Events; consolidate into Culture.Events"
+        },
+        {
+          "original_category": "AUTHOR-PERSONA",
+          "tag_ids": [96990663, 96990664],
+          "status": "merge_into_parent",
+          "notes": "Author personalities; consolidate into Culture.Personas"
+        },
+        {
+          "original_category": "BUSINESS-PERSONA",
+          "tag_ids": [96990665, 96990666, 96990667],
+          "status": "merge_into_parent",
+          "notes": "Business personalities; consolidate into Culture.Personas"
+        },
+        {
+          "original_category": "RAGNAROK-PERSONA",
+          "tag_ids": [96990668, 96990669, 96990670],
+          "status": "merge_or_niche",
+          "notes": "Niche personality cluster; consider consolidation or preservation as sub-category"
+        },
+        {
+          "original_category": "SEXY-PERSONA",
+          "tag_ids": [96990671, 96990672, 96990673],
+          "status": "merge_or_niche",
+          "notes": "Lifestyle/persona tags; consolidate or review for appropriateness"
+        },
+        {
+          "original_category": "CLASSIC",
+          "tag_ids": [96990674, 96990675],
+          "status": "merge_into_parent",
+          "notes": "Classic content; consolidate into Culture.Classics"
+        },
+        {
+          "original_category": "CLASSIC-BOOKS",
+          "tag_ids": [96990676, 96990677, 96990678],
+          "status": "merge_into_parent",
+          "notes": "Classic books; consolidate into Culture.Classics"
+        },
+        {
+          "original_category": "CLASSIC-EVENTS",
+          "tag_ids": [96990679, 96990680, 96990681],
+          "status": "merge_into_parent",
+          "notes": "Classic events; consolidate into Culture.Events"
+        },
+        {
+          "original_category": "CLASSIC-WORKS",
+          "tag_ids": [96990682, 96990683, 96990684],
+          "status": "merge_into_parent",
+          "notes": "Classic works; consolidate into Culture.Classics"
+        }
+      ],
+      "total_child_tags": 29,
+      "merge_strategy": "Preserve PERSONA (core). Merge all other categories as 301 redirects. Consider niche sub-clusters (RAGNAROK, SEXY) for 88x1 review before finalization."
+    },
+    {
+      "id": "tech",
+      "name": "Technology",
+      "slug": "tech",
+      "description": "Tech news, innovation, industry personalities, and technology trends.",
+      "estimated_posts": 45,
+      "child_tags": [
+        {
+          "original_category": "TECH-NEWS",
+          "tag_ids": [96990645, 96990646, 96990647],
+          "status": "preserve",
+          "notes": "Tech news; core of Tech cluster"
+        },
+        {
+          "original_category": "TECH-PERSONA",
+          "tag_ids": [96990648, 96990649, 96990650],
+          "status": "merge_into_parent",
+          "notes": "Tech personalities; consolidate into Tech.Personas"
+        }
+      ],
+      "total_child_tags": 6,
+      "merge_strategy": "Preserve TECH-NEWS tags. Merge TECH-PERSONA as 301 redirect."
+    },
+    {
+      "id": "sports",
+      "name": "Sports",
+      "slug": "sports",
+      "description": "Sports news, events, and personalities across all disciplines.",
+      "estimated_posts": 40,
+      "child_tags": [
+        {
+          "original_category": "SPORTS-NEWS",
+          "tag_ids": [96990651, 96990652, 96990653],
+          "status": "preserve",
+          "notes": "Sports news; core of Sports cluster"
+        },
+        {
+          "original_category": "SPORTS-PERSONA",
+          "tag_ids": [96990654, 96990655, 96990656],
+          "status": "merge_into_parent",
+          "notes": "Sports personalities; consolidate into Sports.Personas"
+        }
+      ],
+      "total_child_tags": 6,
+      "merge_strategy": "Preserve SPORTS-NEWS tags. Merge SPORTS-PERSONA as 301 redirect."
+    }
+  ],
+  "summary": {
+    "total_super_tags": 5,
+    "total_managed_tags": 80,
+    "merge_strategy": "Preserve 4 core Music tags + top tags from each cluster. Implement 301 redirects for merged tags. Update TAG_MAPPING in scripts to reference new super-tags.",
+    "implementation_phases": [
+      "Phase 1 (Unit 2): Finalize taxonomy and merge strategy",
+      "Phase 2 (Unit 3): Create tag descriptions and content templates",
+      "Phase 3 (Unit 4): Generate SEO metadata and schema markup",
+      "Phase 4 (Units 5-6): Update WordPress.com via API; implement 301 redirects",
+      "Phase 5 (Unit 7): QA and verification",
+      "Phase 6 (Unit 8): Document governance rules"
+    ]
+  },
+  "notes": {
+    "optional_clusters": "Consider adding optional cross-cutting clusters: Trending (featured, editor's-pick), Interviews (interviews, conversations). Defer to post-launch based on editorial need.",
+    "wildcard_tags": "1,240 single-post wildcard tags (artist names, etc.) are deferred. May be evaluated for optional auto-consolidation after Unit 7.",
+    "rollback_plan": "All tag ID mappings preserved. 301 redirects maintained for 90 days minimum. Original tag structure backed up in this JSON file."
+  }
+}
