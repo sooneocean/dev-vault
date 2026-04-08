@@ -1,9 +1,10 @@
 ---
 title: "feat: YOLO LAB 首頁排版 × 站內連結 × SEO 骨架全面重構"
 type: feat
-status: active
+status: completed
 date: 2026-04-08
 origin: User request — "首頁排版切版格局 站內布局連結 SEO結構 一切由你安排"
+execution_completed: 2026-04-08
 ---
 
 # YOLO LAB 首頁排版 × 站內連結 × SEO 骨架全面重構
