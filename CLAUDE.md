@@ -42,6 +42,10 @@ npm run test:proposal-integration --forceExit
 | Server | Status | Purpose |
 |--------|--------|---------|
 | **wpcom-mcp** | ✅ | WordPress.com site management |
+| **chrome-devtools-mcp** | ✅ | Browser debugging and testing |
+| **context7** | ✅ | Framework documentation caching |
+| **github** | ✅ | GitHub API integration |
+| **claude-mem** (agent-memory) | ❌ | Disabled — conflicts with obsidian-agent vault management |
 | **arxiv, huggingface, fetch** | ❌ | Disabled (use WebSearch/WebFetch instead) |
 
 Test: `npm run test:proposal-integration --forceExit`

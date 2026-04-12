@@ -148,4 +148,36 @@ clausidian note "Title" type    # Create note (auto-links)
 clausidian search "keyword"     # Full-text search
 clausidian sync                 # Rebuild indices after manual edits
 clausidian health               # Vault completeness score
+clausidian stale                # Find inactive notes (90+ days)
+clausidian archive "note"       # Move to archived status
 ```
+
+## Vault Maintenance (Quarterly)
+
+Keep vault healthy and searchable with periodic maintenance:
+
+```bash
+# Find inactive projects and resources
+clausidian stale --path projects/ --days 90
+clausidian stale --path resources/ --days 120
+
+# Before archiving, ensure metadata is complete
+clausidian patch "projects/X" --frontmatter summary "Brief description"
+clausidian patch "projects/X" --frontmatter updated "$(date +%Y-%m-%d)"
+
+# Archive completed or paused projects
+clausidian archive "projects/old-project"
+
+# Rebuild indices after manual changes
+clausidian sync
+```
+
+**When to archive:**
+- No updates for 90+ days (projects) or 120+ days (resources)
+- Status is `paused` or `completed`
+- Project goals no longer relevant
+
+**Required before archiving:**
+- `summary` field is non-empty (for index clarity)
+- `updated` field reflects last substantive edit
+- `status` is set to `archived` or `completed`
