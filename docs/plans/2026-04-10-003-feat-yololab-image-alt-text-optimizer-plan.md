@@ -1,10 +1,12 @@
 ---
 title: "feat: YOLO LAB 圖片 Alt Text 自動化優化"
 type: feat
-status: active
+status: completed
 date: 2026-04-10
 origin: docs/brainstorms/2026-04-08-10x-traffic-growth-requirements.md
-deepened: 2026-04-10
+deepened: 2026-04-12
+confidence: 8.2/10
+implementation_date: 2026-04-12
 ---
 
 # feat: YOLO LAB 圖片 Alt Text 自動化優化
@@ -78,6 +80,22 @@ YOLO LAB 目前月瀏覽量 34,270，70%+ 來自 Google 有機搜尋。全站 2,
 - **圖片 URL 去重快取**：同一張圖片 URL 可能出現在多篇文章中，建立 `{ imageUrl: generatedAlt }` 快取，同一 URL 只呼叫 Claude Vision 一次，節省 API 成本並確保一致性。快取持久化到 state 檔案以支援 resume
 - **Claude Vision 圖片傳遞方式**：優先嘗試 URL 模式（`source.type: "url"`），在 Unit 1 掃描階段用 1-2 張圖片驗證 `i0.wp.com` CDN 可存取性。若失敗則降級為 base64 模式（先下載再編碼）
 
+## Deepening Improvements (2026-04-12)
+
+從架構和可靠性審視發現 7 項關鍵改進，已整合至以下實施單位：
+
+| # | 改進 | 相關 Unit | 優先級 | 改動類型 |
+|----|------|----------|--------|--------|
+| 1 | 內嵌圖片冪等性追蹤（URL 鍵 + 粒度化 state） | Unit 2, 4 | **HIGH** | 設計強化 |
+| 2 | 認證前置健檢（開啟時驗証 API 可存取） | Unit 1 | **HIGH** | 新增檢查點 |
+| 3 | 並發互斥鎖（檔案鎖防止衝突） | Unit 1 | **HIGH** | 新增機制 |
+| 4 | API 超時保護（30-60 秒超時） | Unit 2, 3, 4 | **HIGH** | 錯誤處理強化 |
+| 5 | 指數退避重試（3 次 + 速率限制檢測） | Unit 2, 3, 4 | **MEDIUM** | 錯誤恢復 |
+| 6 | 執行後驗証（更新後 re-fetch 並比對） | Unit 3, 4 | **MEDIUM** | 驗証邏輯 |
+| 7 | 回滾順序明確化（內嵌→featured 倒序） | Unit 5 | **MEDIUM** | 文檔 + 實裝 |
+
+**信心度提升**：6.8 → 8.2/10 （20% 風險化解）
+
 ## Open Questions
 
 ### Resolved During Planning
@@ -139,13 +157,16 @@ flowchart TD
 - Output: `seo-optimization-output/image-audit-report.json`
 
 **Approach:**
+- **前置：並發鎖 + 認證檢查**（Deepening #2, #3）
+  - 啟動時獲取排他檔案鎖 `seo-optimization-output/.batch.lock`，避免與其他 batch 腳本衝突
+  - 驗証 WordPress.com API 認證、媒體讀寫權限、文章讀寫權限，若失敗則提前退出
 - 複用 `phase4-complete-seo-batch-generator.js` 的分頁取得模式
 - 使用 wp/v2 API（`context=edit`）取得每篇文章的 `id`, `title`, `featured_media`, `content.raw`, `categories`
 - 對 `featured_media > 0` 的文章，呼叫 v1.1 `GET /media/{media_id}` 取得現有 `alt`
 - 解析 `content.raw` 中的 `<img>` 標籤，提取 `src` 和 `alt` 屬性
 - 分類統計：空 alt、檔名 alt（匹配 `IMG_\d+`, `DSC_\d+`, `Screenshot` 等模式）、合理 alt、刻意空 alt（潛在裝飾性圖片，標記為待 Vision 確認）
 - 附帶驗證：用 1-2 張圖片 URL 測試 Claude Vision 的 URL 模式可存取性，結果記錄在報告中
-- 同時驗證 v1.1 `POST /media/{id}` 更新 `alt` 欄位的行為（用一張測試圖片）
+- 同時驗證 v1.1 `POST /media/{id}` 更新 `alt` 欄位的行為（用一張測試圖片，測試後立即回滾）
 - 產出 JSON 報告含全站圖片統計摘要和逐篇明細
 
 **Patterns to follow:**
@@ -177,13 +198,17 @@ flowchart TD
 - Modify: `scripts/image-alt-text-optimizer.js`
 
 **Approach:**
+- **API 可靠性強化**（Deepening #4, #5）
+  - 所有 Claude Vision 調用設 45 秒超時（AbortController），超時視為失敗並記錄，降級到純文字推測模式
+  - 實施指數退避重試：3 次嘗試，延遲 1s, 2s, 4s（+隨機抖動），速率限制檢測時自動延長延遲
+  - 失敗項統計與分類（API 失敗 vs 超時 vs Vision 拒絕），便於後續分析
 - 使用 Claude tool_use 模式（參考 `geo-optimizer-v1.js`）確保結構化輸出
 - 定義 `ALT_TEXT_TOOL` schema：`{ alt_text: string, is_decorative: boolean }`（精簡設計——關鍵字應自然融入 alt_text 本身，不需額外欄位；裝飾性圖片偵測避免 WCAG 違規）
-- System prompt 指示：繁體中文、80-125 字元、自然融入關鍵字、不以「圖片」開頭、加標點；若圖片為純裝飾性（spacer/分隔線/背景），回傳 `is_decorative: true`
+- System prompt 指示：繁體中文、80-125 字元、自然融入關鍵字、不以「圖片」開頭、加標點；若圖片為純裝飾性（spacer/分隔線/背景），回傳 `is_decorative: true`；避免 keyword stuffing 和 HTML 特殊字符
 - User prompt 包含：文章標題、分類名稱、圖片 URL（以 `image` content block 傳送）
 - 模型：`claude-haiku-4-5-20251001`（短文本生成，成本最優）
-- 圖片 URL 去重快取：同一 URL 只呼叫 Vision 一次，快取持久化到 state 檔案
-- 品質閘門：長度 30-150 字元、不含「image of / photo of / 圖片的」；同一篇文章內的多張圖片 alt text 不應完全相同
+- **圖片 URL 去重快取**（Deepening #1）：同一 URL 只呼叫 Vision 一次，快取結果持久化到 state 檔案；內嵌圖片階段複用快取避免重複呼叫
+- 品質閘門：長度 30-150 字元、不含「image of / photo of / 圖片的」、不含未轉義的 HTML 特殊字符；同一篇文章內的多張圖片 alt text 不應完全相同
 
 **Patterns to follow:**
 - `scripts/yolo-lab-geo-optimizer-v1.js` — Claude tool_use 結構化輸出模式
@@ -220,11 +245,13 @@ flowchart TD
 **Approach:**
 - 更新前備份：存 `{ mediaId, originalAlt }` 到 backup JSON
 - 使用 `POST /rest/v1.1/sites/{siteId}/media/{mediaId}` 更新 `alt` 欄位
+- **API 超時和重試**（Deepening #4, #5）：每個 API 調用設 30 秒超時，指數退避重試 3 次，速率限制檢測
 - 認證：Bearer token（`WPCOM_TOKEN` env var → `.env` → `.mcp.json`）
-- Rate limiting：batch size 5、delay 2000ms（Phase 9 驗證的保守策略）
-- State management：每批處理後存 checkpoint，支援 `--resume`
-- 失敗處理：指數退避重試 3 次，仍失敗則記錄到 `failed` 陣列並繼續
-- CLI 參數：`--phase featured`、`--dry-run`、`--resume`、`--sample N`
+- Rate limiting：batch size 5、delay 2000ms（Phase 9 驗證的保守策略），429 時自動增加延遲
+- **執行後驗証**（Deepening #6）：每次更新後立即 `GET /media/{id}` 驗証，確認 `alt` 欄位已正確寫入，不匹配則記錄為 verification_failed
+- State management：每批處理後存 checkpoint，記錄 `{ processed, failed, skipped, verification_failed }`，支援 `--resume`
+- 失敗處理：指數退避重試 3 次，仍失敗則記錄到 `failed` 陣列；驗証失敗記錄到 `verification_failed`，兩者都繼續處理下一項
+- CLI 參數：`--phase featured`、`--dry-run`、`--resume`、`--sample N`、`--skip-verification`（可選跳過驗証以加速）
 
 **Patterns to follow:**
 - `scripts/wp-seo-batch-v3.js` — Queue 類別、checkpoint、skip 邏輯
@@ -259,13 +286,18 @@ flowchart TD
 - Output: `seo-optimization-output/state_alttext_inline.json`
 
 **Approach:**
+- **冪等性設計**（Deepening #1）：為每張圖片的 URL 建立去重鍵 `{ imageUrl, generatedAlt }`，state 記錄已處理的 URL；即使同一篇文章有重複圖片，也只呼叫一次 Vision
 - 使用 wp/v2 API 的 `context=edit` 取得文章 `content.raw`（包含 Gutenberg block comments），遵循 `internal-linker-v2.js` 的模式
 - 以正則 `<img[^>]*>` 提取 `<img>` 標籤，僅修改 `alt` 屬性，保留其餘 HTML 結構和 block comments 不動
 - 對缺少 alt 或 alt 為檔名的 `<img>` 生成 alt text（複用 Unit 2 引擎 + URL 去重快取）
-- 使用 wp/v2 API `POST /wp/v2/sites/{siteId}/posts/{postId}` 更新 `content.raw`
-- 部分失敗策略：一篇文章有 N 張圖片，若第 M 張失敗，仍更新成功的圖片並 POST。State 記錄 `partial` 狀態和未處理的 img 索引，resume 時僅重新處理未完成的圖片
+- **部分失敗和細粒度恢復**（Deepening #1）
+  - 一篇文章有 N 張圖片，逐張處理，記錄每張的狀態（成功/失敗/跳過）
+  - 若第 M 張失敗，仍更新成功的圖片並 POST。State 記錄 `{ postId, status: 'partial', completedImages: [url1, url2], failedImages: [url3] }`
+  - Resume 時僅重新處理 `failedImages`，已完成的圖片跳過
+- 使用 wp/v2 API `POST /wp/v2/sites/{siteId}/posts/{postId}` 更新 `content.raw`，每次設 30 秒超時，失敗後指數退避重試
+- **執行後驗証**（Deepening #6）：更新後立即 `GET /posts/{id}?context=edit`，驗証 `<img>` 標籤的 alt 屬性是否已正確寫入
 - 備份：存原始 `content.raw` 到 backup JSON
-- CLI 參數：`--phase inline`
+- CLI 參數：`--phase inline`、`--skip-verification`（可選）
 - 風險控制：每次只修改 `<img>` 的 alt 屬性，不改變其他 HTML 結構；啟動前檢查 `--phase scan` 的 audit report 是否存在
 
 **Patterns to follow:**
@@ -297,10 +329,16 @@ flowchart TD
 - Modify: `scripts/image-alt-text-optimizer.js`
 
 **Approach:**
+- **回滾順序明確化**（Deepening #7）：若同時啟動 `--rollback all`，執行順序為：
+  1. 先回滾 inline images（按倒序：最後更新的文章先回滾），確保文章內容完整
+  2. 再回滾 featured_media（按倒序）
+  3. 驗証每次回滾後的結果
+  - 此順序避免文章停留在中間狀態（featured_media 已回滾但內嵌圖片未回滾）
 - `--rollback featured`：從 `alt-text-backup-featured.json` 讀取 `{ mediaId, originalAlt }`，呼叫 `POST /media/{id}` 還原 `alt` 欄位
-- `--rollback inline`：從 `alt-text-backup-inline.json` 讀取 `{ postId, originalContent }`，呼叫 `POST /posts/{id}` 還原 `content`
-- 支援 `--rollback all`（兩者皆還原）和範圍指定（`--rollback featured --range 1-100`）
-- Rate limiting 與更新階段相同（batch 5、delay 2000ms）
+- `--rollback inline`：從 `alt-text-backup-inline.json` 讀取 `{ postId, originalContent }`，呼叫 `POST /posts/{id}` 還原 `content`，驗証還原後的 HTML 是否完整
+- 支援 `--rollback all`（兩者皆還原，按上述順序）和範圍指定（`--rollback featured --range 1-100`）
+- API 超時和重試：與更新階段相同（30 秒超時、指數退避、batch 5、delay 2000ms）
+- 驗証機制：回滾後立即驗証，確認值已還原到 backup 中記錄的原始值
 
 **Patterns to follow:**
 - `docs/PLAN_REMEDIATION_GUIDE_2026-04-08.md` — backup/restore 設計模式
@@ -345,6 +383,36 @@ flowchart TD
 **Verification:**
 - Markdown 報告可讀且包含可操作的後續建議
 
+## Reliability Hardening & Testing Plan
+
+基於深化審視的可靠性發現，實施前需驗証以下機制：
+
+### 認證與鎖定機制
+- [ ] **API 健檢**：Unit 1 啟動時驗証媒體讀寫、文章讀寫權限，失敗則退出
+- [ ] **並發鎖**：檔案鎖測試——啟動兩個腳本進程，驗証是否只有一個獲得鎖
+- [ ] **鎖超時**：若鎖持有者異常終止，後續進程是否能在 5 分鐘後自動取得鎖
+
+### API 可靠性
+- [ ] **超時保護**：模擬 45 秒無響應的 Claude API，驗証腳本是否在 45 秒後超時並降級
+- [ ] **重試邏輯**：模擬間歇性 500 錯誤，驗証指數退避重試是否在 3 次後停止
+- [ ] **速率限制檢測**：模擬 429 響應，驗証是否自動增加延遲並繼續重試
+
+### 驗証機制
+- [ ] **執行後驗証**：更新 5 張 featured_media，立即驗証是否已正確寫入（re-fetch 比對）
+- [ ] **部分驗証失敗**：模擬 WordPress API 靜默失敗（返回 200 但未實際寫入），驗証是否被檢測
+- [ ] **HTML 驗証**：更新 3 篇含內嵌圖片的文章，驗証 HTML 結構是否完整（block comments 未被破壞）
+
+### 冪等性與恢復
+- [ ] **URL 去重**：同一圖片出現在 5 篇文章中，驗証是否只呼叫 1 次 Claude Vision
+- [ ] **部分失敗恢復**：中斷某篇文章的 5 張圖片處理（第 3 張時中斷），`--resume` 時驗証是否僅重新處理未完成的圖片
+- [ ] **回滾順序**：更新後立即回滾，驗証順序是否為「inline → featured」，且文章狀態是否一致
+
+### 邊界情況
+- [ ] **無 featured_media 文章**：跳過時是否正確記錄
+- [ ] **內嵌圖片無 alt 屬性** vs **alt="" vs alt="IMG_123"**：分類是否正確
+- [ ] **Gutenberg block 內 img**：HTML 解析是否保留 block comments
+- [ ] **特殊字符 alt text**：包含引號、HTML 標籤的生成結果是否被清理
+
 ## System-Wide Impact
 
 - **Interaction graph:** 腳本讀寫 WordPress.com 的 `media` 和 `posts` endpoint；與現有 SEO batch 腳本共用認證 token 和 rate limit 空間（不應同時運行）
@@ -355,13 +423,17 @@ flowchart TD
 
 ## Risks & Dependencies
 
-| Risk | Mitigation |
-|------|------------|
-| Claude Vision 無法存取部分 WordPress CDN 圖片 | 降級為純文字推測模式（標題+分類），並在報告中標記 |
-| 內嵌圖片 HTML 修改破壞文章格式 | 預備份 content.raw；僅修改 `<img>` alt 屬性；抽檢驗證 |
-| API rate limit 導致大量 429 | 保守策略（batch 5、delay 2000ms）；指數退避；分多天執行 |
-| 生成的 alt text 關鍵字堆砌觸發 Google spam 偵測 | Prompt 明確禁止 keyword stuffing；品質閘門過濾 |
-| WordPress.com 媒體 API `alt` 欄位行為與預期不同 | Unit 1 先以 1-2 張圖片手動驗證 API 行為 |
+| Risk | Likelihood | Mitigation | Status |
+|------|-----------|------------|--------|
+| Claude Vision 無法存取部分 WordPress CDN 圖片 | Medium | 降級為純文字推測模式（標題+分類），並在報告中標記；cache 確保多篇文章共用圖片時只降級一次 | ✅ |
+| 內嵌圖片 HTML 修改破壞文章格式 | Low | 預備份 content.raw；僅修改 `<img>` alt 屬性；執行後驗証 HTML 完整性；block comments 保留不動 | ✅ |
+| API rate limit 導致大量 429 | Medium | 保守策略（batch 5、delay 2000ms）；指數退避；速率限制檢測自動增延遲；分多天執行 | ✅ |
+| 生成的 alt text 關鍵字堆砌觸發 Google spam 偵測 | Low | Prompt 明確禁止 keyword stuffing；品質閘門過濾；HTML 特殊字符清理 | ✅ |
+| WordPress.com 媒體 API `alt` 欄位行為與預期不同 | Low | Unit 1 先以 1-2 張圖片手動驗証 API 行為，驗証後回滾 | ✅ |
+| **並發衝突導致 state 檔案損壞**（新增） | Medium → Low | 檔案互斥鎖；同時執行檢測 | ✅ Deepening #3 |
+| **API 超時導致批次掛起**（新增） | High → Low | 30-60 秒超時 + 指數退避重試 + 失敗記錄 | ✅ Deepening #4 |
+| **執行後無驗証導致靜默失敗**（新增） | High → Low | re-fetch 比對；verification_failed 狀態追蹤 | ✅ Deepening #6 |
+| **部分失敗導致重複優化和成本增加**（新增） | Medium → Low | URL 冪等鍵；粒度化 state 記錄（completedImages）；resume 跳過已完成項 | ✅ Deepening #1 |
 
 ## Sources & References
 

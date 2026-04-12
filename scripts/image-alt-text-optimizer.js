@@ -68,6 +68,7 @@ const RATE_LIMIT = {
 };
 
 const VISION_MODEL = "claude-haiku-4-5-20251001";
+const LOCK_FILE = path.join(OUTPUT_DIR, ".batch.lock");
 
 // ─── CLI Args ────────────────────────────────────────────────────────────────
 
@@ -167,6 +168,67 @@ function isFilenameLikeAlt(alt) {
   return /^(IMG|DSC|Screenshot|DSCF|P\d|image|photo|pic)[-_\s]?\d*/i.test(alt.trim());
 }
 
+// ─── File Locking (Deepening #3) ─────────────────────────────────────────
+
+function acquireLock() {
+  ensureDir(path.dirname(LOCK_FILE));
+  if (fs.existsSync(LOCK_FILE)) {
+    try {
+      const lockData = JSON.parse(fs.readFileSync(LOCK_FILE, "utf-8"));
+      const age = Date.now() - lockData.timestamp;
+      if (age < 3600000) { // 1 hour lock
+        throw new Error(`🔒 Batch already running (lock age: ${Math.round(age/1000)}s). Use --force to override.`);
+      }
+      log("Removing stale lock", "warning");
+    } catch (e) {
+      if (!e.message.includes("already running")) throw e;
+    }
+  }
+  fs.writeFileSync(LOCK_FILE, JSON.stringify({ timestamp: Date.now(), pid: process.pid }, null, 2));
+  log("Lock acquired", "success");
+}
+
+function releaseLock() {
+  if (fs.existsSync(LOCK_FILE)) {
+    try {
+      fs.unlinkSync(LOCK_FILE);
+      log("Lock released", "success");
+    } catch (e) {
+      log(`Failed to release lock: ${e.message}`, "warning");
+    }
+  }
+}
+
+// ─── API Health Check (Deepening #2) ───────────────────────────────────────
+
+async function healthCheck() {
+  log("Running API health check...", "info");
+  const base = getApiBase();
+  const headers = getAuthHeaders();
+
+  try {
+    // Check posts read
+    const postsRes = await fetch(`${base}/posts?per_page=1`, { headers });
+    if (!postsRes.ok) throw new Error(`Posts read failed: ${postsRes.status}`);
+    log("✓ Posts read permission OK", "success");
+
+    // Check media read/write (via WordPress.com v1.1 API)
+    const mediaRes = await fetch(`${SITE_ID.startsWith("http") ? API_V1 : `${API_V1}/media?number=1`}`, {
+      headers,
+      method: "GET",
+    });
+    if (!mediaRes.ok && mediaRes.status !== 404) {
+      throw new Error(`Media read failed: ${mediaRes.status}`);
+    }
+    log("✓ Media read permission OK", "success");
+
+    log("Health check passed ✓", "success");
+  } catch (error) {
+    log(`Health check failed: ${error.message}`, "error");
+    throw error;
+  }
+}
+
 // ─── API Helpers ─────────────────────────────────────────────────────────────
 
 async function apiGet(base, endpoint) {
@@ -239,6 +301,17 @@ function saveState(state) {
 async function phaseScan() {
   log("Phase: scan — 掃描全站文章圖片 alt 狀態");
   ensureDir(OUTPUT_DIR);
+
+  // Deepening #2, #3: Health check and acquire lock
+  try {
+    acquireLock();
+    await healthCheck();
+  } catch (error) {
+    log(`Initialization failed: ${error.message}`, "error");
+    process.exit(1);
+  }
+
+  try {
 
   // Paginated fetch of all posts via wp/v2 with context=edit
   const allPosts = [];
@@ -415,6 +488,9 @@ async function phaseScan() {
   console.log(`    檔名式 alt:       ${report.summary.inlineImages.filenameLike}`);
   console.log("═══════════════════════════════════════════════════");
   console.log(`\n📝 報告已儲存: ${reportPath}`);
+  } finally {
+    releaseLock();
+  }
 }
 
 // ─── Phase: Claude Vision Alt Text Generation ────────────────────────────────
@@ -438,7 +514,7 @@ const ALT_TEXT_TOOL = {
   },
 };
 
-async function generateAltText(client, imageUrl, articleTitle, categoryNames, altCache) {
+async function generateAltText(client, imageUrl, articleTitle, categoryNames, altCache, attempt = 1) {
   // Check cache first
   if (altCache[imageUrl]) {
     return altCache[imageUrl];
@@ -473,6 +549,10 @@ async function generateAltText(client, imageUrl, articleTitle, categoryNames, al
   } catch {
     useBase64 = true;
   }
+
+  // Deepening #4: API 超時保護 (45 seconds)
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 45000);
 
   // If URL mode fails or image is inaccessible, fallback to text-only
   try {
@@ -528,12 +608,24 @@ async function generateAltText(client, imageUrl, articleTitle, categoryNames, al
       return result;
     }
   } catch (err) {
+    clearTimeout(timeoutId);
+
+    // Deepening #5: 指數退避重試 (3 times max)
+    if (attempt < 3 && (err.message.includes("429") || err.message.includes("timeout") || err.message.includes("AbortError"))) {
+      const delayMs = Math.min(1000 * Math.pow(2, attempt - 1) + Math.random() * 1000, 10000);
+      log(`Vision API 失敗 (attempt ${attempt}/3)，${Math.round(delayMs)}ms 後重試...`, "warning");
+      await sleep(delayMs);
+      return generateAltText(client, imageUrl, articleTitle, categoryNames, altCache, attempt + 1);
+    }
+
     // If Vision fails (e.g., URL inaccessible), fallback to text-only
     if (!useBase64 && (err.message.includes("image") || err.message.includes("URL") || err.message.includes("Could not"))) {
       log(`Vision 失敗，降級為文字推測: ${imageUrl.slice(-40)}`, "warning");
       return generateAltTextFallback(client, articleTitle, categoryNames, imageUrl, altCache);
     }
     throw err;
+  } finally {
+    clearTimeout(timeoutId);
   }
 
   return { alt_text: "", is_decorative: false };
@@ -652,6 +744,29 @@ async function phaseFeatured() {
           // Update via v1.1 API
           await apiPost(getApiBase(), `/media/${item.mediaId}`, { alt_text: result.alt_text });
           log(`media ${item.mediaId}: "${result.alt_text.slice(0, 50)}..."`, "success");
+
+          // Deepening #6: 執行後驗証
+          if (!skipVerification) {
+            try {
+              await sleep(500); // Wait for API to settle
+              const verifyRes = await apiGet(getApiBase(), `/media/${item.mediaId}?_fields=alt_text`);
+              if (verifyRes.alt_text === result.alt_text) {
+                log(`✓ 驗証通過: media ${item.mediaId}`, "success");
+                state.verified = state.verified || [];
+                state.verified.push({ mediaId: item.mediaId, status: "verified" });
+              } else {
+                log(`✗ 驗証失敗: media ${item.mediaId} (寫入值不符)`, "error");
+                state.verificationFailed = state.verificationFailed || [];
+                state.verificationFailed.push({
+                  mediaId: item.mediaId,
+                  expected: result.alt_text,
+                  actual: verifyRes.alt_text,
+                });
+              }
+            } catch (verifyErr) {
+              log(`驗証錯誤: media ${item.mediaId}: ${verifyErr.message}`, "warning");
+            }
+          }
         } else {
           log(`[DRY-RUN] media ${item.mediaId}: "${result.alt_text.slice(0, 50)}..."`, "info");
         }
@@ -855,6 +970,31 @@ async function phaseInline() {
         // Update post if modified
         if (modified && !dryRun) {
           await apiPost(getApiBase(), `/posts/${postInfo.id}`, { content: content });
+
+          // Deepening #6: 執行後驗証 (HTML 完整性檢查)
+          if (!skipVerification) {
+            try {
+              await sleep(500);
+              const verifyPost = await apiGet(getApiBase(), `/posts/${postInfo.id}?context=edit&_fields=id,content`);
+              const verifyContent = verifyPost.content?.raw || verifyPost.content?.rendered || "";
+
+              // Check if Gutenberg block comments are preserved
+              const originalHasBlocks = /<!\-\- wp:/.test(content);
+              const updatedHasBlocks = /<!\-\- wp:/.test(verifyContent);
+
+              if (originalHasBlocks && !updatedHasBlocks) {
+                log(`✗ HTML 驗証失敗: 文章 ${postInfo.id} block comments 被破壞`, "error");
+                state.verificationFailed = state.verificationFailed || [];
+                state.verificationFailed.push({ postId: postInfo.id, reason: "block comments lost" });
+              } else {
+                log(`✓ 驗証通過: 文章 ${postInfo.id}`, "success");
+                state.verified = state.verified || [];
+                state.verified.push({ postId: postInfo.id, status: "verified" });
+              }
+            } catch (verifyErr) {
+              log(`驗証錯誤: 文章 ${postInfo.id}: ${verifyErr.message}`, "warning");
+            }
+          }
           log(`post ${postInfo.id}: 更新 ${successCount} 張圖片`, "success");
         } else if (modified && dryRun) {
           log(`[DRY-RUN] post ${postInfo.id}: 會更新 ${successCount} 張圖片`, "info");
@@ -920,7 +1060,8 @@ async function phaseRollback(target) {
     process.exit(1);
   }
 
-  const targets = target === "all" ? ["featured", "inline"] : [target];
+  // Deepening #7: 回滾順序明確化 — inline 先，featured 後（倒序執行）
+  const targets = target === "all" ? ["inline", "featured"] : [target];
 
   for (const t of targets) {
     log(`Rollback: ${t}`);
@@ -943,7 +1084,19 @@ async function phaseRollback(target) {
         try {
           if (t === "featured") {
             await apiPost(getApiBase(), `/media/${item.mediaId}`, { alt_text: item.originalAlt });
-            log(`media ${item.mediaId}: 已還原`, "success");
+
+            // 驗証回滾結果
+            if (!skipVerification) {
+              await sleep(300);
+              const verifyMedia = await apiGet(getApiBase(), `/media/${item.mediaId}?_fields=alt_text`);
+              if (verifyMedia.alt_text === item.originalAlt) {
+                log(`✓ media ${item.mediaId}: 已驗証還原`, "success");
+              } else {
+                log(`✗ media ${item.mediaId}: 驗証失敗 (預期: "${item.originalAlt}", 實際: "${verifyMedia.alt_text}")`, "error");
+              }
+            } else {
+              log(`media ${item.mediaId}: 已還原`, "success");
+            }
           } else {
             await apiPost(getApiBase(), `/posts/${item.postId}`, { content: item.originalContent });
             log(`post ${item.postId}: 已還原`, "success");
