@@ -1,6 +1,7 @@
 {
   "name": "dev-vault",
   "version": "1.0.0",
+  "type": "module",
   "description": "Claude Code DevVault - PARA-style knowledge management and automation",
   "main": "index.js",
   "scripts": {

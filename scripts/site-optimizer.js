@@ -206,7 +206,7 @@ async function handleImageAltOptimization(args, siteConfig, optConfig) {
   const scriptPath = path.join(__dirname, "image-alt-text-optimizer.js");
 
   // Build command
-  let cmd = `node ${scriptPath} --phase=${args.phase}`;
+  let cmd = `node "${scriptPath}" --phase=${args.phase}`;
 
   if (args.sample > 0) cmd += ` --sample=${args.sample}`;
   if (args.dryRun) cmd += ` --dry-run`;
@@ -258,7 +258,7 @@ async function handleInternalLinksOptimization(args, siteConfig, optConfig) {
 
   const scriptPhase = phaseMap[args.phase] || args.phase;
 
-  let cmd = `node ${scriptPath} --phase ${scriptPhase}`;
+  let cmd = `node "${scriptPath}" --phase ${scriptPhase}`;
   if (args.dryRun) cmd += ` --dry-run`;
   if (args.sample > 0) cmd += ` --sample ${args.sample}`;
 
