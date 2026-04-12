@@ -1,7 +1,9 @@
-# Site Optimizer Skill 文檔
+# Site Optimizer Skill 文檔 (DEPRECATED)
+
+> **Deprecated:** This skill has been superseded by `/seo`. See `.claude/skills/seo-orchestrator.md` for the new unified SEO orchestrator.
 
 **Version:** 1.0.0
-**Status:** ✅ Ready (image-alt 完全實現)
+**Status:** Deprecated — replaced by `/seo` orchestrator skill
 **Author:** Claude Code Engineering
 
 ---
