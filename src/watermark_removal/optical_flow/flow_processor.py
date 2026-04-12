@@ -235,7 +235,10 @@ class OpticalFlowProcessor:
         Returns:
             Flow map (H×W×2, float32).
         """
-        with self.model.eval():
+        import torch
+
+        self.model.eval()
+        with torch.no_grad():
             flow_list = self.model(img1, img2)
             flow = flow_list[-1]  # Take final flow prediction
 
