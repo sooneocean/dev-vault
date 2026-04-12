@@ -472,7 +472,15 @@ function generateSummaryReport(totalArticles, completedTasks) {
   log(`\n執行報告已保存: ${reportFile}`);
 }
 
-main().catch(error => {
-  log(`未捕捉的錯誤: ${error.message}`, "error");
-  process.exit(1);
-});
+// ─── Exports for module wrappers ─────────────────────────────────────────
+export { generateMetaOptimization, generateSchemaMarkup, generateOGTags };
+
+// ─── CLI Entry Point ─────────────────────────────────────────────────────
+// Only run main() when executed directly (not imported as module)
+const isMainModule = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+if (isMainModule) {
+  main().catch(error => {
+    log(`未捕捉的錯誤: ${error.message}`, "error");
+    process.exit(1);
+  });
+}
