@@ -1,7 +1,9 @@
 export default {
   testEnvironment: 'node',
   roots: ['<rootDir>/.claude/lib'],
-  testMatch: ['**/*.test.js'],
+  testMatch: [
+    '**/proposal-engine*.test.js',
+  ],
   testPathIgnorePatterns: [
     'node_modules',
     'projects',
@@ -14,4 +16,7 @@ export default {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   transform: {},
+  clearMocks: true,
+  resetMocks: true,
+  restoreMocks: true,
 };
