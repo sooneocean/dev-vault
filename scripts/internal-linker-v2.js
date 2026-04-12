@@ -11,6 +11,7 @@
  *   propose    — Generate link proposals (dry-run)
  *   inject     — Append "延伸閱讀" sections to articles
  *   fix-broken — Remove old broken SEO links from articles
+ *   rollback   — Restore original post content from NDJSON backup
  *
  * Usage:
  *   node scripts/internal-linker-v2.js --phase fetch-map
@@ -18,181 +19,115 @@
  *   node scripts/internal-linker-v2.js --phase inject --dry-run
  *   node scripts/internal-linker-v2.js --phase inject
  *   node scripts/internal-linker-v2.js --phase fix-broken
+ *   node scripts/internal-linker-v2.js --phase rollback
  *
  * Env:
  *   WP_BEARER_TOKEN — WordPress.com REST API Bearer token
  *   (or set in .env file)
+ *
+ * Module usage:
+ *   import { fetchMap, generateProposals, injectLinks, fixBrokenLinks, rollbackLinks } from './internal-linker-v2.js';
  */
 
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import {
+  discoverAuth,
+  resolveApiBase,
+  apiGet as sharedApiGet,
+  apiPost as sharedApiPost,
+  appendNDJSON,
+  readNDJSON,
+  sleep,
+  ensureDir,
+  saveJSON as sharedSaveJSON,
+  loadJSON,
+  log,
+} from "./lib/seo-shared.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// ─── Config ──────────────────────────────────────────────────────────────────
+// ─── Default Config ─────────────────────────────────────────────────────────
 
-const SITE_ID = 133512998;
-const API_BASE = `https://public-api.wordpress.com/wp/v2/sites/${SITE_ID}`;
-const DATA_DIR = path.join(__dirname, "../data");
-const OUTPUT_DIR = path.join(__dirname, "../seo-optimization-output");
-
-const RATE_LIMIT = {
-  batchSize: 10,
-  delayMs: 1500,
-  retries: 3,
-  backoffMs: 2000,
+const DEFAULT_CONFIG = {
+  siteId: 133512998,
+  domain: "yololab.net",
+  dataDir: path.join(__dirname, "../data"),
+  outputDir: path.join(__dirname, "../seo-optimization-output"),
+  rootDir: path.join(__dirname, ".."),
+  rateLimit: {
+    batchSize: 10,
+    delayMs: 1500,
+    retries: 3,
+    backoffMs: 2000,
+  },
 };
 
-// ─── Auth ────────────────────────────────────────────────────────────────────
-// Supports two auth methods:
-//   1. Application Password (Basic auth) — WP_APP_USER + WP_APP_PASS env vars or .env
-//   2. Bearer token — WP_BEARER_TOKEN env var, .env, or .mcp.json
+// ─── Internal Helpers (use shared utilities) ────────────────────────────────
 
-function getAuthHeaders() {
-  // Try Application Password first (most reliable for batch operations)
-  const user = process.env.WP_APP_USER;
-  const pass = process.env.WP_APP_PASS;
-  if (user && pass) {
-    const encoded = Buffer.from(`${user}:${pass}`).toString("base64");
-    return { Authorization: `Basic ${encoded}` };
-  }
-
-  // Try .env file for Application Password
-  const envPath = path.join(__dirname, "../.env");
-  if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, "utf-8");
-    const userMatch = envContent.match(/WP_APP_USER=(.+)/);
-    const passMatch = envContent.match(/WP_APP_PASS=(.+)/);
-    if (userMatch && passMatch) {
-      const encoded = Buffer.from(
-        `${userMatch[1].trim()}:${passMatch[1].trim()}`
-      ).toString("base64");
-      return { Authorization: `Basic ${encoded}` };
-    }
-  }
-
-  // Fallback to Bearer token
-  const token = getToken();
-  return { Authorization: `Bearer ${token}` };
+function resolveConfig(config = {}) {
+  return { ...DEFAULT_CONFIG, ...config };
 }
 
-function getToken() {
-  if (process.env.WP_BEARER_TOKEN) return process.env.WP_BEARER_TOKEN;
-
-  const envPath = path.join(__dirname, "../.env");
-  if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, "utf-8");
-    const match = envContent.match(/WP_BEARER_TOKEN=(.+)/);
-    if (match) return match[1].trim();
+function getApiContext(config) {
+  const auth = discoverAuth({ rootDir: config.rootDir });
+  if (!auth) {
+    throw new Error("No auth found. Set WP_APP_USER+WP_APP_PASS or WP_BEARER_TOKEN in .env");
   }
-
-  const mcpPath = path.join(__dirname, "../.mcp.json");
-  if (fs.existsSync(mcpPath)) {
-    const mcp = JSON.parse(fs.readFileSync(mcpPath, "utf-8"));
-    const auth = mcp.mcpServers?.["wpcom-mcp"]?.headers?.Authorization;
-    if (auth) return auth.replace("Bearer ", "");
-  }
-
-  console.error(
-    "❌ No auth found. Set WP_APP_USER+WP_APP_PASS or WP_BEARER_TOKEN in .env"
-  );
-  console.error(
-    "   Create Application Password: https://yololab.net/wp-admin/profile.php"
-  );
-  process.exit(1);
+  const apiBase = resolveApiBase({ siteId: config.siteId, domain: config.domain }, auth);
+  return { auth, apiBase };
 }
 
-// ─── API Helpers ─────────────────────────────────────────────────────────────
-
-async function apiGet(endpoint) {
-  const headers = getAuthHeaders();
-  for (let attempt = 1; attempt <= RATE_LIMIT.retries; attempt++) {
-    try {
-      const res = await fetch(`${API_BASE}${endpoint}`, { headers });
-      if (res.status === 429) {
-        const wait = RATE_LIMIT.backoffMs * attempt;
-        console.log(`  ⏳ Rate limited, waiting ${wait}ms...`);
-        await sleep(wait);
-        continue;
-      }
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
-      return await res.json();
-    } catch (err) {
-      if (attempt === RATE_LIMIT.retries) throw err;
-      await sleep(RATE_LIMIT.backoffMs * attempt);
-    }
-  }
+async function _apiGet(endpoint, config) {
+  const { auth, apiBase } = getApiContext(config);
+  return sharedApiGet(`${apiBase}${endpoint}`, auth.headers, config.rateLimit);
 }
 
-async function apiPost(endpoint, body) {
-  const headers = { ...getAuthHeaders(), "Content-Type": "application/json" };
-  for (let attempt = 1; attempt <= RATE_LIMIT.retries; attempt++) {
-    try {
-      const res = await fetch(`${API_BASE}${endpoint}`, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(body),
-      });
-      if (res.status === 429) {
-        const wait = RATE_LIMIT.backoffMs * attempt;
-        console.log(`  ⏳ Rate limited, waiting ${wait}ms...`);
-        await sleep(wait);
-        continue;
-      }
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
-      return await res.json();
-    } catch (err) {
-      if (attempt === RATE_LIMIT.retries) throw err;
-      await sleep(RATE_LIMIT.backoffMs * attempt);
-    }
-  }
-}
-
-function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
+async function _apiPost(endpoint, body, config) {
+  const { auth, apiBase } = getApiContext(config);
+  return sharedApiPost(`${apiBase}${endpoint}`, body, auth.headers, config.rateLimit);
 }
 
 // ─── Data Loaders ────────────────────────────────────────────────────────────
 
-function loadTier1() {
-  const p = path.join(DATA_DIR, "tier1-articles.json");
+function loadTier1(config) {
+  const p = path.join(config.dataDir, "tier1-articles.json");
   return JSON.parse(fs.readFileSync(p, "utf-8"));
 }
 
-function loadPillarMap() {
-  const p = path.join(DATA_DIR, "pillar-map.json");
+function loadPillarMap(config) {
+  const p = path.join(config.dataDir, "pillar-map.json");
   return JSON.parse(fs.readFileSync(p, "utf-8"));
 }
 
-function loadArticleMap() {
-  const p = path.join(DATA_DIR, "tier1-article-map.json");
+function loadArticleMap(config) {
+  const p = path.join(config.dataDir, "tier1-article-map.json");
   if (!fs.existsSync(p)) return null;
   return JSON.parse(fs.readFileSync(p, "utf-8"));
 }
 
-function saveJSON(filename, data) {
-  const dir = path.dirname(filename);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(filename, JSON.stringify(data, null, 2));
+function backupPath(config) {
+  return path.join(config.outputDir, "internal-links-backup.ndjson");
 }
 
 // ─── Phase: fetch-map ────────────────────────────────────────────────────────
 
-async function fetchMap() {
-  const tier1 = loadTier1();
+export async function fetchMap(userConfig) {
+  const config = resolveConfig(userConfig);
+  const tier1 = loadTier1(config);
   const allIds = Object.values(tier1.tier1_articles).flat();
   console.log(`📥 Fetching ${allIds.length} article titles/URLs...`);
 
   const map = {};
   let done = 0;
 
-  for (let i = 0; i < allIds.length; i += RATE_LIMIT.batchSize) {
-    const batch = allIds.slice(i, i + RATE_LIMIT.batchSize);
+  for (let i = 0; i < allIds.length; i += config.rateLimit.batchSize) {
+    const batch = allIds.slice(i, i + config.rateLimit.batchSize);
 
     for (const id of batch) {
       try {
-        const post = await apiGet(`/posts/${id}?_fields=id,title,link,categories`);
+        const post = await _apiGet(`/posts/${id}?_fields=id,title,link,categories`, config);
         map[id] = {
           id,
           title: post.title.rendered,
@@ -208,18 +143,18 @@ async function fetchMap() {
       await sleep(500);
     }
 
-    if (i + RATE_LIMIT.batchSize < allIds.length) {
-      await sleep(RATE_LIMIT.delayMs);
+    if (i + config.rateLimit.batchSize < allIds.length) {
+      await sleep(config.rateLimit.delayMs);
     }
   }
 
   // Also fetch pillar pages
-  const pillars = loadPillarMap();
+  const pillars = loadPillarMap(config);
   for (const [cat, info] of Object.entries(pillars.pillar_pages)) {
     const id = info.article_id;
     if (!map[id]) {
       try {
-        const post = await apiGet(`/posts/${id}?_fields=id,title,link`);
+        const post = await _apiGet(`/posts/${id}?_fields=id,title,link`, config);
         map[id] = { id, title: post.title.rendered, link: post.link, isPillar: true };
       } catch (err) {
         console.log(`\n  ❌ Pillar ${cat} (${id}): ${err.message}`);
@@ -230,22 +165,24 @@ async function fetchMap() {
     }
   }
 
-  const outPath = path.join(DATA_DIR, "tier1-article-map.json");
-  saveJSON(outPath, { generated: new Date().toISOString(), articles: map });
+  const outPath = path.join(config.dataDir, "tier1-article-map.json");
+  sharedSaveJSON(outPath, { generated: new Date().toISOString(), articles: map });
   console.log(`\n📝 Saved to ${outPath}`);
   console.log(`  Total: ${Object.keys(map).length} articles mapped`);
+
+  return { articlesCount: Object.keys(map).length, outputPath: outPath, articles: map };
 }
 
 // ─── Phase: propose ──────────────────────────────────────────────────────────
 
-function generateProposals() {
-  const tier1 = loadTier1();
-  const pillars = loadPillarMap();
-  const articleMap = loadArticleMap();
+export function generateProposals(userConfig) {
+  const config = resolveConfig(userConfig);
+  const tier1 = loadTier1(config);
+  const pillars = loadPillarMap(config);
+  const articleMap = loadArticleMap(config);
 
   if (!articleMap) {
-    console.error("❌ Run --phase fetch-map first");
-    process.exit(1);
+    throw new Error("Article map not found. Run fetch-map phase first.");
   }
 
   const proposals = [];
@@ -315,8 +252,8 @@ function generateProposals() {
     }
   }
 
-  const outPath = path.join(OUTPUT_DIR, "proposed-links-v2.json");
-  saveJSON(outPath, {
+  const outPath = path.join(config.outputDir, "proposed-links-v2.json");
+  sharedSaveJSON(outPath, {
     generated: new Date().toISOString(),
     totalArticles: proposals.length,
     totalLinks: proposals.reduce((sum, p) => sum + p.links.length, 0),
@@ -334,11 +271,13 @@ function generateProposals() {
     }
   }
   if (proposals.length > 3) console.log(`  ... and ${proposals.length - 3} more`);
+
+  return { totalArticles: proposals.length, totalLinks: proposals.reduce((s, p) => s + p.links.length, 0), proposals, outputPath: outPath };
 }
 
 // ─── Phase: inject ───────────────────────────────────────────────────────────
 
-function buildRelatedSection(links) {
+export function buildRelatedSection(links) {
   const items = links.map((l) => {
     const prefix = l.type === "pillar" ? "📌 " : "";
     return `<li><a href="${l.url}">${prefix}${l.title}</a></li>`;
@@ -353,17 +292,19 @@ function buildRelatedSection(links) {
   ].join("\n");
 }
 
-const RELATED_MARKER = "延伸閱讀";
+export const RELATED_MARKER = "延伸閱讀";
 
-async function injectLinks(dryRun) {
-  const proposalPath = path.join(OUTPUT_DIR, "proposed-links-v2.json");
+export async function injectLinks(userConfig, options = {}) {
+  const config = resolveConfig(userConfig);
+  const dryRun = options.dryRun || false;
+
+  const proposalPath = path.join(config.outputDir, "proposed-links-v2.json");
   if (!fs.existsSync(proposalPath)) {
-    console.error("❌ Run --phase propose first");
-    process.exit(1);
+    throw new Error("Proposals not found. Run propose phase first.");
   }
 
   const { proposals } = JSON.parse(fs.readFileSync(proposalPath, "utf-8"));
-  const statePath = path.join(OUTPUT_DIR, "link-inject-state.json");
+  const statePath = path.join(config.outputDir, "link-inject-state.json");
   const state = fs.existsSync(statePath)
     ? JSON.parse(fs.readFileSync(statePath, "utf-8"))
     : { completed: [], failed: [], skipped: [] };
@@ -372,7 +313,9 @@ async function injectLinks(dryRun) {
     (p) => !state.completed.includes(p.articleId) && !state.skipped.includes(p.articleId)
   );
 
+  const bkPath = backupPath(config);
   console.log(`🔗 Injecting links: ${todo.length} articles (${dryRun ? "DRY RUN" : "LIVE"})`);
+  if (!dryRun) console.log(`📦 Backup: ${bkPath}`);
   let success = 0;
   let skip = 0;
   let fail = 0;
@@ -382,7 +325,7 @@ async function injectLinks(dryRun) {
 
     try {
       // Fetch current content
-      const post = await apiGet(`/posts/${proposal.articleId}?_fields=id,content&context=edit`);
+      const post = await _apiGet(`/posts/${proposal.articleId}?_fields=id,content&context=edit`, config);
       const content = post.content.raw || post.content.rendered || "";
 
       // Check if already has "延伸閱讀"
@@ -403,10 +346,17 @@ async function injectLinks(dryRun) {
           console.log(`     → [${l.type}] ${l.title}`);
         }
       } else {
-        // Update post
-        await apiPost(`/posts/${proposal.articleId}`, {
-          content: updatedContent,
+        // Backup original content BEFORE writing (NDJSON for large-file safety)
+        appendNDJSON(bkPath, {
+          postId: proposal.articleId,
+          originalContent: content,
+          backedUpAt: new Date().toISOString(),
         });
+
+        // Update post
+        await _apiPost(`/posts/${proposal.articleId}`, {
+          content: updatedContent,
+        }, config);
         console.log(`  ✅ [${proposal.articleId}] Injected ${proposal.links.length} links`);
         state.completed.push(proposal.articleId);
       }
@@ -420,24 +370,65 @@ async function injectLinks(dryRun) {
     }
 
     // Save state periodically
-    if (!dryRun && (i + 1) % RATE_LIMIT.batchSize === 0) {
-      saveJSON(statePath, state);
-      await sleep(RATE_LIMIT.delayMs);
+    if (!dryRun && (i + 1) % config.rateLimit.batchSize === 0) {
+      sharedSaveJSON(statePath, state);
+      await sleep(config.rateLimit.delayMs);
     }
   }
 
-  if (!dryRun) saveJSON(statePath, state);
+  if (!dryRun) sharedSaveJSON(statePath, state);
 
   console.log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
   console.log(`✅ Success: ${success} | ⏭️ Skipped: ${skip} | ❌ Failed: ${fail}`);
+
+  return { success, skip, fail, backupPath: dryRun ? null : bkPath };
+}
+
+// ─── Phase: rollback ────────────────────────────────────────────────────────
+
+export async function rollbackLinks(userConfig) {
+  const config = resolveConfig(userConfig);
+  const bkPath = backupPath(config);
+
+  if (!fs.existsSync(bkPath)) {
+    throw new Error(`No backup file found at ${bkPath}. Nothing to rollback.`);
+  }
+
+  console.log(`🔄 Rolling back from ${bkPath}...`);
+  let restored = 0;
+  let failed = 0;
+
+  for await (const entry of readNDJSON(bkPath)) {
+    const { postId, originalContent } = entry;
+    if (!postId || originalContent === undefined) {
+      console.log(`  ⚠️ Skipping malformed backup entry`);
+      continue;
+    }
+
+    try {
+      await _apiPost(`/posts/${postId}`, { content: originalContent }, config);
+      console.log(`  ✅ [${postId}] Restored original content`);
+      restored++;
+      await sleep(500);
+    } catch (err) {
+      console.log(`  ❌ [${postId}] Rollback failed: ${err.message}`);
+      failed++;
+    }
+  }
+
+  console.log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+  console.log(`🔄 Rollback complete — Restored: ${restored} | Failed: ${failed}`);
+
+  return { restored, failed };
 }
 
 // ─── Phase: fix-broken ───────────────────────────────────────────────────────
 
-const BROKEN_LINK_PATTERN = /<!-- SEO Link: \w+ --><br\s*\/?>\s*<a href="https:\/\/yololab\.net\/article-\d+\/">.*?<\/a><br\s*\/?>\s*/g;
+export const BROKEN_LINK_PATTERN = /<!-- SEO Link: \w+ --><br\s*\/?>\s*<a href="https:\/\/yololab\.net\/article-\d+\/">.*?<\/a><br\s*\/?>\s*/g;
 
-async function fixBrokenLinks() {
-  const tier1 = loadTier1();
+export async function fixBrokenLinks(userConfig) {
+  const config = resolveConfig(userConfig);
+  const tier1 = loadTier1(config);
   const allIds = Object.values(tier1.tier1_articles).flat();
 
   console.log(`🔧 Scanning ${allIds.length} articles for broken SEO links...`);
@@ -447,12 +438,15 @@ async function fixBrokenLinks() {
 
   for (const id of allIds) {
     try {
-      const post = await apiGet(`/posts/${id}?_fields=id,content&context=edit`);
+      const post = await _apiGet(`/posts/${id}?_fields=id,content&context=edit`, config);
       const content = post.content.raw || post.content.rendered || "";
 
+      // Reset regex lastIndex since it uses the 'g' flag
+      BROKEN_LINK_PATTERN.lastIndex = 0;
       if (BROKEN_LINK_PATTERN.test(content)) {
+        BROKEN_LINK_PATTERN.lastIndex = 0;
         const cleaned = content.replace(BROKEN_LINK_PATTERN, "");
-        await apiPost(`/posts/${id}`, { content: cleaned });
+        await _apiPost(`/posts/${id}`, { content: cleaned }, config);
         console.log(`  🔧 [${id}] Removed broken SEO links`);
         fixed++;
       } else {
@@ -465,6 +459,8 @@ async function fixBrokenLinks() {
   }
 
   console.log(`\n✅ Fixed: ${fixed} | Clean: ${clean}`);
+
+  return { fixed, clean };
 }
 
 // ─── CLI ─────────────────────────────────────────────────────────────────────
@@ -498,14 +494,17 @@ async function main() {
       generateProposals();
       break;
     case "inject":
-      await injectLinks(args.dryRun);
+      await injectLinks(undefined, { dryRun: args.dryRun });
       break;
     case "fix-broken":
       await fixBrokenLinks();
       break;
+    case "rollback":
+      await rollbackLinks();
+      break;
     default:
       console.error(`❌ Unknown phase: ${args.phase}`);
-      console.log("Available: fetch-map, propose, inject, fix-broken");
+      console.log("Available: fetch-map, propose, inject, fix-broken, rollback");
       process.exit(1);
   }
 
@@ -513,7 +512,11 @@ async function main() {
   console.log("✅ Done");
 }
 
-main().catch((err) => {
-  console.error("❌ Error:", err.message);
-  process.exit(1);
-});
+// Only run CLI when executed directly (not imported as module)
+const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url));
+if (isDirectRun) {
+  main().catch((err) => {
+    console.error("❌ Error:", err.message);
+    process.exit(1);
+  });
+}
