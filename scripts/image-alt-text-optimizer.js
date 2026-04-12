@@ -29,46 +29,69 @@ import Anthropic from "@anthropic-ai/sdk";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import {
+  discoverAuth,
+  resolveApiBase,
+  apiGet as sharedApiGet,
+  apiPost as sharedApiPost,
+  createBackup as sharedCreateBackup,
+  loadBackup as sharedLoadBackup,
+  loadState as sharedLoadState,
+  saveState as sharedSaveState,
+  acquireGlobalLock,
+  releaseGlobalLock,
+  sleep,
+  ensureDir,
+  saveJSON,
+  loadJSON,
+  log,
+  isFilenameLikeAlt,
+  DEFAULT_RATE_LIMIT,
+} from "./lib/seo-shared.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// ─── Config ──────────────────────────────────────────────────────────────────
+// ─── Default Config (used by CLI main()) ────────────────────────────────────
 
-const SITE_ID = 133512998;
-const SITE_DOMAIN = "yololab.net";
-// Direct wp-json endpoint (Application Password auth)
-const API_DIRECT = `https://${SITE_DOMAIN}/wp-json/wp/v2`;
-// WordPress.com proxy endpoint (Bearer token auth)
-const API_V2 = `https://public-api.wordpress.com/wp/v2/sites/${SITE_ID}`;
-const API_V1 = `https://public-api.wordpress.com/rest/v1.1/sites/${SITE_ID}`;
-
-// Auto-detect which base URL to use based on auth method
-function getApiBase() {
-  const user = process.env.WP_APP_USER || process.env.WP_USERNAME;
-  const pass = process.env.WP_APP_PASS || process.env.WP_APP_PASSWORD;
-  if (user && pass) return API_DIRECT; // Application Password → direct endpoint
-
-  const envPath = path.join(__dirname, "../.env");
-  if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, "utf-8");
-    if (envContent.match(/(?:WP_APP_USER|WP_USERNAME)=/) && envContent.match(/(?:WP_APP_PASS|WP_APP_PASSWORD)=/)) {
-      return API_DIRECT;
-    }
-  }
-
-  return API_V2; // Bearer token → WP.com proxy
-}
-const OUTPUT_DIR = path.join(__dirname, "../seo-optimization-output");
-
-const RATE_LIMIT = {
-  batchSize: 5,
-  delayMs: 2000,
-  retries: 3,
-  backoffMs: 3000,
+const DEFAULT_SITE_CONFIG = {
+  siteId: 133512998,
+  domain: "yololab.net",
 };
 
+function buildDefaultConfig() {
+  const rootDir = path.join(__dirname, "..");
+  const auth = discoverAuth({ rootDir });
+  const apiBase = auth ? resolveApiBase(DEFAULT_SITE_CONFIG, auth) : null;
+  const apiV1 = `https://public-api.wordpress.com/rest/v1.1/sites/${DEFAULT_SITE_CONFIG.siteId}`;
+  return {
+    siteId: DEFAULT_SITE_CONFIG.siteId,
+    domain: DEFAULT_SITE_CONFIG.domain,
+    apiBase,
+    apiV1,
+    auth,
+    outputDir: path.join(rootDir, "seo-optimization-output"),
+    rateLimit: { ...DEFAULT_RATE_LIMIT },
+    visionModel: "claude-haiku-4-5-20251001",
+    rootDir,
+  };
+}
+
+// Legacy compatibility wrappers — used internally when config is available
+function getApiBaseFromConfig(config) {
+  return config.apiBase;
+}
+function getAuthHeadersFromConfig(config) {
+  return config.auth?.headers || {};
+}
+
+// ─── Legacy Config (backward compatibility for direct CLI invocation) ────────
+
+const LEGACY_OUTPUT_DIR = path.join(__dirname, "../seo-optimization-output");
+
+const RATE_LIMIT = { ...DEFAULT_RATE_LIMIT };
+
 const VISION_MODEL = "claude-haiku-4-5-20251001";
-const LOCK_FILE = path.join(OUTPUT_DIR, ".batch.lock");
+const LOCK_FILE = path.join(LEGACY_OUTPUT_DIR, ".batch.lock");
 
 // ─── CLI Args ────────────────────────────────────────────────────────────────
 
@@ -85,200 +108,91 @@ const sampleSize = parseInt(
   || "0"
 );
 
-// ─── Auth ────────────────────────────────────────────────────────────────────
+// ─── Auth (delegated to seo-shared.js) ──────────────────────────────────────
+// Legacy wrappers for backward compat within this file
 
 function getAuthHeaders() {
-  // Try Application Password (Basic auth) — multiple env var conventions
-  const user = process.env.WP_APP_USER || process.env.WP_USERNAME;
-  const pass = process.env.WP_APP_PASS || process.env.WP_APP_PASSWORD;
-  if (user && pass) {
-    const encoded = Buffer.from(`${user}:${pass}`).toString("base64");
-    return { Authorization: `Basic ${encoded}` };
+  const auth = discoverAuth({ rootDir: path.join(__dirname, "..") });
+  if (!auth) {
+    console.error("No auth found. Set WP_APP_USER+WP_APP_PASS or WP_BEARER_TOKEN in .env");
+    process.exit(1);
   }
-
-  // Try .env file for Application Password
-  const envPath = path.join(__dirname, "../.env");
-  if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, "utf-8");
-    const userMatch = envContent.match(/(?:WP_APP_USER|WP_USERNAME)=(.+)/);
-    const passMatch = envContent.match(/(?:WP_APP_PASS|WP_APP_PASSWORD)=(.+)/);
-    if (userMatch && passMatch) {
-      const encoded = Buffer.from(
-        `${userMatch[1].trim()}:${passMatch[1].trim()}`
-      ).toString("base64");
-      return { Authorization: `Basic ${encoded}` };
-    }
-  }
-
-  // Fallback to Bearer token
-  const token = getBearerToken();
-  return { Authorization: `Bearer ${token}` };
+  return auth.headers;
 }
 
-function getBearerToken() {
-  if (process.env.WP_BEARER_TOKEN) return process.env.WP_BEARER_TOKEN;
-  if (process.env.WPCOM_TOKEN) return process.env.WPCOM_TOKEN;
-
-  const envPath = path.join(__dirname, "../.env");
-  if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, "utf-8");
-    const match = envContent.match(/(?:WP_BEARER_TOKEN|WPCOM_TOKEN)=(.+)/);
-    if (match) return match[1].trim();
-  }
-
-  const mcpPath = path.join(__dirname, "../.mcp.json");
-  if (fs.existsSync(mcpPath)) {
-    const mcp = JSON.parse(fs.readFileSync(mcpPath, "utf-8"));
-    const auth = mcp.mcpServers?.["wpcom-mcp"]?.headers?.Authorization;
-    if (auth) return auth.replace("Bearer ", "");
-  }
-
-  console.error("❌ No auth found. Set WP_APP_USER+WP_APP_PASS or WP_BEARER_TOKEN in .env");
-  process.exit(1);
+function getApiBase() {
+  const auth = discoverAuth({ rootDir: path.join(__dirname, "..") });
+  if (!auth) return `https://public-api.wordpress.com/wp/v2/sites/${DEFAULT_SITE_CONFIG.siteId}`;
+  return resolveApiBase(DEFAULT_SITE_CONFIG, auth);
 }
 
-// ─── Utilities ───────────────────────────────────────────────────────────────
-
-function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
-}
-
-function ensureDir(dir) {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-}
-
-function saveJSON(filepath, data) {
-  ensureDir(path.dirname(filepath));
-  fs.writeFileSync(filepath, JSON.stringify(data, null, 2));
-}
-
-function loadJSON(filepath) {
-  if (!fs.existsSync(filepath)) return null;
-  return JSON.parse(fs.readFileSync(filepath, "utf-8"));
-}
-
-function log(msg, level = "info") {
-  const ts = new Date().toISOString().split("T")[1].slice(0, 8);
-  const prefix = { info: "ℹ️", success: "✅", error: "❌", warning: "⚠️", skip: "⏭️" }[level] || "  ";
-  console.log(`[${ts}] ${prefix} ${msg}`);
-}
-
-function isFilenameLikeAlt(alt) {
-  if (!alt || alt.trim() === "") return true;
-  return /^(IMG|DSC|Screenshot|DSCF|P\d|image|photo|pic)[-_\s]?\d*/i.test(alt.trim());
-}
-
-// ─── File Locking (Deepening #3) ─────────────────────────────────────────
-
+// Legacy lock wrappers
 function acquireLock() {
-  ensureDir(path.dirname(LOCK_FILE));
-  if (fs.existsSync(LOCK_FILE)) {
-    try {
-      const lockData = JSON.parse(fs.readFileSync(LOCK_FILE, "utf-8"));
-      const age = Date.now() - lockData.timestamp;
-      if (age < 3600000) { // 1 hour lock
-        throw new Error(`🔒 Batch already running (lock age: ${Math.round(age/1000)}s). Use --force to override.`);
-      }
-      log("Removing stale lock", "warning");
-    } catch (e) {
-      if (!e.message.includes("already running")) throw e;
-    }
-  }
-  fs.writeFileSync(LOCK_FILE, JSON.stringify({ timestamp: Date.now(), pid: process.pid }, null, 2));
-  log("Lock acquired", "success");
+  acquireGlobalLock(LOCK_FILE, 3600000); // 1 hour TTL for legacy
 }
 
 function releaseLock() {
-  if (fs.existsSync(LOCK_FILE)) {
-    try {
-      fs.unlinkSync(LOCK_FILE);
-      log("Lock released", "success");
-    } catch (e) {
-      log(`Failed to release lock: ${e.message}`, "warning");
-    }
-  }
+  releaseGlobalLock(LOCK_FILE);
 }
 
 // ─── API Health Check (Deepening #2) ───────────────────────────────────────
 
-async function healthCheck() {
+async function healthCheck(config) {
   log("Running API health check...", "info");
-  const base = getApiBase();
-  const headers = getAuthHeaders();
+  const base = config ? config.apiBase : getApiBase();
+  const headers = config ? getAuthHeadersFromConfig(config) : getAuthHeaders();
+  const apiV1 = config ? config.apiV1 : `https://public-api.wordpress.com/rest/v1.1/sites/${DEFAULT_SITE_CONFIG.siteId}`;
 
   try {
     // Check posts read
     const postsRes = await fetch(`${base}/posts?per_page=1`, { headers });
     if (!postsRes.ok) throw new Error(`Posts read failed: ${postsRes.status}`);
-    log("✓ Posts read permission OK", "success");
+    log("Posts read permission OK", "success");
 
     // Check media read/write (via WordPress.com v1.1 API)
-    const mediaRes = await fetch(`${SITE_ID.startsWith("http") ? API_V1 : `${API_V1}/media?number=1`}`, {
+    const mediaRes = await fetch(`${apiV1}/media?number=1`, {
       headers,
       method: "GET",
     });
     if (!mediaRes.ok && mediaRes.status !== 404) {
       throw new Error(`Media read failed: ${mediaRes.status}`);
     }
-    log("✓ Media read permission OK", "success");
+    log("Media read permission OK", "success");
 
-    log("Health check passed ✓", "success");
+    log("Health check passed", "success");
   } catch (error) {
     log(`Health check failed: ${error.message}`, "error");
     throw error;
   }
 }
 
-// ─── API Helpers ─────────────────────────────────────────────────────────────
+// ─── API Helpers (parameterized, delegating to seo-shared.js) ───────────────
 
-async function apiGet(base, endpoint) {
+async function apiGet(baseOrConfig, endpoint) {
+  // Support both legacy (base, endpoint) and config-based calls
+  if (typeof baseOrConfig === "object" && baseOrConfig.apiBase) {
+    const config = baseOrConfig;
+    return sharedApiGet(`${config.apiBase}${endpoint}`, getAuthHeadersFromConfig(config), config.rateLimit);
+  }
+  // Legacy: baseOrConfig is a URL string
   const headers = getAuthHeaders();
-  for (let attempt = 1; attempt <= RATE_LIMIT.retries; attempt++) {
-    try {
-      const res = await fetch(`${base}${endpoint}`, { headers });
-      if (res.status === 429) {
-        const wait = RATE_LIMIT.backoffMs * attempt;
-        log(`Rate limited, waiting ${wait}ms...`, "warning");
-        await sleep(wait);
-        continue;
-      }
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
-      return await res.json();
-    } catch (err) {
-      if (attempt === RATE_LIMIT.retries) throw err;
-      await sleep(RATE_LIMIT.backoffMs * attempt);
-    }
-  }
+  return sharedApiGet(`${baseOrConfig}${endpoint}`, headers, RATE_LIMIT);
 }
 
-async function apiPost(base, endpoint, body) {
-  const headers = { ...getAuthHeaders(), "Content-Type": "application/json" };
-  for (let attempt = 1; attempt <= RATE_LIMIT.retries; attempt++) {
-    try {
-      const res = await fetch(`${base}${endpoint}`, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(body),
-      });
-      if (res.status === 429) {
-        const wait = RATE_LIMIT.backoffMs * attempt;
-        log(`Rate limited, waiting ${wait}ms...`, "warning");
-        await sleep(wait);
-        continue;
-      }
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
-      return await res.json();
-    } catch (err) {
-      if (attempt === RATE_LIMIT.retries) throw err;
-      await sleep(RATE_LIMIT.backoffMs * attempt);
-    }
+async function apiPost(baseOrConfig, endpoint, body) {
+  if (typeof baseOrConfig === "object" && baseOrConfig.apiBase) {
+    const config = baseOrConfig;
+    return sharedApiPost(`${config.apiBase}${endpoint}`, body, getAuthHeadersFromConfig(config), config.rateLimit);
   }
+  const headers = getAuthHeaders();
+  return sharedApiPost(`${baseOrConfig}${endpoint}`, body, headers, RATE_LIMIT);
 }
 
-// ─── State Management ────────────────────────────────────────────────────────
+// ─── State Management (parameterized) ───────────────────────────────────────
 
-function loadState(name) {
-  const filepath = path.join(OUTPUT_DIR, `state_alttext_${name}.json`);
+function loadAltState(name, outputDir) {
+  const dir = outputDir || LEGACY_OUTPUT_DIR;
+  const filepath = path.join(dir, `state_alttext_${name}.json`);
   return loadJSON(filepath) || {
     name,
     startTime: new Date().toISOString(),
@@ -291,24 +205,44 @@ function loadState(name) {
   };
 }
 
-function saveState(state) {
-  const filepath = path.join(OUTPUT_DIR, `state_alttext_${state.name}.json`);
+function saveAltState(state, outputDir) {
+  const dir = outputDir || LEGACY_OUTPUT_DIR;
+  const filepath = path.join(dir, `state_alttext_${state.name}.json`);
   saveJSON(filepath, state);
 }
 
 // ─── Phase: scan ─────────────────────────────────────────────────────────────
 
-async function phaseScan() {
+/**
+ * Scan all site articles, audit image alt text status, produce report.
+ *
+ * @param {object} config - Site config: { siteId, domain, apiBase, apiV1, auth, outputDir, rateLimit, rootDir }
+ * @param {object} [options] - { sample, skipLock, skipHealthCheck }
+ * @returns {Promise<object>} Audit report object
+ */
+export async function exportPhaseScan(config, options = {}) {
+  const sampleSz = options.sample || 0;
+  const outputDir = config.outputDir || LEGACY_OUTPUT_DIR;
+  const lockFile = path.join(outputDir, ".batch.lock");
+
   log("Phase: scan — 掃描全站文章圖片 alt 狀態");
-  ensureDir(OUTPUT_DIR);
+  ensureDir(outputDir);
 
   // Deepening #2, #3: Health check and acquire lock
-  try {
-    acquireLock();
-    await healthCheck();
-  } catch (error) {
-    log(`Initialization failed: ${error.message}`, "error");
-    process.exit(1);
+  if (!options.skipLock) {
+    try {
+      acquireGlobalLock(lockFile, 3600000);
+    } catch (error) {
+      throw new Error(`Lock acquisition failed: ${error.message}`);
+    }
+  }
+  if (!options.skipHealthCheck) {
+    try {
+      await healthCheck(config);
+    } catch (error) {
+      if (!options.skipLock) releaseGlobalLock(lockFile);
+      throw new Error(`Health check failed: ${error.message}`);
+    }
   }
 
   try {
@@ -320,9 +254,8 @@ async function phaseScan() {
 
   while (hasMore) {
     try {
-      const base = getApiBase();
       const posts = await apiGet(
-        base,
+        config,
         `/posts?per_page=100&page=${page}&_fields=id,title,featured_media,content,categories`
       );
       if (!posts || posts.length === 0) {
@@ -346,8 +279,8 @@ async function phaseScan() {
   log(`共取得 ${allPosts.length} 篇文章`);
 
   // Apply sample limit
-  const posts = sampleSize > 0 ? allPosts.slice(0, sampleSize) : allPosts;
-  if (sampleSize > 0) log(`Sample mode: 只處理前 ${sampleSize} 篇`);
+  const posts = sampleSz > 0 ? allPosts.slice(0, sampleSz) : allPosts;
+  if (sampleSz > 0) log(`Sample mode: 只處理前 ${sampleSz} 篇`);
 
   // Collect all unique featured_media IDs
   const featuredMediaIds = [...new Set(
@@ -356,13 +289,13 @@ async function phaseScan() {
   log(`共 ${featuredMediaIds.length} 個不重複的 featured_media`);
 
   // Fetch media items for featured images
+  const rl = config.rateLimit || RATE_LIMIT;
   const mediaMap = {};
-  for (let i = 0; i < featuredMediaIds.length; i += RATE_LIMIT.batchSize) {
-    const batch = featuredMediaIds.slice(i, i + RATE_LIMIT.batchSize);
+  for (let i = 0; i < featuredMediaIds.length; i += rl.batchSize) {
+    const batch = featuredMediaIds.slice(i, i + rl.batchSize);
     for (const mediaId of batch) {
       try {
-        const base = getApiBase();
-        const media = await apiGet(base, `/media/${mediaId}?_fields=id,alt_text,source_url,title`);
+        const media = await apiGet(config, `/media/${mediaId}?_fields=id,alt_text,source_url,title`);
         mediaMap[mediaId] = {
           id: mediaId,
           alt: media.alt_text || "",
@@ -375,8 +308,8 @@ async function phaseScan() {
       }
       await sleep(200);
     }
-    if (i + RATE_LIMIT.batchSize < featuredMediaIds.length) {
-      await sleep(RATE_LIMIT.delayMs);
+    if (i + rl.batchSize < featuredMediaIds.length) {
+      await sleep(rl.delayMs);
     }
   }
 
@@ -465,7 +398,7 @@ async function phaseScan() {
   report.summary.uniqueImageUrls = allImageUrls.size;
 
   // Save audit report
-  const reportPath = path.join(OUTPUT_DIR, "image-audit-report.json");
+  const reportPath = path.join(outputDir, "image-audit-report.json");
   saveJSON(reportPath, report);
 
   // Print summary
@@ -487,9 +420,11 @@ async function phaseScan() {
   console.log(`    無 alt 屬性:      ${report.summary.inlineImages.noAltAttr}`);
   console.log(`    檔名式 alt:       ${report.summary.inlineImages.filenameLike}`);
   console.log("═══════════════════════════════════════════════════");
-  console.log(`\n📝 報告已儲存: ${reportPath}`);
+  console.log(`\n報告已儲存: ${reportPath}`);
+
+  return report;
   } finally {
-    releaseLock();
+    if (!options.skipLock) releaseGlobalLock(path.join(outputDir, ".batch.lock"));
   }
 }
 
@@ -658,19 +593,30 @@ async function generateAltTextFallback(client, articleTitle, categoryNames, imag
 
 // ─── Phase: featured ─────────────────────────────────────────────────────────
 
-async function phaseFeatured() {
+/**
+ * Batch-update featured_media alt text using Claude Vision.
+ *
+ * @param {object} config - Site config
+ * @param {object} [options] - { dryRun, resume, sample }
+ * @returns {Promise<object>} Execution state with stats
+ */
+export async function exportPhaseFeatured(config, options = {}) {
+  const isDryRun = options.dryRun ?? false;
+  const isResume = options.resume ?? false;
+  const sampleSz = options.sample || 0;
+  const outputDir = config.outputDir || LEGACY_OUTPUT_DIR;
+
   log("Phase: featured — 批次更新 featured_media alt text");
 
   // Load audit report
-  const reportPath = path.join(OUTPUT_DIR, "image-audit-report.json");
+  const reportPath = path.join(outputDir, "image-audit-report.json");
   const report = loadJSON(reportPath);
   if (!report) {
-    log("請先執行 --phase scan", "error");
-    process.exit(1);
+    throw new Error("Audit report not found. Run phaseScan first.");
   }
 
   // Load or create state
-  const state = resume ? loadState("featured") : loadState("featured");
+  const state = loadAltState("featured", outputDir);
   const processedIds = new Set(state.processed.map((p) => p.mediaId));
 
   // Collect featured media that needs update (deduplicated by mediaId)
@@ -690,31 +636,33 @@ async function phaseFeatured() {
   }
 
   const items = [...mediaToUpdate.values()];
-  if (sampleSize > 0) items.splice(sampleSize);
+  if (sampleSz > 0) items.splice(sampleSz);
   state.stats.total = items.length + state.processed.length;
 
   log(`待處理: ${items.length} 個 featured_media (已處理: ${state.processed.length})`);
-  if (dryRun) log("DRY-RUN 模式 — 不會實際更新", "warning");
+  if (isDryRun) log("DRY-RUN 模式 — 不會實際更新", "warning");
 
   // Initialize Claude client
   const client = new Anthropic();
 
   // Backup file
-  const backupPath = path.join(OUTPUT_DIR, "alt-text-backup-featured.json");
+  const backupPath = path.join(outputDir, "alt-text-backup-featured.json");
   const backup = loadJSON(backupPath) || { created: new Date().toISOString(), items: [] };
 
   // Fetch category names for context
   let categoryMap = {};
   try {
-    const cats = await apiGet(getApiBase(), "/categories?per_page=100&_fields=id,name");
+    const cats = await apiGet(config, "/categories?per_page=100&_fields=id,name");
     categoryMap = Object.fromEntries(cats.map((c) => [c.id, c.name]));
   } catch (err) {
     log(`取得分類失敗: ${err.message}`, "warning");
   }
 
+  const rl = config.rateLimit || RATE_LIMIT;
+
   // Process in batches
-  for (let i = 0; i < items.length; i += RATE_LIMIT.batchSize) {
-    const batch = items.slice(i, i + RATE_LIMIT.batchSize);
+  for (let i = 0; i < items.length; i += rl.batchSize) {
+    const batch = items.slice(i, i + rl.batchSize);
 
     for (const item of batch) {
       try {
@@ -740,22 +688,22 @@ async function phaseFeatured() {
         // Backup original
         backup.items.push({ mediaId: item.mediaId, originalAlt: item.currentAlt });
 
-        if (!dryRun) {
-          // Update via v1.1 API
-          await apiPost(getApiBase(), `/media/${item.mediaId}`, { alt_text: result.alt_text });
+        if (!isDryRun) {
+          // Update via API
+          await apiPost(config, `/media/${item.mediaId}`, { alt_text: result.alt_text });
           log(`media ${item.mediaId}: "${result.alt_text.slice(0, 50)}..."`, "success");
 
-          // Deepening #6: 執行後驗証
-          if (!skipVerification) {
+          // Deepening #6: post-write verification
+          if (!options.skipVerification) {
             try {
               await sleep(500); // Wait for API to settle
-              const verifyRes = await apiGet(getApiBase(), `/media/${item.mediaId}?_fields=alt_text`);
+              const verifyRes = await apiGet(config, `/media/${item.mediaId}?_fields=alt_text`);
               if (verifyRes.alt_text === result.alt_text) {
-                log(`✓ 驗証通過: media ${item.mediaId}`, "success");
+                log(`Verified: media ${item.mediaId}`, "success");
                 state.verified = state.verified || [];
                 state.verified.push({ mediaId: item.mediaId, status: "verified" });
               } else {
-                log(`✗ 驗証失敗: media ${item.mediaId} (寫入值不符)`, "error");
+                log(`Verification failed: media ${item.mediaId} (mismatch)`, "error");
                 state.verificationFailed = state.verificationFailed || [];
                 state.verificationFailed.push({
                   mediaId: item.mediaId,
@@ -764,7 +712,7 @@ async function phaseFeatured() {
                 });
               }
             } catch (verifyErr) {
-              log(`驗証錯誤: media ${item.mediaId}: ${verifyErr.message}`, "warning");
+              log(`Verification error: media ${item.mediaId}: ${verifyErr.message}`, "warning");
             }
           }
         } else {
@@ -787,18 +735,18 @@ async function phaseFeatured() {
     }
 
     // Save state after each batch
-    saveState(state);
-    if (!dryRun) saveJSON(backupPath, backup);
+    saveAltState(state, outputDir);
+    if (!isDryRun) saveJSON(backupPath, backup);
 
-    if (i + RATE_LIMIT.batchSize < items.length) {
-      await sleep(RATE_LIMIT.delayMs);
+    if (i + rl.batchSize < items.length) {
+      await sleep(rl.delayMs);
     }
   }
 
   // Final state save
   state.endTime = new Date().toISOString();
-  saveState(state);
-  if (!dryRun) saveJSON(backupPath, backup);
+  saveAltState(state, outputDir);
+  if (!isDryRun) saveJSON(backupPath, backup);
 
   console.log("\n═══════════════════════════════════════════════════");
   console.log("  Featured Media Alt Text 更新完成");
@@ -807,21 +755,33 @@ async function phaseFeatured() {
   console.log(`  跳過:   ${state.stats.skipped} (裝飾性: ${state.stats.decorative})`);
   console.log(`  失敗:   ${state.stats.failed}`);
   console.log("═══════════════════════════════════════════════════");
+
+  return state;
 }
 
 // ─── Phase: inline ───────────────────────────────────────────────────────────
 
-async function phaseInline() {
+/**
+ * Batch-update inline image alt text in post content using Claude Vision.
+ *
+ * @param {object} config - Site config
+ * @param {object} [options] - { dryRun, resume, sample, skipVerification }
+ * @returns {Promise<object>} Execution state with stats
+ */
+export async function exportPhaseInline(config, options = {}) {
+  const isDryRun = options.dryRun ?? false;
+  const sampleSz = options.sample || 0;
+  const outputDir = config.outputDir || LEGACY_OUTPUT_DIR;
+
   log("Phase: inline — 批次更新內嵌圖片 alt text");
 
-  const reportPath = path.join(OUTPUT_DIR, "image-audit-report.json");
+  const reportPath = path.join(outputDir, "image-audit-report.json");
   const report = loadJSON(reportPath);
   if (!report) {
-    log("請先執行 --phase scan", "error");
-    process.exit(1);
+    throw new Error("Audit report not found. Run phaseScan first.");
   }
 
-  const state = resume ? loadState("inline") : loadState("inline");
+  const state = loadAltState("inline", outputDir);
   const processedPostIds = new Set(state.processed.map((p) => p.postId));
   const partialPostIds = new Map(state.partial.map((p) => [p.postId, p.pendingImgIndices]));
 
@@ -831,32 +791,34 @@ async function phaseInline() {
     return p.inlineImages.some((img) => img.needsUpdate);
   });
 
-  if (sampleSize > 0) postsToProcess = postsToProcess.slice(0, sampleSize);
+  if (sampleSz > 0) postsToProcess = postsToProcess.slice(0, sampleSz);
   state.stats.total = postsToProcess.length + state.processed.length;
 
   log(`待處理: ${postsToProcess.length} 篇文章 (已處理: ${state.processed.length}, partial: ${state.partial.length})`);
-  if (dryRun) log("DRY-RUN 模式 — 不會實際更新", "warning");
+  if (isDryRun) log("DRY-RUN 模式 — 不會實際更新", "warning");
 
   const client = new Anthropic();
 
-  const backupPath = path.join(OUTPUT_DIR, "alt-text-backup-inline.json");
+  const backupPath = path.join(outputDir, "alt-text-backup-inline.json");
   const backup = loadJSON(backupPath) || { created: new Date().toISOString(), items: [] };
 
   let categoryMap = {};
   try {
-    const cats = await apiGet(getApiBase(), "/categories?per_page=100&_fields=id,name");
+    const cats = await apiGet(config, "/categories?per_page=100&_fields=id,name");
     categoryMap = Object.fromEntries(cats.map((c) => [c.id, c.name]));
   } catch (err) {
     log(`取得分類失敗: ${err.message}`, "warning");
   }
 
-  for (let i = 0; i < postsToProcess.length; i += RATE_LIMIT.batchSize) {
-    const batch = postsToProcess.slice(i, i + RATE_LIMIT.batchSize);
+  const rl = config.rateLimit || RATE_LIMIT;
+
+  for (let i = 0; i < postsToProcess.length; i += rl.batchSize) {
+    const batch = postsToProcess.slice(i, i + rl.batchSize);
 
     for (const postInfo of batch) {
       try {
         // Fetch current content.raw via wp/v2 with context=edit
-        const post = await apiGet(getApiBase(), `/posts/${postInfo.id}?context=edit&_fields=id,content`);
+        const post = await apiGet(config, `/posts/${postInfo.id}?context=edit&_fields=id,content`);
         let content = post.content?.raw || post.content?.rendered || "";
 
         if (!content) {
@@ -968,14 +930,14 @@ async function phaseInline() {
         }
 
         // Update post if modified
-        if (modified && !dryRun) {
-          await apiPost(getApiBase(), `/posts/${postInfo.id}`, { content: content });
+        if (modified && !isDryRun) {
+          await apiPost(config, `/posts/${postInfo.id}`, { content: content });
 
-          // Deepening #6: 執行後驗証 (HTML 完整性檢查)
-          if (!skipVerification) {
+          // Deepening #6: post-write verification (HTML integrity check)
+          if (!options.skipVerification) {
             try {
               await sleep(500);
-              const verifyPost = await apiGet(getApiBase(), `/posts/${postInfo.id}?context=edit&_fields=id,content`);
+              const verifyPost = await apiGet(config, `/posts/${postInfo.id}?context=edit&_fields=id,content`);
               const verifyContent = verifyPost.content?.raw || verifyPost.content?.rendered || "";
 
               // Check if Gutenberg block comments are preserved
@@ -996,7 +958,7 @@ async function phaseInline() {
             }
           }
           log(`post ${postInfo.id}: 更新 ${successCount} 張圖片`, "success");
-        } else if (modified && dryRun) {
+        } else if (modified && isDryRun) {
           log(`[DRY-RUN] post ${postInfo.id}: 會更新 ${successCount} 張圖片`, "info");
         }
 
@@ -1029,17 +991,17 @@ async function phaseInline() {
       await sleep(500);
     }
 
-    saveState(state);
-    if (!dryRun) saveJSON(backupPath, backup);
+    saveAltState(state, outputDir);
+    if (!isDryRun) saveJSON(backupPath, backup);
 
-    if (i + RATE_LIMIT.batchSize < postsToProcess.length) {
-      await sleep(RATE_LIMIT.delayMs);
+    if (i + rl.batchSize < postsToProcess.length) {
+      await sleep(rl.delayMs);
     }
   }
 
   state.endTime = new Date().toISOString();
-  saveState(state);
-  if (!dryRun) saveJSON(backupPath, backup);
+  saveAltState(state, outputDir);
+  if (!isDryRun) saveJSON(backupPath, backup);
 
   console.log("\n═══════════════════════════════════════════════════");
   console.log("  Inline Image Alt Text 更新完成");
@@ -1050,26 +1012,40 @@ async function phaseInline() {
   console.log(`  裝飾性:   ${state.stats.decorative}`);
   console.log(`  Partial:  ${state.partial.length} 篇文章`);
   console.log("═══════════════════════════════════════════════════");
+
+  return state;
 }
 
 // ─── Phase: rollback ─────────────────────────────────────────────────────────
 
-async function phaseRollback(target) {
+/**
+ * Rollback featured and/or inline alt text changes from backup.
+ *
+ * @param {object} config - Site config
+ * @param {string} target - "featured" | "inline" | "all"
+ * @param {object} [options] - { skipVerification }
+ * @returns {Promise<object>} { results: [{ target, restored, failed }] }
+ */
+export async function exportPhaseRollback(config, target, options = {}) {
   if (!["featured", "inline", "all"].includes(target)) {
-    log("--rollback 需要指定 featured / inline / all", "error");
-    process.exit(1);
+    throw new Error("Rollback target must be featured / inline / all");
   }
 
-  // Deepening #7: 回滾順序明確化 — inline 先，featured 後（倒序執行）
+  const outputDir = config.outputDir || LEGACY_OUTPUT_DIR;
+
+  // Deepening #7: rollback order — inline first, featured second
   const targets = target === "all" ? ["inline", "featured"] : [target];
+  const results = [];
+  const rl = config.rateLimit || RATE_LIMIT;
 
   for (const t of targets) {
     log(`Rollback: ${t}`);
-    const backupPath = path.join(OUTPUT_DIR, `alt-text-backup-${t}.json`);
+    const backupPath = path.join(outputDir, `alt-text-backup-${t}.json`);
     const backup = loadJSON(backupPath);
 
     if (!backup?.items?.length) {
-      log(`備份檔案不存在或為空: ${backupPath}`, "error");
+      log(`Backup file missing or empty: ${backupPath}`, "error");
+      results.push({ target: t, restored: 0, failed: 0, error: "backup missing" });
       continue;
     }
 
@@ -1077,58 +1053,67 @@ async function phaseRollback(target) {
     let restored = 0;
     let failed = 0;
 
-    for (let i = 0; i < backup.items.length; i += RATE_LIMIT.batchSize) {
-      const batch = backup.items.slice(i, i + RATE_LIMIT.batchSize);
+    for (let i = 0; i < backup.items.length; i += rl.batchSize) {
+      const batch = backup.items.slice(i, i + rl.batchSize);
 
       for (const item of batch) {
         try {
           if (t === "featured") {
-            await apiPost(getApiBase(), `/media/${item.mediaId}`, { alt_text: item.originalAlt });
+            await apiPost(config, `/media/${item.mediaId}`, { alt_text: item.originalAlt });
 
-            // 驗証回滾結果
-            if (!skipVerification) {
+            if (!options.skipVerification) {
               await sleep(300);
-              const verifyMedia = await apiGet(getApiBase(), `/media/${item.mediaId}?_fields=alt_text`);
+              const verifyMedia = await apiGet(config, `/media/${item.mediaId}?_fields=alt_text`);
               if (verifyMedia.alt_text === item.originalAlt) {
-                log(`✓ media ${item.mediaId}: 已驗証還原`, "success");
+                log(`Verified rollback: media ${item.mediaId}`, "success");
               } else {
-                log(`✗ media ${item.mediaId}: 驗証失敗 (預期: "${item.originalAlt}", 實際: "${verifyMedia.alt_text}")`, "error");
+                log(`Rollback verification failed: media ${item.mediaId}`, "error");
               }
             } else {
-              log(`media ${item.mediaId}: 已還原`, "success");
+              log(`media ${item.mediaId}: restored`, "success");
             }
           } else {
-            await apiPost(getApiBase(), `/posts/${item.postId}`, { content: item.originalContent });
-            log(`post ${item.postId}: 已還原`, "success");
+            await apiPost(config, `/posts/${item.postId}`, { content: item.originalContent });
+            log(`post ${item.postId}: restored`, "success");
           }
           restored++;
         } catch (err) {
-          log(`還原失敗: ${err.message}`, "error");
+          log(`Rollback failed: ${err.message}`, "error");
           failed++;
         }
         await sleep(300);
       }
 
-      if (i + RATE_LIMIT.batchSize < backup.items.length) {
-        await sleep(RATE_LIMIT.delayMs);
+      if (i + rl.batchSize < backup.items.length) {
+        await sleep(rl.delayMs);
       }
     }
 
-    console.log(`\n  ${t}: 已還原 ${restored}, 失敗 ${failed}`);
+    results.push({ target: t, restored, failed });
+    console.log(`\n  ${t}: restored ${restored}, failed ${failed}`);
   }
+
+  return { results };
 }
 
 // ─── Phase: report ───────────────────────────────────────────────────────────
 
-function phaseReport() {
+/**
+ * Generate a quality verification report from execution states.
+ *
+ * @param {object} config - Site config (needs outputDir)
+ * @returns {object} { markdown, reportPath, stats }
+ */
+export function exportPhaseReport(config) {
+  const outputDir = config.outputDir || LEGACY_OUTPUT_DIR;
+
   log("Phase: report — 產出品質驗證報告");
 
-  const featuredState = loadJSON(path.join(OUTPUT_DIR, "state_alttext_featured.json"));
-  const inlineState = loadJSON(path.join(OUTPUT_DIR, "state_alttext_inline.json"));
+  const featuredState = loadJSON(path.join(outputDir, "state_alttext_featured.json"));
+  const inlineState = loadJSON(path.join(outputDir, "state_alttext_inline.json"));
 
   if (!featuredState && !inlineState) {
-    log("沒有找到任何 state 檔案。請先執行 --phase featured 或 --phase inline", "error");
-    process.exit(1);
+    throw new Error("No state files found. Run phaseFeatured or phaseInline first.");
   }
 
   // Combine stats
@@ -1204,21 +1189,53 @@ ${inlineState?.partial?.length > 0 ? `### Partial 文章 (${inlineState.partial.
 4. 定期對新文章執行 alt text 優化
 `;
 
-  const reportPath = path.join(OUTPUT_DIR, "alt-text-optimization-report.md");
+  const reportPath = path.join(outputDir, "alt-text-optimization-report.md");
   fs.writeFileSync(reportPath, md);
   log(`報告已儲存: ${reportPath}`, "success");
   console.log(md);
+
+  return {
+    markdown: md,
+    reportPath,
+    stats: {
+      featured: fStats,
+      inline: iStats,
+      altTextCount: lengths.length,
+      avgLength,
+      decorativeCount,
+    },
+  };
 }
 
-// ─── Main ────────────────────────────────────────────────────────────────────
+// ─── Named Exports (for module wrapper / programmatic use) ──────────────────
+
+export {
+  exportPhaseScan as phaseScan,
+  exportPhaseFeatured as phaseFeatured,
+  exportPhaseInline as phaseInline,
+  exportPhaseReport as phaseReport,
+  exportPhaseRollback as phaseRollback,
+  buildDefaultConfig,
+  generateAltText,
+  generateAltTextFallback,
+  healthCheck,
+};
+
+// ─── Main (CLI entry point — backward compatible) ───────────────────────────
 
 async function main() {
   console.log("═══════════════════════════════════════════════════");
   console.log("  YOLO LAB Image Alt Text Optimizer");
   console.log("═══════════════════════════════════════════════════\n");
 
+  const config = buildDefaultConfig();
+  if (!config.auth) {
+    console.error("No auth found. Set WP_APP_USER+WP_APP_PASS or WP_BEARER_TOKEN in .env");
+    process.exit(1);
+  }
+
   if (rollbackTarget) {
-    await phaseRollback(rollbackTarget);
+    await exportPhaseRollback(config, rollbackTarget);
     return;
   }
 
@@ -1232,27 +1249,36 @@ async function main() {
     process.exit(0);
   }
 
+  const cliOptions = { dryRun, resume, sample: sampleSize };
+
   switch (phase) {
     case "scan":
-      await phaseScan();
+      await exportPhaseScan(config, cliOptions);
       break;
     case "featured":
-      await phaseFeatured();
+      await exportPhaseFeatured(config, cliOptions);
       break;
     case "inline":
-      await phaseInline();
+      await exportPhaseInline(config, cliOptions);
       break;
     case "report":
-      phaseReport();
+      exportPhaseReport(config);
       break;
     default:
-      log(`未知的 phase: ${phase}`, "error");
+      log(`Unknown phase: ${phase}`, "error");
       process.exit(1);
   }
 }
 
-main().catch((err) => {
-  log(`Fatal: ${err.message}`, "error");
-  console.error(err.stack);
-  process.exit(1);
-});
+// Only run main() when invoked directly as CLI (not when imported)
+const isMainModule = process.argv[1] &&
+  (process.argv[1].includes("image-alt-text-optimizer") ||
+   fileURLToPath(import.meta.url) === path.resolve(process.argv[1]));
+
+if (isMainModule) {
+  main().catch((err) => {
+    log(`Fatal: ${err.message}`, "error");
+    console.error(err.stack);
+    process.exit(1);
+  });
+}
