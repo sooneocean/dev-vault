@@ -1,13 +1,13 @@
 ---
-title: Untitled
+title: Create a new note
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
 domain: knowledge-management
-summary: ""
+summary: "Creates a new note in the vault under the specified type."
 ---
 
 Create a new note.

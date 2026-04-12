@@ -1,13 +1,13 @@
 ---
-title: Untitled
+title: List notes in the knowledge base
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
 domain: knowledge-management
-summary: ""
+summary: "Lists notes in the vault knowledge base with optional filtering."
 ---
 
 List notes in the knowledge base.

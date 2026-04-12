@@ -2,13 +2,27 @@
 
 PARA-style Obsidian 知識庫 + 浮水印移除系統 + 自動化工具集。
 
+## 快速開始
+
+```bash
+# 查看配置與設置
+cat QUICK_START_SYSTEM.md    # 系統快速開始
+cat CLAUDE.md                # 專案概覽
+
+# 開始工作
+clausidian journal           # 創建日誌
+npm test                     # 運行測試
+pytest tests/ -v             # 運行 Python 測試
+```
+
 ## 專案結構
 
 ```
 src/watermark_removal/   # 浮水印移除核心演算法（Python）
 tests/                   # Python 測試（pytest）
 test/                    # Node.js 測試（Jest）
-docs/                    # 架構文件、計畫、報告
+docs/                    # 📚 文檔（CONFIG.md、TROUBLESHOOT.md、ARCHITECTURE.md）
+  └── archive/           # 📦 歷史報告與完成的 Phase（74 個文件）
 scripts/                 # 執行腳本（benchmark、Label Studio、Optuna）
 config/                  # YAML 組態檔
 projects/                # YOLO LAB 網站優化

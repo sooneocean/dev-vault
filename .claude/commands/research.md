@@ -1,13 +1,13 @@
 ---
-title: Untitled
+title: Trigger a research pipeline scan
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
-domain: knowledge-management
-summary: ""
+domain: research
+summary: "Triggers the research pipeline to discover new LLM tools and papers."
 ---
 
 Trigger a research pipeline scan to discover new LLM tools and papers.

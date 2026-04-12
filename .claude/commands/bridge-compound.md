@@ -1,13 +1,13 @@
 ---
-title: Untitled
+title: Bridge Compound Engineering document to vault
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
 domain: knowledge-management
-summary: ""
+summary: "Bridges a Compound Engineering learning document into the vault as a resource note."
 ---
 
 Bridge a Compound Engineering learning document into the vault as a resource note.

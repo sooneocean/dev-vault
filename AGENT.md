@@ -70,31 +70,30 @@ clausidian export [file]             # Export vault to JSON/markdown
 
 | Directory | Type | Purpose |
 |-----------|------|---------|
-| `areas/` | `area` | Long-term focus (e.g., `ai-engineering`) |
-| `projects/` | `project` | Active efforts with a specific `goal` and `deadline` |
-| `resources/` | `resource` | Static or evolving references. **Must have a `subtype`.** |
-| `journal/` | `journal` | Daily logs and recurring reviews |
-| `ideas/` | `idea` | Potential future projects or research seeds |
+| `areas/` | `area` | Long-term focus domains |
+| `projects/` | `project` | Active efforts with `goal` + `deadline` |
+| `resources/` | `resource` | References + research (must have `subtype`) |
+| `journal/` | `journal` | Daily logs + reviews |
+| `ideas/` | `idea` | Future seeds |
 
-## Manual Editing Rules (Fallback)
+## Manual Editing (Fallback)
 
-If you must edit files directly (via `write_file` or `replace`):
+If editing files directly (not via `clausidian`):
+1. **Read CONVENTIONS.md** for metadata schema
+2. Ensure `maturity`, `domain`, `updated` fields present
+3. Resource notes MUST have `subtype`
+4. Use `[[links]]` for cross-references
+5. Run `clausidian sync` after edits to rebuild indices
 
-1. **Read `CONVENTIONS.md` first**: This is non-negotiable for metadata accuracy.
-2. **Schema Integrity**: Ensure `maturity`, `domain`, and `updated` fields are present.
-3. **Subtype Requirement**: `resource` notes MUST have a `subtype` (reference/research/catalog/etc).
-4. **Linking**: Use `[[filename]]` for internal links. Update the `related` field for bidirectional connectivity.
-5. **Post-Edit Sync**: ALWAYS run `clausidian sync` after manual edits to refresh indices.
+## Knowledge Routing
 
-## Context & Knowledge Routing
+- **Plans**: Store in `docs/plans/`
+- **Learnings**: Create `resource` note with `subtype: learning`
+- **Research**: Use `subtype: research`, update iteratively
+- **Session memory**: Use `MEMORY.md` only for transient pointers
 
-- **Implementation Plans**: Store in `docs/plans/`.
-- **Learnings/Post-mortems**: Create a `resource` note with `subtype: learning` in the vault.
-- **Research**: Use `subtype: research`. Update these iteratively as the project evolves.
-- **Session Memory**: Use `MEMORY.md` only for transient, session-to-session pointers (<150 chars per entry).
+## Configuration
 
-## Technical Configuration
-
-- `OA_VAULT`: Default path to this vault.
-- `OA_TIMEZONE`: Set for accurate journal timestamps.
-- Use `--json` flag with CLI for structured data processing.
+- `OA_VAULT`: Vault path
+- `OA_TIMEZONE`: Journal timestamp timezone
+- Use `--json` flag for structured CLI output

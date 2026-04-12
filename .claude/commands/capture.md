@@ -1,13 +1,13 @@
 ---
-title: Untitled
+title: Quick capture an idea
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
 domain: knowledge-management
-summary: ""
+summary: "Quickly captures an idea or fleeting thought to the vault inbox."
 ---
 
 Quick capture an idea.

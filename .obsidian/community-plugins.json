@@ -1,5 +1,6 @@
 [
   "calendar",
   "templater-obsidian",
-  "terminal"
+  "terminal",
+  "obsidian-local-rest-api"
 ]

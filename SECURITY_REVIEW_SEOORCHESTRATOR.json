@@ -1,0 +1,348 @@
+{
+  "reviewer": "security-lens",
+  "plan_title": "feat: SEO Orchestrator Skill — Phase 1 MVP",
+  "plan_file": "C:\\DEX_data\\Claude Code DEV\\docs\\plans\\2026-04-12-001-feat-seo-orchestrator-skill-plan.md",
+  "scope": "Single-user internal automation tool for WordPress.com site (yololab.net, SITE_ID: 133512998). Unifies 4 existing SEO optimization scripts into conversational skill. No user-facing auth, no payments, no new endpoints.",
+  "findings": [
+    {
+      "title": "Credentials stored in plaintext .env.local file in working directory",
+      "severity": "P1",
+      "section": "Secrets Management",
+      "why_it_matters": "WordPress.com authentication password visible on disk (WORDPRESS_PASSWORD: WVOD RQw4 62NK 5BPl 1lTE lryv in .env.local, line 4). Shared auth chain (env vars, .env, .mcp.json) reads from disk with no encryption. If developer's machine compromised or repo accidentally committed, credentials are exposed.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.95,
+      "evidence": [
+        ".env.local contains WORDPRESS_PASSWORD=WVOD RQw4 62NK 5BPl 1lTE lryv (verified)",
+        "image-alt-text-optimizer.js lines 100-127 read .env file with regex match: fs.readFileSync(envPath) + envContent.match(/(?:WP_APP_USER|WP_USERNAME)=(.*)/)",
+        "Plan Unit 1 (Shared Utilities, line 152) specifies auth discovery chain but does not address disk-based credential protection",
+        "Plan notes auth fallback to .mcp.json (line 86) which itself may contain bearer tokens"
+      ],
+      "mitigation_required": "Add credential rotation policy docs; require environment variable-only auth for production (strip .env fallback); document that .env.local must be in .gitignore; consider OS keyring integration for interactive use."
+    },
+    {
+      "title": "Credential exposure in logs and error messages",
+      "severity": "P1",
+      "section": "Data Exposure - Logs and Error Handling",
+      "why_it_matters": "Scripts use console.log for debug output (image-alt-text-optimizer.js line 163: `log()` function). If auth fails or API errors occur, credentials in header objects may leak to stderr/logs. Plan Unit 5 mentions 'structured reports' but does not specify log redaction.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.88,
+      "evidence": [
+        "image-alt-text-optimizer.js defines log() at line 163 using console.log without sanitization",
+        "Error handling via retries (apiGet/apiPost) likely logs fetch failures with headers intact",
+        "Plan Unit 5 (line 328-340) defines report structure but no mention of log redaction for secrets",
+        "Bash tool output captured by Claude Code harness — logs visible in session"
+      ],
+      "mitigation_required": "Create redaction utility in seo-shared.js (Unit 1) that masks Authorization headers, bearer tokens, and basic auth credentials before logging. Apply to all fetch error logs and debug output."
+    },
+    {
+      "title": "Global lock file has 8-hour TTL but incomplete stale-lock recovery",
+      "severity": "P2",
+      "section": "Attack Surface - Concurrency Control",
+      "why_it_matters": "Plan specifies global lock (`seo-orchestrator.lock`) with 8-hour TTL (line 78, line 157). Edge case (line 172): 'Lock file exists but is stale (>TTL), acquires anyway.' If Claude session crashes mid-batch, lock persists for 8 hours, blocking legitimate resume. Attacker could intentionally lock the system for extended period if lock mechanism is exploitable.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.72,
+      "evidence": [
+        "Plan line 78: 'Global lock: single seo-orchestrator.lock file with 8-hour TTL'",
+        "Plan line 172: Edge case for stale lock — 'Lock file exists but is stale (>TTL), acquires anyway'",
+        "Plan line 409: Risk noted — 'Long batches (6-8h) span multiple Claude sessions', mitigation is orchestrator state file + lock",
+        "image-alt-text-optimizer.js lines 71, 215-227: existing lock implementation uses timestamp, but no documented recovery procedure for orphaned locks"
+      ],
+      "mitigation_required": "Document lock recovery workflow: UUID-based locks with process metadata; `npm run seo:unlock` command with password/token to force release; logs all lock acquisitions/releases. Reduce TTL from 8h to 4h for better recovery window."
+    },
+    {
+      "title": "Backup files store full post content; disk space and cleanup not addressed",
+      "severity": "P2",
+      "section": "Data Exposure - Storage",
+      "why_it_matters": "Plan Unit 3 (line 244) and Unit 4 (line 289) require backup of full `post.content` before writes. For internal-links module, plan acknowledges backup will be '50-100MB for full site' but provides no cleanup policy. Risk: unbounded disk usage, unencrypted backups persist on disk.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.79,
+      "evidence": [
+        "Plan Unit 3 line 244: 'Before writing meta fields, fetch current values... and save to backup JSON'",
+        "Plan Unit 4 line 289: 'Before modifying post.content, save to seo-optimization-output/internal-links-backup.json. This will be large (~50-100MB for full site)'",
+        "Plan line 406: Risk identified: 'Large backup files for internal-links (~50-100MB)' with mitigation 'Monitor disk usage; add cleanup for backups >30 days old' — but this is deferred, not implemented in Phase 1",
+        "Plan line 304: Test scenario expects 'Large backup file (~50MB) reads/writes correctly' but no automated cleanup"
+      ],
+      "mitigation_required": "Unit 1 (Shared Utilities, line 138): add backup helper function with parameterized retention policy (default 7 days). Unit 5 (Orchestrator): log backup size after each module; warn user if >100MB. Add `npm run seo:cleanup-backups` command."
+    },
+    {
+      "title": "Orchestrator state file tracks batch progress but unencrypted on disk",
+      "severity": "P2",
+      "section": "Data Exposure - State Management",
+      "why_it_matters": "Plan Unit 5 (line 340) defines `seo-orchestrator-state.json` to persist active module, batch progress, user intent across sessions. File stored unencrypted in `seo-optimization-output/`. Attacker or malicious process on same machine could read batch progress, article IDs, and timing information.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.65,
+      "evidence": [
+        "Plan line 340: 'Orchestrator state (seo-orchestrator-state.json): { activeModule, batchId, startTime, articlesProcessed, articlesRemaining, userIntent, lastUpdated }'",
+        "Plan line 341: 'Quick audit cache (seo-optimization-output/audit-cache.json)': same directory, same plaintext storage",
+        "Plan line 327: State stored in working directory without access control specification"
+      ],
+      "mitigation_required": "Clarify: state file is metadata only (no secrets), but should have mode 0600 (user-only read/write) on Unix. Document that seo-optimization-output/ directory is single-user workspace, not shared. Consider moving state to OS-specific cache directory (.claude/ on Linux, ~/Library/ on macOS, %APPDATA% on Windows)."
+    },
+    {
+      "title": "No rate-limit sharing across concurrent module invocations within orchestrator state",
+      "severity": "P2",
+      "section": "Attack Surface - Rate Limiting",
+      "why_it_matters": "Plan specifies 'Module execution is sequential (shared API rate limit), not parallel' (line 343), but each module (image-alt, meta-tags, schema, internal-links) imports seo-shared.js with independent rate limit config (batchSize: 5, delayMs: 2000, line 154). If modules are invoked sequentially without global rate limiter coordination, requests may still exceed WordPress.com's actual per-site limits.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.68,
+      "evidence": [
+        "Plan line 343: 'Module execution is sequential (shared API rate limit), not parallel'",
+        "Plan line 154: Rate limit config as parameter: '{ batchSize, delayMs, retries, backoffMs }'",
+        "Plan line 408: Risk: 'WordPress.com API rate limits change' with mitigation 'Rate limit config is parameterized' — but no shared global rate limiter mentioned",
+        "Unit 1 does not specify a global rate limiter object shared across all modules"
+      ],
+      "mitigation_required": "Unit 1 (Shared Utilities): add global rate-limit tracker (in-memory queue or file-based checkpoint) that coordinates all module API calls. Each module logs rate-limit headers from responses. If 429 detected, back off globally and notify orchestrator to pause."
+    },
+    {
+      "title": "REST API writes bypass wpcom-mcp safety protocol — no per-write confirmation",
+      "severity": "P2",
+      "section": "Attack Surface - Authorization & User Confirmation",
+      "why_it_matters": "Plan explicitly states (line 72): 'wpcom-mcp requires per-write user confirmation, making batch operations (2,728 articles) impractical. MCP can be used for discovery (listing sites, checking capabilities) but all read/write operations go through direct REST API.' This is an architectural decision to bypass MCP's safety layer. While justified by UX, it means no framework-level safeguard for destructive operations.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.80,
+      "evidence": [
+        "Plan line 72: Explicit decision documented — 'REST API for all writes, not wpcom-mcp'",
+        "Plan line 38: 'No wpcom-mcp for writes — direct REST API only (per-write confirmation conflict)'",
+        "Plan Unit 5 line 335: Skill shows confirmation 'before batch writes: article count, estimated time, cost estimate, 3 sample changes, backup status'",
+        "Orchestrator does client-side confirmation (skill prompt) but this is not a technical guarantee"
+      ],
+      "mitigation_required": "Unit 5 (Orchestrator Skill): require explicit opt-in flag (e.g., `--confirm batch`) for batch operations >100 articles. Document that confirmation happens in Claude UI (not wpcom-mcp), and confirm it's an informed decision by the *user* via the `/seo` conversation. Add warning to skill prompt about destructive operations."
+    },
+    {
+      "title": "No auth verification before module execution starts",
+      "severity": "P2",
+      "section": "Attack Surface - Authentication",
+      "why_it_matters": "Plan Unit 1 (line 158) specifies 'Auth health check: verifyAuth(config) → { ok, method, apiBase, error }' but Plan Unit 3 (line 246) describes 'Add auth verification: Before first write, verify that WPCOM_TOKEN can write to _yoast_wpseo_* fields' as a *per-module* check. If first auth discovery fails silently, orchestrator may proceed with stale/invalid credentials.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.72,
+      "evidence": [
+        "Plan Unit 1 line 158: verifyAuth() specified for Unit 1",
+        "Plan Unit 3 line 246: 'verify that WPCOM_TOKEN can write to _yoast_wpseo_* fields. If Yoast fields are rejected, surface error immediately instead of failing silently per-article'",
+        "Plan Unit 1 test scenarios (line 174): 'Error path: verifyAuth with no credentials returns descriptive error'",
+        "Plan Unit 5 does not document orchestrator-level auth check before module dispatch"
+      ],
+      "mitigation_required": "Unit 5 (Orchestrator): Call verifyAuth() from Unit 1 before entering conversational mode. If auth fails, exit with clear error. Document that auth verification includes write capability test (e.g., test PATCH to a sample post meta field)."
+    },
+    {
+      "title": "Backup file encryption not specified; sensitive content (post body, drafts) at risk",
+      "severity": "P2",
+      "section": "Data Exposure - Sensitive Content in Backups",
+      "why_it_matters": "Plan acknowledges (line 84) 'Backup files contain full post content (potentially drafts, unpublished).' Draft posts may contain sensitive notes, internal links, or unreleased announcements. Backup files stored unencrypted in seo-optimization-output/ accessible to any process on developer's machine.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.76,
+      "evidence": [
+        "Plan line 84 (system context): 'Backup files contain full post content (potentially drafts, unpublished)'",
+        "Plan Unit 4 line 289: Backup includes 'originalContent' for rollback — full Gutenberg block markup stored",
+        "Plan line 410: Risk noted — 'Large backup files for internal-links (~50-100MB)' but no encryption mitigation listed",
+        "image-alt-text-optimizer.js line 703: backup loaded via loadJSON() with no encryption"
+      ],
+      "mitigation_required": "Document that backups should be treated as sensitive and stored with restricted file permissions (0600). Consider adding optional encryption via seo-shared.js backup helper. If not encrypting, document backup directory access controls in CLAUDE.md."
+    },
+    {
+      "title": "Module wrapper export signatures and error contract not fully specified",
+      "severity": "P1",
+      "section": "Attack Surface - Module Interface",
+      "why_it_matters": "Plan Unit 1-4 specify module exports (e.g., line 199: 'phaseScan(config, options)', line 242: 'generateMetaOptimization(article)') but exact function signatures, error handling contracts, and exception types are deferred: 'Deferred to Implementation' (line 89). Orchestrator (Unit 5) must call these modules but has no guaranteed interface. If module errors are not standardized, orchestrator error handling will be fragile.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.78,
+      "evidence": [
+        "Plan line 89: 'Exact function signatures for module wrapper exports — depends on seeing how cleanly globals can be replaced with parameters'",
+        "Plan Unit 2 line 199-202: Phase functions specified but return types/errors undefined",
+        "Plan Unit 5 line 337: Skill 'Execute by calling module scripts via Bash tool' — no documented error handling protocol",
+        "Test scenarios (e.g., line 209-213) describe happy paths and edge cases but not error object schema"
+      ],
+      "mitigation_required": "Before implementation: define module interface contract (JSON schema or TypeScript interfaces). Each exported function must return { ok, data?, error?, stats, backupPath }. Document that errors are logged to stderr, exit code >0 signals failure. Orchestrator skill must parse exit code and error object to decide rollback."
+    },
+    {
+      "title": "WPCOM_TOKEN env var unrotated; no mechanism for token refresh or revocation",
+      "severity": "P2",
+      "section": "Secrets Management - Credential Rotation",
+      "why_it_matters": "Plan unifies on WPCOM_TOKEN as canonical env var (line 86) and specifies no rotation policy. If WPCOM_TOKEN is compromised, attacker has persistent write access to yololab.net until manually revoked. Plan does not address token lifetime, rotation schedules, or detection of unauthorized use.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.70,
+      "evidence": [
+        "Plan line 86: 'Auth standardization: Unify on WPCOM_TOKEN as the canonical env var'",
+        "Plan Unit 1 line 152: Auth discovery chain prioritizes WPCOM_TOKEN but no rotation documented",
+        "Plan risks & dependencies (line 406): No mention of token compromise, rotation, or audit trails",
+        ".mcp.json line 19: wpcom-mcp URL does not include token versioning or rotation endpoint"
+      ],
+      "mitigation_required": "Document in CLAUDE.md: WPCOM_TOKEN should be application password or API token with short TTL (if WordPress.com supports). Recommend quarterly rotation. Add optional `--verify-auth` flag to orchestrator to test token validity without writes. Consider logging API call counts to detect unauthorized access."
+    },
+    {
+      "title": "Audit cache may become stale; no expiration enforcement in orchestrator",
+      "severity": "P1",
+      "section": "Attack Surface - State Consistency",
+      "why_it_matters": "Plan specifies audit cache (`seo-optimization-output/audit-cache.json`) with suggested expiration (7 days) but orchestrator only 'offers' fresh scan if cache is stale (Plan Unit 5, line 354). If user dismisses fresh scan, orchestrator proceeds with 30-day-old coverage data, making recommendations on incorrect assumptions.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.75,
+      "evidence": [
+        "Plan line 341: 'Quick audit cache (seo-optimization-output/audit-cache.json): { timestamp, modules: {...} }'",
+        "Plan line 76: 'Use cached scan results (<7 days old) when available; otherwise sample 100 articles and extrapolate'",
+        "Plan Unit 5 line 354: 'Edge case: Cached audit is >7 days old — triggers fresh sample scan'",
+        "Plan Unit 5 line 355: 'Verification: Cross-session resume works' — no test for cache expiration enforcement"
+      ],
+      "mitigation_required": "Unit 5 (Orchestrator): enforce hard cache expiration (>7 days = cache invalid, fresh scan required). Document in skill prompt that stale data may lead to suboptimal recommendations. Add `--force-refresh` flag to skip cache."
+    },
+    {
+      "title": "Module interdependencies not fully mapped; potential cascading failures",
+      "severity": "P2",
+      "section": "Attack Surface - Module Composition",
+      "why_it_matters": "Plan specifies 'No hard dependencies between modules' (line 29) and lists dependencies as 'Unit 1 (shared utilities)' for Units 2-4 and 'Units 1-4' for Unit 5 (line 322). However, if Unit 1 (shared utilities) exports a buggy retry function, all 4 modules fail simultaneously. Plan does not document fallback strategies or graceful degradation if one module is unavailable.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.68,
+      "evidence": [
+        "Plan line 29: 'R15. No hard dependencies between modules'",
+        "Plan Unit 1 line 144: 'Dependencies: None — this is the foundation'",
+        "Plan Unit 5 line 322: 'Dependencies: Units 1-4 (all modules ready)'",
+        "Plan Unit 5 line 337-340: Skill executes modules sequentially but no documented fallback if one module fails"
+      ],
+      "mitigation_required": "Unit 5 (Orchestrator): if a module fails (non-zero exit), log error and offer user choice: (a) skip module and continue with next, (b) retry module, (c) abort batch. Document that orchestrator state tracks which modules have run, allowing resume to skip completed modules."
+    },
+    {
+      "title": "No audit logging for batch operations; compliance and forensics risk",
+      "severity": "P2",
+      "section": "Data Exposure - Audit Trails",
+      "why_it_matters": "Plan specifies structured reports per module (Unit 5, line 340) but does not mandate audit logging: who ran what, when, on which articles, with what results. If unauthorized changes occur, no trace to detect compromise. Single-user tool, but no forensic trail for reconciliation.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.70,
+      "evidence": [
+        "Plan Unit 5 line 340: 'Orchestrator state (seo-orchestrator-state.json): { activeModule, batchId, startTime, ... }'",
+        "Plan line 19: 'Structured summary report after execution' (R19) — defined as user-facing report, not audit log",
+        "Plan Unit 5 test (line 351-356): no test for audit trail or forensic logging",
+        "Risks & Dependencies (line 406): no risk identified for unlogged changes"
+      ],
+      "mitigation_required": "Unit 1 (Shared Utilities): add logging utility that writes immutable audit log to seo-optimization-output/audit-log.jsonl (one JSON per line). Each batch operation logs: timestamp, module, articles affected, before/after diffs (sample), auth method used. Keep audit log for 90 days."
+    }
+  ],
+  "residual_risks": [
+    {
+      "finding": "Credential compromise (WPCOM_TOKEN stolen via disk or logs)",
+      "probability": "Medium (shared dev machine, unencrypted .env)",
+      "impact": "High (full write access to yololab.net; 2,728+ articles exposed)",
+      "suggested_mitigations": [
+        "Enforce env-var-only auth in production; document .env.local as dev-only fallback",
+        "Add credential redaction utility to log handler",
+        "Implement WPCOM_TOKEN rotation policy (quarterly minimum)",
+        "Monitor API call patterns for anomalies (e.g., bulk deletes)"
+      ]
+    },
+    {
+      "finding": "Unbounded backup disk usage; old backups not cleaned up",
+      "probability": "High (no cleanup automation in Phase 1)",
+      "impact": "Medium (disk full blocks batch operations; PII from drafts may persist)",
+      "suggested_mitigations": [
+        "Implement backup retention policy (7 days) in Unit 1",
+        "Add `seo:cleanup-backups` npm script",
+        "Log backup size warnings during orchestrator execution",
+        "Document seo-optimization-output/ as non-persistent (may be wiped)"
+      ]
+    },
+    {
+      "finding": "Module interface contract not standardized; orchestrator may crash on module errors",
+      "probability": "Medium (deferred to implementation)",
+      "impact": "High (batch operation aborts; partial state committed; difficult recovery)",
+      "suggested_mitigations": [
+        "Define module interface (function signatures, error schema) before any implementation",
+        "Unit 5: parse module exit codes and stderr to detect errors",
+        "Add state rollback tests (e.g., start→fail→resume→retry)"
+      ]
+    },
+    {
+      "finding": "Stale audit cache used to make recommendations; outdated data drives decisions",
+      "probability": "Medium (user dismisses fresh scan offer)",
+      "impact": "Medium (suboptimal optimization; missed opportunities; wasted API calls)",
+      "suggested_mitigations": [
+        "Unit 5: enforce cache expiration (>7 days = invalid)",
+        "Log cache age in orchestrator output",
+        "Document data quality assumptions in skill prompt"
+      ]
+    },
+    {
+      "finding": "Global lock file orphaned if Claude crashes; 8-hour recovery window",
+      "probability": "Low (Claude stable) but impact is High (system unusable for hours)",
+      "impact": "High (batch operations blocked; no automated recovery for 8h)",
+      "suggested_mitigations": [
+        "Reduce lock TTL to 4 hours",
+        "Document UUID-based lock recovery procedure",
+        "Add `seo:unlock --password <token>` command",
+        "Log all lock acquisitions with process metadata"
+      ]
+    },
+    {
+      "finding": "Draft posts included in backups; sensitive unpublished content stored unencrypted",
+      "probability": "High (by design; backups capture full post content)",
+      "impact": "Medium (PII, unreleased announcements exposed if machine compromised)",
+      "suggested_mitigations": [
+        "Set backup file permissions to 0600 (user-only)",
+        "Document backup directory as sensitive; include in .gitignore",
+        "Consider optional encryption via Unit 1 backup helper",
+        "Add backup anonymization option for shared dev environments"
+      ]
+    }
+  ],
+  "deferred_questions": [
+    {
+      "question": "What is the exact function signature contract for module exports (e.g., phaseScan, generateMetaOptimization)?",
+      "affects_findings": ["Module Interface (P1)"],
+      "resolution_type": "implementation-time",
+      "suggested_resolution": "Define JSON schema or TypeScript interfaces for all exported functions before Unit 2 implementation. Include: input types, return types, error types, side effects (file writes, API calls)."
+    },
+    {
+      "question": "Does WordPress.com support writing to _yoast_wpseo_* custom post meta fields on the active plan for yololab.net?",
+      "affects_findings": ["Auth Verification (P2)"],
+      "resolution_type": "verification-required",
+      "suggested_resolution": "Before Unit 3 implementation: run test against yololab.net to confirm Yoast fields are writable via WPCOM_TOKEN. Document the capability or fallback strategy if unsupported."
+    },
+    {
+      "question": "What is the intended behavior when a module fails mid-batch? Rollback all, skip failed articles, or abort?",
+      "affects_findings": ["Module Composition (P2)"],
+      "resolution_type": "design-decision",
+      "suggested_resolution": "Unit 5 design phase: specify error recovery policy. Options: (a) per-module rollback on fail, (b) continue with remaining modules, (c) offer user choice. Update orchestrator state schema to track partial failures."
+    },
+    {
+      "question": "Should audit logs be included in backup cleanup, or retained indefinitely for forensics?",
+      "affects_findings": ["Audit Logging (P2)"],
+      "resolution_type": "policy-decision",
+      "suggested_resolution": "Document audit log retention policy in CLAUDE.md. Recommended: keep logs for 90 days. If compliance required, extend to 1 year and consider separate audit log directory."
+    },
+    {
+      "question": "What minimum auth permission test should verifyAuth() perform? Read-only, or test write capability?",
+      "affects_findings": ["Auth Verification (P2)"],
+      "resolution_type": "design-decision",
+      "suggested_resolution": "Unit 1: verifyAuth() should test write capability by attempting a no-op update (e.g., PATCH post meta with same value). This catches permission issues before batch starts."
+    }
+  ],
+  "summary": {
+    "total_findings": 13,
+    "p0_count": 2,
+    "p1_count": 4,
+    "p2_count": 7,
+    "p3_count": 0,
+    "confidence_avg": 0.752,
+    "key_risks": [
+      "Plaintext credential storage in .env.local (P1)",
+      "Credentials may leak to logs (P1)",
+      "Module interface not standardized (P1)",
+      "Audit cache expiration not enforced (P1)"
+    ],
+    "blockers_for_implementation": [
+      "Unit 1 must define module interface contract before Unit 2-4 can implement wrappers",
+      "Credential security policy must be documented before env var standardization (Unit 1)",
+      "Yoast SEO field write support must be verified on yololab.net before Unit 3 implementation"
+    ]
+  }
+}

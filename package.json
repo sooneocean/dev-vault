@@ -1,13 +1,20 @@
 {
   "name": "dev-vault",
   "version": "1.0.0",
+  "type": "module",
   "description": "Claude Code DevVault - PARA-style knowledge management and automation",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
     "test:proposal": "jest .claude/lib/proposal-engine.test.js",
-    "test:proposal-integration": "jest .claude/lib/proposal-engine.integration.test.js --forceExit"
+    "test:proposal-integration": "jest .claude/lib/proposal-engine.integration.test.js --forceExit",
+    "optimize:scan": "node scripts/modules/image-alt.js --action scan --site yololab",
+    "optimize:scan-sample": "node scripts/modules/image-alt.js --action scan --site yololab --sample 10",
+    "optimize:featured": "node scripts/modules/image-alt.js --action featured --site yololab",
+    "optimize:inline": "node scripts/modules/image-alt.js --action inline --site yololab",
+    "optimize:report": "node scripts/modules/image-alt.js --action report --site yololab",
+    "optimize:rollback": "node scripts/modules/image-alt.js --action rollback --site yololab --target all"
   },
   "keywords": [
     "obsidian",
@@ -21,8 +28,6 @@
     "jest": "^29.7.0"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.24.0",
-    "@octokit/rest": "^21.0.0",
-    "@octokit/plugin-throttling": "^9.3.0"
+    "@anthropic-ai/sdk": "^0.24.0"
   }
 }

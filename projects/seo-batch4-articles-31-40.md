@@ -1,5 +1,5 @@
 ---
-status: archived
+status: "archived"
 title: seo-batch4-articles-31-40
 type: project
 ---

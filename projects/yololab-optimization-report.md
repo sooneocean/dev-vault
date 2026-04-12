@@ -3,8 +3,8 @@ title: YOLO LAB 網站優化審計報告
 type: project
 tags: [project, active, seo, optimization]
 created: 2026-04-03
-updated: "2026-04-04"
-status: active
+updated: "2026-04-06"
+status: "archived"
 maturity: growing
 domain: knowledge-management
 summary: "YOLO LAB 網站優化審計報告 — 23 個外掛、Gzip、快取、SEO、Core Web Vitals 完整優化方案"

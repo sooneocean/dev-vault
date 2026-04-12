@@ -1,9 +1,9 @@
 ---
-status: archived
+status: "archived"
 title: seo-batch-3-4-execution-timeline
 type: project
 created: 2026-04-06
-updated: 2026-04-06
+updated: "2026-04-06"
 ---
 
 # SEO Batch 3 & 4 執行時間表與檢查清單

@@ -1,0 +1,82 @@
+{
+  "batch": "Phase 3 Batch 1 (MCP)",
+  "site": "yololab.net",
+  "startTime": "2026-04-08T14:58:31.433Z",
+  "articles": [
+    {
+      "articleId": 34826,
+      "originalTitle": "影后岸井雪乃對決曾敬驊！《鼠一般的你》台北取景...",
+      "status": "failed",
+      "error": "SEO generation failed: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
+      "timestamp": "2026-04-08T14:58:31.437Z"
+    },
+    {
+      "articleId": 34821,
+      "originalTitle": "5/15上映！《傳奇女伶 高菊花》必看亮點：見證鄒族家族重生",
+      "status": "failed",
+      "error": "SEO generation failed: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
+      "timestamp": "2026-04-08T14:58:32.238Z"
+    },
+    {
+      "articleId": 34816,
+      "originalTitle": "從金曲新人到靈魂導師！南穎 Fiona 用 R&B 拆解關係中的「依附病理」",
+      "status": "failed",
+      "error": "SEO generation failed: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
+      "timestamp": "2026-04-08T14:58:33.045Z"
+    },
+    {
+      "articleId": 34809,
+      "originalTitle": "港都最強爵士盛會！高流爵對有春回歸，16組神級陣容再抽韓國機票",
+      "status": "failed",
+      "error": "SEO generation failed: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
+      "timestamp": "2026-04-08T14:58:33.853Z"
+    },
+    {
+      "articleId": 34804,
+      "originalTitle": "10天飆破1.25億！《愛在每一天》艾琳維拉莫解剖愛情...",
+      "status": "failed",
+      "error": "SEO generation failed: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
+      "timestamp": "2026-04-08T14:58:34.664Z"
+    },
+    {
+      "articleId": 34798,
+      "originalTitle": "別再忍受腳底慘叫！2026 SKECHERS 穿搭指南：解密霸榜全美的機能美學",
+      "status": "failed",
+      "error": "SEO generation failed: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
+      "timestamp": "2026-04-08T14:58:35.478Z"
+    },
+    {
+      "articleId": 34794,
+      "originalTitle": "JOYCE 就以斯《才華換桃花》專場：李權哲驚喜站台...",
+      "status": "failed",
+      "error": "SEO generation failed: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
+      "timestamp": "2026-04-08T14:58:36.292Z"
+    },
+    {
+      "articleId": 34788,
+      "originalTitle": "別在串流看！《死亡賭局》4/24 全台開局...",
+      "status": "failed",
+      "error": "SEO generation failed: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
+      "timestamp": "2026-04-08T14:58:37.096Z"
+    },
+    {
+      "articleId": 34784,
+      "originalTitle": "拋棄CG肉身獻祭！《捕風追影》成龍梁家輝搏命，3/27必看神作",
+      "status": "failed",
+      "error": "SEO generation failed: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
+      "timestamp": "2026-04-08T14:58:37.898Z"
+    },
+    {
+      "articleId": 34778,
+      "originalTitle": "為什麼你必須聽 LITTLE JOHN？首張專輯《LITTLE SIZE》揭秘新世代集體焦慮的出口",
+      "status": "failed",
+      "error": "SEO generation failed: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted",
+      "timestamp": "2026-04-08T14:58:38.713Z"
+    }
+  ],
+  "summary": {
+    "success": 0,
+    "failed": 10,
+    "total": 10
+  }
+}

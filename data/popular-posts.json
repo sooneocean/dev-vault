@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-04-08T14:36:04.103Z",
+  "period": "30_days",
+  "version": "1.0",
+  "popular_posts": [
+    {
+      "id": 27155,
+      "title": "ARTICLE_27155",
+      "views": 350
+    },
+    {
+      "id": 28183,
+      "title": "ARTICLE_28183",
+      "views": 298
+    },
+    {
+      "id": 30591,
+      "title": "ARTICLE_30591",
+      "views": 280
+    },
+    {
+      "id": 27412,
+      "title": "ARTICLE_27412",
+      "views": 265
+    },
+    {
+      "id": 34221,
+      "title": "ARTICLE_34221",
+      "views": 252
+    },
+    {
+      "id": 30369,
+      "title": "ARTICLE_30369",
+      "views": 245
+    },
+    {
+      "id": 26788,
+      "title": "ARTICLE_26788",
+      "views": 238
+    },
+    {
+      "id": 27744,
+      "title": "ARTICLE_27744",
+      "views": 220
+    }
+  ],
+  "include_ids": [
+    27155,
+    28183,
+    30591,
+    27412,
+    34221,
+    30369,
+    26788,
+    27744
+  ],
+  "exclude_ids": [],
+  "meta": {
+    "source": "jetpack_stats",
+    "total_count": 8,
+    "last_updated": "2026-04-08T14:36:04.105Z"
+  }
+}

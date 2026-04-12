@@ -61,21 +61,7 @@ Controlled vocabulary for topic classification. Use exactly one value per note:
 
 ## Relation Types
 
-The `related` field uses plain `[[note]]` format for CLI compatibility. Semantic relation types are stored in the separate `relation_map` field.
-
-**Format:** `relation_map: "note-a:documents, note-b:extends"`
-
-| Type | Meaning | Example |
-|------|---------|---------|
-| `extends` | Builds upon or deepens another note | research note extends an area |
-| `depends-on` | Requires another note's content | project depends on a resource |
-| `implements` | Realizes or executes a plan/idea | project implements an idea |
-| `documents` | Describes or records details of another note | architecture doc documents a project |
-| `supersedes` | Replaces an older note | new research supersedes old version |
-| `nav-prev` | Previous journal entry (journal only) | — |
-| `nav-next` | Next journal entry (journal only) | — |
-
-**When to use:** Only add `relation_map` when the relationship has clear semantics beyond "related". Not every `related` link needs a typed entry. CLI ignores this field (safe to add).
+`related: [[note]]` uses plain format for CLI compatibility. Use `relation_map` for semantic types: `"note-a:documents, note-b:extends"` (extends | depends-on | implements | documents | supersedes). Only add when relationship is clear; not every link needs typing.
 
 ## Subtypes
 
@@ -118,34 +104,9 @@ canonical_url: url              # Final live URL
 excerpt: string                 # SEO description
 ```
 
-### `subtype: iteration-log` — Additional Fields
+### `subtype: iteration-log` — Product Iteration Records
 
-**Role:** Record a single iteration cycle for product development — proposals generated, features selected, and release completed.
-
-**When to use:** After running `/iterate propose`, `/iterate confirm`, and `/iterate release` commands to document the full iteration workflow.
-
-**Additional frontmatter fields:**
-
-```yaml
-subtype: iteration-log
-version: string                 # Version released in this iteration (e.g., "1.2.3")
-iteration_date: YYYY-MM-DD      # Date iteration was initiated
-proposals_count: integer        # Number of proposals generated
-selected_count: integer         # Number of features selected
-github_release_url: string      # URL to GitHub release (set after release)
-github_release_date: YYYY-MM-DD # Date of GitHub release (set after release)
-```
-
-**Sections:**
-
-- **Proposals Generated** — Table of proposals with title, problem statement, effort estimate (S/M/L), value estimate (L/M/H), rank, and status
-- **Features Selected** — Table of selected features with GitHub issue links and status
-- **Release Record** — GitHub release link, generated changelog, version jump details
-- **Iteration Notes** — Key dates: iteration started, selection finalized, release date
-
-**File naming:** `YYYY-MM-DD-vX.Y.Z-iteration.md` (e.g., `2026-03-30-v1.2.3-iteration.md`)
-
-**Use case:** Developers can browse iteration history, link to past proposals, understand what was shipped in which version, and track feature evolution.
+Records iteration cycles (proposals → selection → release). Add `version`, `iteration_date`, `proposals_count`, `selected_count`, `github_release_url`, `github_release_date` fields. File naming: `YYYY-MM-DD-vX.Y.Z-iteration.md`
 
 ## File Naming
 
@@ -170,66 +131,53 @@ github_release_date: YYYY-MM-DD # Date of GitHub release (set after release)
 
 ## Agent Rules
 
-1. **Read this file before writing**
-2. **New notes must include complete frontmatter** (use actual values, not template placeholders)
-3. **Update the `updated` field** when modifying notes
-4. **Update the directory's `_index.md`**
-5. **Update `_tags.md`** tag index
-6. **Update `_graph.md`** relationship graph (if note has `[[]]` links or `related` field)
-7. **Actively maintain `related` field** — search for related notes and build bidirectional links
-8. **For area type**: update "Current Focus" and "Recent Progress" sections
-
-## Using Templates
-
-All templates are in `templates/` with `{{PLACEHOLDER}}` syntax. When creating notes:
-1. Read the template for the note type
-2. Replace all `{{}}` placeholders with actual values
-3. Do not leave any unreplaced placeholders
+1. Read CONVENTIONS.md before writing
+2. Complete frontmatter required; no template placeholders left
+3. Use `clausidian` CLI (handles rules 4-7 automatically)
+4. If editing manually: update `updated` field, rebuild `_tags.md`/`_graph.md` via `clausidian sync`
+5. Build bidirectional links via `related` field
+6. For `area` type: update "Current Focus" and "Recent Progress" sections
 
 ## Using the CLI (recommended)
 
-Instead of manual file operations, agents can use the `clausidian` CLI.
-The CLI handles frontmatter, linking, and index updates automatically.
+Prefer `clausidian` over manual edits — handles frontmatter, linking, and indices automatically. Full command reference in [AGENT.md](AGENT.md). Core commands:
 
 ```bash
-# Create & read
-clausidian journal              # Create/open today's journal
-clausidian note "Title" type    # Create a note (auto-links related notes)
-clausidian capture "idea"       # Quick idea capture
-clausidian read "note"          # Read a note's content
-clausidian recent               # Recently updated notes (last 7 days)
-
-# Search & discover
+clausidian journal              # Daily log
+clausidian note "Title" type    # Create note (auto-links)
 clausidian search "keyword"     # Full-text search
-clausidian list [type]          # List notes with filters
-clausidian backlinks "note"     # What links here?
-clausidian orphans              # Find unlinked notes
-
-# Edit existing notes (prefer over direct file editing)
-clausidian patch "note" --heading "Section" --append "content"
-clausidian update "note" --status active --summary "Updated"
-clausidian archive "old-note"   # Set status to archived
-clausidian delete "old-note"    # Delete and clean up references
-
-# Tags
-clausidian tag list             # List all tags with counts
-clausidian tag rename "old" "new"
-
-# Reviews
-clausidian review               # Weekly review
-clausidian review monthly       # Monthly review
-
-# Discovery & analysis
-clausidian stale                # Find stale notes + triage plan
-clausidian cluster              # Topic clustering + missing links
-clausidian digest --all         # Project status dashboard
-clausidian thread "topic"       # Trace topic evolution over time
-clausidian suggest              # Smart daily action suggestions
-clausidian context "note"       # Full context around a note
-
-# Maintenance
-clausidian sync                 # Rebuild tag & graph indices
-clausidian health               # Vault health score
-clausidian stats                # Vault statistics overview
-clausidian graph                # Generate Mermaid knowledge graph
+clausidian sync                 # Rebuild indices after manual edits
+clausidian health               # Vault completeness score
+clausidian stale                # Find inactive notes (90+ days)
+clausidian archive "note"       # Move to archived status
 ```
+
+## Vault Maintenance (Quarterly)
+
+Keep vault healthy and searchable with periodic maintenance:
+
+```bash
+# Find inactive projects and resources
+clausidian stale --path projects/ --days 90
+clausidian stale --path resources/ --days 120
+
+# Before archiving, ensure metadata is complete
+clausidian patch "projects/X" --frontmatter summary "Brief description"
+clausidian patch "projects/X" --frontmatter updated "$(date +%Y-%m-%d)"
+
+# Archive completed or paused projects
+clausidian archive "projects/old-project"
+
+# Rebuild indices after manual changes
+clausidian sync
+```
+
+**When to archive:**
+- No updates for 90+ days (projects) or 120+ days (resources)
+- Status is `paused` or `completed`
+- Project goals no longer relevant
+
+**Required before archiving:**
+- `summary` field is non-empty (for index clarity)
+- `updated` field reflects last substantive edit
+- `status` is set to `archived` or `completed`

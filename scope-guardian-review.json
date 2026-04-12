@@ -1,0 +1,225 @@
+{
+  "reviewer": "scope-guardian",
+  "findings": [
+    {
+      "title": "Unit 5 (Skill) depends on 4 module wrappers that don't yet export async functions",
+      "severity": "P0",
+      "section": "Implementation Units",
+      "why_it_matters": "Units 1-4 are prerequisites for Unit 5 to function. The plan specifies that the skill 'calls module scripts via Bash tool' but the modules (Units 2-4) don't yet export the async functions they promise. This creates a critical path dependency risk.",
+      "finding_type": "error",
+      "autofix_class": "present",
+      "confidence": 0.92,
+      "evidence": [
+        "Unit 5 'Approach' section: 'Execute by calling module scripts via Bash tool'",
+        "Unit 2 'Approach': 'Refactor image-alt-text-optimizer.js to export its phase functions: phaseScan, phaseFeatured...'",
+        "Unit 3 'Approach': 'Export from phase4-complete-seo-batch-generator.js: generateMetaOptimization, generateSchemaMarkup...'",
+        "Unit 4 'Approach': 'Export from internal-linker-v2.js: fetchMap, generateProposals, injectLinks...'",
+        "Current site-optimizer.js already exists and uses execSync, but the module wrapper functions don't export yet"
+      ]
+    },
+    {
+      "title": "Deprecation scope claims 51 scripts but only ~76 SEO-related scripts exist in scripts/ directory",
+      "severity": "P2",
+      "section": "Unit 6: Script Deprecation and Cleanup",
+      "why_it_matters": "The plan claims '~51 superseded scripts' but actual count of deprecatable SEO-related scripts (phase*, seo*, optimize*, apply*, deploy*, batch*) is 76, or 111 total files including __pycache__. This discrepancy suggests either: (1) the deprecation scope is incomplete or (2) the count is inaccurate. Unit 6 must be clear about exactly which scripts move to _deprecated/.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.85,
+      "evidence": [
+        "Plan R21: '制定舊腳本廢棄計畫：識別 scripts/ 中可被新模組取代的腳本'",
+        "Plan Unit 6 'Approach': 'Move ~51 scripts to scripts/_deprecated/'",
+        "Actual count: `ls -1 scripts | grep -E '(phase|seo|optimize|apply|deploy|batch)' | wc -l` = 76",
+        "Total scripts directory: 111 files"
+      ]
+    },
+    {
+      "title": "Backup scope for internal-links may be over-specified (50-100MB) without justification for single-user tool",
+      "severity": "P1",
+      "section": "Unit 4: Internal Links Module Wrapper",
+      "why_it_matters": "The plan allocates 50-100MB for full-site internal-links backup (2,728 articles × ~40-50KB per post.content). For a single-user tool with a single blog, this is correct for safety but represents significant disk overhead. The plan should either: (1) justify this cost explicitly, (2) propose incremental backup strategy, or (3) scope Phase 1 to sample-only (not full-site).",
+      "finding_type": "error",
+      "autofix_class": "present",
+      "confidence": 0.78,
+      "evidence": [
+        "Unit 4 'Approach': 'This will be large (~50-100MB for full site) but is necessary for safe rollback'",
+        "Unit 4 'Test scenarios': 'Backup file grows large — verify JSON write/read handles >50MB'",
+        "Plan 'Risks & Dependencies': 'Large backup files for internal-links (~50-100MB)'",
+        "User context: Single WordPress.com blog (yololab.net), single user"
+      ]
+    },
+    {
+      "title": "Shared utilities design is under-specified — exact API surface deferred to implementation",
+      "severity": "P2",
+      "section": "Unit 1: Shared Utilities Module",
+      "why_it_matters": "R13 requires 'shared utilities' but the plan defers 'Exact function signatures for module wrapper exports' to implementation. This risks inconsistent interfaces across modules (2-4) and complicates Unit 5 (skill) orchestration. The plan should specify minimal contract: function names, parameter shape (config object structure), return types.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.80,
+      "evidence": [
+        "Plan 'Open Questions' > 'Deferred to Implementation': 'Exact function signatures for module wrapper exports — depends on seeing how cleanly globals can be replaced with parameters'",
+        "Unit 1 specifies individual utilities (apiGet, apiPost, acquireLock) but not the config object schema that all 4 modules must accept",
+        "Unit 2-4 'Approach' all reference a `config` parameter but the schema is not defined"
+      ]
+    },
+    {
+      "title": "Quick audit caching logic deferred but Unit 5 depends on it",
+      "severity": "P2",
+      "section": "Unit 5: SEO Orchestrator Skill",
+      "why_it_matters": "Unit 5 promises 'load cached scan results or sample 100 articles' but the caching strategy (TTL, invalidation, format) is defined only as 'Deferred to Implementation' note: 'Optimal sample size for quick audit — 100 is a starting point; may adjust based on variance in real data'. Unit 5 must have concrete cache logic before execution.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.75,
+      "evidence": [
+        "Unit 5 'Approach': 'load cached scan results or sample 100 articles'",
+        "Plan 'Open Questions' > 'Deferred to Implementation': 'Optimal sample size for quick audit — 100 is a starting point'",
+        "Unit 5 'Approach': 'Quick audit cache (seo-optimization-output/audit-cache.json): { timestamp, modules: ... }'",
+        "No specification of when cache is considered stale or how to rebuild"
+      ]
+    },
+    {
+      "title": "Skill prompt template is a new abstraction (markdown file) without evidence of why this beats existing CLI wrapper",
+      "severity": "P1",
+      "section": "Key Technical Decisions & Unit 5",
+      "why_it_matters": "The plan introduces a new abstraction: '.claude/skills/seo-orchestrator.md' (skill prompt). The existing solution (site-optimizer.js CLI + .claude/lib/site-optimizer-command.js) already provides: config loading, arg parsing, dispatch to modules, help text. The plan argues 'conversational mode' is the benefit, but the complexity trade-off is not clearly justified: the skill prompt is a new file format/maintenance surface that requires Claude instructions, while the CLI already works. This violates 'wrap, don't rewrite' principle.",
+      "finding_type": "error",
+      "autofix_class": "present",
+      "confidence": 0.82,
+      "evidence": [
+        "Plan 'Key Technical Decisions': 'The /seo skill is a Claude Code skill prompt (markdown in .claude/skills/) that guides Claude through conversational SEO optimization'",
+        "Plan 'Skill prompt template, not executable script': 'The skill prompt is a markdown file that instructs Claude how to...'",
+        "Current site-optimizer.js already provides: help, dispatch, config loading, arg parsing",
+        "Plan does not compare skill prompt maintenance cost vs CLI wrapper cost",
+        "Requirements R1-R2 ask for 'single entry point' and 'conversational mode' but existing CLI already has both (help text is conversational, config-driven dispatch)"
+      ]
+    },
+    {
+      "title": "Auth standardization deferred; 3 different auth patterns still in source scripts",
+      "severity": "P2",
+      "section": "Unit 1: Shared Utilities Module",
+      "why_it_matters": "The plan identifies 3 different auth patterns (WPCOM_TOKEN vs WP_BEARER_TOKEN vs WP_APP_USER+WP_APP_PASS vs .mcp.json) across existing scripts and promises Unit 1 will unify them. However, 'Auth standardization' is marked as 'Resolved During Planning' but the resolution is vague: 'Unify on WPCOM_TOKEN as the canonical env var. The shared auth module accepts WPCOM_TOKEN, WP_BEARER_TOKEN, WP_APP_USER+WP_APP_PASS, and .mcp.json fallback (in that order).' This creates a risk: old scripts in production still use different patterns, and Unit 1 only adds a wrapper.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.72,
+      "evidence": [
+        "Plan 'Context & Research' > 'Auth Patterns (3 implementations, need unification)' table",
+        "Plan 'Open Questions' > 'Resolved During Planning': 'Auth standardization... accepts WPCOM_TOKEN, WP_BEARER_TOKEN, WP_APP_USER+WP_APP_PASS, and .mcp.json fallback'",
+        "Existing scripts (image-alt, internal-linker, phase4-apply) have hardcoded auth discovery logic",
+        "No plan to update existing scripts or deprecate old auth patterns"
+      ]
+    },
+    {
+      "title": "No edge case specified for concurrent module execution (stated as 'sequential' but not enforced)",
+      "severity": "P2",
+      "section": "Unit 5: SEO Orchestrator Skill & High-Level Design",
+      "why_it_matters": "Plan states 'Module execution is sequential (shared API rate limit), not parallel' but does not specify mechanism. The 8-hour TTL global lock is mentioned but there's no specification of what happens if: (1) lock acquisition fails, (2) lock file is corrupted, (3) two Claude sessions attempt simultaneous execution. This is low-risk for single-user tool but should be explicit.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.65,
+      "evidence": [
+        "Plan 'High-Level Design': 'Global lock managed at skill level — acquire before any module execution, release after'",
+        "Plan 'Technical Decisions': 'Global lock: Single seo-orchestrator.lock file with 8-hour TTL'",
+        "Plan 'Unit 5 Test scenarios': 'Lock file exists — refuses to start, shows who holds the lock'",
+        "No specification of: corrupt lock handling, lock write failure recovery, or distributed lock semantics"
+      ]
+    },
+    {
+      "title": "Phase 2 requirements (R3, R4, R9-R12) are completely deferred; unclear if Phase 1 enables or blocks them",
+      "severity": "P3",
+      "section": "Scope Boundaries & Phase 2 Requirements",
+      "why_it_matters": "The plan defers health score (R3), priority matrix (R4), and 4 new modules (R9-R12) to Phase 2, which is correct for MVP. However, the plan does not specify whether Phase 1 architecture will support these later. For example, if Phase 2 adds a health score computation, Unit 1 (shared utilities) should reserve a data structure for metrics. This is low-severity but indicates incomplete forward-compatibility thinking.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.60,
+      "evidence": [
+        "Plan 'Scope Boundaries': 'Phase 1 only — no health score (R3), priority matrix (R4), or new modules (R9-R12)'",
+        "Plan 'Outstanding Questions' in requirements doc: '[Affects R3][Needs research] 健康分數的權重應基於實際 GSC 數據還是啟發式規則？'",
+        "No specification of how Unit 1 (state, cache) should be structured to support future health score computation"
+      ]
+    },
+    {
+      "title": "Per-batch backup strategy for image-alt is institutional learning but not extended to other modules",
+      "severity": "P2",
+      "section": "Unit 2 & Unit 3",
+      "why_it_matters": "Plan notes 'Backup must persist per-batch, not per-run' (from image-alt experience) but Unit 3 (meta-tags, schema) and Unit 4 (internal-links) do not specify per-batch backup granularity. They promise 'partial backup exists, processed articles tracked in state' but the implementation details are missing. This risks silent partial failures if a batch crashes mid-execution.",
+      "finding_type": "omission",
+      "autofix_class": "present",
+      "confidence": 0.68,
+      "evidence": [
+        "Plan 'Context & Research' > 'Institutional Learnings': 'Backup must persist per-batch, not per-run: If batch fails mid-execution, only per-batch backup allows partial rollback'",
+        "Unit 3 'Test scenarios': 'Error path: Apply fails mid-batch — partial backup exists, processed articles tracked in state'",
+        "Unit 3 'Approach': No specification of batch JSON structure or checkpoint frequency",
+        "Unit 4 'Approach': 'save { postId, originalContent } to seo-optimization-output/internal-links-backup.json' but no per-batch grouping specified"
+      ]
+    }
+  ],
+  "residual_risks": [
+    {
+      "title": "Yoast SEO field support verification deferred to Unit 3 execution",
+      "description": "Plan assumes yololab.net WordPress.com plan supports Yoast fields (_yoast_wpseo_*) based on 'phase4-apply-seo-to-wordpress.js already successfully writes' but notes 'Unit 3 includes a verification step before first batch write'. If verification fails, entire meta-tags and schema modules fail. Risk: low (fields are already proven), but mitigation timing is Unit 3, not Unit 1 planning.",
+      "severity": "P2"
+    },
+    {
+      "title": "Large backup files (50-100MB) not cleanup policy specified",
+      "description": "Plan acknowledges backup sizes but offers only: 'Monitor disk usage; add cleanup for backups >30 days old'. Cleanup logic is not part of Phase 1 scope, creating debt.",
+      "severity": "P2"
+    },
+    {
+      "title": "Rate limit budget sharing across 4 concurrent modules not finalized",
+      "description": "Plan states 'current plan uses per-module limits; may need a shared rate limiter if 429s are site-wide' and defers to implementation. If real execution hits rate limits, fallback strategy is undefined.",
+      "severity": "P2"
+    },
+    {
+      "title": "Existing site-optimizer.js CLI usage (npm run optimize:*) must remain functional after deprecation",
+      "description": "Plan promises 'npm run optimize:scan-sample still works' but Unit 6 moves scripts and Unit 5 introduces /seo skill. If the refactoring breaks the npm scripts, existing automation or external references fail. Verification step required.",
+      "severity": "P1"
+    }
+  ],
+  "deferred_questions": [
+    {
+      "question": "Should Phase 1 include a dry-run mode for the skill (/seo --dry-run) or is dry-run only available per-module?",
+      "affects": "Unit 5, user experience",
+      "priority": "P2"
+    },
+    {
+      "question": "If a module execution fails mid-batch, does the skill automatically offer rollback or require user to explicitly invoke /seo --rollback?",
+      "affects": "Unit 5, error handling",
+      "priority": "P2"
+    },
+    {
+      "question": "Unit 5 promises 'cost estimate' in confirmation prompt — what is the pricing model? (per-article, per-Claude-call, estimated token spend?)",
+      "affects": "Unit 5, transparency",
+      "priority": "P2"
+    },
+    {
+      "question": "When quick audit caches results for 7 days, should the skill proactively notify user if cache is stale (>7 days old) or just silently refresh?",
+      "affects": "Unit 5, UX",
+      "priority": "P3"
+    },
+    {
+      "question": "The plan defers 'exact function signatures for module wrapper exports' — should Unit 1 test contract first with mock modules or let Unit 2-4 define their own?",
+      "affects": "Unit 1 design, modular coupling",
+      "priority": "P1"
+    },
+    {
+      "question": "Should orchestrator state survive if Claude process is killed (state file persists) or be considered abandoned if >24h stale?",
+      "affects": "Unit 5, state lifecycle",
+      "priority": "P2"
+    }
+  ],
+  "summary": {
+    "scope_to_goal_alignment": "MODERATE_MISALIGNMENT",
+    "explanation": "The plan correctly identifies the core problem (fragmented SEO scripts, 'coming soon' stubs) and Phase 1 MVP scope is appropriate for a single-user tool. However, several scope items exceed the goals: (1) Skill prompt abstraction (Unit 5) adds complexity without clear justification vs. enhancing existing CLI, (2) Backup scope for internal-links (50-100MB) is justified for safety but unquantified for single-blog scenario, (3) Deprecation scope (51 scripts) is vague and actual count is 76 SEO-related scripts.",
+    "complexity_assessment": "REASONABLE_FOR_GOALS",
+    "explanation": "Phase 1 proposes 6 units with 4 new files (seo-shared.js, 4 module wrappers) + 5 modified files + 1 new skill prompt. This is proportionate to the goal (unify 4 scripts + remove 'coming soon' errors) BUT the skill prompt (Unit 5) is a new abstraction that increases maintenance surface without clear ROI over CLI enhancement. The shared utilities (Unit 1) earn their keep by centralizing auth, retry, backup logic. Per-module wrappers (Units 2-4) are necessary thin adapters around existing code.",
+    "priority_dependencies": "CRITICAL_PATH_AT_RISK",
+    "explanation": "Unit 5 depends on Units 1-4 to export async functions, but the exact function contracts are deferred. Unit 6 (deprecation) depends on Unit 5 confirmation (to avoid breaking still-in-use scripts), but deprecation list is vague. All units depend on correct backup/rollback semantics, which are under-specified in Units 3-4.",
+    "is_right_sized": false,
+    "evidence_list": [
+      "Skill prompt (Unit 5) introduces new abstraction without ROI justification — existing CLI works, enhancement would be lower-risk",
+      "Backup scope (50-100MB for internal-links) is justified for safety but unquantified for cost-benefit on single-blog tool",
+      "Deprecation scope mismatch: plan says ~51 scripts, actual count is 76 SEO-related + 111 total files",
+      "Auth standardization incomplete: wrapper accepts 4 patterns but existing scripts still use 3 inconsistent patterns",
+      "Function contracts deferred to implementation, creating coupling risk between Units 1-5"
+    ]
+  }
+}
