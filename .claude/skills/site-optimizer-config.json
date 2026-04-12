@@ -27,25 +27,32 @@
         "完整回滾機制"
       ],
       "estimatedCost": "$3-5 per 2,728 articles",
-      "estimatedTime": "8-10 hours full batch"
+      "estimatedTime": "8-10 hours full batch",
+      "module": "scripts/modules/image-alt.js"
     },
     "meta-tags": {
       "name": "Meta Tags 優化",
       "description": "生成 SEO 優化的 Meta Title、Meta Description",
-      "status": "coming-soon",
-      "relatedScripts": ["phase4-complete-seo-batch-generator.js"]
+      "status": "available",
+      "phases": ["scan", "generate", "apply", "verify", "rollback"],
+      "relatedScripts": ["phase4-complete-seo-batch-generator.js", "phase4-apply-seo-to-wordpress.js"],
+      "module": "scripts/modules/meta-tags.js"
     },
     "schema-markup": {
       "name": "Schema Markup 注入",
-      "description": "添加 JSON-LD Schema（Article、NewsArticle 等）",
-      "status": "coming-soon",
-      "relatedScripts": ["phase4-complete-seo-batch-generator.js"]
+      "description": "添加 JSON-LD Schema（Article��NewsArticle 等）",
+      "status": "available",
+      "phases": ["scan", "generate", "apply", "verify", "rollback"],
+      "relatedScripts": ["phase4-complete-seo-batch-generator.js", "phase4-apply-seo-to-wordpress.js"],
+      "module": "scripts/modules/schema-markup.js"
     },
     "internal-links": {
       "name": "內部連結優化",
       "description": "自動推薦和注入相關內部連結",
       "status": "available",
-      "relatedScripts": ["internal-linker-v2.js"]
+      "phases": ["scan", "generate-proposals", "inject", "fix-broken", "rollback"],
+      "relatedScripts": ["internal-linker-v2.js"],
+      "module": "scripts/modules/internal-links.js"
     }
   },
   "siteConfig": {
