@@ -54,14 +54,17 @@
       "domain": "yololab.net",
       "language": "zh_TW",
       "authMethod": "bearer-token",
-      "enabledOptimizations": ["image-alt", "meta-tags", "schema-markup", "internal-links"]
+      "enabledOptimizations": ["image-alt", "meta-tags", "schema-markup", "internal-links"],
+      "totalArticles": 2728,
+      "description": "YOLO LAB 音樂電影分享網誌 - 音樂推薦、電影評論、生活觀察"
     },
     "template": {
       "siteId": "YOUR_SITE_ID",
       "domain": "your-site.com",
       "language": "en",
       "authMethod": "bearer-token",
-      "enabledOptimizations": ["image-alt"]
+      "enabledOptimizations": ["image-alt"],
+      "description": "Your site description here"
     }
   },
   "commands": {

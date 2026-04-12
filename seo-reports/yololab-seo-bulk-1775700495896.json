@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-04-09T02:08:15.893Z",
+  "summary": {
+    "totalArticles": 2645,
+    "processed": 3,
+    "succeeded": 0,
+    "skipped": 1,
+    "failed": 2,
+    "successRate": 0,
+    "elapsedMs": 11061,
+    "elapsedFormatted": "0m 11s"
+  },
+  "failedIds": [
+    2645,
+    2643
+  ]
+}
