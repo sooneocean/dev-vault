@@ -7,7 +7,13 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:proposal": "jest .claude/lib/proposal-engine.test.js",
-    "test:proposal-integration": "jest .claude/lib/proposal-engine.integration.test.js --forceExit"
+    "test:proposal-integration": "jest .claude/lib/proposal-engine.integration.test.js --forceExit",
+    "optimize:scan": "node scripts/site-optimizer.js --site yololab --type image-alt --phase scan",
+    "optimize:scan-sample": "node scripts/site-optimizer.js --site yololab --type image-alt --phase scan --sample 10",
+    "optimize:featured": "node scripts/site-optimizer.js --site yololab --type image-alt --phase apply-featured",
+    "optimize:inline": "node scripts/site-optimizer.js --site yololab --type image-alt --phase apply-inline",
+    "optimize:report": "node scripts/site-optimizer.js --site yololab --type image-alt --phase report",
+    "optimize:rollback": "node scripts/site-optimizer.js --site yololab --type image-alt --phase rollback --target all"
   },
   "keywords": [
     "obsidian",

@@ -1,0 +1,80 @@
+{
+  "name": "site-optimizer",
+  "version": "1.0.0",
+  "description": "WordPress 網站批量優化框架 - 支持圖片 ALT、Meta Tags、Schema 等多種優化類型",
+  "triggers": ["site-optimizer", "optimize-site"],
+  "supportedOptimizations": {
+    "image-alt": {
+      "name": "圖片 ALT 文字優化",
+      "description": "使用 Claude Vision 為圖片生成 SEO 優化的 alt text",
+      "phases": ["scan", "generate", "apply-featured", "apply-inline", "report", "rollback"],
+      "implementations": {
+        "scan": "掃描全站文章，盤點圖片 alt 狀態",
+        "generate": "Claude Vision 分析圖片，生成繁體中文 alt text",
+        "apply-featured": "批次更新 featured_media alt text",
+        "apply-inline": "批次更新內嵌圖片 alt 屬性",
+        "report": "產出品質驗証報告",
+        "rollback": "從備份還原（支持 featured/inline/all）"
+      },
+      "features": [
+        "並發互斥鎖防止衝突",
+        "API 認證健檢",
+        "45秒超時保護",
+        "指數退避重試（3次）",
+        "執行後驗証",
+        "冪等性追蹤",
+        "斷點續傳支持",
+        "完整回滾機制"
+      ],
+      "estimatedCost": "$3-5 per 2,728 articles",
+      "estimatedTime": "8-10 hours full batch"
+    },
+    "meta-tags": {
+      "name": "Meta Tags 優化",
+      "description": "生成 SEO 優化的 Meta Title、Meta Description",
+      "status": "coming-soon",
+      "relatedScripts": ["phase4-complete-seo-batch-generator.js"]
+    },
+    "schema-markup": {
+      "name": "Schema Markup 注入",
+      "description": "添加 JSON-LD Schema（Article、NewsArticle 等）",
+      "status": "coming-soon",
+      "relatedScripts": ["phase4-complete-seo-batch-generator.js"]
+    },
+    "internal-links": {
+      "name": "內部連結優化",
+      "description": "自動推薦和注入相關內部連結",
+      "status": "available",
+      "relatedScripts": ["internal-linker-v2.js"]
+    }
+  },
+  "siteConfig": {
+    "yololab": {
+      "siteId": 133512998,
+      "domain": "yololab.net",
+      "language": "zh_TW",
+      "authMethod": "bearer-token",
+      "enabledOptimizations": ["image-alt", "meta-tags", "schema-markup", "internal-links"]
+    },
+    "template": {
+      "siteId": "YOUR_SITE_ID",
+      "domain": "your-site.com",
+      "language": "en",
+      "authMethod": "bearer-token",
+      "enabledOptimizations": ["image-alt"]
+    }
+  },
+  "commands": {
+    "quick-start": "node site-optimizer.js --site yololab --type image-alt --phase scan --sample 10",
+    "full-scan": "node site-optimizer.js --site yololab --type image-alt --phase scan",
+    "apply-featured": "node site-optimizer.js --site yololab --type image-alt --phase apply-featured",
+    "apply-inline": "node site-optimizer.js --site yololab --type image-alt --phase apply-inline",
+    "report": "node site-optimizer.js --site yololab --type image-alt --phase report",
+    "rollback": "node site-optimizer.js --site yololab --type image-alt --phase rollback --target all"
+  },
+  "environmentVariables": {
+    "WPCOM_TOKEN": "WordPress.com Bearer Token",
+    "ANTHROPIC_API_KEY": "Claude API Key",
+    "SITE_CONFIG_PATH": "Optional: path to custom site config"
+  }
+}
