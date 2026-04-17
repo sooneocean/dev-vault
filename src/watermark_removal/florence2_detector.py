@@ -7,8 +7,11 @@ and generates smooth masks for inpainting.
 import logging
 import numpy as np
 import cv2
-from typing import Tuple, Optional, List
+from typing import Tuple, Optional, List, TYPE_CHECKING
 from PIL import Image
+
+if TYPE_CHECKING:
+    from .memory_manager import MemoryManager
 
 logger = logging.getLogger(__name__)
 
@@ -35,15 +38,18 @@ class Florence2Detector:
         self,
         confidence_threshold: float = 0.5,
         device: Optional[str] = None,
+        memory_manager: Optional["MemoryManager"] = None,
     ):
         """Initialize Florence-2 detector.
 
         Args:
             confidence_threshold: Minimum confidence for detections (0.3-0.9)
             device: Target device ("cuda", "cpu", or None for auto-detect)
+            memory_manager: Optional MemoryManager for GPU lifecycle management
         """
         self.confidence_threshold = confidence_threshold
         self.device = device or self._detect_device()
+        self.memory_manager = memory_manager
         self.model = None
         self.processor = None
         self._model_loaded = False
@@ -87,6 +93,11 @@ class Florence2Detector:
 
             self.model.eval()
             self._model_loaded = True
+
+            # Register with MemoryManager if provided
+            if self.memory_manager:
+                self.memory_manager.load_model("florence2", self.model)
+
             logger.info("Florence-2-large loaded successfully")
 
         except ImportError as e:
@@ -289,6 +300,10 @@ class Florence2Detector:
         if self.model is not None:
             try:
                 import torch
+
+                # Unregister from MemoryManager if provided
+                if self.memory_manager:
+                    self.memory_manager.unload_model("florence2")
 
                 del self.model
                 del self.processor

@@ -282,3 +282,103 @@ class TestFlorence2DetectorIntegration:
         # Cleanup should not raise
         detector.cleanup()
         assert not detector._model_loaded
+
+
+class TestFlorence2DetectorMemoryManager:
+    """Test Florence2Detector integration with MemoryManager."""
+
+    def test_init_accepts_memory_manager(self):
+        """Detector should accept optional MemoryManager."""
+        from src.watermark_removal.memory_manager import MemoryManager
+
+        mm = MemoryManager(device="cpu")
+        detector = Florence2Detector(device="cpu", memory_manager=mm)
+
+        assert detector.memory_manager is mm
+
+    def test_init_without_memory_manager(self):
+        """Detector should work without MemoryManager (backward compatible)."""
+        detector = Florence2Detector(device="cpu")
+        assert detector.memory_manager is None
+
+    @patch("src.watermark_removal.florence2_detector.Florence2Detector._lazy_load_model")
+    def test_lazy_load_without_memory_manager(self, mock_load):
+        """Lazy load should work without MemoryManager."""
+        detector = Florence2Detector(device="cpu")
+        detector._model_loaded = True
+        detector.model = MagicMock()
+        detector.processor = MagicMock()
+
+        # Mock lazy load to succeed
+        with patch.object(detector, "_lazy_load_model", wraps=detector._lazy_load_model):
+            # Should not crash even without MM
+            assert detector.memory_manager is None
+
+    def test_lazy_load_calls_memory_manager_load(self):
+        """Lazy load should call memory_manager.load_model if provided."""
+        mock_mm = MagicMock()
+        detector = Florence2Detector(device="cpu", memory_manager=mock_mm)
+
+        # Manually trigger lazy load simulation
+        detector._model_loaded = False
+        mock_model = MagicMock()
+        detector.model = mock_model
+
+        # Simulate what _lazy_load_model does
+        if detector.memory_manager:
+            detector.memory_manager.load_model("florence2", detector.model)
+
+        mock_mm.load_model.assert_called_once_with("florence2", mock_model)
+
+    def test_cleanup_calls_memory_manager_unload(self):
+        """Cleanup should call memory_manager.unload_model if provided."""
+        mock_mm = MagicMock()
+        detector = Florence2Detector(device="cpu", memory_manager=mock_mm)
+        detector._model_loaded = True
+        detector.model = MagicMock()
+        detector.processor = MagicMock()
+
+        detector.cleanup()
+
+        mock_mm.unload_model.assert_called_once_with("florence2")
+
+    def test_cleanup_without_memory_manager(self):
+        """Cleanup should work without MemoryManager."""
+        detector = Florence2Detector(device="cpu")
+        detector._model_loaded = True
+        detector.model = MagicMock()
+        detector.processor = MagicMock()
+
+        # Should not crash
+        detector.cleanup()
+        assert not detector._model_loaded
+
+    def test_full_lifecycle_with_memory_manager(self):
+        """Full detection lifecycle should integrate with MemoryManager."""
+        from src.watermark_removal.memory_manager import MemoryManager
+
+        mm = MemoryManager(device="cpu")
+        detector = Florence2Detector(device="cpu", memory_manager=mm)
+
+        # Check initial state
+        assert detector.memory_manager is mm
+        assert not detector._model_loaded
+        assert "florence2" not in mm._loaded_models
+
+        # Simulate lazy load
+        detector._model_loaded = True
+        detector.model = MagicMock()
+        detector.processor = MagicMock()
+
+        # Register with MM
+        if detector.memory_manager:
+            detector.memory_manager.load_model("florence2", detector.model)
+
+        # Should be tracked
+        assert "florence2" in mm._loaded_models
+
+        # Cleanup
+        detector.cleanup()
+
+        # Should be untracked
+        assert "florence2" not in mm._loaded_models
