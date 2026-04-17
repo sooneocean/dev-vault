@@ -77,9 +77,18 @@ def create_app():
             # Update config based on UI selection
             target_engine = InpaintEngine.LAMA if "LaMa" in engine else InpaintEngine.FLUX
             router.config.engine = target_engine
+            router.config.lama_tile_size = lama_tile_size
+            router.config.lama_overlap = lama_overlap
             router.config.flux_guidance_scale = flux_guidance
             router.config.flux_num_steps = flux_steps
             router.config.flux_enable_sequential_offload = flux_offload
+
+            # If LaMa config changed, recreate the instance to use new tile settings
+            if router.lama and (
+                router.lama.tile_size != lama_tile_size or router.lama.overlap != lama_overlap
+            ):
+                router.lama.cleanup()
+                router.lama = None
 
             # Convert PIL to numpy
             image_np = np.array(image, dtype=np.uint8)

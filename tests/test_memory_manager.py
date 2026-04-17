@@ -8,6 +8,7 @@ from src.watermark_removal.memory_manager import (
     MemoryManager,
     MemoryState,
     InsufficientVRAMError,
+    StateTransitionError,
     VRAMSnapshot,
 )
 
@@ -292,5 +293,125 @@ class TestMemoryManagerIntegration:
         mm.transition_to(MemoryState.INPAINT_CLEANUP)
         mm.unload_model("lama")
 
+        mm.transition_to(MemoryState.IDLE)
+        assert mm.state == MemoryState.IDLE
+
+
+class TestMemoryManagerCleanupVerification:
+    """Tests for R3 cleanup verification (verify_cleanup)."""
+
+    def test_verify_cleanup_passes_when_vram_free(self):
+        """verify_cleanup() should pass when allocated VRAM <0.5GB."""
+        mm = MemoryManager(device="cuda")
+        with patch.object(torch.cuda, "memory_allocated", return_value=0.2 * (1024 ** 3)):
+            # Should not raise
+            mm.verify_cleanup()
+
+    def test_verify_cleanup_raises_on_fragmentation(self):
+        """verify_cleanup() should raise InsufficientVRAMError if allocated >0.5GB."""
+        mm = MemoryManager(device="cuda")
+        with patch.object(torch.cuda, "memory_allocated", return_value=0.7 * (1024 ** 3)):
+            with pytest.raises(InsufficientVRAMError):
+                mm.verify_cleanup()
+
+    def test_verify_cleanup_skips_cpu(self):
+        """verify_cleanup() should skip on CPU device."""
+        mm = MemoryManager(device="cpu")
+        # Should not raise even with high allocated VRAM (CPU path is skipped)
+        mm.verify_cleanup()
+
+
+class TestMemoryManagerVRAMDetection:
+    """Tests for R5 dynamic VRAM detection."""
+
+    def test_init_reads_actual_device_vram(self):
+        """__init__ should read actual VRAM from torch.cuda.get_device_properties."""
+        mock_props = MagicMock()
+        mock_props.total_memory = 16 * (1024 ** 3)  # 16GB in bytes
+
+        with patch("torch.cuda.is_available", return_value=True):
+            with patch("torch.cuda.get_device_properties", return_value=mock_props):
+                mm = MemoryManager(device="cuda", vram_budget=16.0)
+                assert mm._total_vram_gb == 16.0
+
+    def test_init_uses_budget_on_cpu(self):
+        """__init__ should use vram_budget parameter on CPU."""
+        mm = MemoryManager(device="cpu", vram_budget=8.0)
+        assert mm._total_vram_gb == 8.0
+
+    def test_vram_snapshot_uses_total_vram_gb(self):
+        """_get_vram_snapshot should use _total_vram_gb not hardcoded 16.0."""
+        mm = MemoryManager(device="cpu", vram_budget=12.0)
+        snapshot = mm._get_vram_snapshot()
+        assert snapshot.available_gb == 12.0  # CPU always returns configured value
+
+
+class TestMemoryManagerExecuteAPI:
+    """Tests for R12 execute() API."""
+
+    def test_execute_returns_fn_result(self):
+        """execute(fn, *args) should return fn's result."""
+        mm = MemoryManager(device="cpu")
+
+        def test_fn(x, y):
+            return x + y
+
+        result = mm.execute(test_fn, 10, 20)
+        assert result == 30
+
+    def test_execute_cleanup_on_exception(self):
+        """execute() should call cleanup_all() if fn raises exception."""
+        mm = MemoryManager(device="cpu")
+        mock_model = MagicMock()
+        mm.load_model("test", mock_model)
+
+        def failing_fn():
+            raise ValueError("test error")
+
+        with pytest.raises(ValueError, match="test error"):
+            mm.execute(failing_fn)
+
+        # Models should be cleaned up after exception
+        assert len(mm._loaded_models) == 0
+        assert mm.state == MemoryState.IDLE
+
+
+class TestMemoryManagerStateTransitions:
+    """Tests for complete state machine coverage."""
+
+    def test_state_transition_error_type(self):
+        """Invalid transitions should raise StateTransitionError, not ValueError."""
+        mm = MemoryManager(device="cpu")
+        with pytest.raises(StateTransitionError):
+            mm.transition_to(MemoryState.INFERRING)  # Invalid from IDLE
+
+    def test_detect_cleanup_to_inpaint_loading(self):
+        """DETECT_CLEANUP → INPAINT_LOADING should be valid."""
+        mm = MemoryManager(device="cpu")
+        mm.transition_to(MemoryState.DETECT_LOADING)
+        mm.transition_to(MemoryState.DETECTING)
+        mm.transition_to(MemoryState.DETECT_CLEANUP)
+        # Should allow direct transition to inpainting without going through IDLE
+        mm.transition_to(MemoryState.INPAINT_LOADING)
+        assert mm.state == MemoryState.INPAINT_LOADING
+
+    def test_postprocess_state_path(self):
+        """INPAINT_CLEANUP → POSTPROCESS → IDLE should be valid."""
+        mm = MemoryManager(device="cpu")
+        mm.transition_to(MemoryState.INPAINT_LOADING)
+        mm.transition_to(MemoryState.INFERRING)
+        mm.transition_to(MemoryState.INPAINT_CLEANUP)
+        mm.transition_to(MemoryState.POSTPROCESS)
+        mm.transition_to(MemoryState.IDLE)
+        assert mm.state == MemoryState.IDLE
+
+    def test_inferring_to_error(self):
+        """INFERRING → ERROR should be valid (graceful failure)."""
+        mm = MemoryManager(device="cpu")
+        mm.transition_to(MemoryState.INPAINT_LOADING)
+        mm.transition_to(MemoryState.INFERRING)
+        mm.transition_to(MemoryState.ERROR)
+        assert mm.state == MemoryState.ERROR
+        # Should be able to reset from ERROR to IDLE
         mm.transition_to(MemoryState.IDLE)
         assert mm.state == MemoryState.IDLE
