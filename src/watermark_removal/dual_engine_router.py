@@ -116,8 +116,12 @@ class DualEngineRouter:
                 memory_manager=self.memory_manager,
             )
 
-        # Transition memory state
+        # Transition memory state and validate VRAM with actual image resolution
         self.memory_manager.transition_to(MemoryState.INPAINT_LOADING)
+        h, w = image.shape[:2]
+        self.memory_manager.validate_vram_headroom(
+            self.memory_manager.estimate_peak_vram("lama", (h, w)) + 0.5
+        )
         self.lama.load_model()
 
         self.memory_manager.transition_to(MemoryState.INFERRING)
@@ -144,8 +148,12 @@ class DualEngineRouter:
                 memory_manager=self.memory_manager,
             )
 
-        # Transition memory state
+        # Transition memory state and validate VRAM with actual image resolution
         self.memory_manager.transition_to(MemoryState.INPAINT_LOADING)
+        h, w = image.shape[:2]
+        self.memory_manager.validate_vram_headroom(
+            self.memory_manager.estimate_peak_vram("flux", (h, w)) + 0.5
+        )
         self.flux.load_model()
 
         self.memory_manager.transition_to(MemoryState.INFERRING)
