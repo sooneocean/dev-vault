@@ -1,9 +1,9 @@
 ---
 status: archived
 title: COMPLETION_REPORT_TEMPLATE
-type: project
+type: resource
 created: 2026-04-06
-updated: 2026-04-06
+updated: "2026-04-06"
 ---
 
 # 🎉 YOLOLAB SEO 批量优化 - 最终完成报告

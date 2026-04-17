@@ -1,9 +1,9 @@
 ---
 title: YOLO LAB 網站優化 - 快速操作指南
-type: project
+type: resource
 tags: [project, active]
 created: 2026-04-03
-updated: "2026-04-03"
+updated: "2026-04-06"
 status: archived
 maturity: growing
 domain: knowledge-management

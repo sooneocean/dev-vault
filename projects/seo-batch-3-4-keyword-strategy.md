@@ -1,9 +1,9 @@
 ---
-status: archived
+status: "archived"
 title: seo-batch-3-4-keyword-strategy
 type: project
 created: 2026-04-06
-updated: 2026-04-06
+updated: "2026-04-06"
 ---
 
 # SEO Batch 3 & 4 關鍵字佈局戰略圖

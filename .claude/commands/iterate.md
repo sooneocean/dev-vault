@@ -3,11 +3,11 @@ title: /iterate — Product Iteration Automation
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
-domain: knowledge-management
-summary: ""
+domain: product
+summary: "Automates the product iteration cycle: propose features, create issues, and publish releases."
 ---
 
 # /iterate — Product Iteration Automation

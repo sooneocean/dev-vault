@@ -1,13 +1,13 @@
 ---
-title: Untitled
+title: Create or open today's journal entry
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
 domain: knowledge-management
-summary: ""
+summary: "Creates or opens today's journal entry in the vault."
 ---
 
 Create or open today's journal entry.

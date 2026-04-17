@@ -1,9 +1,9 @@
 ---
-status: archived
+status: "archived"
 title: FINAL-CHECKLIST
 type: project
 created: 2026-04-06
-updated: 2026-04-06
+updated: "2026-04-06"
 ---
 
 # ✅ Batch 3 & 4 優化方案 — 最終交付清單

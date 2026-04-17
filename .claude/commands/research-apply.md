@@ -1,13 +1,13 @@
 ---
-title: Untitled
+title: Apply pending research pipeline proposals
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
-domain: knowledge-management
-summary: ""
+domain: research
+summary: "Reviews and applies pending research pipeline integration proposals."
 ---
 
 Review and apply pending research pipeline integration proposals.

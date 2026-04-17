@@ -1,13 +1,13 @@
 ---
-title: Untitled
+title: Generate this week's review
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
 domain: knowledge-management
-summary: ""
+summary: "Generates a weekly review from vault activity and journal entries."
 ---
 
 Generate this week's review.

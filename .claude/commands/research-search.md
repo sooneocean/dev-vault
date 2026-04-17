@@ -1,13 +1,13 @@
 ---
-title: Untitled
+title: Search research notes by keyword
 type: project
 tags: [project, active]
 created: 2026-04-03
-updated: 2026-04-03
+updated: 2026-04-06
 status: active
 maturity: growing
-domain: knowledge-management
-summary: ""
+domain: research
+summary: "Searches research notes using keyword and semantic matching."
 ---
 
 Search research notes using keyword and semantic matching.

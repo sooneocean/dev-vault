@@ -16,6 +16,13 @@ class MaskType(str, Enum):
     POINTS = "points"  # JSON sequence of per-frame key points (deferred)
 
 
+class OffloadMode(str, Enum):
+    """GPU memory offload strategy for diffusers-based inpainting models."""
+
+    FAST = "fast"  # enable_model_cpu_offload: faster, ~12GB peak VRAM
+    SEQUENTIAL = "sequential"  # enable_sequential_cpu_offload: slower, ~8GB peak VRAM
+
+
 @dataclass
 class Frame:
     """Single video frame with metadata."""

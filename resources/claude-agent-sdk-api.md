@@ -4,13 +4,13 @@ type: resource
 subtype: "reference"
 tags: [knowledge-management, auto-memory-migration, claude-agent-sdk, reference]
 created: "2026-03-30"
-updated: "2026-04-03"
+updated: "2026-04-06"
 status: active
 maturity: growing
 domain: "ai-engineering"
 summary: "Verified API shape for claude-agent-sdk v0.1.52 — AgentDefinition, subagent dispatch, MCP inheritance, Windows compatibility"
 source: ""
-related: ["[[dev-vault-status]]", "[[architecture-lessons]]", "[[benchmark-first-rule]]", "[[context-engineering-hygiene]]", "[[toolchain-reference]]"]
+related: ["[[dev-vault-status]]", "[[architecture-lessons]]", "[[benchmark-first-rule]]", "[[context-engineering-hygiene]]", "[[toolchain-reference]]", "[[agent-safe-partial-note-rewrite]]"]
 relation_map: ""
 ---
 

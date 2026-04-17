@@ -1,5 +1,5 @@
 ---
-status: archived
+status: "archived"
 title: wpcom-batch-updater
 type: project
 ---

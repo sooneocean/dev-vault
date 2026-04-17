@@ -1,9 +1,9 @@
 ---
-status: archived
+status: "archived"
 title: seo-batches-3-4-summary
 type: project
 created: 2026-04-06
-updated: 2026-04-06
+updated: "2026-04-06"
 ---
 
 # SEO 優化 Batch 3 & Batch 4 統整文件
