@@ -3,8 +3,11 @@
 import logging
 import numpy as np
 import torch
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 from PIL import Image
+
+if TYPE_CHECKING:
+    from .memory_manager import MemoryManager
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +24,7 @@ class FluxInpainter:
         enable_sequential_offload: bool = False,
         guidance_scale: float = 3.5,
         num_steps: int = 50,
+        memory_manager: Optional["MemoryManager"] = None,
     ):
         """Initialize Flux inpainter.
 
@@ -30,11 +34,13 @@ class FluxInpainter:
                 or model offload (default, faster)
             guidance_scale: Guidance scale (1-10, default 3.5)
             num_steps: Inference steps (30-100, default 50)
+            memory_manager: Optional MemoryManager for GPU lifecycle management
         """
         self.device = device
         self.enable_sequential_offload = enable_sequential_offload
         self.guidance_scale = guidance_scale
         self.num_steps = num_steps
+        self.memory_manager = memory_manager
         self.pipeline = None
         self._model_loaded = False
 
@@ -70,6 +76,11 @@ class FluxInpainter:
             self.pipeline.enable_attention_slicing()
 
             self._model_loaded = True
+
+            # Register with MemoryManager if provided
+            if self.memory_manager:
+                self.memory_manager.load_model("flux", self.pipeline)
+
             logger.info("Flux.1-Fill loaded successfully")
 
         except ImportError as e:
@@ -143,6 +154,10 @@ class FluxInpainter:
         """Cleanup model from GPU."""
         if self.pipeline is not None:
             try:
+                # Unregister from MemoryManager if provided
+                if self.memory_manager:
+                    self.memory_manager.unload_model("flux")
+
                 del self.pipeline
                 torch.cuda.empty_cache()
                 self._model_loaded = False

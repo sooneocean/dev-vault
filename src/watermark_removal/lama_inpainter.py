@@ -4,7 +4,10 @@ import logging
 import numpy as np
 import torch
 import torch.nn.functional as F
-from typing import Tuple
+from typing import Tuple, Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .memory_manager import MemoryManager
 
 logger = logging.getLogger(__name__)
 
@@ -16,18 +19,26 @@ class LamaInpainter:
     Supports both full-image (≤2K) and tiling (>2K) inference.
     """
 
-    def __init__(self, device: str = "cuda", tile_size: int = 512, overlap: int = 64):
+    def __init__(
+        self,
+        device: str = "cuda",
+        tile_size: int = 512,
+        overlap: int = 64,
+        memory_manager: Optional["MemoryManager"] = None,
+    ):
         """Initialize LaMa inpainter.
 
         Args:
             device: "cuda" or "cpu"
             tile_size: Tile size for high-res processing (512)
             overlap: Tile overlap for seamless blending (64px = 12.5%)
+            memory_manager: Optional MemoryManager for GPU lifecycle management
         """
         self.device = device
         self.tile_size = tile_size
         self.overlap = overlap
         self.stride = tile_size - overlap
+        self.memory_manager = memory_manager
         self.model = None
         self._model_loaded = False
 
@@ -47,6 +58,11 @@ class LamaInpainter:
             self.model.to(self.device)
             self.model.eval()
             self._model_loaded = True
+
+            # Register with MemoryManager if provided
+            if self.memory_manager:
+                self.memory_manager.load_model("lama", self.model)
+
             logger.info("LaMa model loaded successfully")
         except Exception as e:
             raise RuntimeError(f"Failed to load LaMa model: {e}") from e
@@ -231,6 +247,10 @@ class LamaInpainter:
     def cleanup(self) -> None:
         """Cleanup model from GPU."""
         if self.model is not None:
+            # Unregister from MemoryManager if provided
+            if self.memory_manager:
+                self.memory_manager.unload_model("lama")
+
             del self.model
             torch.cuda.empty_cache()
             self._model_loaded = False
