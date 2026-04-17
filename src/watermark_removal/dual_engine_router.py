@@ -3,10 +3,9 @@
 import logging
 from enum import Enum
 from dataclasses import dataclass
-from typing import Tuple, Optional
+from typing import Optional
 
 import numpy as np
-from PIL import Image
 
 from .memory_manager import MemoryManager, MemoryState
 from .lama_inpainter import LamaInpainter
@@ -83,7 +82,7 @@ class DualEngineRouter:
 
             try:
                 self.memory_manager.validate_vram_headroom(estimated_vram + 0.5)
-            except Exception as e:
+            except Exception:
                 if self.config.auto_downgrade_on_oom:
                     logger.warning(
                         f"Insufficient VRAM for Flux ({estimated_vram}GB). "
@@ -132,7 +131,7 @@ class DualEngineRouter:
 
         self.memory_manager.transition_to(MemoryState.IDLE)
 
-        logger.info(f"LaMa inpainting complete")
+        logger.info("LaMa inpainting complete")
         return result
 
     def _inpaint_with_flux(
@@ -164,7 +163,7 @@ class DualEngineRouter:
 
         self.memory_manager.transition_to(MemoryState.IDLE)
 
-        logger.info(f"Flux inpainting complete")
+        logger.info("Flux inpainting complete")
         return result
 
     def cleanup(self) -> None:

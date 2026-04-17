@@ -51,7 +51,7 @@ class FluxInpainter:
 
         try:
             from diffusers import FluxInpaintPipeline
-            import bitsandbytes
+            import bitsandbytes  # noqa: F401 (dependency check)
 
             logger.info("Loading Flux.1-Fill with FP8 quantization...")
 
@@ -85,7 +85,7 @@ class FluxInpainter:
 
         except ImportError as e:
             raise RuntimeError(
-                f"Flux.1-Fill requires: pip install diffusers bitsandbytes torch"
+                "Flux.1-Fill requires: pip install diffusers bitsandbytes torch"
             ) from e
         except Exception as e:
             raise RuntimeError(f"Failed to load Flux model: {e}") from e
