@@ -292,7 +292,7 @@ class MemoryManager:
             snapshot = self._get_vram_snapshot()
             logger.info(
                 f"Unloaded {model_name}. "
-                f"VRAM allocated: {snapshot.allocated_gb}GB / 16GB"
+                f"VRAM allocated: {snapshot.allocated_gb}GB / {self._total_vram_gb:.1f}GB"
             )
             return True
         except Exception as e:
@@ -331,7 +331,7 @@ class MemoryManager:
         self.state = MemoryState.IDLE
         logger.info("All models cleaned up, state reset to IDLE")
 
-    def get_status(self) -> Dict[str, any]:
+    def get_status(self) -> Dict[str, Any]:
         """Get current memory manager status.
 
         Returns:
