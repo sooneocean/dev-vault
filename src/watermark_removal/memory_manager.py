@@ -8,7 +8,7 @@ import gc
 import logging
 import torch
 from enum import Enum
-from typing import Dict, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple
 from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
@@ -106,7 +106,7 @@ class MemoryManager:
             self._total_vram_gb = vram_budget  # CPU path uses budget parameter
 
         # Track loaded models for cleanup
-        self._loaded_models: Dict[str, any] = {}
+        self._loaded_models: Dict[str, Any] = {}
 
         # State transition rules (defines which states are valid transitions)
         self._valid_transitions = {
@@ -171,11 +171,9 @@ class MemoryManager:
             True if transition succeeded, False if invalid
 
         Raises:
-            ValueError: If transition not allowed from current state
+            StateTransitionError: If transition not allowed from current state
         """
-        if target_state not in self._valid_transitions.get(
-            self.state, []
-        ) and target_state != MemoryState.ERROR:
+        if target_state not in self._valid_transitions.get(self.state, []):
             raise StateTransitionError(
                 f"Invalid transition: {self.state} → {target_state}. "
                 f"Valid transitions: {self._valid_transitions.get(self.state, [])}"
@@ -235,7 +233,7 @@ class MemoryManager:
         return base_vram
 
     def load_model(
-        self, model_name: str, model_instance: any, device: Optional[str] = None
+        self, model_name: str, model_instance: Any, device: Optional[str] = None
     ) -> None:
         """Load model to GPU and register for cleanup.
 
@@ -256,6 +254,10 @@ class MemoryManager:
             logger.warning(f"VRAM validation failed for {model_name}: {e}")
             raise
 
+        # Unload existing model if already loaded
+        if model_name in self._loaded_models:
+            self.unload_model(model_name)
+
         if device == "cuda":
             model_instance.to("cuda")
             torch.cuda.synchronize()
@@ -265,7 +267,7 @@ class MemoryManager:
         snapshot = self._get_vram_snapshot()
         logger.info(
             f"Loaded {model_name} on {device}. "
-            f"VRAM allocated: {snapshot.allocated_gb}GB / 16GB"
+            f"VRAM allocated: {snapshot.allocated_gb}GB / {self._total_vram_gb:.1f}GB"
         )
 
     def unload_model(self, model_name: str) -> bool:

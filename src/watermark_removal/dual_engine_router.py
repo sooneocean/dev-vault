@@ -113,6 +113,7 @@ class DualEngineRouter:
                 device=self.config.device,
                 tile_size=self.config.lama_tile_size,
                 overlap=self.config.lama_overlap,
+                memory_manager=self.memory_manager,
             )
 
         # Transition memory state
@@ -140,6 +141,7 @@ class DualEngineRouter:
                 enable_sequential_offload=self.config.flux_enable_sequential_offload,
                 guidance_scale=self.config.flux_guidance_scale,
                 num_steps=self.config.flux_num_steps,
+                memory_manager=self.memory_manager,
             )
 
         # Transition memory state
