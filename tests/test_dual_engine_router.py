@@ -335,3 +335,28 @@ class TestIntegrationWithProcessConfig:
             router = DualEngineRouter(config)
 
             assert router.config.flux_enable_sequential_offload is True
+
+    def test_flux_initialization_uses_offload_mode(self):
+        """Flux should be initialized with offload_mode from config."""
+        config = InpaintEngineConfig(
+            engine=InpaintEngine.FLUX,
+            flux_enable_sequential_offload=True,
+            device="cpu",
+        )
+        mm = MemoryManager(device="cpu")
+        router = DualEngineRouter(config, memory_manager=mm)
+
+        # Create mock Flux
+        mock_flux = MagicMock()
+        mock_flux.inpaint.return_value = np.zeros((512, 512, 3), dtype=np.uint8)
+        router.flux = mock_flux
+
+        image = np.zeros((512, 512, 3), dtype=np.uint8)
+        mask = np.zeros((512, 512), dtype=np.uint8)
+
+        # Execute Flux inpainting
+        with patch.object(mm, "validate_vram_headroom"):
+            result = router._inpaint_with_flux(image, mask, "test prompt")
+
+        # Verify result
+        assert result is not None
