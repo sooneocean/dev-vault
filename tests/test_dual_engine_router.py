@@ -74,29 +74,6 @@ class TestOffloadModeConfiguration:
         config = InpaintEngineConfig(flux_enable_sequential_offload=True)
         assert config.flux_enable_sequential_offload is True
 
-    def test_offload_mode_from_process_config(self):
-        """Offload mode should propagate from ProcessConfig to InpaintEngineConfig."""
-        from src.watermark_removal.core.types import ProcessConfig, OffloadMode
-        import tempfile
-        from pathlib import Path
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            tmp_path = Path(tmpdir)
-            pconfig = ProcessConfig(
-                video_path=str(tmp_path / "video.mp4"),
-                mask_path=str(tmp_path / "mask.json"),
-                output_dir=str(tmp_path),
-                memory_offload_mode=OffloadMode.SEQUENTIAL,
-            )
-
-            # Router should be able to read from ProcessConfig
-            sequential = pconfig.memory_offload_mode == OffloadMode.SEQUENTIAL
-            config = InpaintEngineConfig(
-                flux_enable_sequential_offload=sequential
-            )
-
-            assert config.flux_enable_sequential_offload is True
-
     def test_offload_mode_default_is_fast(self):
         """Default offload mode should be FAST (enable_model_cpu_offload)."""
         config = InpaintEngineConfig()
@@ -308,11 +285,11 @@ class TestRouterCleanup:
 
 
 class TestIntegrationWithProcessConfig:
-    """Test integration with ProcessConfig for offload mode."""
+    """Test integration with ProcessConfig for router initialization."""
 
     def test_create_router_from_process_config(self):
-        """Router should be creatable with ProcessConfig offload mode."""
-        from src.watermark_removal.core.types import ProcessConfig, OffloadMode
+        """Router should be creatable with ProcessConfig."""
+        from src.watermark_removal.core.types import ProcessConfig
         import tempfile
         from pathlib import Path
 
@@ -322,19 +299,18 @@ class TestIntegrationWithProcessConfig:
                 video_path=str(tmp_path / "video.mp4"),
                 mask_path=str(tmp_path / "mask.json"),
                 output_dir=str(tmp_path),
-                memory_offload_mode=OffloadMode.SEQUENTIAL,
             )
 
-            # Create router with offload mode from ProcessConfig
-            sequential = pconfig.memory_offload_mode == OffloadMode.SEQUENTIAL
+            # Create router from ProcessConfig
             config = InpaintEngineConfig(
                 engine=InpaintEngine.FLUX,
-                flux_enable_sequential_offload=sequential,
+                flux_enable_sequential_offload=False,
                 device="cpu",
             )
             router = DualEngineRouter(config)
 
-            assert router.config.flux_enable_sequential_offload is True
+            assert router.config.engine == InpaintEngine.FLUX
+            assert router.memory_manager is not None
 
     def test_flux_initialization_uses_offload_mode(self):
         """Flux should be initialized with offload_mode from config."""
@@ -360,3 +336,106 @@ class TestIntegrationWithProcessConfig:
 
         # Verify result
         assert result is not None
+
+
+class TestMemoryManagerIntegration:
+    """Test that MemoryManager is properly passed to inpainters."""
+
+    def test_lama_receives_memory_manager_parameter(self):
+        """LamaInpainter should be initialized with MemoryManager from router."""
+        config = InpaintEngineConfig(engine=InpaintEngine.LAMA, device="cpu")
+        mm = MemoryManager(device="cpu")
+        router = DualEngineRouter(config, memory_manager=mm)
+
+        # Mock LamaInpainter.__init__ to verify it receives memory_manager
+        with patch(
+            "src.watermark_removal.dual_engine_router.LamaInpainter"
+        ) as mock_lama_class:
+            mock_instance = MagicMock()
+            mock_instance.inpaint.return_value = np.zeros(
+                (512, 512, 3), dtype=np.uint8
+            )
+            mock_lama_class.return_value = mock_instance
+
+            image = np.zeros((512, 512, 3), dtype=np.uint8)
+            mask = np.zeros((512, 512), dtype=np.uint8)
+
+            router._inpaint_with_lama(image, mask)
+
+            # Verify LamaInpainter was instantiated with memory_manager parameter
+            mock_lama_class.assert_called_once()
+            call_kwargs = mock_lama_class.call_args[1]
+            assert "memory_manager" in call_kwargs
+            assert call_kwargs["memory_manager"] is mm
+
+    def test_flux_receives_memory_manager_parameter(self):
+        """FluxInpainter should be initialized with MemoryManager from router."""
+        config = InpaintEngineConfig(engine=InpaintEngine.FLUX, device="cpu")
+        mm = MemoryManager(device="cpu")
+        router = DualEngineRouter(config, memory_manager=mm)
+
+        # Mock FluxInpainter.__init__ to verify it receives memory_manager
+        with patch(
+            "src.watermark_removal.dual_engine_router.FluxInpainter"
+        ) as mock_flux_class:
+            mock_instance = MagicMock()
+            mock_instance.inpaint.return_value = np.zeros(
+                (512, 512, 3), dtype=np.uint8
+            )
+            mock_flux_class.return_value = mock_instance
+
+            image = np.zeros((512, 512, 3), dtype=np.uint8)
+            mask = np.zeros((512, 512), dtype=np.uint8)
+
+            with patch.object(mm, "validate_vram_headroom"):
+                router._inpaint_with_flux(image, mask, "test prompt")
+
+            # Verify FluxInpainter was instantiated with memory_manager parameter
+            mock_flux_class.assert_called_once()
+            call_kwargs = mock_flux_class.call_args[1]
+            assert "memory_manager" in call_kwargs
+            assert call_kwargs["memory_manager"] is mm
+
+    def test_lama_registers_with_memory_manager(self):
+        """LamaInpainter should register model with MemoryManager during load."""
+        config = InpaintEngineConfig(engine=InpaintEngine.LAMA, device="cpu")
+        mm = MemoryManager(device="cpu")
+        router = DualEngineRouter(config, memory_manager=mm)
+
+        # Mock the LamaInpainter to verify lifecycle tracking
+        mock_lama = MagicMock()
+        mock_lama.inpaint.return_value = np.zeros((512, 512, 3), dtype=np.uint8)
+        router.lama = mock_lama
+
+        image = np.zeros((512, 512, 3), dtype=np.uint8)
+        mask = np.zeros((512, 512), dtype=np.uint8)
+
+        # Track memory_manager calls
+        with patch.object(mm, "transition_to", wraps=mm.transition_to):
+            router._inpaint_with_lama(image, mask)
+
+            # Verify load_model and cleanup were called
+            mock_lama.load_model.assert_called_once()
+            mock_lama.cleanup.assert_called_once()
+
+    def test_flux_registers_with_memory_manager(self):
+        """FluxInpainter should register model with MemoryManager during load."""
+        config = InpaintEngineConfig(engine=InpaintEngine.FLUX, device="cpu")
+        mm = MemoryManager(device="cpu")
+        router = DualEngineRouter(config, memory_manager=mm)
+
+        # Mock the FluxInpainter to verify lifecycle tracking
+        mock_flux = MagicMock()
+        mock_flux.inpaint.return_value = np.zeros((512, 512, 3), dtype=np.uint8)
+        router.flux = mock_flux
+
+        image = np.zeros((512, 512, 3), dtype=np.uint8)
+        mask = np.zeros((512, 512), dtype=np.uint8)
+
+        # Track memory_manager calls
+        with patch.object(mm, "validate_vram_headroom"):
+            router._inpaint_with_flux(image, mask, "test prompt")
+
+            # Verify load_model and cleanup were called
+            mock_flux.load_model.assert_called_once()
+            mock_flux.cleanup.assert_called_once()

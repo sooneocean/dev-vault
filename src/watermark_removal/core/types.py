@@ -325,12 +325,6 @@ class ProcessConfig:
     })
     """Hyperparameter search space bounds for Optuna."""
 
-    memory_offload_mode: OffloadMode = field(default=OffloadMode.FAST)
-    """GPU memory offload strategy for diffusers inpainting: 'fast' (12GB) or 'sequential' (8GB)."""
-
-    vram_budget_gb: int = 16
-    """GPU VRAM budget in GB (default 16 for RTX 4090). Enables testing on smaller GPUs."""
-
     def __post_init__(self):
         """Validate configuration."""
         if not self.video_path:
@@ -414,9 +408,3 @@ class ProcessConfig:
             for param_name, (low, high) in self.optuna_search_bounds.items():
                 if low >= high:
                     raise ValueError(f"optuna_search_bounds[{param_name}]: low must be < high")
-
-        # Memory manager parameter validation
-        if self.vram_budget_gb < 4 or self.vram_budget_gb > 80:
-            raise ValueError(f"vram_budget_gb must be between 4 and 80, got {self.vram_budget_gb}")
-        if self.memory_offload_mode not in (OffloadMode.FAST, OffloadMode.SEQUENTIAL):
-            raise ValueError(f"memory_offload_mode must be 'fast' or 'sequential', got {self.memory_offload_mode}")
